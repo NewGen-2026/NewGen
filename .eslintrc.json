@@ -1,0 +1,39 @@
+{
+  "extends": ["next/core-web-vitals", "airbnb", "prettier"],
+  "plugins": ["import", "prettier"],
+  "rules": {
+    "react/jsx-filename-extension": ["off"],
+    "react/prop-types": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "react/no-array-index-key": ["off"],
+    "react/jsx-no-constructed-context-values": ["off"],
+		"react/react-in-jsx-scope": ["off"],
+    "react/no-danger": ["off"],
+		"react/no-unknown-property": ["warn"],
+    "import/no-dynamic-require": ["off"],
+    "prettier/prettier": ["warn"],
+    "no-unused-vars": ["warn"],
+    "camelcase": ["off"],
+    "no-use-before-define": ["off"],
+    "global-require": ["off"],
+		"react/require-default-props": ["off"],
+		"import/extensions": ["off"],
+		"no-nested-ternary": ["off"]
+
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["~/components", "./src/components"],
+          ["~/pages", "./src/pages"],
+          ["~/hooks", "./src/hooks"],
+          ["~/utils", "./src/utils"],
+          ["~/assets", "./src/assets"],
+					["~/types", "./src/types"]
+        ],
+        "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+      }
+    }
+  }
+}
