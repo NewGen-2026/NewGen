@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
+import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
+import { Color } from "~/utils/getColors";
+import maxWidthProps, { MaxWidthStyleType } from "~/utils/maxWidthProps";
 import LinkGroup, { LinkGroupProps } from "../links/LinkGroup";
+import TextCardHeading from "./TextCardHeading";
+import TextCardContent from "./TextCardContent";
 
 export type TextCardProps = {
 	subheading?: string;
 	heading?: string;
 	content?: string;
 	links?: LinkGroupProps["links"];
+	breakpoint?: number;
 	options?: {
-		max_width?: string;
+		variant?: "vertical" | "horizontal";
+		section_max_width?: string;
 		text_alignment?: "left" | "center" | "right";
 		has_mobile_text_alignment?: boolean;
 		mobile_text_alignment?: "left" | "center" | "right";
@@ -19,18 +26,21 @@ export type TextCardProps = {
 		heading_tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 		heading_font_size?: string;
 		heading_classes?: string;
-		heading_max_width?: string;
-		content_max_width?: string;
+		heading_max_width?: number;
+		heading_font_color?: {
+			color?: Color;
+		};
+		heading_margin_bottom?: string;
+		content_max_width?: number;
 		content_classes?: string;
+		content_font_size?: string;
+		content_font_color?: {
+			color?: Color;
+		};
 		custom_y_spacing?: string;
 		mobile_section_alignment?: string;
 	};
-};
-
-const ySpacings = {
-	h1: "space-y-6",
-	h2: "space-y-5",
-	h3: "space-y-3",
+	className?: string;
 };
 
 function TextCard({
@@ -38,8 +48,10 @@ function TextCard({
 	heading = "",
 	content = "",
 	links = [],
+	breakpoint = 768,
 	options: {
-		max_width = "",
+		variant = "vertical",
+		section_max_width,
 		text_alignment = "left",
 		has_mobile_text_alignment = false,
 		mobile_text_alignment = "left",
@@ -49,46 +61,101 @@ function TextCard({
 		subheading_classes = "",
 		heading_tag = "h2",
 		heading_font_size = "default",
-		heading_classes = "",
-		heading_max_width = "",
-		content_max_width = "",
+		heading_font_color,
+		heading_max_width,
+		heading_margin_bottom = "default",
+		content_max_width,
 		content_classes = "",
-		custom_y_spacing = "",
+		content_font_size = "22",
+		content_font_color,
 		mobile_section_alignment = "",
 	} = {},
+	className = "",
 }: TextCardProps) {
-	const HeadingTag = (heading_tag as keyof React.JSX.IntrinsicElements) || "h2";
-	const headingFontSize = heading_font_size === "default" ? HeadingTag : heading_font_size;
-
 	const SubheadingTag = (subheading_tag as keyof React.JSX.IntrinsicElements) || "h6";
 	const subheadingFontSize = subheading_font_size === "default" ? SubheadingTag : subheading_font_size;
 
-	const ySpacing = custom_y_spacing || ySpacings[headingFontSize] || "space-y-2";
+	const breakpointCrossed = useBreakpointCrossed(breakpoint);
 
-	const flexItemAlignmentClasses = clsx(text_alignment === "center" ? "items-center" : text_alignment === "right" ? "items-end" : "items-start");
+	const [maxWidthStyle, setMaxWidthStyle] = useState<MaxWidthStyleType>(maxWidthProps(section_max_width));
 
-	const sectionAlignmentClasses = clsx(section_alignment === "center" ? "md:items-center" : section_alignment === "right" ? "items-end" : "items-start");
+	useEffect(() => {
+		if (breakpointCrossed) {
+			setMaxWidthStyle(null);
+		} else {
+			setMaxWidthStyle(maxWidthProps(section_max_width));
+		}
+	}, [section_max_width, breakpointCrossed]);
+
+	const classes = clsx(
+		"flex flex-col",
+		section_alignment === "center" && "mx-auto",
+		section_alignment === "right" && "ml-auto",
+		breakpointCrossed && !has_mobile_text_alignment && "text-center mx-auto",
+		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "text-left",
+		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "text-center mx-auto",
+		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "text-right",
+		!breakpointCrossed && text_alignment === "left" && "text-left mx-0",
+		!breakpointCrossed && text_alignment === "center" && "text-center",
+		!breakpointCrossed && text_alignment === "right" && "text-right mx-0"
+	);
 
 	return (
-		<div className={`flex w-full flex-col ${mobile_section_alignment} ${sectionAlignmentClasses}`}>
-			<div
-				className={`text-card flex flex-col ${flexItemAlignmentClasses} ${ySpacing} text-${
-					has_mobile_text_alignment ? mobile_text_alignment : text_alignment
-				} md:text-${text_alignment} md:${max_width}`}
-			>
-				{subheading && (
-					<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
-				)}
+		<div
+			style={{
+				...maxWidthStyle?.style,
+			}}
+			className={clsx(classes, className)}
+		>
+			{subheading && (
+				<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
+			)}
+			<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between md:flex-row md:gap-6")}>
 				{heading && (
-					<HeadingTag
-						className={`w-full text-${headingFontSize} ${heading_classes || ""} md:${heading_max_width}`}
-						dangerouslySetInnerHTML={{
-							__html: heading,
+					<TextCardHeading
+						className={clsx(variant === "horizontal" && "flex-1")}
+						heading={heading}
+						breakpointCrossed={breakpointCrossed}
+						text_alignment={text_alignment}
+						options={{
+							font_size: heading_font_size,
+							max_width: heading_max_width,
+							font_color: heading_font_color?.color,
+							margin_bottom: heading_margin_bottom,
+							heading_tag,
 						}}
 					/>
 				)}
-				{content && <div className={`prose w-full ${content_classes || ""} md:${content_max_width || ""}`} dangerouslySetInnerHTML={{ __html: content }} />}
-				{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && <LinkGroup links={links} className={headingFontSize === "h1" ? "md:pt-4" : "pt-2"} />}
+				{content && (
+					<TextCardContent
+						className={clsx(variant === "horizontal" && "flex-1")}
+						content={content}
+						breakpointCrossed={breakpointCrossed}
+						options={{
+							font_size: content_font_size,
+							max_width: content_max_width,
+							font_color: content_font_color?.color,
+							margin_bottom: "default",
+							content_classes,
+							text_alignment,
+						}}
+					/>
+				)}
+				{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && (
+					<LinkGroup
+						links={links}
+						className={clsx(
+							"flex",
+							!breakpointCrossed && text_alignment === "center" && "justify-center",
+							!breakpointCrossed && text_alignment === "right" && "justify-end",
+							!breakpointCrossed && text_alignment === "left" && "justify-start",
+							breakpointCrossed && !has_mobile_text_alignment && "justify-center",
+							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "justify-center",
+							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "justify-end",
+							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "justify-start"
+						)}
+					/>
+				)}
 			</div>
 		</div>
 	);

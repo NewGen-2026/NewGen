@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import React from "react";
 import { ComponentRenderer } from "~/components/layouts/ComponentRenderer";
 import clsx from "clsx";
@@ -82,11 +81,11 @@ function Section(props: SectionProps) {
 	]);
 
 	return (
-		<motion.section id={id} className={outerClasses}>
+		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
 				<ComponentRenderer components={components} />
 			</div>
-		</motion.section>
+		</section>
 	);
 }
 

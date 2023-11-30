@@ -19,7 +19,6 @@
 		"react/require-default-props": ["off"],
 		"import/extensions": ["off"],
 		"no-nested-ternary": ["off"]
-
   },
   "settings": {
     "import/resolver": {
