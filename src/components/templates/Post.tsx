@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout } from "~/components/templates/Layout";
+import Layout from "./Layout";
 
 export default function Post(data) {
 	const {

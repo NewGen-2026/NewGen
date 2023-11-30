@@ -9,7 +9,8 @@ $responsive_size_modifier: 0.825;
 $responsive_size_modifier_large: 0.5;
 
 html {
-	// @apply font-site;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .text-h1 {

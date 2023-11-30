@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "~/components/elements/links/Link";
+import { Link, LinkProps } from "./Link";
 
-function LinkGroup({ links, className = "" }) {
+export type LinkGroupProps = {
+	links: LinkProps[];
+	className?: string;
+};
+
+function LinkGroup({ links, className = "" }: LinkGroupProps) {
 	return (
 		<div className={`w-full md:w-auto ${className}`}>
 			<div className="-mb-4 md:flex md:space-x-5">

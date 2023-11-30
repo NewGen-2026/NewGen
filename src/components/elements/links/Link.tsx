@@ -1,8 +1,27 @@
 import React from "react";
 import NextLink from "next/link";
-import { Button, TextLink } from "~/components/elements/buttons/Button";
+import { Button, TextLink } from "../buttons/Button";
 
-export function Link(props) {
+export type LinkProps = {
+	link?: {
+		title?: string;
+		url?: string;
+		target?: string;
+		link?: {
+			title?: string;
+			url?: string;
+			target?: string;
+		};
+	};
+	type?: string;
+	href?: string;
+	to?: string;
+	target?: string;
+	children?: React.ReactNode;
+	className?: string;
+};
+
+export function Link(props: LinkProps) {
 	const { link, type, href, to, target, children, className, ...other } = props;
 	// get url from either href prop or link.url
 	const url = link?.url || href || to || "#";
@@ -34,8 +53,6 @@ export function Link(props) {
 		</NextLink>
 	);
 }
-
-export default Link;
 
 export function LinkTypeRenderer(props) {
 	const { type, link, children } = props;

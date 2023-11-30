@@ -1,8 +1,13 @@
 import React from "react";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
+import { WpPage } from "~/types/wp";
 
-export default function Seo({ page = false }) {
+type SeoProps = {
+	page: WpPage;
+};
+
+export default function Seo({ page }: SeoProps) {
 	const isIndexable = page?.seo?.indexable !== "1"; // This 1 value is yoast for "not indexable"
 
 	return (

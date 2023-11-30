@@ -1,10 +1,17 @@
 import React from "react";
-import Post from "~/components/templates/Post";
 import Page from "~/components/templates/Page";
-import { getFromWordpress } from "~/utils/server";
+import Post from "~/components/templates/Post";
+import { WpOptions, WpPage } from "~/types/wp";
+import cms from "~/utils/cms";
 
-export default function Template(data) {
+type TemplateProps = {
+	page: WpPage;
+	options: WpOptions;
+};
+
+export default function Template(data: TemplateProps) {
 	const { page } = data;
+
 	switch (page?.post_type) {
 		case "post":
 			return <Post {...data} />;
@@ -14,19 +21,19 @@ export default function Template(data) {
 }
 
 export async function getStaticPaths() {
-	const data = await getFromWordpress(`together/paths`);
+	const data = await cms().paths();
 	return { paths: data, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
 	const slug = typeof params.slug !== "string" ? `/${params.slug.join("/")}` : params.slug;
-	const [page, options] = await Promise.all([getFromWordpress(`together/post?slug=${slug}`), getFromWordpress(`together/options`)]);
+	const [page, options] = await Promise.all([cms().page(slug), cms().options()]);
 
 	return {
 		props: {
 			page,
 			options,
 		},
-		revalidate: 60, // In seconds
+		revalidate: 6000, // In seconds
 	};
 }

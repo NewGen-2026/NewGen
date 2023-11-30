@@ -7,14 +7,19 @@
     "react/jsx-props-no-spreading": ["off"],
     "react/no-array-index-key": ["off"],
     "react/jsx-no-constructed-context-values": ["off"],
+		"react/react-in-jsx-scope": ["off"],
     "react/no-danger": ["off"],
 		"react/no-unknown-property": ["warn"],
     "import/no-dynamic-require": ["off"],
     "prettier/prettier": ["warn"],
     "no-unused-vars": ["warn"],
     "camelcase": ["off"],
-    "no-use-before-define": ["warn"],
-    "global-require": ["off"]
+    "no-use-before-define": ["off"],
+    "global-require": ["off"],
+		"react/require-default-props": ["off"],
+		"import/extensions": ["off"],
+		"no-nested-ternary": ["off"]
+
   },
   "settings": {
     "import/resolver": {
@@ -24,9 +29,10 @@
           ["~/pages", "./src/pages"],
           ["~/hooks", "./src/hooks"],
           ["~/utils", "./src/utils"],
-          ["~/assets", "./src/assets"]
+          ["~/assets", "./src/assets"],
+					["~/types", "./src/types"]
         ],
-        "extensions": [".js", ".jsx", ".json"]
+        "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
       }
     }
   }

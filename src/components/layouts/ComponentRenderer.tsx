@@ -1,12 +1,10 @@
 import React from "react";
-import { LayoutGroup } from "framer-motion";
-import { TestComponent } from "~/components/flexible/TestComponent";
-import { TextCard } from "~/components/elements/text/TextCard";
+import TextCard from "../elements/text/TextCard";
+import TestComponent from "../flexible/TestComponent";
 
 export function ComponentRenderer({ components = [], pageId = null }) {
 	return (
-		<LayoutGroup>
-			{/* <pre>{JSON.stringify(components, null, 4)}</pre> */}
+		<>
 			{components.map((layout, i) => {
 				const layoutName = layout.acf_fc_layout;
 				return (
@@ -16,7 +14,7 @@ export function ComponentRenderer({ components = [], pageId = null }) {
 					</React.Fragment>
 				);
 			})}
-		</LayoutGroup>
+		</>
 	);
 }
 
