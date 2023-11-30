@@ -1,15 +1,13 @@
 module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
-		container: (theme) => ({
-			maxWidth: "100%",
-			center: true,
-			padding: {
-				DEFAULT: theme("spacing.6"),
-				lg: theme("spacing.12"),
+		extend: {
+			fontFamily: {
+				heading: ["PSTElliots", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji"],
+				body: ["PSTElliots", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji"],
+				gridular: ["Gridular", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji"],
 			},
-		}),
-		extend: {},
+		},
 	},
 	plugins: [require("@tailwindcss/typography"), require("@tailwindcss/aspect-ratio"), require("@tailwindcss/forms")],
 };

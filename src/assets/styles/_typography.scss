@@ -11,6 +11,7 @@ $responsive_size_modifier_large: 0.5;
 html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	@apply font-body;
 }
 
 .text-h1 {
