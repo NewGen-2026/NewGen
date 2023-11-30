@@ -1,6 +1,25 @@
 module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
+		screens: {
+			xxs: "320px",
+			xss: "400px",
+			xs: "480px",
+			sm: "640px",
+			md: "768px",
+			"md-large": "890px",
+			lg: "1024px",
+			"xl-small": "1200px",
+			xl: "1280px",
+			xxl: "1320px",
+			"2xl": "1441px",
+			"3xl": "1920px",
+			"4xl": "2560px",
+			"tiny-laptop": { raw: "(min-width: 1280px) and (max-height: 740px)" },
+			laptop: { raw: "(min-width: 1024px) and (max-height: 835px)" },
+			"min-h-md": { raw: "(min-height: 800px)" },
+			"min-h-xl": { raw: "(min-height: 1080px)" },
+		},
 		extend: {
 			colors: {
 				transparent: "transparent",

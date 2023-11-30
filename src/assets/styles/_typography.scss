@@ -68,6 +68,11 @@ h6 {
 	@apply leading-[1.1] tracking-[-0.01375rem];
 }
 
+.t-16{
+	@include clamp("font-size", rem(28px * $responsive_size_modifier_large), rem(16px), $md, $lg);
+	@apply leading-[0.95];
+}
+
 
 .prose {
 	max-width: 100%;
