@@ -3,6 +3,7 @@ import React from "react";
 import { ComponentRenderer } from "~/components/layouts/ComponentRenderer";
 import clsx from "clsx";
 import { SectionProps } from "~/types/wp";
+import { getBgColorClasses } from "~/utils/getColors";
 
 const paddingSizes = {
 	top: {
@@ -42,17 +43,6 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 	}
 };
 
-const getSectionColors = (background = "") => {
-	switch (background) {
-		case "black":
-			return "bg-black text-white";
-		case "white":
-			return "bg-white text-black";
-		default:
-			return `bg-${background}`;
-	}
-};
-
 const getSectionPaddingClasses = ({ paddingTop, paddingBottom }) => {
 	const top = paddingSizes.top[paddingTop];
 	const bottom = paddingSizes.bottom[paddingBottom];
@@ -77,7 +67,7 @@ function Section(props: SectionProps) {
 	// Set section outer classes
 	const outerClasses = clsx(classnames, [
 		overflow ? "overflow-hidden" : "overflow-visible", // Set overflow
-		getSectionColors(background?.background_color), // Set outer background
+		getBgColorClasses(background?.background_color), // Set outer background
 		getSectionPaddingClasses({ paddingTop: padding_top, paddingBottom: padding_bottom }), // Set padding
 		is_rounded && has_container ? "container" : "", // Add container to outer element if is rounded section and has_container set to true
 	]);
@@ -87,7 +77,7 @@ function Section(props: SectionProps) {
 		(!is_rounded && has_container) || (is_rounded && rounded_options?.has_inner_container) ? "container" : "", // Set if using container or not
 		getComponentSpacingClasses(inner_spacing), // Set inner spacing
 		is_rounded ? "sm:rounded-2xl" : "", // Set it to be rounded
-		is_rounded ? getSectionColors(rounded_options?.inner_background_color) : "", // Set inner background color options
+		is_rounded ? getBgColorClasses(rounded_options?.inner_background_color) : "", // Set inner background color options
 		is_rounded ? getSectionPaddingClasses({ paddingTop: rounded_options?.inner_padding_top, paddingBottom: rounded_options?.inner_padding_bottom }) : "", // Set inner padding
 	]);
 

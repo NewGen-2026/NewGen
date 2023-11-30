@@ -1,3 +1,5 @@
+import { Color } from "~/utils/getColors";
+
 export type SectionProps = {
 	components?: any[];
 	id?: string;
@@ -6,14 +8,14 @@ export type SectionProps = {
 	has_container?: boolean;
 	overflow?: boolean;
 	background?: {
-		background_color?: string;
+		background_color?: Color;
 	};
 	padding_top?: string;
 	padding_bottom?: string;
 	is_rounded?: boolean;
 	rounded_options?: {
 		has_inner_container?: boolean;
-		inner_background_color?: string;
+		inner_background_color?: Color;
 		inner_padding_top?: string;
 		inner_padding_bottom?: string;
 	};
