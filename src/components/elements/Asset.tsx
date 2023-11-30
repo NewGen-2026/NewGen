@@ -1,8 +1,8 @@
 import React from "react";
 // import dynamic from "next/dynamic";
-import WpImage from "./WpImage";
-import VideoPlayer from "./VideoPlayer";
 import AnimationRenderer from "./animations/AnimationRenderer";
+import VideoPlayer from "./VideoPlayer";
+import WpImage from "./WpImage";
 // import LottiePlayer from "./LottiePlayer";
 
 // const LottiePlayer = dynamic(() => import("./LottiePlayer"), { ssr: false });
