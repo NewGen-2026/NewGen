@@ -14,21 +14,60 @@ html {
 	@apply font-body;
 }
 
-.text-h1 {
+body {
+	@apply font-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply font-heading;
+}
+
+.t-144
+{
+	@include clamp("font-size", rem(72px * $responsive_size_modifier_large), rem(144px), $md, $lg);
+	@apply leading-[0.88] tracking-[-0.18rem];
+}
+
+.t-96{
+	@include clamp("font-size", rem(72px * $responsive_size_modifier_large), rem(96px), $md, $lg);
+	@apply leading-[0.95] tracking-[-0.12rem];
+}
+
+.text-h1,
+.t-72
+{
 	@include clamp("font-size", rem(72px * $responsive_size_modifier_large), rem(56px), $md, $lg);
+	@apply leading-[0.95] tracking-[-0.09rem];
+
 }
 
-.text-h2 {
-	@include clamp("font-size", rem(48px * $responsive_size_modifier_large), rem(48px), $md, $lg);
+.text-h2,
+.t-44
+{
+	@include clamp("font-size", rem(44px * $responsive_size_modifier_large), rem(44px), $md, $lg);
+	@apply leading-[1.05] tracking-[-0.055rem];
 }
 
-.text-h3 {
-	@apply text-3xl;
+.t-40{
+	@include clamp("font-size", rem(40px * $responsive_size_modifier_large), rem(40px), $md, $lg);
+	@apply leading-[1.05] tracking-[-0.05rem];
 }
 
-.text-h4 {
-	@apply text-xl;
+.t-22{
+	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
+	@apply leading-[1.3] tracking-[-0.01375rem];
 }
+
+.t-18{
+	@include clamp("font-size", rem(18px * $responsive_size_modifier_large), rem(18px), $md, $lg);
+	@apply leading-[1.1] tracking-[-0.01375rem];
+}
+
 
 .prose {
 	max-width: 100%;
