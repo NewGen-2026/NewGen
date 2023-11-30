@@ -1,0 +1,52 @@
+{
+	"name": "next-starter",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"dev": "next dev",
+		"develop": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"wp": "wp-env start"
+	},
+	"dependencies": {
+		"@next/bundle-analyzer": "^13.5.6",
+		"@reach/rect": "^0.18.0",
+		"@svgr/webpack": "^8.1.0",
+		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"@tailwindcss/forms": "^0.5.6",
+		"@tailwindcss/line-clamp": "^0.4.4",
+		"@tailwindcss/typography": "^0.5.10",
+		"axios": "^1.6.0",
+		"classnames": "^2.3.2",
+		"dotenv": "^16.3.1",
+		"framer-motion": "^10.16.4",
+		"html-react-parser": "^4.2.7",
+		"next": "^14.0.1",
+		"next-seo": "^6.1.0",
+		"prettier-plugin-tailwindcss": "^0.5.6",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-hotkeys-hook": "^4.4.1",
+		"react-use": "^17.4.0",
+		"sass": "^1.69.5",
+		"styled-components": "^6.1.0",
+		"swr": "^2.2.4",
+		"tailwindcss": "^3.3.3"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^8.10.0",
+		"eslint": "8.51.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-next": "^14.0.1",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-import-resolver-alias": "^1.1.2",
+		"eslint-plugin-import": "^2.28.1",
+		"eslint-plugin-prettier": "^5.0.1",
+		"lefthook": "^1.5.2",
+		"lint-staged": "^15.0.2",
+		"prettier": "^3.0.3"
+	}
+}
