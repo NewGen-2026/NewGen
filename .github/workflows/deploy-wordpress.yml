@@ -2,10 +2,10 @@
 # ===========
 # 1. Duplicate this file and remove .example from filename
 #
-# 2. Replace all instances of WPENGINE_SITENAME in this file with relevant WPEngine site names
-#    eg. if the CMS is hosted at togethercms.wpengine.com, the WPENGINE_SITENAME would be "togethercms"
+# 2. Replace all instances of newgencms in this file with relevant WPEngine site names
+#    eg. if the CMS is hosted at togethercms.wpengine.com, the newgencms would be "togethercms"
 #        and if the staging CMS is hosted at togethercmsstage.wpengine.com,
-#        the WPENGINE_SITENAME for the staging branch would be "togethercmsstage"
+#        the newgencms for the staging branch would be "togethercmsstage"
 #
 # 3. If no staging/development CMS instances setup, remove these lines from the "branches" config line
 #    and from the "Set the WPEngine User Environment Variable" steps
@@ -21,7 +21,7 @@ name: "Deploy WPEngine CMS"
 on:
   push:
     paths: ["backend/theme/**"]
-    branches: ["master", "staging", "develop"]
+    branches: ["master"]
 
 jobs:
   deploy:
@@ -35,15 +35,13 @@ jobs:
       - name: Set the WPEngine User Environment Variable
         run: |
           declare -A SITEMAP=(
-            [refs/heads/master]=WPENGINE_SITENAME
-            [refs/heads/staging]=WPENGINE_SITENAME
-            [refs/heads/develop]=WPENGINE_SITENAME
+            [refs/heads/master]=newgencms
           )
           echo "WPE_USER=${SITEMAP[${{github.ref}}]}" >> $GITHUB_ENV
 
       - name: "Deploy to ${{ env.WPE_USER }}.wpengine.com"
         uses: burnett01/rsync-deployments@5.1
-        if: ${{ contains(env.WPE_USER, 'WPENGINE_SITENAME') }}
+        if: ${{ contains(env.WPE_USER, 'newgencms') }}
         with:
           switches: -razvh --update
           path: backend/theme/
