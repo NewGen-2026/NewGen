@@ -4,6 +4,7 @@ import { Color, getTextColorClasses } from "~/utils/getColors";
 import getFontSize from "~/utils/getFontSize";
 import getMarginBottom from "~/utils/getMarginBottom";
 import maxWidthProps, { MaxWidthStyleType } from "~/utils/maxWidthProps";
+import FontSwitcher from "../animations/helpers/FontSwitcher";
 
 export interface HeadingProps {
 	heading: string;
@@ -38,20 +39,6 @@ function TextCardHeading({
 		}
 	}, [max_width, breakpointCrossed]);
 
-	const processText = (text) =>
-		text
-			.split("|")
-			.map((part, index) => {
-				if (index % 2 === 1) {
-					// Odd parts (between pipes) get wrapped in a span with the special class
-					return `<span class="font-gridular">${part}</span>`;
-				}
-				// Even parts (outside pipes) are returned as is
-				return part;
-			})
-			.join("");
-
-	const processedHeading = processText(heading);
 	return (
 		<HeadingTag
 			className={clsx(
@@ -65,10 +52,9 @@ function TextCardHeading({
 			style={{
 				...maxWidthStyle?.style,
 			}}
-			dangerouslySetInnerHTML={{
-				__html: processedHeading,
-			}}
-		/>
+		>
+			<FontSwitcher text={heading} />
+		</HeadingTag>
 	);
 }
 export default TextCardHeading;
