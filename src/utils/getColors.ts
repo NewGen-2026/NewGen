@@ -1,4 +1,4 @@
-export type Color = "white" | "black" | "cobalt" | "electric" | "stone" | "ketchup" | "sand" | "candy" | "boost" | "energy";
+export type Color = "white" | "black" | "cobalt" | "electric" | "stone" | "ketchup" | "sand" | "candy" | "boost" | "energy" | "forest";
 
 export const getBgColorClasses = (color: Color) => {
 	const colors = {
@@ -12,6 +12,7 @@ export const getBgColorClasses = (color: Color) => {
 		candy: "bg-candy",
 		boost: "bg-boost",
 		energy: "bg-energy",
+		forest: "bg-forest",
 	};
 
 	return colors[color];
@@ -29,6 +30,7 @@ export const getTextColorClasses = (color: Color) => {
 		candy: "text-candy",
 		boost: "text-boost",
 		energy: "text-energy",
+		forest: "text-forest",
 	};
 
 	return colors[color];
@@ -46,6 +48,7 @@ export const getColorHexCodes = (color) => {
 		candy: "#FFD2FD",
 		boost: "#5800C8",
 		energy: "#D3FFD2",
+		forest: "#00A72F",
 	};
 
 	return colors[color];

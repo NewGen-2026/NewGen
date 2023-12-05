@@ -1,6 +1,7 @@
 import { Color } from "~/utils/getColors";
 
 export type SectionProps = {
+	pageId?: number;
 	components?: any[];
 	id?: string;
 	classnames?: string;

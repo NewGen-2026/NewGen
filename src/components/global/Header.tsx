@@ -1,11 +1,22 @@
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Header(props) {
 	const { menu } = props;
 
 	return (
-		<header className="absolute left-0 right-0 top-0">
+		<motion.div
+			initial={{ y: -100 }}
+			animate={{ y: 0 }}
+			transition={{
+				type: "spring",
+				stiffness: 200,
+				damping: 20,
+				delay: 3.2,
+			}}
+			className="fixed left-0 right-0 top-0 z-[200] block"
+		>
 			<div className="flex w-full items-center justify-between py-3 pl-2 md:pl-8 md-large:py-0">
 				<Link href="/" className="block">
 					<svg width="144" height="24" viewBox="0 0 144 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,6 +39,6 @@ export default function Header(props) {
 					</Link>
 				</div>
 			</div>
-		</header>
+		</motion.div>
 	);
 }
