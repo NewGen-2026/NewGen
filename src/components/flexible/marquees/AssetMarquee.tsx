@@ -11,9 +11,14 @@ const AssetMarquee = (props) => {
 
 	return (
 		<div className="asset-marquee min-h-[200px] w-full ">
-			<Marquee duration={breakpointCrossed ? 12000 : 10000} axis="X" align="center" height="200px" width="100%">
+			<Marquee duration={breakpointCrossed ? 12000 : 15000} axis="X" align="center" height="200px" width="100%">
 				{assets?.map((asset, i) => (
 					<div key={`asset-${i}`} className="mx-3 w-[296px]">
+						<Asset className="marquee-asset w-[296px]" {...asset?.asset} />
+					</div>
+				))}
+				{assets?.map((asset, i) => (
+					<div key={`asset2-${i}`} className="mx-3 w-[296px]">
 						<Asset className="marquee-asset w-[296px]" {...asset?.asset} />
 					</div>
 				))}
