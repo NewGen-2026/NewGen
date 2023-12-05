@@ -15,7 +15,7 @@ export default function Footer(props) {
 								<div className="t-18 mb-6 font-heading font-black uppercase opacity-20 md:mb-12">{navItem?.nav_item?.heading}</div>
 								<ul className="t-16 mt-4 space-y-3 font-heading font-black uppercase md:space-y-6">
 									{navItem?.nav_item?.links?.map((link, j) => (
-										<li key={`link${j}`} className="block">
+										<li key={`link${j}`} className="block transition-colors duration-300 hover:text-boost">
 											<Link href={link?.link?.url}>{link?.link?.title}</Link>
 										</li>
 									))}

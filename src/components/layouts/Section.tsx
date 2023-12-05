@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentRenderer } from "~/components/layouts/ComponentRenderer";
 import clsx from "clsx";
 import { SectionProps } from "~/types/wp";
 import { getBgColorClasses } from "~/utils/getColors";
+import ComponentRenderer from "./ComponentRenderer";
 
 const paddingSizes = {
 	top: {
@@ -50,6 +50,7 @@ const getSectionPaddingClasses = ({ paddingTop, paddingBottom }) => {
 
 function Section(props: SectionProps) {
 	const {
+		pageId,
 		components = [],
 		id = "",
 		classnames = "",
@@ -65,7 +66,7 @@ function Section(props: SectionProps) {
 
 	// Set section outer classes
 	const outerClasses = clsx(classnames, [
-		overflow ? "overflow-hidden" : "overflow-visible", // Set overflow
+		!overflow ? "overflow-hidden" : "overflow-visible", // Set overflow
 		getBgColorClasses(background?.background_color), // Set outer background
 		getSectionPaddingClasses({ paddingTop: padding_top, paddingBottom: padding_bottom }), // Set padding
 		is_rounded && has_container ? "container" : "", // Add container to outer element if is rounded section and has_container set to true
@@ -83,7 +84,7 @@ function Section(props: SectionProps) {
 	return (
 		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
-				<ComponentRenderer components={components} />
+				<ComponentRenderer pageId={pageId} components={components} />
 			</div>
 		</section>
 	);
