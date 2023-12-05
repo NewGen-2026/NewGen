@@ -1,6 +1,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { useMotionTemplate, useMotionValueEvent, useScroll, motion, useSpring, useMotionValue } from "framer-motion";
 import { useRef } from "react";
+import { useMeasure, useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import { Button } from "~/components/elements/buttons/Button";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
@@ -63,16 +64,26 @@ const WorkSlider = (props) => {
 	const rightTemplate = useMotionTemplate`translateY(${rightMotionValueSpring}%)`;
 	const rightPeekTemplate = useMotionTemplate`translateY(${rightPeekMotionValueSpring}%)`;
 
+	const [ref, { height }] = useMeasure() as any;
+	const { height: windowHeight } = useWindowSize();
+
+	const stickyTop = windowHeight / 2 - height / 2;
+
 	return (
 		<div
 			ref={scrollRef}
 			style={{
 				height: `${work_slides?.length * 100}vh`,
 			}}
-			className="relative hidden overflow-x-clip pt-8 md:block"
+			className="relative mx-auto hidden max-w-[1920px] overflow-x-clip pt-8 md:block"
 		>
-			<div className="top-[5vh] flex w-full items-center md:sticky ">
-				<div className="w-full px-8">
+			<div
+				style={{
+					top: stickyTop || "unset",
+				}}
+				className="top-[5vh] flex w-full items-center md:sticky "
+			>
+				<div ref={ref} className="w-full px-8">
 					<div className="flex aspect-[1376/696] max-h-[66vh] min-h-[600px] w-full overflow-hidden ">
 						<motion.div
 							style={{
