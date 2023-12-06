@@ -1,8 +1,10 @@
 import React from "react";
 import TwoColTextAsset from "./TwoColTextAsset";
+import FadeGrid from "./FadeGrid";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
+	fade_grid: FadeGrid,
 };
 
 const ContentRenderer = (props) => {

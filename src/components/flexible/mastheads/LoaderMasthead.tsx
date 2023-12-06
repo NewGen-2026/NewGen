@@ -38,14 +38,14 @@ const LoaderMasthead = (props) => {
 						<h1 className="t-144 mx-auto max-w-[1376px] text-center font-black uppercase">
 							<span className="whitespace-nowrap">
 								<TextContainer custom={4}>
-									<FontSwitcher startDelay={3800} text="W||pst->grid->pst||e||lcome" />
+									<FontSwitcher startDelay={4800} text="W<pst-grid-pst>e</>lcome" />
 								</TextContainer>{" "}
 								<TextContainer custom={3}>to</TextContainer> <TextContainer custom={2}>the</TextContainer> <br />
 							</span>
 							<span className="whitespace-nowrap">
 								<TextContainer custom={1}>new</TextContainer>{" "}
 								<TextContainer custom={0}>
-									<FontSwitcher startDelay={4000} text="gener||pst->grid->pst||a||tion" />
+									<FontSwitcher startDelay={5000} text="gener<pst-grid-pst>a</>tion" />
 								</TextContainer>
 							</span>
 						</h1>
@@ -62,10 +62,11 @@ const LoaderMasthead = (props) => {
 									y: [animationComplete ? 0 : -initialY, 0],
 								}}
 								transition={{
-									duration: 1,
+									duration: 0.8,
+									ease: "easeInOut",
 									delay: 1.3,
 									y: {
-										delay: 3,
+										delay: 4,
 										type: "spring",
 										stiffness: 180,
 										damping: 23,
@@ -215,7 +216,7 @@ const TextContainer = ({ children, custom = 0 }) => {
 				animate={{
 					y: 0,
 					opacity: 1,
-					transition: { type: "spring", stiffness: 1500, damping: 30, mass: 0.2, delay: 3.5 + custom * 0.15 },
+					transition: { type: "spring", stiffness: 1000, damping: 30, mass: 0.2, delay: 4.5 + custom * 0.15 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>

@@ -13,7 +13,7 @@ export default function Header(props) {
 				type: "spring",
 				stiffness: 200,
 				damping: 20,
-				delay: 3.2,
+				delay: 4.2,
 			}}
 			className="fixed left-0 right-0 top-0 z-[200] block"
 		>

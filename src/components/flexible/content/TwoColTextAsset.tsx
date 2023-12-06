@@ -43,7 +43,7 @@ const TwoColTextAsset = (props) => {
 				<div className="relative aspect-[672/672] w-full overflow-hidden bg-stone/10">
 					{media?.assets.map((asset, index) => (
 						<motion.div
-							key={asset.id}
+							key={`asset${index}`}
 							style={{
 								zIndex: activeIndex === index ? (isTransitioning ? 2 : 3) : 1,
 							}}
