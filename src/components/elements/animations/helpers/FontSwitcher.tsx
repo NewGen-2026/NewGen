@@ -23,17 +23,17 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 
 		const parsedSegments = lines.flatMap((line, lineIndex) => {
 			return line
-				.split(/(\|\|[^|]+\|\|\w)/)
+				.split(/(<[^>]+>\w)/)
 				.filter(Boolean)
 				.map((segment) => {
-					const fontSwitchMatch = segment.match(/\|\|([^|]+)\|\|(\w)/);
+					const fontSwitchMatch = segment.match(/<([^>]+)>(\w)/);
 					if (fontSwitchMatch) {
 						fontSwitchCount += 1;
-						const fontNames = fontSwitchMatch[1].split("->").map(mapFontName);
+						const fontNames = fontSwitchMatch[1].split("-").map(mapFontName);
 						const content = fontSwitchMatch[2];
 						return { content, fonts: fontNames, index: fontSwitchCount - 1 };
 					}
-					return { content: segment.replace(/\|\|/g, "") };
+					return { content: segment };
 				})
 				.concat(lineIndex < lines.length - 1 ? { content: <br />, isBreak: true } : []);
 		});

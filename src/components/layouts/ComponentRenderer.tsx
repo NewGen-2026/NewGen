@@ -6,6 +6,7 @@ import SpecialBlocksRenderer from "../flexible/specialBlocks/SpecialBlocksRender
 import MastheadsRenderer from "../flexible/mastheads/MastheadsRenderer";
 import MarqueesRenderer from "../flexible/marquees/MarqueesRenderer";
 import WorkBlocksRenderer from "../flexible/workBlocks/WorkBlocksRenderer";
+import ContentRenderer from "../flexible/content/ContentRenderer";
 
 const COMPONENT_MAP = {
 	test_component: TestComponent,
@@ -15,6 +16,7 @@ const COMPONENT_MAP = {
 	work_blocks: WorkBlocksRenderer,
 	mastheads: MastheadsRenderer,
 	marquees: MarqueesRenderer,
+	content: ContentRenderer,
 };
 
 const ComponentRenderer = ({ components = [], pageId = null }) => {
