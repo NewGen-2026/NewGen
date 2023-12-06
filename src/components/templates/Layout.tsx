@@ -5,6 +5,7 @@ import Seo from "../global/Seo";
 import Footer from "../global/Footer";
 import WpHotkey from "../elements/WpHotkey";
 import PasswordProtect from "../global/PasswordProtect";
+import CTA from "../global/CTA";
 
 type LayoutProps = {
 	data: {
@@ -22,6 +23,7 @@ function Layout({ data, children }: LayoutProps) {
 			<Seo page={data?.page} />
 			<Header {...options} />
 			<main>{children}</main>
+			<CTA />
 			<Footer {...options} />
 			<WpHotkey id={page?.ID} />
 		</PasswordProtect>

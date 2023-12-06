@@ -1,8 +1,10 @@
 import React from "react";
 import AssetMarquee from "./AssetMarquee";
+import FeedMarquee from "./FeedMarquee";
 
 const MARQUEE_COMPONENT_MAP = {
 	asset_marquee: AssetMarquee,
+	feed_marquee: FeedMarquee,
 };
 
 const MarqueesRenderer = (props) => {

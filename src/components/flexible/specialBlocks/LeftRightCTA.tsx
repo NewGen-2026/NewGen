@@ -82,7 +82,7 @@ export default LeftRightCTA;
 
 const TextContainer = ({ top_line_left, top_line_right, middle_line, bottom_line }) => {
 	return (
-		<motion.h2 className="t-144 w-full max-w-[1000px]  font-heading uppercase">
+		<motion.h2 className="t-144 pointer-events-none w-full  max-w-[1000px] font-heading uppercase">
 			<div className="flex justify-center gap-[0.1em] md-large:gap-[10rem]">
 				<span className="relative z-[0] inline-flex whitespace-nowrap">
 					<FontSwitcher text={top_line_left} />
