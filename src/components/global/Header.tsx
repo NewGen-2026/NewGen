@@ -1,9 +1,11 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 
 export default function Header(props) {
 	const { menu } = props;
+	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<motion.div
@@ -34,8 +36,13 @@ export default function Header(props) {
 							</Link>
 						))}
 					</nav>
-					<Link href={menu?.button?.url || "/#"} className="t-16 hidden bg-white px-[24.5px] py-[26.5px] font-black uppercase text-black md-large:block">
-						{menu?.button?.title}
+					<Link
+						onMouseEnter={() => setIsHovered(true)}
+						onMouseLeave={() => setIsHovered(false)}
+						href={menu?.button?.url || "/#"}
+						className="t-16 hidden min-w-[150px] justify-center bg-white px-4 py-[26.5px] text-center font-black uppercase text-black transition-colors duration-200 hover:bg-electric hover:text-cobalt md-large:block md-large:flex"
+					>
+						<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
 					</Link>
 				</div>
 			</div>

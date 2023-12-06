@@ -1,15 +1,18 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { useMotionTemplate, useMotionValueEvent, useScroll, motion, useSpring, useMotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useMeasure, useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { Button } from "~/components/elements/buttons/Button";
+import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses } from "~/utils/getColors";
 
 const WorkSlider = (props) => {
 	const scrollRef = useRef(null);
 	const breakpointCrossed = useBreakpointCrossed(768);
+	const [activeSlide, setActiveSlide] = useState(0);
 
 	const { work_slides } = props;
 
@@ -57,6 +60,9 @@ const WorkSlider = (props) => {
 
 		leftPeekMotionValue.set(leftPeekValue);
 		rightPeekMotionValue.set(rightPeekValue);
+
+		const closestThresholdIndex = thresholds.indexOf(closestThreshold);
+		setActiveSlide(closestThresholdIndex);
 	});
 
 	const leftTemplate = useMotionTemplate`translateY(${leftMotionValueSpring}%)`;
@@ -132,7 +138,7 @@ const WorkSlider = (props) => {
 						</motion.div>
 					</div>
 					<div className="mt-16 flex justify-center laptop:mt-12">
-						<NavBar />
+						<NavBar items={work_slides} active={activeSlide} />
 					</div>
 				</div>
 			</div>
@@ -141,21 +147,40 @@ const WorkSlider = (props) => {
 };
 export default WorkSlider;
 
-const NavBar = () => {
+const NavBar = ({ items, active }) => {
+	const [isHovered, setIsHovered] = useState(false);
+
 	return (
 		<div className="w-full max-w-[680px] bg-stone/25 p-3">
 			<div className="flex items-center justify-between pl-2">
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
-						<div className="h-[10px] w-[10px] bg-cobalt" />
-						<div className="h-[6px] w-[6px] bg-stone" />
-						<div className="h-[6px] w-[6px] bg-stone" />
+						{items.map((_, i) => (
+							<motion.div
+								animate={{
+									scale: active === i ? 1.4 : 1,
+								}}
+								key={`nav-item-${i}`}
+								className={`h-[6px] w-[6px] ${active === i ? "bg-cobalt" : "bg-stone "}`}
+							/>
+						))}
 					</div>
-					<div>Revolut</div>
+					<div>
+						<WpImage image={items[active]?.work?.acf?.work_logos?.dark_logo} />
+					</div>
 				</div>
 				<div className="flex flex-1 items-center gap-5">
-					<div className="t-18 whitespace-nowrap font-heading font-black">VIEW CASE STUDY</div>
-					<Button className="w-full text-center">All Work</Button>
+					<Link
+						href={items[active]?.work?.permalink}
+						className="t-18 whitespace-nowrap font-heading font-black transition-colors duration-150 hover:text-cobalt"
+					>
+						VIEW CASE STUDY
+					</Link>
+					<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
+						<Button className="w-full text-center">
+							<FontSwitcher hover isHovered={isHovered} text="All w<pst-rec>o</>rk" />
+						</Button>
+					</div>
 				</div>
 			</div>
 		</div>

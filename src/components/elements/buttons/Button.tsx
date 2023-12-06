@@ -24,7 +24,7 @@ export function Button({ link, button, size, className = "", children, ...other 
 	const classes = clsx(
 		"text-white border transition-colors duration-300 select-none appearance-none inline-block t-18 uppercase px-[17.5px] !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
 		className,
-		backgroundColor === "black" && "bg-black border-black hover:bg-white hover:text-black hover:border-white",
+		backgroundColor === "black" && "bg-black border-black hover:bg-cobalt hover:text-electric hover:border-white",
 		backgroundColor === "white" && "bg-white border-white hover:bg-white hover:text-black",
 		buttonSize === "small" && "inline-block rounded text-13px px-5 py-2 font-medium",
 		buttonSize === "wide" && "block rounded-[100px] text-16px px-7 py-5 leading-[1.3] text-center font-bold",
