@@ -7,6 +7,7 @@ import MastheadsRenderer from "../flexible/mastheads/MastheadsRenderer";
 import MarqueesRenderer from "../flexible/marquees/MarqueesRenderer";
 import WorkBlocksRenderer from "../flexible/workBlocks/WorkBlocksRenderer";
 import ContentRenderer from "../flexible/content/ContentRenderer";
+import SlidersRenderer from "../flexible/sliders/SlidersRenderer";
 
 const COMPONENT_MAP = {
 	test_component: TestComponent,
@@ -16,6 +17,7 @@ const COMPONENT_MAP = {
 	work_blocks: WorkBlocksRenderer,
 	mastheads: MastheadsRenderer,
 	marquees: MarqueesRenderer,
+	sliders: SlidersRenderer,
 	content: ContentRenderer,
 };
 
