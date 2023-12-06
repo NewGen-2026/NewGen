@@ -17,7 +17,7 @@ const AssetMarquee = (props) => {
 		once: false,
 	});
 
-	const duration = breakpointCrossed ? 12000 : 15000;
+	const duration = breakpointCrossed ? 20000 : 15000;
 	const pauseDuration = isInView ? duration : 0;
 
 	return (

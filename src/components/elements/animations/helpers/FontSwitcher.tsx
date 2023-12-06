@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0 }) => {
+const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0, hover = false, isHovered = false }) => {
 	const [segmentIndices, setSegmentIndices] = useState([]);
 	const [segments, setSegments] = useState([]);
 
@@ -44,54 +45,61 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 	}, [text]);
 
 	useEffect(() => {
-		const intervals = [];
-		let delayTimeout;
+		if (!hover && isInView && segments.length > 0) {
+			const intervals = [];
 
-		if (isInView && segments.length > 0) {
-			// Delay the start of the font switching
-			delayTimeout = setTimeout(() => {
-				segments.forEach((segment, i) => {
-					if (segment.fonts) {
-						intervals[i] = setInterval(() => {
-							setSegmentIndices((indices) => {
-								const newIndices = [...indices];
-								const nextIndex = indices[segment.index] + 1;
+			const startInterval = (segment, i) => {
+				if (segment.fonts && segment.fonts.length > 1) {
+					intervals[i] = setInterval(() => {
+						setSegmentIndices((indices) => {
+							const newIndices = [...indices];
+							const currentIndex = indices[segment.index];
+							let nextIndex = currentIndex + 1;
 
-								if (!loop && nextIndex >= segment.fonts.length) {
+							if (nextIndex >= segment.fonts.length) {
+								if (loop) {
+									nextIndex = 0;
+								} else {
 									clearInterval(intervals[i]);
 									return indices;
 								}
-								newIndices[segment.index] = nextIndex % segment.fonts.length;
-								return newIndices;
-							});
-						}, switchInterval);
-					}
-				});
-			}, startDelay);
-		}
+							}
 
-		return () => {
-			intervals.forEach((interval) => clearInterval(interval));
-			if (delayTimeout) {
-				clearTimeout(delayTimeout);
-			}
-		};
-	}, [isInView, segments, switchInterval, loop, startDelay]);
+							newIndices[segment.index] = nextIndex;
+							return newIndices;
+						});
+					}, switchInterval);
+				}
+			};
+
+			segments.forEach((segment, i) => {
+				setTimeout(() => startInterval(segment, i), startDelay);
+			});
+
+			return () => {
+				intervals.forEach((interval) => interval && clearInterval(interval));
+			};
+		}
+	}, [isInView, segments, switchInterval, loop, hover, startDelay]);
+
 	return (
 		<span ref={ref}>
 			{segments.map((segment, index) => {
 				if (segment.isBreak) {
 					return <span key={index}>{segment.content}</span>;
 				}
-				if (segment.fonts) {
-					const className = segment.fonts[segmentIndices[segment.index]] || "";
-					return (
-						<span key={index} className={className}>
-							{segment.content}
-						</span>
-					);
+
+				let className = "";
+				if (segment.fonts && segment.fonts.length > 0) {
+					const currentFontIndex = hover && isHovered ? Math.min(segment.fonts.length - 1, 1) : segmentIndices[segment.index] % segment.fonts.length;
+					className = segment.fonts[currentFontIndex];
 				}
-				return <span key={index}>{segment.content}</span>;
+
+				return (
+					<span key={index} className={className}>
+						{segment.content}
+					</span>
+				);
 			})}
 		</span>
 	);

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 
 const TestimonialSlider = (props) => {
 	const { items } = props;
@@ -10,6 +11,7 @@ const TestimonialSlider = (props) => {
 	const isInView = useInView(ref, { once: false, amount: 0 });
 
 	const [activeSlide, setActiveSlide] = useState(0);
+	const [isHovered, setIsHovered] = useState(false);
 
 	useEffect(() => {
 		const updateActiveSlide = () => {
@@ -65,10 +67,14 @@ const TestimonialSlider = (props) => {
 												delay: 0.1,
 											},
 										}}
-										className="t-40 font-black uppercase"
+										onMouseEnter={() => setIsHovered(true)}
+										onMouseLeave={() => setIsHovered(false)}
+										className={`t-40 cursor-pointer font-black uppercase transition-colors duration-200  ${isHovered ? "text-ketchup" : "text-black"}`}
 									>
 										<span className="font-gridular text-ketchup">“</span>
-										{item?.quote}
+										<span>
+											<FontSwitcher hover isHovered={isHovered} text={item?.quote} />
+										</span>
 										<span className="font-gridular text-ketchup">”</span>
 									</motion.div>
 								)
