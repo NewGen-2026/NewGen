@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
-
-const timerTime = 3500;
 
 const TestimonialSlider = (props) => {
 	const { items } = props;
@@ -12,38 +10,21 @@ const TestimonialSlider = (props) => {
 	const isInView = useInView(ref, { once: false, amount: 0 });
 
 	const [activeSlide, setActiveSlide] = useState(0);
-	const [intervalId, setIntervalId] = useState(null);
-
-	const changeSlide = (newIndex) => {
-		setActiveSlide(newIndex);
-		if (intervalId) {
-			clearInterval(intervalId);
-		}
-		const newIntervalId = setInterval(updateSlide, timerTime);
-		setIntervalId(newIntervalId);
-	};
-
-	const updateSlide = useCallback(() => {
-		setActiveSlide((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
-	}, [items.length]);
 
 	useEffect(() => {
-		let interval = setInterval(updateSlide, timerTime);
-
-		const handleVisibilityChange = () => {
-			if (document.hidden) {
-				clearInterval(interval);
-			} else if (isInView) {
-				interval = setInterval(updateSlide, timerTime);
+		const updateActiveSlide = () => {
+			if (isInView) {
+				setActiveSlide((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
 			}
 		};
 
-		document.addEventListener("visibilitychange", handleVisibilityChange);
+		const intervalDuration = 3500;
+		const interval = setInterval(updateActiveSlide, intervalDuration);
+
 		return () => {
 			clearInterval(interval);
-			document.removeEventListener("visibilitychange", handleVisibilityChange);
 		};
-	}, [items.length, isInView, updateSlide]);
+	}, [items.length, activeSlide, isInView]);
 
 	return (
 		<div>
@@ -125,7 +106,7 @@ const TestimonialSlider = (props) => {
 						{items?.map((_, i) => (
 							<motion.div
 								key={`navItem${i}`}
-								onClick={() => changeSlide(i)}
+								onClick={() => setActiveSlide(i)}
 								initial={{ scale: 1 }}
 								animate={{ scale: activeSlide === i ? 1.5 : 1 }}
 								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 hover:bg-candy ${activeSlide === i ? "bg-ketchup" : "bg-stone"}`}

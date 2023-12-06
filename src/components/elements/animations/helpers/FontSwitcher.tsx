@@ -13,6 +13,7 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 			pst: "font-heading",
 			pil: "font-pilowlava !leading-[0.5]",
 			grid: "font-gridular !leading-[0.5] !font-normal",
+			rec: "font-recoleta !leading-[0.5] !font-semibold",
 		};
 		return fontMap[shortName] || shortName;
 	};

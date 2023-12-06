@@ -75,16 +75,16 @@ const WorkSlider = (props) => {
 			style={{
 				height: `${work_slides?.length * 100}vh`,
 			}}
-			className="relative mx-auto hidden max-w-[1920px] overflow-x-clip pt-8 md:block"
+			className="relative mx-auto hidden max-w-[1920px] overflow-x-clip pt-8 md:block "
 		>
 			<div
 				style={{
 					top: stickyTop || "unset",
 				}}
-				className="top-[5vh] flex w-full items-center md:sticky "
+				className="sticky flex w-full items-center "
 			>
 				<div ref={ref} className="w-full px-8">
-					<div className="flex aspect-[1376/696] max-h-[66vh] min-h-[600px] w-full overflow-hidden ">
+					<div className="flex aspect-[1376/696] max-h-[66vh] w-full overflow-hidden xl:min-h-[600px] ">
 						<motion.div
 							style={{
 								transform: leftPeekTemplate,
@@ -105,7 +105,7 @@ const WorkSlider = (props) => {
 										)}`}
 									>
 										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
-										<h2 className="t-64 uppercase">{slide?.work?.acf?.work_masthead?.heading}</h2>
+										<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">{slide?.work?.acf?.work_masthead?.heading}</h2>
 										<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
 									</div>
 								))}

@@ -1,8 +1,10 @@
 import React from "react";
 import ServicesOverview from "./ServicesOverview";
+import LeftRightCTA from "./LeftRightCTA";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,
+	creatorstalent_cta: LeftRightCTA,
 };
 
 const SpecialBlocksRenderer = (props) => {
