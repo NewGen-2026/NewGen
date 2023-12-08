@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import { getBgColorClasses } from "~/utils/getColors";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import getFontClass from "~/utils/getFontClass";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -10,6 +10,10 @@ import "swiper/css";
 
 const ConnectingMasthead = (props) => {
 	const { top_line, middle_line_left, middle_line_right, bottom_line, items } = props;
+
+	const ref = useRef(null);
+
+	const isInView = useInView(ref);
 
 	const [swiper, setSwiper] = useState(null);
 	const [activeSlide, setActiveSlide] = useState(null);
@@ -40,6 +44,16 @@ const ConnectingMasthead = (props) => {
 		}
 	};
 
+	useEffect(() => {
+		if (swiper) {
+			if (isInView) {
+				swiper.autoplay.start();
+			} else {
+				swiper.autoplay.pause();
+			}
+		}
+	}, [isInView, swiper]);
+
 	const logoOpacity = !isInitialLoad ? "opacity-50" : "opacity-100";
 
 	const filterClassMap = {
@@ -49,7 +63,7 @@ const ConnectingMasthead = (props) => {
 	};
 
 	return (
-		<div className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
+		<div ref={ref} className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
 			<div className="container">
 				<Title
 					top_line={top_line}

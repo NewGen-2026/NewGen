@@ -1,8 +1,10 @@
 import React from "react";
 import WorkSlider from "./WorkSlider";
+import WorkGrid from "./WorkGrid";
 
 const WORK_BLOCKS_COMPONENT_MAP = {
 	work_slider: WorkSlider,
+	work_grid: WorkGrid,
 };
 
 const WorkBlocksRenderer = (props) => {
