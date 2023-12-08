@@ -40,6 +40,7 @@ export type WpPage = {
 	guid: string;
 	menu_order: number;
 	post_type: string;
+	page_options?: any;
 	url: string;
 	flexible_content: FlexibleContent[];
 	sections: FlexibleContent[];

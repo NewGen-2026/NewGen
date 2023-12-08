@@ -11,6 +11,10 @@ export default function getFontSize(size) {
 			return "t-40";
 		case "22":
 			return "t-22";
+		case "24":
+			return "t-24";
+		case "24-body":
+			return "t-24-body";
 		case "20":
 			return "t-20";
 		case "subheading":

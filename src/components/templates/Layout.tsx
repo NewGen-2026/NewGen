@@ -21,7 +21,7 @@ function Layout({ data, children }: LayoutProps) {
 	return (
 		<PasswordProtect password={page?.post_password}>
 			<Seo page={data?.page} />
-			<Header {...options} />
+			<Header {...options} pageOptions={page?.page_options} />
 			<main>{children}</main>
 			<CTA />
 			<Footer {...options} />

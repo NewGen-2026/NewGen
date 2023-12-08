@@ -105,7 +105,7 @@ function TextCard({
 			style={{
 				...maxWidthStyle?.style,
 			}}
-			className={clsx(classes, className)}
+			className={clsx(classes, className, "container")}
 		>
 			{subheading && (
 				<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
@@ -135,7 +135,6 @@ function TextCard({
 							font_size: content_font_size,
 							max_width: content_max_width,
 							font_color: content_font_color?.color,
-							margin_bottom: "default",
 							content_classes,
 							text_alignment,
 						}}

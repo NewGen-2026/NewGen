@@ -1,10 +1,12 @@
 import React from "react";
 import TwoColTextAsset from "./TwoColTextAsset";
 import FadeGrid from "./FadeGrid";
+import RotatingHeading from "./RotatingHeading";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
 	fade_grid: FadeGrid,
+	rotating_heading: RotatingHeading,
 };
 
 const ContentRenderer = (props) => {
