@@ -11,6 +11,7 @@ $responsive_size_modifier_large: 0.5;
 html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
 	@apply font-body;
 }
 
@@ -49,6 +50,17 @@ h6 {
 }
 }
 
+.bg-candy{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-ketchup;
+}
+}
+
 .bg-ketchup{
 h1,
 h2,
@@ -57,6 +69,28 @@ h4,
 h5,
 h6 {
 	@apply text-candy;
+}
+}
+
+.bg-sand{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-forest;
+}
+}
+
+.bg-electric{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-cobalt;
 }
 }
 
@@ -117,6 +151,11 @@ h6 {
 .t-24{
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.03rem];
+}
+
+.t-24-body{
+	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(24px), $md, $lg);
+	@apply leading-[1.35] ;
 }
 
 .t-22{

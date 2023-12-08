@@ -1,8 +1,10 @@
 import React from "react";
 import LoaderMasthead from "./LoaderMasthead";
+import ConnectingMasthead from "./ConnectingMasthead";
 
 const MASTHEADS_COMPONENT_MAP = {
 	loader_masthead: LoaderMasthead,
+	connecting_masthead: ConnectingMasthead,
 };
 
 const MastheadsRenderer = (props) => {

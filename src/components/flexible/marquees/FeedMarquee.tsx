@@ -61,7 +61,7 @@ const FeedSlide = ({ post, i }) => {
 				</div>
 			</div>
 			<div className="flex justify-between gap-2">
-				<WpImage className="marquee-asset relative z-[5] w-full max-w-[168px] md:max-w-[340px]" image={post?.image} />
+				<WpImage className="marquee-asset relative z-[5]  w-full max-w-[168px] md:max-w-[340px]" image={post?.image} />
 				<div className="flex flex-col gap-4">
 					<motion.span
 						initial="initial"
@@ -119,7 +119,7 @@ const FeedSlide = ({ post, i }) => {
 						whileTap="tap"
 						onHoverStart={() => setOpenShare(true)}
 						onHoverEnd={() => setOpenShare(false)}
-						className="relative z-[10]  h-5 w-5 hover:text-cobalt md:h-8 md:w-8"
+						className="relative h-5 w-5 hover:text-cobalt md:h-8 md:w-8"
 					>
 						<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
@@ -141,7 +141,7 @@ const FeedSlide = ({ post, i }) => {
 									exit={{
 										clipPath: "inset(0% 100% 100% 0% round 0px)",
 									}}
-									className="absolute bottom-[-150%] left-[-45%] z-[10] h-[45px] w-[200px] flex-1 rounded bg-stone"
+									className="absolute bottom-[-150%] left-[-45%] z-[10] h-[45px] w-[200px] flex-1 rounded bg-stone will-change-transform"
 								/>
 							)}
 						</AnimatePresence>
@@ -192,7 +192,7 @@ const LikeHearts = () => {
 					},
 					duration: 1,
 				}}
-				className="absolute inset-0 block"
+				className="absolute inset-0 z-[10] block"
 			>
 				<Heart />
 			</motion.span>
@@ -272,7 +272,7 @@ const LikeHearts = () => {
 					duration: 1,
 					delay: 0.1,
 				}}
-				className="absolute inset-0 block"
+				className="absolute inset-0 z-[10] block"
 			>
 				<Heart />
 			</motion.span>

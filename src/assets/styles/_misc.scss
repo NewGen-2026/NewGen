@@ -8,5 +8,26 @@
 
 	div:first-of-type{
 		align-items: unset !important;
+		overflow: visible !important;
+		span{
+			overflow: visible !important;
+		}
 	}
+}
+.feed-marquee>span{
+	overflow: visible !important;
+
+}
+
+
+.filter-candy{
+	filter: invert(0.4) sepia(1) saturate(5) hue-rotate(315deg) brightness(1);
+}
+
+.filter-electric{
+  filter: invert(0.3) sepia(1) saturate(5) hue-rotate(175deg);
+}
+
+.filter-sand{
+  filter: invert(0.3) sepia(1) saturate(5) hue-rotate(75deg);
 }
