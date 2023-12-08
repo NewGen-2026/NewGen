@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+/* eslint-disable no-shadow */
+import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
@@ -7,6 +8,8 @@ const TestimonialSlider = (props) => {
 	const { items } = props;
 
 	const ref = useRef(null);
+	const quoteRefs = useRef(items.map(() => createRef()));
+	const [maxQuoteHeight, setMaxQuoteHeight] = useState(0);
 
 	const isInView = useInView(ref, { once: false, amount: 0 });
 
@@ -27,6 +30,12 @@ const TestimonialSlider = (props) => {
 			clearInterval(interval);
 		};
 	}, [items.length, activeSlide, isInView]);
+
+	useLayoutEffect(() => {
+		const heights = quoteRefs.current.map((ref: { current: { offsetHeight: any } }) => ref.current?.offsetHeight || 0);
+		const maxHeight = Math.max(...heights);
+		setMaxQuoteHeight(maxHeight);
+	}, [items.length, activeSlide]);
 
 	return (
 		<div>
@@ -50,13 +59,14 @@ const TestimonialSlider = (props) => {
 					))}
 				</div>
 
-				<motion.div layout className="mt-6 md:mt-[51px]">
+				<div className="mt-6 md:mt-[51px]">
 					<AnimatePresence mode="wait">
 						{items?.map(
 							(item, i) =>
 								activeSlide === i && (
 									<motion.div
 										key={`quote${i}`}
+										ref={quoteRefs.current[i]}
 										initial={{ opacity: 0 }}
 										animate={{
 											opacity: 1,
@@ -67,6 +77,7 @@ const TestimonialSlider = (props) => {
 												delay: 0.1,
 											},
 										}}
+										style={{ minHeight: maxQuoteHeight }}
 										onMouseEnter={() => setIsHovered(true)}
 										onMouseLeave={() => setIsHovered(false)}
 										className={`t-40 cursor-pointer font-black uppercase transition-colors duration-200  ${isHovered ? "text-ketchup" : "text-black"}`}
@@ -81,7 +92,7 @@ const TestimonialSlider = (props) => {
 						)}
 					</AnimatePresence>
 
-					<motion.div layout className="mt-8 md:mt-20">
+					<div className="mt-8 md:mt-20">
 						<AnimatePresence mode="wait">
 							{items?.map(
 								(item, i) =>
@@ -107,8 +118,8 @@ const TestimonialSlider = (props) => {
 									)
 							)}
 						</AnimatePresence>
-					</motion.div>
-					<motion.div layout className="mt-16 flex items-center justify-center gap-3">
+					</div>
+					<div className="mt-16 flex items-center justify-center gap-3">
 						{items?.map((_, i) => (
 							<motion.div
 								key={`navItem${i}`}
@@ -118,8 +129,8 @@ const TestimonialSlider = (props) => {
 								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 hover:bg-candy ${activeSlide === i ? "bg-ketchup" : "bg-stone"}`}
 							/>
 						))}
-					</motion.div>
-				</motion.div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
