@@ -17,6 +17,7 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 			rec: "font-recoleta !leading-[0.5] !font-semibold",
 			nip: "font-nippo !leading-[0.5] !font-bold",
 			bec: "font-become !leading-[0.5] !font-medium",
+			hal: "font-haltwins !leading-[0.5] !font-normal",
 		};
 		return fontMap[shortName] || shortName;
 	};
