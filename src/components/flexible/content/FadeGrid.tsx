@@ -45,7 +45,7 @@ const FadeGrid = ({ items }) => {
 		};
 
 		if (isInView) {
-			interval = setInterval(updateItems, 3000);
+			interval = setInterval(updateItems, 2000);
 		}
 
 		return () => {

@@ -25,7 +25,7 @@ const LoaderMasthead = (props) => {
 			const calculatedY = -(windowHeight / 2 - (assetTopRelativeToViewport + height / 2));
 			setInitialY(calculatedY);
 		}
-	}, [height, ref, windowHeight]);
+	}, [height, assetRef, windowHeight]);
 
 	return (
 		<div className="relative min-h-screen overflow-hidden bg-black pt-44 text-white">
@@ -38,15 +38,14 @@ const LoaderMasthead = (props) => {
 						<h1 className="t-144 mx-auto max-w-[1376px] text-center font-black uppercase">
 							<span className="whitespace-nowrap">
 								<TextContainer custom={4}>
-									<FontSwitcher startDelay={4800} text="W<pst-grid-pst>e</>lcome" />
+									<FontSwitcher startDelay={4800} text="F<pst-grid-pst>i</>nd" />
 								</TextContainer>{" "}
-								<TextContainer custom={3}>to</TextContainer> <TextContainer custom={2}>the</TextContainer> <br />
-							</span>
-							<span className="whitespace-nowrap">
-								<TextContainer custom={1}>new</TextContainer>{" "}
-								<TextContainer custom={0}>
-									<FontSwitcher startDelay={5000} text="gener<pst-grid-pst>a</>tion" />
-								</TextContainer>
+								<TextContainer custom={3}>your</TextContainer>{" "}
+								<TextContainer custom={2}>
+									{" "}
+									<FontSwitcher startDelay={5000} text="n<pst-grid-pst>e</>w" />
+								</TextContainer>{" "}
+								<br />
 							</span>
 						</h1>
 					</div>
@@ -77,7 +76,7 @@ const LoaderMasthead = (props) => {
 							>
 								<motion.div
 									initial={{
-										scale: 1.4,
+										scale: 0.8,
 									}}
 									animate={{
 										scale: 1,
@@ -86,7 +85,7 @@ const LoaderMasthead = (props) => {
 										type: "spring",
 										stiffness: 80,
 										damping: 18,
-										delay: 1.3,
+										delay: 1.4,
 									}}
 									className="h-full w-full"
 								>
@@ -216,7 +215,7 @@ const TextContainer = ({ children, custom = 0 }) => {
 				animate={{
 					y: 0,
 					opacity: 1,
-					transition: { type: "spring", stiffness: 1000, damping: 30, mass: 0.2, delay: 4.5 + custom * 0.15 },
+					transition: { type: "spring", stiffness: 1000, damping: 15, mass: 0.1, delay: 4.5 + custom * 0.15 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>
