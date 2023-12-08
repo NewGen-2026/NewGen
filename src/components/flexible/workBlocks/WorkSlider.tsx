@@ -111,7 +111,9 @@ const WorkSlider = (props) => {
 										)}`}
 									>
 										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
-										<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">{slide?.work?.acf?.work_masthead?.heading}</h2>
+										<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">
+											<FontSwitcher text={slide?.work?.acf?.work_masthead?.heading} />
+										</h2>
 										<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
 									</div>
 								))}
@@ -130,7 +132,7 @@ const WorkSlider = (props) => {
 								className="flex flex-1 flex-col whitespace-nowrap"
 							>
 								{work_slides.map((slide, i) => (
-									<div key={`slide-image${i}`} className="aspect-[688/700] min-h-full w-full overflow-hidden">
+									<div id={`slide${i}`} key={`slide-image${i}`} className="aspect-[688/700] min-h-full w-full overflow-hidden">
 										<WpImage image={slide?.work?.acf?.previews?.slider_image || slide?.work?.featured_image} className="h-full w-full object-cover" />
 									</div>
 								))}
@@ -138,7 +140,7 @@ const WorkSlider = (props) => {
 						</motion.div>
 					</div>
 					<div className="mt-16 flex justify-center laptop:mt-12">
-						<NavBar items={work_slides} active={activeSlide} />
+						<NavBar items={work_slides} active={activeSlide} setActiveSlide={setActiveSlide} />
 					</div>
 				</div>
 			</div>
@@ -147,7 +149,7 @@ const WorkSlider = (props) => {
 };
 export default WorkSlider;
 
-const NavBar = ({ items, active }) => {
+const NavBar = ({ items, active, setActiveSlide }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (

@@ -6,11 +6,19 @@ import { motion } from "framer-motion";
 import { useMeasure } from "react-use";
 import { getBgColorClasses } from "~/utils/getColors";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
+import { Button } from "~/components/elements/buttons/Button";
 
 const WorkGrid = (props) => {
 	const { works } = props;
 
-	return <div className="grid gap-4 sm:grid-cols-2 md:gap-8">{works?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work} />)}</div>;
+	return (
+		<div>
+			<div className="grid gap-4 sm:grid-cols-2 md:gap-8">{works?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work} />)}</div>
+			<div className="mt-8 flex w-full justify-center md:mt-24">
+				<Button>All Projects</Button>
+			</div>
+		</div>
+	);
 };
 export default WorkGrid;
 
