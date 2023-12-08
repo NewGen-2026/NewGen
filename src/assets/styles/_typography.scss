@@ -116,6 +116,13 @@ h6 {
 	@apply leading-[0.95] tracking-[-0.12rem];
 }
 
+.t-80
+{
+	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(80px), $md, $lg);
+	@apply leading-[0.95] tracking-[-0.1rem];
+
+}
+
 .text-h1,
 .t-72
 {
@@ -134,6 +141,12 @@ h6 {
 {
 	@include clamp("font-size", rem(56px * $responsive_size_modifier_large), rem(56px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.07rem];
+}
+
+.t-48
+{
+	@include clamp("font-size", rem(44px * $responsive_size_modifier_large), rem(48px), $md, $lg);
+	@apply leading-[0.95] tracking-[-0.06rem];
 }
 
 .text-h2,

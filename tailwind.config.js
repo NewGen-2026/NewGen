@@ -33,6 +33,7 @@ module.exports = {
 				boost: "#5800C8",
 				energy: "#D3FFD2",
 				forest: "#00A72F",
+				spark: "#FF7A00",
 			},
 			fontFamily: {
 				heading: ["PSTElliots", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji"],

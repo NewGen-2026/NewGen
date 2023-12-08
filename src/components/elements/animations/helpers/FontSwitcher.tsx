@@ -12,9 +12,11 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 	const mapFontName = (shortName) => {
 		const fontMap = {
 			pst: "font-heading",
-			pil: "font-pilowlava !leading-[0.5]",
+			pil: "font-pilowlava !leading-[0.5] !font-normal",
 			grid: "font-gridular !leading-[0.5] !font-normal",
 			rec: "font-recoleta !leading-[0.5] !font-semibold",
+			nip: "font-nippo !leading-[0.5] !font-bold",
+			bec: "font-become !leading-[0.5] !font-medium",
 		};
 		return fontMap[shortName] || shortName;
 	};
@@ -25,10 +27,10 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 
 		const parsedSegments = lines.flatMap((line, lineIndex) => {
 			return line
-				.split(/(<[^>]+>\w)/)
+				.split(/(<[^>]+>.\s*<\/>)/g) // Updated regex pattern to split text
 				.filter(Boolean)
 				.map((segment) => {
-					const fontSwitchMatch = segment.match(/<([^>]+)>(\w)/);
+					const fontSwitchMatch = segment.match(/<([^>]+)>(.)\s*<\/>/); // Updated regex pattern to match segment
 					if (fontSwitchMatch) {
 						fontSwitchCount += 1;
 						const fontNames = fontSwitchMatch[1].split("-").map(mapFontName);
