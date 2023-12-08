@@ -7,13 +7,18 @@ import { useMeasure } from "react-use";
 import { getBgColorClasses } from "~/utils/getColors";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { Button } from "~/components/elements/buttons/Button";
+import clsx from "clsx";
 
 const WorkGrid = (props) => {
-	const { works } = props;
+	const { works, variant } = props;
+
+	const isThreeCol = variant === "3col";
 
 	return (
 		<div>
-			<div className="grid gap-4 sm:grid-cols-2 md:gap-8">{works?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work} />)}</div>
+			<div className={clsx("grid", isThreeCol ? "xl::gap-8 gap-4 lg:grid-cols-3" : `gap-4 sm:grid-cols-2 md:gap-8`)}>
+				{works?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work} variant={variant} />)}
+			</div>
 			<div className="mt-8 flex w-full justify-center md:mt-24">
 				<Button>All Projects</Button>
 			</div>
@@ -22,7 +27,7 @@ const WorkGrid = (props) => {
 };
 export default WorkGrid;
 
-const WorkGridItem = ({ work }) => {
+const WorkGridItem = ({ work, variant }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const [containerRef, { height: containerHeight }] = useMeasure() as any;
@@ -30,11 +35,13 @@ const WorkGridItem = ({ work }) => {
 
 	const isBreakpointCrossed = useBreakpointCrossed(768);
 
+	const isThreeCol = variant === "3col";
+
 	return (
 		<div
 			onMouseEnter={() => setIsHovered(!isBreakpointCrossed)}
 			onMouseLeave={() => setIsHovered(false)}
-			className="relative aspect-1 w-full overflow-hidden bg-stone/5 text-white will-change-transform"
+			className={`relative ${isThreeCol ? "aspect-[437/540]" : "aspect-1"}  w-full overflow-hidden bg-stone/5 text-white will-change-transform`}
 		>
 			<motion.div
 				initial={{
@@ -82,7 +89,7 @@ const WorkGridItem = ({ work }) => {
 						animate={{
 							opacity: isHovered ? 1 : 0,
 						}}
-						className="relative z-20 flex w-full flex-wrap gap-4 lg:flex-nowrap"
+						className={`relative z-20 flex w-full flex-wrap gap-4  ${isThreeCol ? "" : "lg:flex-nowrap"}`}
 					>
 						<InfoBlock />
 						<InfoBlock heading="Services" content="Influencer Marketing" />
