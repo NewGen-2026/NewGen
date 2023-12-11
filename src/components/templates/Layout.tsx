@@ -23,8 +23,8 @@ function Layout({ data, children }: LayoutProps) {
 			<Seo page={data?.page} />
 			<Header {...options} pageOptions={page?.page_options} />
 			<main>{children}</main>
-			<CTA />
-			<Footer {...options} />
+			<CTA pageOptions={page?.page_options} />
+			<Footer {...options} pageOptions={page?.page_options} />
 			<WpHotkey id={page?.ID} />
 		</PasswordProtect>
 	);
