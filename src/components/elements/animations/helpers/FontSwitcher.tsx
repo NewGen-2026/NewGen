@@ -28,10 +28,10 @@ const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0
 
 		const parsedSegments = lines.flatMap((line, lineIndex) => {
 			return line
-				.split(/(<[^>]+>.\s*<\/>)/g) // Updated regex pattern to split text
+				.split(/(<[^>]+>.\s*<\/>)/g)
 				.filter(Boolean)
 				.map((segment) => {
-					const fontSwitchMatch = segment.match(/<([^>]+)>(.)\s*<\/>/); // Updated regex pattern to match segment
+					const fontSwitchMatch = segment.match(/<([^>]+)>(.)\s*<\/>/);
 					if (fontSwitchMatch) {
 						fontSwitchCount += 1;
 						const fontNames = fontSwitchMatch[1].split("-").map(mapFontName);

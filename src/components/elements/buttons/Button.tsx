@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useState } from "react";
+import FontSwitcher from "../animations/helpers/FontSwitcher";
 
 type ButtonProps = {
 	link?: {
@@ -42,6 +43,18 @@ export function Button({ link, button, size, className = "", children, ...other 
 		</div>
 	);
 }
+
+export const HoverButton = ({ link, button, size, className = "", children, ...other }: ButtonProps) => {
+	const [isHovered, setIsHovered] = useState(false);
+
+	return (
+		<button type="button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+			<Button>
+				<FontSwitcher hover isHovered={isHovered} text={link?.title || children} />
+			</Button>
+		</button>
+	);
+};
 
 type TextLinkProps = {
 	link?: {

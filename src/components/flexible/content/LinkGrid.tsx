@@ -8,8 +8,6 @@ import { getTextColorGroupHoverClasses } from "~/utils/getColors";
 const LinkGrid = (props) => {
 	const { items, variant } = props;
 
-	console.log(props);
-
 	return (
 		<div
 			className={clsx(
