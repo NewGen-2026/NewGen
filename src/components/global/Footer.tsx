@@ -9,6 +9,11 @@ const themeStyles = {
 		hoverColor: "hover:text-energy",
 		focusClasses: "focus:border-energy",
 	},
+	cobalt: {
+		isLight: true,
+		hoverColor: "hover:text-electric",
+		focusClasses: "focus:border-energy",
+	},
 	white: {
 		isLight: false,
 		hoverColor: "hover:text-cobalt",

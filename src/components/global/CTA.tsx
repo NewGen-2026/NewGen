@@ -9,8 +9,10 @@ const themeStyles = {
 		ctaText: "G<pst-pil>e</>t in to<pst-pil>u</>ch",
 	},
 	cobalt: {
-		bg: "bg-cobalt",
-		text: "text-electric",
+		backgroundColor: "bg-cobalt",
+		unhoveredClasses: "bg-electric text-electric",
+		hoveredClasses: "bg-white !text-cobalt",
+		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
 	},
 	black: {
 		bg: "bg-black",

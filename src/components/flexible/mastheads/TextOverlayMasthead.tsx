@@ -3,8 +3,17 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import { getBgColorClasses } from "~/utils/getColors";
 import { motion } from "framer-motion";
 
+const vairantThemeStyles = {
+	talent: {
+		imageClass: "max-w-[42.8%] translate-x-[-5%]",
+	},
+	creator: {
+		imageClass: "max-w-[35%]",
+	},
+};
+
 const TextOverlayMasthead = (props) => {
-	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image } = props;
+	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image, variant } = props;
 
 	return (
 		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
@@ -64,7 +73,7 @@ const TextOverlayMasthead = (props) => {
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
-					<WpImage image={image} priority className="mx-auto max-w-[35%]" />
+					<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variant]?.imageClass}`} />
 				</motion.div>
 			</div>
 		</div>

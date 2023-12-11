@@ -7,7 +7,7 @@ import ComponentRenderer from "./ComponentRenderer";
 const paddingSizes = {
 	top: {
 		none: "pt-0",
-		small: "pt-8 md:pt-16",
+		small: "pt-8 md:pt-20",
 		medium: "pt-16 md:pt-24",
 		large: "pt-16 md:pt-32 ",
 		xlarge: "pt-16 md:pt-40 laptop:pt-32",
@@ -16,7 +16,7 @@ const paddingSizes = {
 	},
 	bottom: {
 		none: "pb-0",
-		small: "pb-8 md:pb-16",
+		small: "pb-8 md:pb-20",
 		medium: "pb-16 md:pb-24",
 		large: "pb-16 md:pb-32",
 		xlarge: "pb-16 md:pb-40 laptop:pb-32",
