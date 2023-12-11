@@ -2,11 +2,13 @@ import React from "react";
 import LoaderMasthead from "./LoaderMasthead";
 import ConnectingMasthead from "./ConnectingMasthead";
 import SliderMasthead from "./SliderMasthead";
+import TextOverlayMasthead from "./TextOverlayMasthead";
 
 const MASTHEADS_COMPONENT_MAP = {
 	loader_masthead: LoaderMasthead,
 	connecting_masthead: ConnectingMasthead,
 	slider_masthead: SliderMasthead,
+	text_overlay: TextOverlayMasthead,
 };
 
 const MastheadsRenderer = (props) => {

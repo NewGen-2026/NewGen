@@ -105,6 +105,17 @@ h6 {
 }
 }
 
+.bg-energy{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-boost;
+}
+}
+
 .t-144
 {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
