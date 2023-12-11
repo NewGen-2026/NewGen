@@ -4,6 +4,7 @@ import FadeGrid from "./FadeGrid";
 import RotatingHeading from "./RotatingHeading";
 import LinkGrid from "./LinkGrid";
 import StatAssetRow from "./StatAssetRow";
+import HoverRevealIconGrid from "./HoverRevealIconGrid";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
@@ -11,6 +12,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	rotating_heading: RotatingHeading,
 	link_grid: LinkGrid,
 	statasset_row: StatAssetRow,
+	hover_reveal_icon_grid: HoverRevealIconGrid,
 };
 
 const ContentRenderer = (props) => {
