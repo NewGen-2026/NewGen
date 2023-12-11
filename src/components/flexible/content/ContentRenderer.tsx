@@ -5,6 +5,7 @@ import RotatingHeading from "./RotatingHeading";
 import LinkGrid from "./LinkGrid";
 import StatAssetRow from "./StatAssetRow";
 import HoverRevealIconGrid from "./HoverRevealIconGrid";
+import RosterGrid from "./RosterGrid";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
@@ -13,6 +14,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	link_grid: LinkGrid,
 	statasset_row: StatAssetRow,
 	hover_reveal_icon_grid: HoverRevealIconGrid,
+	roster_grid: RosterGrid,
 };
 
 const ContentRenderer = (props) => {

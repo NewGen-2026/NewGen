@@ -2,6 +2,7 @@ import { useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import { motion } from "framer-motion";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import clsx from "clsx";
 
 const socialVariants = {
 	initial: {
@@ -14,14 +15,18 @@ const socialVariants = {
 	},
 };
 
-const CreatorCard = ({ creator }) => {
+const CreatorCard = ({ className = "", creator, size = "default" }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<motion.div
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			className="bg-stone-10 relative aspect-[437/580] w-full max-w-[437px] transform-gpu text-white"
+			className={clsx(
+				`bg-stone-10 relative h-full w-full transform-gpu overflow-hidden text-white`,
+				size === "large" ? "aspect-[907/580]  max-w-[907px]" : "aspect-[437/580] max-w-[437px]",
+				className
+			)}
 		>
 			<WpImage className="h-full w-full object-cover" image={creator?.creator?.featured_image} />
 			<div className="absolute inset-0 z-[10] flex w-full items-end justify-center p-8">
