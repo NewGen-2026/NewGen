@@ -22,9 +22,11 @@ export default function Template(data: TemplateProps) {
 
 export async function getStaticPaths() {
 	const data = await cms().paths();
-	return { paths: data, fallback: "blocking" };
-}
 
+	const filteredPaths = data.filter((path) => !path.includes("/creator/"));
+
+	return { paths: filteredPaths, fallback: "blocking" };
+}
 export async function getStaticProps({ params }) {
 	const slug = typeof params.slug !== "string" ? `/${params.slug.join("/")}` : params.slug;
 	const [page, options] = await Promise.all([cms().page(slug), cms().options()]);

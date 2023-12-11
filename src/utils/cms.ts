@@ -33,6 +33,10 @@ export default function cms() {
 			const data = await fetchFromWp(`together/options`);
 			return data;
 		},
+		postType: async (postType, limit) => {
+			const data = await fetchFromWp(`together/post_previews?post_type=${postType}`);
+			return limit ? data.slice(0, limit) : data;
+		},
 		preview: async (post_id: number): Promise<WpPage> => {
 			const data: WpPage = await fetchFromWp(`together/preview?post_id=${post_id}&cache=${+new Date()}`, {
 				cache: "no-cache",

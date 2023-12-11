@@ -12,6 +12,7 @@ const paddingSizes = {
 		large: "pt-16 md:pt-32 ",
 		xlarge: "pt-16 md:pt-40 laptop:pt-32",
 		xxlarge: "pt-20 md:pt-44 laptop:pt-36",
+		mastheadLarge: "pt-20 md:pt-52 laptop:pt-36",
 	},
 	bottom: {
 		none: "pb-0",

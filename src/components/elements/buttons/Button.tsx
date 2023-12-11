@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { useState } from "react";
 import FontSwitcher from "../animations/helpers/FontSwitcher";
 
-type ButtonProps = {
+export type ButtonProps = {
 	link?: {
 		title: string;
 		url: string;

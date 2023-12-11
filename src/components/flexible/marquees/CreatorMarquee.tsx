@@ -3,12 +3,23 @@ import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { HoverButton } from "~/components/elements/buttons/Button";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
+import Link from "next/link";
 import CreatorCard from "../creatorBlocks/CreatorCard";
 
 const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
-const CreatorMarquee = (props) => {
-	const { creators } = props;
+type CreatorMarqueeProps = {
+	creators: any;
+	button?: {
+		link?: {
+			title: string;
+			url: string;
+		};
+		background_color?: "black" | "white";
+	};
+};
+const CreatorMarquee = (props: CreatorMarqueeProps) => {
+	const { creators, button } = props;
 
 	const ref = useRef(null);
 
@@ -29,9 +40,21 @@ const CreatorMarquee = (props) => {
 					))}
 				</Marquee>
 			</div>
-			<div className="mt-24 flex w-full justify-center">
-				<HoverButton>{`See the r<pst-rec>o</>ster`}</HoverButton>
-			</div>
+			{button?.link && (
+				<div className="mt-24 flex w-full justify-center">
+					<Link href={button?.link?.url}>
+						<HoverButton
+							button={{
+								color: button?.background_color || "black",
+								size: "wide",
+								type: "solid",
+							}}
+						>
+							{button?.link?.title}
+						</HoverButton>
+					</Link>
+				</div>
+			)}
 		</div>
 	);
 };

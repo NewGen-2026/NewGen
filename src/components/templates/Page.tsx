@@ -10,6 +10,7 @@ type PageProps = {
 
 export default function Page(data: PageProps) {
 	const { page } = data;
+
 	return (
 		<Layout data={data}>
 			<LayoutRenderer {...page} />
