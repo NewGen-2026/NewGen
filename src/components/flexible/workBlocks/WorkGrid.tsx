@@ -73,8 +73,9 @@ const WorkGridItem = ({ work, variant }) => {
 						y: isHovered ? -containerHeight / 2 + headingHeight / 2 : 0,
 					}}
 					transition={{
-						duration: 0.3,
-						ease: "easeInOut",
+						type: "spring",
+						stiffness: 220,
+						damping: 24,
 					}}
 					className="t-44 relative z-20 w-full max-w-[502.5px] font-black uppercase will-change-transform"
 				>

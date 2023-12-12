@@ -15,6 +15,7 @@ const vairantThemeStyles = {
 const TextOverlayMasthead = (props) => {
 	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image, variant } = props;
 
+	const variantType = variant || "creator";
 	return (
 		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
 			<div className="mx-auto w-full max-w-[1440px]">
@@ -29,9 +30,12 @@ const TextOverlayMasthead = (props) => {
 									animate={{
 										x: 0,
 									}}
+									transition={{
+										delay: 0.4,
+									}}
 									className="inline-block"
 								>
-									<FontSwitcher startDelay={200} text={top_line_left} />
+									<FontSwitcher startDelay={600} text={top_line_left} />
 								</motion.span>
 								<motion.span
 									initial={{
@@ -39,6 +43,9 @@ const TextOverlayMasthead = (props) => {
 									}}
 									animate={{
 										x: 0,
+									}}
+									transition={{
+										delay: 0.4,
 									}}
 									className="inline-block"
 								>
@@ -49,7 +56,7 @@ const TextOverlayMasthead = (props) => {
 								<FontSwitcher text={middle_line} />
 							</span>
 							<span className="relative z-10 block">
-								<FontSwitcher startDelay={300} text={bottom_line} />
+								<FontSwitcher startDelay={700} text={bottom_line} />
 							</span>
 						</h1>
 					</div>
@@ -67,13 +74,13 @@ const TextOverlayMasthead = (props) => {
 					transition={{
 						opacity: {
 							duration: 0.3,
-							delay: 0.2,
+							delay: 0.6,
 						},
-						delay: 0.2,
+						delay: 0.6,
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
-					<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variant]?.imageClass}`} />
+					<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variantType]?.imageClass}`} />
 				</motion.div>
 			</div>
 		</div>
