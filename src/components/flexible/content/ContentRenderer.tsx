@@ -9,6 +9,7 @@ import RosterGrid from "./RosterGrid";
 import AllCreatorsList from "./AllCreatorsList";
 import TwoColStatContent from "./TwoColStatContent";
 import FillScreenTextBlock from "./FillScreenTextBlock";
+import TwoColContentLinks from "./TwoColContentLinks";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
@@ -21,6 +22,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	all_creators_list: AllCreatorsList,
 	two_col_stat_content: TwoColStatContent,
 	fill_screen_text_block: FillScreenTextBlock,
+	two_col_contentlinks: TwoColContentLinks,
 };
 
 const ContentRenderer = (props) => {

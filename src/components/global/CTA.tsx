@@ -21,11 +21,10 @@ const themeStyles = {
 		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
 	},
 	candy: {
-		bg: "bg-ketchup",
-		text: "text-candy",
-		hoverBg: "bg-white",
-		hoverText: "text-ketchup",
-		ctaText: "G<pst-grid>e</>t in to<pst-grid>u</>ch",
+		backgroundColor: "bg-candy",
+		unhoveredClasses: "bg-ketchup text-candy",
+		hoveredClasses: "bg-white !text-ketchup",
+		ctaText: "G<pst-bec>e</>t in to<pst-bec>u</>ch",
 	},
 
 	white: {

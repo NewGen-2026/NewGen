@@ -19,6 +19,11 @@ const themeStyles = {
 		hoverColor: "hover:text-electric",
 		focusClasses: "focus:border-white",
 	},
+	candy: {
+		isLight: false,
+		hoverColor: "hover:text-ketchup",
+		focusClasses: "focus:border-ketchup",
+	},
 	white: {
 		isLight: false,
 		hoverColor: "hover:text-cobalt",
