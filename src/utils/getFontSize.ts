@@ -1,5 +1,7 @@
 export default function getFontSize(size) {
 	switch (size) {
+		case "200":
+			return "t-200";
 		case "96":
 			return "t-96";
 		case "72":

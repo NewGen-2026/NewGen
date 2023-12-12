@@ -60,7 +60,7 @@ export const getBgHoverColors = (color: Color) => {
 export const getTextColorClasses = (color: Color) => {
 	const colors = {
 		white: "!text-white",
-		black: "text-black",
+		black: "!text-black",
 		cobalt: "text-cobalt",
 		electric: "text-electric",
 		stone: "text-stone",

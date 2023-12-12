@@ -144,7 +144,7 @@ function TextCard({
 					<LinkGroup
 						links={links}
 						className={clsx(
-							"flex",
+							"mt-8 flex xl:mt-16",
 							!breakpointCrossed && text_alignment === "center" && "justify-center",
 							!breakpointCrossed && text_alignment === "right" && "justify-end",
 							!breakpointCrossed && text_alignment === "left" && "justify-start",

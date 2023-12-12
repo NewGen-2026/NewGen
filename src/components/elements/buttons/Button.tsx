@@ -73,15 +73,20 @@ type TextLinkProps = {
 };
 
 export function TextLink({ className = "", link, children, underlineColour = "black" }: TextLinkProps) {
+	const [isHovered, setIsHovered] = useState(false);
+
 	return (
-		<div className={`text-16px group inline-flex cursor-pointer select-none items-center leading-tight ${className}`}>
+		<div
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			className={`t-18 l group inline-flex cursor-pointer select-none items-center font-heading font-black uppercase text-white ${className}`}
+		>
 			{(link?.title || children) && (
-				<div className="group-hover:text-orange inline-block font-bold text-inherit">
-					{link?.title && <span dangerouslySetInnerHTML={{ __html: link?.title }} />}
-					{!link?.title && children && children}
+				<div className="group-hover:text-orange inline-block font-black ">
+					{(link?.title || children) && <FontSwitcher hover isHovered={isHovered} text={link?.title || children} />}
 					<div
-						className={`group-hover:bg-orange mt-1 h-[2px] w-full rounded bg-black
-          bg-${underlineColour} transition-colors duration-300 ease-in-out`}
+						className={` mt-1 h-[2px] w-full rounded bg-white
+        opacity-0 transition-colors duration-300 ease-in-out group-hover:opacity-100`}
 					/>
 				</div>
 			)}
