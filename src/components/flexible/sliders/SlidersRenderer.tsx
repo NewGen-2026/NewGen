@@ -1,8 +1,10 @@
 import React from "react";
 import TestimonialSlider from "./TestimonialSlider";
+import BigTitleSlider from "./BigTitleSlider";
 
 const SLIDERS_COMPONENT_MAP = {
 	testimonial_slider: TestimonialSlider,
+	big_title_slider: BigTitleSlider,
 };
 
 const SlidersRenderer = (props) => {

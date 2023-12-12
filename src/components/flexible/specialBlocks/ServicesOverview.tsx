@@ -12,7 +12,7 @@ const activeHoverLayouts = {
 		hoverTextColor: "text-energy",
 		button: {
 			bgColor: "bg-energy",
-			textColor: "text-boost",
+			textColor: "!text-boost",
 		},
 		blockColor: "bg-energy text-boost",
 		font: "font-pilowlava  !leading-[0.5] !text-[0.92em]",
@@ -22,7 +22,7 @@ const activeHoverLayouts = {
 		hoverTextColor: "text-electric",
 		button: {
 			bgColor: "bg-electric",
-			textColor: "text-cobalt",
+			textColor: "!text-cobalt",
 		},
 		blockColor: "bg-electric text-cobalt",
 		font: "font-become  !leading-[0.8]",
@@ -32,7 +32,7 @@ const activeHoverLayouts = {
 		hoverTextColor: "text-sand",
 		button: {
 			bgColor: "bg-sand",
-			textColor: "text-forest",
+			textColor: "!text-forest",
 		},
 		blockColor: "bg-sand text-forest",
 		font: "font-haltwins !leading-[0.8]",
