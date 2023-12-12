@@ -2,11 +2,13 @@ import React from "react";
 import ServicesOverview from "./ServicesOverview";
 import LeftRightCTA from "./LeftRightCTA";
 import AllTeam from "./AllTeam";
+import TimelineScroller from "./TimelineScroller";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,
 	creatorstalent_cta: LeftRightCTA,
 	all_team: AllTeam,
+	timeline_scroller: TimelineScroller,
 };
 
 const SpecialBlocksRenderer = (props) => {

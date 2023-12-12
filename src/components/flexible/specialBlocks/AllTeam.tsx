@@ -20,22 +20,23 @@ const AllTeam = (props) => {
 	return (
 		<div className="flex w-full flex-wrap gap-2 sm:gap-5 xl:gap-8">
 			<div className="flex flex-[1_1_45%] items-center">
-				<h2 className="t-120 font-black uppercase !leading-[1]">Meet the team</h2>
+				<h2 className="t-120 font-black uppercase !leading-[1]">
+					<FontSwitcher text="M<pst-grid-pst>e</>et the te<pst-grid-pst>a</>m" />
+				</h2>
 			</div>
-			{team_members?.map((member, i) => <TeamMember member={member} i={i} />)}
+			{team_members?.map((member, i) => <TeamMember key={`teamMember${i}`} member={member} />)}
 		</div>
 	);
 };
 export default AllTeam;
 
-const TeamMember = ({ member, i }) => {
+const TeamMember = ({ member }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<div
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			key={`teamMember${i}`}
 			className="flex w-full flex-[1_1_45%] flex-col md:flex-[1_1_320px] xxl:flex-[0_1_320px]"
 		>
 			<div className="relative w-full overflow-hidden text-white md:flex-[0_1_400px]">
