@@ -14,7 +14,7 @@ const Crown = () => {
 
 const Diversify = () => {
 	return (
-		<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
 				d="M39.6329 29.5555L17.7662 29.5555L17.7662 36.6367L5.33594 21.6144L17.7662 6.59107L17.7662 13.6723L33.6329 13.6723L39.6329 29.5555Z"
 				fill="currentColor"
@@ -29,7 +29,7 @@ const Diversify = () => {
 
 const Money = () => {
 	return (
-		<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -45,10 +45,57 @@ const Money = () => {
 	);
 };
 
+const Job = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect x="7.92969" y="14.7852" width="48.1367" height="19.4551" fill="currentColor" />
+			<path
+				d="M23.4062 10.6553C23.4062 9.56634 24.289 8.68359 25.3779 8.68359H38.7619C39.7721 8.68359 40.5911 9.50255 40.5911 10.5128V12.342H23.4062V10.6553Z"
+				fill="currentColor"
+			/>
+			<path fillRule="evenodd" clipRule="evenodd" d="M28.1661 34.2383H9.89062V55.3164H54.1055V34.2383H35.8281V42.7988H28.1661V34.2383Z" fill="currentColor" />
+		</svg>
+	);
+};
+
+const Growth = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="3.69286" height="27.9002" transform="matrix(-1 0 0 1 34.9258 20.5938)" fill="currentColor" />
+			<path
+				d="M50.2539 9.17969H42.5952C37.3304 9.17969 33.0625 13.4476 33.0625 18.7124V23.368H40.7212C45.986 23.368 50.2539 19.1001 50.2539 13.8353V9.17969Z"
+				fill="currentColor"
+			/>
+			<path
+				d="M33.0781 22.93C33.0781 15.3359 26.9219 9.17969 19.3278 9.17969H10.847V13.777C10.847 21.3711 17.0032 27.5274 24.5973 27.5274H33.0781V22.93Z"
+				fill="currentColor"
+			/>
+			<path d="M46.1758 31.1641H19.8485L21.984 54.8219H44.0402L46.1758 31.1641Z" fill="currentColor" />
+			<rect x="17.5742" y="29.7695" width="30.8811" height="9.40846" fill="currentColor" />
+		</svg>
+	);
+};
+
+const Happy = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M54.5 9.5H9.5V54.5H54.5V9.5ZM42.3088 37.6529C42.8695 36.2991 43.1582 34.8481 43.1582 33.3828H32L20.8418 33.3828C20.8418 34.8481 21.1304 36.2991 21.6911 37.6529C22.2519 39.0067 23.0738 40.2367 24.1099 41.2729C25.1461 42.309 26.3761 43.1309 27.7299 43.6917C29.0837 44.2524 30.5346 44.541 32 44.541C33.4653 44.541 34.9162 44.2524 36.27 43.6917C37.6238 43.1309 38.8539 42.309 39.89 41.2729C40.9261 40.2367 41.748 39.0067 42.3088 37.6529ZM28.5547 24.9258C28.5547 26.9818 26.888 28.6484 24.832 28.6484C22.7761 28.6484 21.1094 26.9818 21.1094 24.9258C21.1094 22.8698 22.7761 21.2031 24.832 21.2031C26.888 21.2031 28.5547 22.8698 28.5547 24.9258ZM39.1664 28.6512C41.2237 28.6512 42.8914 26.9834 42.8914 24.9262C42.8914 22.8689 41.2237 21.2012 39.1664 21.2012C37.1091 21.2012 35.4414 22.8689 35.4414 24.9262C35.4414 26.9834 37.1091 28.6512 39.1664 28.6512Z"
+				fill="currentColor"
+			/>
+		</svg>
+	);
+};
+
 const IconMap = {
 	crown: Crown,
 	diversify: Diversify,
 	money: Money,
+	job: Job,
+	growth: Growth,
+	happy: Happy,
 };
 
 const IconsRenderer = ({ icon }) => {

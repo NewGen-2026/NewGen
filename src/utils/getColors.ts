@@ -151,3 +151,22 @@ export const getColorHexCodes = (color) => {
 
 	return colors[color];
 };
+
+export const getColorGradients = (color) => {
+	const colors = {
+		white: "from-white/100 to-white/0",
+		black: "from-black/100 to-black/0",
+		cobalt: "from-cobalt/100 to-cobalt/0",
+		electric: "from-electric/100 to-electric/0",
+		stone: "from-stone/100 to-stone/0",
+		ketchup: "from-ketchup/100 to-ketchup/0",
+		sand: "from-sand/100 to-sand/0",
+		candy: "from-candy/100 to-candy/0",
+		boost: "from-boost/100 to-boost/0",
+		energy: "from-energy/100 to-energy/0",
+		forest: "from-forest/100 to-forest/0",
+		spark: "from-spark/100 to-spark/0",
+	};
+
+	return colors[color];
+};

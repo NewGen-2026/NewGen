@@ -7,6 +7,7 @@ import StatAssetRow from "./StatAssetRow";
 import HoverRevealIconGrid from "./HoverRevealIconGrid";
 import RosterGrid from "./RosterGrid";
 import AllCreatorsList from "./AllCreatorsList";
+import TwoColStatContent from "./TwoColStatContent";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
@@ -17,6 +18,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	hover_reveal_icon_grid: HoverRevealIconGrid,
 	roster_grid: RosterGrid,
 	all_creators_list: AllCreatorsList,
+	two_col_stat_content: TwoColStatContent,
 };
 
 const ContentRenderer = (props) => {

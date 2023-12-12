@@ -10,7 +10,7 @@ const paddingSizes = {
 		small: "pt-8 md:pt-20",
 		medium: "pt-16 md:pt-24",
 		large: "pt-16 md:pt-32 ",
-		xlarge: "pt-16 md:pt-40 laptop:pt-32",
+		xlarge: "pt-16 md:pt-[184px] laptop:pt-32",
 		xxlarge: "pt-20 md:pt-44 laptop:pt-36",
 		mastheadLarge: "pt-20 md:pt-52 laptop:pt-36",
 	},
@@ -19,7 +19,7 @@ const paddingSizes = {
 		small: "pb-8 md:pb-20",
 		medium: "pb-16 md:pb-24",
 		large: "pb-16 md:pb-32",
-		xlarge: "pb-16 md:pb-40 laptop:pb-32",
+		xlarge: "pb-16 md:pb-[184px] laptop:pb-32",
 		xxlarge: "pb-20 md:pb-44 laptop:pb-36",
 	},
 };
@@ -31,7 +31,7 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 		case "small":
 			return "space-y-8";
 		case "medium":
-			return "space-y-10 md:space-y-24";
+			return "space-y-10 md:space-y-20";
 		case "large":
 			return "space-y-12 md:space-y-28";
 		case "xlarge":
