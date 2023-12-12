@@ -15,8 +15,10 @@ const themeStyles = {
 		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
 	},
 	black: {
-		bg: "bg-black",
-		text: "text-white",
+		backgroundColor: "bg-black",
+		unhoveredClasses: "bg-electric text-electric",
+		hoveredClasses: "bg-cobalt !text-electric",
+		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
 	},
 	candy: {
 		bg: "bg-ketchup",

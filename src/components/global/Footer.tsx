@@ -14,6 +14,11 @@ const themeStyles = {
 		hoverColor: "hover:text-electric",
 		focusClasses: "focus:border-energy",
 	},
+	black: {
+		isLight: true,
+		hoverColor: "hover:text-electric",
+		focusClasses: "focus:border-white",
+	},
 	white: {
 		isLight: false,
 		hoverColor: "hover:text-cobalt",
