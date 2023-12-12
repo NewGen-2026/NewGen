@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React, { useState } from "react";
+import { Color, getBgColorClasses, getBgHoverColors, getTextColorClasses, getTextColorHoverClasses } from "~/utils/getColors";
 import FontSwitcher from "../animations/helpers/FontSwitcher";
 
 export type ButtonProps = {
@@ -9,8 +10,15 @@ export type ButtonProps = {
 	};
 	button?: {
 		color: "black" | "white";
+		background_color?: "black" | "white";
+		hover_background_color?: Color;
+		text_color?: Color;
+		text_hover_color?: Color;
 		size: "small" | "medium" | "wide" | "huge";
-		type: "solid" | "outline";
+		link?: {
+			title: string;
+			url: string;
+		};
 	};
 	size?: "small" | "medium" | "wide" | "huge";
 	className?: string;
@@ -18,21 +26,22 @@ export type ButtonProps = {
 };
 
 export function Button({ link, button, size, className = "", children, ...other }: ButtonProps) {
-	const backgroundColor = button?.color || "black";
+	const backgroundColor = button?.color || button?.background_color || "black";
 	const buttonSize = button?.size || "medium";
-	const buttonType = button?.type || "solid";
 
 	const classes = clsx(
 		"text-white border transition-colors duration-300 select-none appearance-none inline-block t-18 uppercase px-[17.5px] !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
 		className,
-		backgroundColor === "black" && "bg-black border-black hover:bg-cobalt hover:text-electric hover:border-white",
-		backgroundColor === "white" && "bg-white border-white hover:bg-white hover:text-black",
+		// backgroundColor === "black" && "bg-black border-black hover:bg-cobalt hover:text-electric hover:border-white",
+		// backgroundColor === "white" && "bg-white !text-black border-white hover:bg-black hover:!text-white",
+		getBgColorClasses(backgroundColor),
+		getBgHoverColors(button?.hover_background_color),
+		getTextColorClasses(button?.text_color),
+		getTextColorHoverClasses(button?.text_hover_color),
+
 		buttonSize === "small" && "inline-block rounded text-13px px-5 py-2 font-medium",
 		buttonSize === "wide" && "block rounded-[100px] text-16px px-7 py-5 leading-[1.3] text-center font-bold",
-		buttonSize === "huge" && "w-full rounded-[100px] text-16px  py-5 px-5 font-bold cursor-pointer text-center",
-		buttonType === "outline" && "bg-transparent border",
-		buttonType === "outline" && backgroundColor === "white" && "border-white hover:bg-white hover:text-black",
-		buttonType === "outline" && backgroundColor === "black" && "border-black text-black hover:bg-black hover:text-white"
+		buttonSize === "huge" && "w-full rounded-[100px] text-16px  py-5 px-5 font-bold cursor-pointer text-center"
 	);
 
 	return link?.title ? (
@@ -49,8 +58,8 @@ export const HoverButton = ({ link, button, size, className = "", children, ...o
 
 	return (
 		<button type="button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-			<Button>
-				<FontSwitcher hover isHovered={isHovered} text={link?.title || children} />
+			<Button button={button}>
+				<FontSwitcher hover isHovered={isHovered} text={link?.title || button?.link?.title || children} />
 			</Button>
 		</button>
 	);

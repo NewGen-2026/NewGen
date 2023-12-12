@@ -38,6 +38,25 @@ export const getBgContrastHoverColorClasses = (color: Color) => {
 	return colors[color];
 };
 
+export const getBgHoverColors = (color: Color) => {
+	const colors = {
+		white: "hover:bg-white",
+		black: "hover:bg-black",
+		cobalt: "hover:bg-cobalt",
+		electric: "hover:bg-electric",
+		stone: "hover:bg-stone",
+		ketchup: "hover:bg-ketchup",
+		sand: "hover:bg-sand",
+		candy: "hover:bg-candy",
+		boost: "hover:bg-boost",
+		energy: "hover:bg-energy",
+		forest: "hover:bg-forest",
+		spark: "hover:bg-spark",
+	};
+
+	return colors[color];
+};
+
 export const getTextColorClasses = (color: Color) => {
 	const colors = {
 		white: "!text-white",
@@ -78,18 +97,18 @@ export const getTextContrastColorClasses = (color: Color) => {
 
 export const getTextColorHoverClasses = (color: Color) => {
 	const colors = {
-		white: "hover:text-white group-hover:text-white",
-		black: "hover:text-black group-hover:text-black",
-		cobalt: "hover:text-cobalt group-hover:text-cobalt",
-		electric: "hover:text-electric group-hover:text-electric",
-		stone: "hover:text-stone group-hover:text-stone",
-		ketchup: "hover:text-ketchup group-hover:text-ketchup",
-		sand: "hover:text-sand group-hover:text-sand",
-		candy: "hover:text-candy group-hover:text-candy",
-		boost: "hover:text-boost group-hover:text-boost",
-		energy: "hover:text-energy group-hover:text-energy",
-		forest: "hover:text-forest group-hover:text-forest",
-		spark: "hover:text-spark group-hover:text-spark",
+		white: "hover:!text-white group-hover:text-white",
+		black: "hover:!text-black group-hover:text-black",
+		cobalt: "hover:!ext-cobalt group-hover:text-cobalt",
+		electric: "hover:!text-electric group-hover:text-electric",
+		stone: "hover:!text-stone group-hover:text-stone",
+		ketchup: "hover:!text-ketchup group-hover:text-ketchup",
+		sand: "hover:!text-sand group-hover:text-sand",
+		candy: "hover:!text-candy group-hover:text-candy",
+		boost: "hover:!text-boost group-hover:text-boost",
+		energy: "hover!:text-energy group-hover:text-energy",
+		forest: "hover!:text-forest group-hover:text-forest",
+		spark: "hover!:text-spark group-hover:text-spark",
 	};
 
 	return colors[color];
