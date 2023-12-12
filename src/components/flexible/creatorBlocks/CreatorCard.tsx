@@ -39,7 +39,10 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 						y: isHovered ? -48 : 0,
 					}}
 					transition={{
+						type: "spring",
 						delay: isHovered ? 0 : 0.5,
+						stiffness: 200,
+						damping: 20,
 					}}
 					className="t-48 text-center font-heading font-black uppercase will-change-transform"
 				>

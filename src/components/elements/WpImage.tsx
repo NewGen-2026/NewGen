@@ -15,10 +15,11 @@ interface WpImageProps {
 	className?: string;
 	priority?: boolean;
 	style?: any;
+	pageId?: number;
 	layout?: "fill" | "fixed" | "intrinsic" | "responsive";
 }
 
-function WpImage({ image, fill = false, className, ...props }: WpImageProps) {
+function WpImage({ image, fill = false, className, pageId, ...props }: WpImageProps) {
 	const imgRef = useRef(null) as any;
 	const imageUrl = image?.src || image?.url;
 

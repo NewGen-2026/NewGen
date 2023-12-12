@@ -90,7 +90,7 @@ const WorkGridItem = ({ work, variant }) => {
 						animate={{
 							opacity: isHovered ? 1 : 0,
 						}}
-						className={`relative z-20 flex w-full flex-wrap gap-4  ${isThreeCol ? "" : "lg:flex-nowrap"}`}
+						className={`relative z-20 flex w-full flex-wrap gap-4 ${isThreeCol ? "" : "lg:flex-nowrap"}`}
 					>
 						<InfoBlock />
 						<InfoBlock heading="Services" content="Influencer Marketing" />

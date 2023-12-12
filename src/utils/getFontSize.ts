@@ -4,6 +4,8 @@ export default function getFontSize(size) {
 			return "t-96";
 		case "72":
 			return "t-72";
+		case "48":
+			return "t-48";
 		case "44":
 		case "default":
 			return "t-44";
