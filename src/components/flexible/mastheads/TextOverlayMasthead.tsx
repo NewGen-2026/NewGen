@@ -13,9 +13,16 @@ const vairantThemeStyles = {
 };
 
 const TextOverlayMasthead = (props) => {
-	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image, variant } = props;
+	const { variant } = props;
 
 	const variantType = variant || "creator";
+	return variantType === "about" ? <TextOnTopVariant {...props} variant={variantType} /> : <AssetAtBottomVariant {...props} variant={variantType} />;
+};
+export default TextOverlayMasthead;
+
+const AssetAtBottomVariant = (props) => {
+	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image, variant } = props;
+
 	return (
 		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
 			<div className="mx-auto w-full max-w-[1440px]">
@@ -80,10 +87,34 @@ const TextOverlayMasthead = (props) => {
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
-					<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variantType]?.imageClass}`} />
+					<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variant]?.imageClass}`} />
 				</motion.div>
 			</div>
 		</div>
 	);
 };
-export default TextOverlayMasthead;
+
+const TextOnTopVariant = (props) => {
+	const { top_line, middle_line, bottom_line, image, variant } = props;
+
+	return (
+		<div className="pt-6 md:pt-0">
+			<h1 className="t-144 text-center font-black uppercase !leading-[0.8]">
+				<span className="relative z-10 block translate-x-[-12%]">
+					<FontSwitcher startDelay={600} text={top_line} />
+				</span>
+
+				<span className="relative z-10 block translate-x-[14%]">
+					<FontSwitcher text={middle_line} />
+				</span>
+				<span className="relative z-10 block translate-x-[-1%]">
+					<FontSwitcher startDelay={700} text={bottom_line} />
+				</span>
+			</h1>
+
+			<div className="-mt-3 md:-mt-[4.5rem]">
+				<WpImage image={image} priority className={`mx-auto ${vairantThemeStyles[variant]?.imageClass}`} />
+			</div>
+		</div>
+	);
+};
