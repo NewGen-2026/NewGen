@@ -10,6 +10,7 @@ import AllCreatorsList from "./AllCreatorsList";
 import TwoColStatContent from "./TwoColStatContent";
 import FillScreenTextBlock from "./FillScreenTextBlock";
 import TwoColContentLinks from "./TwoColContentLinks";
+import StatRow from "./StatRow";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,
@@ -23,6 +24,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_stat_content: TwoColStatContent,
 	fill_screen_text_block: FillScreenTextBlock,
 	two_col_contentlinks: TwoColContentLinks,
+	stat_row: StatRow,
 };
 
 const ContentRenderer = (props) => {
