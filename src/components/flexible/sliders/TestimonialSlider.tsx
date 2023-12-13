@@ -17,6 +17,22 @@ const TestimonialSlider = (props) => {
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [isHovered, setIsHovered] = useState(false);
 
+	const updateMaxHeight = () => {
+		const heights = quoteRefs.current.map((ref) => ref.current?.offsetHeight || 0);
+		const maxHeight = Math.max(...heights);
+		setMaxQuoteHeight(maxHeight);
+	};
+
+	useEffect(() => {
+		updateMaxHeight();
+
+		window.addEventListener("resize", updateMaxHeight);
+
+		return () => {
+			window.removeEventListener("resize", updateMaxHeight);
+		};
+	}, []);
+
 	useEffect(() => {
 		const updateActiveSlide = () => {
 			if (isInView) {

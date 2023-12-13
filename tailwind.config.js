@@ -1,5 +1,6 @@
 module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx}"],
+	safelist: ["text-ketchup"],
 	theme: {
 		screens: {
 			xxs: "320px",

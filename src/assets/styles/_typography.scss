@@ -220,6 +220,11 @@ h6 {
 	@apply leading-[0.95];
 }
 
+.t-15{
+	@include clamp("font-size", rem(26px * $responsive_size_modifier_large), rem(15px), $md, $lg);
+	@apply leading-[1.45];
+}
+
 
 .prose {
 	max-width: 100%;
