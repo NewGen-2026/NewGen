@@ -23,10 +23,10 @@ const TransitionSlider = ({ className = "", children, intervalDuration = 3000, s
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setHasStarted(true);
-		}, startDelay + intervalDuration);
+		}, startDelay);
 
 		return () => clearTimeout(timer);
-	}, [startDelay, intervalDuration]);
+	}, [startDelay]);
 
 	return (
 		<div ref={ref} className={`relative overflow-hidden ${className}`}>
@@ -43,16 +43,18 @@ const TransitionSlider = ({ className = "", children, intervalDuration = 3000, s
 					{child}
 				</motion.div>
 			))}
-			<motion.div
-				key={activeSlide}
-				initial={{ y: "100%" }}
-				animate={{ y: [null, "0%", "-100%"] }}
-				transition={{
-					duration: 0.8,
-					ease: "easeInOut",
-				}}
-				className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(transitionColor)}`}
-			/>
+			{hasStarted && (
+				<motion.div
+					key={activeSlide}
+					initial={{ y: "100%" }}
+					animate={{ y: [null, "0%", "-100%"] }}
+					transition={{
+						duration: 0.8,
+						ease: "easeInOut",
+					}}
+					className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(transitionColor)}`}
+				/>
+			)}
 		</div>
 	);
 };

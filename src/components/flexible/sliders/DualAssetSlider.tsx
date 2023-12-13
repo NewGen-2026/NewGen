@@ -10,7 +10,7 @@ const DualAssetSlider = (props) => {
 				{left_slider?.left_images?.length > 1 &&
 					left_slider?.left_images.map((image, i) => <WpImage key={`leftImage${i}`} image={image?.left_image} className=" h-full w-full object-cover" />)}
 			</TransitionSlider>
-			<TransitionSlider startDelay={0.5} intervalDuration={7000} className="relative flex-1 md:max-w-[437px]">
+			<TransitionSlider startDelay={500} intervalDuration={7000} className="relative flex-1 md:max-w-[437px]">
 				{right_slider?.right_images?.length > 1 &&
 					right_slider?.right_images.map((image, i) => <WpImage key={`rightImage${i}`} image={image?.image} className=" h-full w-full object-cover" />)}
 			</TransitionSlider>

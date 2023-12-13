@@ -8,6 +8,7 @@ import MarqueesRenderer from "../flexible/marquees/MarqueesRenderer";
 import WorkBlocksRenderer from "../flexible/workBlocks/WorkBlocksRenderer";
 import ContentRenderer from "../flexible/content/ContentRenderer";
 import SlidersRenderer from "../flexible/sliders/SlidersRenderer";
+import MediaRenderer from "../flexible/media/MediaRenderer";
 
 const COMPONENT_MAP = {
 	test_component: TestComponent,
@@ -19,6 +20,7 @@ const COMPONENT_MAP = {
 	marquees: MarqueesRenderer,
 	sliders: SlidersRenderer,
 	content: ContentRenderer,
+	media: MediaRenderer,
 };
 
 const ComponentRenderer = ({ components = [], pageId = null }) => {
