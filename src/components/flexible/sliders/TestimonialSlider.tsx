@@ -3,9 +3,10 @@ import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
 
 const TestimonialSlider = (props) => {
-	const { items } = props;
+	const { items, background, variant, mode } = props;
 
 	const ref = useRef(null);
 	const quoteRefs = useRef(items.map(() => createRef()));
@@ -37,8 +38,11 @@ const TestimonialSlider = (props) => {
 		setMaxQuoteHeight(maxHeight);
 	}, [items.length, activeSlide]);
 
+	const textClass = mode === "dark" ? "text-black" : "text-white";
+	const navClass = mode === "dark" ? "bg-stone" : "bg-white/40";
+
 	return (
-		<div>
+		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} px-3 py-12 md:py-20` : ""}`}>
 			<div ref={ref} className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center">
 				<div className="relative aspect-[160/180] w-full max-w-[160px]">
 					{items?.map((item, i) => (
@@ -80,13 +84,15 @@ const TestimonialSlider = (props) => {
 										style={{ minHeight: maxQuoteHeight }}
 										onMouseEnter={() => setIsHovered(true)}
 										onMouseLeave={() => setIsHovered(false)}
-										className={`t-40 cursor-pointer font-black uppercase transition-colors duration-200  ${isHovered ? "text-ketchup" : "text-black"}`}
+										className={`t-40 cursor-pointer font-black uppercase transition-colors duration-200  ${
+											isHovered ? getTextContrastColorClasses(background?.color) : textClass
+										}`}
 									>
-										<span className="font-gridular text-ketchup">“</span>
+										<span className="font-gridular ">“</span>
 										<span>
 											<FontSwitcher hover isHovered={isHovered} text={item?.quote} />
 										</span>
-										<span className="font-gridular text-ketchup">”</span>
+										<span className="font-gridular ">”</span>
 									</motion.div>
 								)
 						)}
@@ -113,7 +119,9 @@ const TestimonialSlider = (props) => {
 											className=""
 										>
 											<div className="t-24 font-black uppercase">{item?.name}</div>
-											<div className="t-16 mt-2 font-medium opacity-[0.35]">{item?.title}</div>
+											<div className={`t-16 mt-2 font-medium ${mode === "dark" ? "opacity-[0.35]" : getTextContrastColorClasses(background?.color)} `}>
+												{item?.title}
+											</div>
 										</motion.div>
 									)
 							)}
@@ -126,7 +134,9 @@ const TestimonialSlider = (props) => {
 								onClick={() => setActiveSlide(i)}
 								initial={{ scale: 1 }}
 								animate={{ scale: activeSlide === i ? 1.5 : 1 }}
-								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 hover:bg-candy ${activeSlide === i ? "bg-ketchup" : "bg-stone"}`}
+								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 ${getBgContrastColorClasses(background?.color)} ${
+									activeSlide === i ? getBgContrastColorClasses(background?.color) : navClass
+								}`}
 							/>
 						))}
 					</div>
