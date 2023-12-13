@@ -30,7 +30,7 @@ export function Button({ link, button, size, className = "", children, ...other 
 	const buttonSize = button?.size || "medium";
 
 	const classes = clsx(
-		"text-white border transition-colors duration-300 select-none appearance-none inline-block t-18 uppercase px-[30px] !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
+		"text-white  transition-colors duration-300 select-none appearance-none inline-block t-18 uppercase px-[30px] !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
 		className,
 		getBgColorClasses(backgroundColor),
 		getBgHoverColors(button?.hover_background_color),

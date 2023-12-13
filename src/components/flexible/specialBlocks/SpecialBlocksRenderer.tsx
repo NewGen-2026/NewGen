@@ -5,6 +5,8 @@ import AllTeam from "./AllTeam";
 import TimelineScroller from "./TimelineScroller";
 import FloatingImagesCta from "./FloatingImagesCta";
 import HijackScroller from "./HijackScroller";
+import Offices from "./Offices";
+import Jobs from "./Jobs";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,
@@ -13,6 +15,8 @@ const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	timeline_scroller: TimelineScroller,
 	floating_images_cta: FloatingImagesCta,
 	hijack_scroller: HijackScroller,
+	offices: Offices,
+	jobs: Jobs,
 };
 
 const SpecialBlocksRenderer = (props) => {

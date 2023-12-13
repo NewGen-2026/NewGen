@@ -101,60 +101,62 @@ function TextCard({
 	);
 
 	return (
-		<div
-			style={{
-				...maxWidthStyle?.style,
-			}}
-			className={clsx(classes, className, "container")}
-		>
-			{subheading && (
-				<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
-			)}
-			<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between md:flex-row md:gap-6")}>
-				{heading && (
-					<TextCardHeading
-						className={clsx(variant === "horizontal" && "flex-1")}
-						heading={heading}
-						breakpointCrossed={breakpointCrossed}
-						text_alignment={text_alignment}
-						options={{
-							font_size: heading_font_size,
-							max_width: heading_max_width,
-							font_color: heading_font_color?.color,
-							margin_bottom: heading_margin_bottom,
-							heading_tag,
-						}}
-					/>
+		<div className="container">
+			<div
+				style={{
+					...maxWidthStyle?.style,
+				}}
+				className={clsx(classes, className)}
+			>
+				{subheading && (
+					<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
 				)}
-				{content && (
-					<TextCardContent
-						className={clsx(variant === "horizontal" && "flex-1")}
-						content={content}
-						breakpointCrossed={breakpointCrossed}
-						options={{
-							font_size: content_font_size,
-							max_width: content_max_width,
-							font_color: content_font_color?.color,
-							content_classes,
-							text_alignment,
-						}}
-					/>
-				)}
-				{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && (
-					<LinkGroup
-						links={links}
-						className={clsx(
-							"mt-8 flex xl:mt-16",
-							!breakpointCrossed && text_alignment === "center" && "justify-center",
-							!breakpointCrossed && text_alignment === "right" && "justify-end",
-							!breakpointCrossed && text_alignment === "left" && "justify-start",
-							breakpointCrossed && !has_mobile_text_alignment && "justify-center",
-							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "justify-center",
-							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "justify-end",
-							breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "justify-start"
-						)}
-					/>
-				)}
+				<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between md:flex-row md:gap-6")}>
+					{heading && (
+						<TextCardHeading
+							className={clsx(variant === "horizontal" && "flex-1")}
+							heading={heading}
+							breakpointCrossed={breakpointCrossed}
+							text_alignment={text_alignment}
+							options={{
+								font_size: heading_font_size,
+								max_width: heading_max_width,
+								font_color: heading_font_color?.color,
+								margin_bottom: heading_margin_bottom,
+								heading_tag,
+							}}
+						/>
+					)}
+					{content && (
+						<TextCardContent
+							className={clsx(variant === "horizontal" && "flex-1")}
+							content={content}
+							breakpointCrossed={breakpointCrossed}
+							options={{
+								font_size: content_font_size,
+								max_width: content_max_width,
+								font_color: content_font_color?.color,
+								content_classes,
+								text_alignment,
+							}}
+						/>
+					)}
+					{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && (
+						<LinkGroup
+							links={links}
+							className={clsx(
+								"mt-8 flex xl:mt-16",
+								!breakpointCrossed && text_alignment === "center" && "justify-center",
+								!breakpointCrossed && text_alignment === "right" && "justify-end",
+								!breakpointCrossed && text_alignment === "left" && "justify-start",
+								breakpointCrossed && !has_mobile_text_alignment && "justify-center",
+								breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "justify-center",
+								breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "justify-end",
+								breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "justify-start"
+							)}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	);
