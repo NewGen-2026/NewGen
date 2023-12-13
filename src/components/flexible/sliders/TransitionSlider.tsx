@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useAutoSlider from "~/hooks/useAutoSlider";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Color, getBgColorClasses } from "~/utils/getColors";
 
 type TransitionSliderProps = {
@@ -38,25 +38,21 @@ const TransitionSlider = ({ className = "", children, intervalDuration = 3000, s
 					transition={{
 						delay: 0.3,
 					}}
-					className="absolute inset-0  h-full w-full"
+					className="absolute inset-0 h-full w-full will-change-transform"
 				>
 					{child}
 				</motion.div>
 			))}
-			<AnimatePresence mode="wait" initial={false}>
-				{hasStarted && (
-					<motion.div
-						key={activeSlide}
-						initial={{ y: "100%" }}
-						animate={{ y: ["100%", "0%", "-100%"] }}
-						transition={{
-							duration: 0.8,
-							ease: [0.24, 0.32, 0.13, 0.98],
-						}}
-						className={`absolute inset-0 z-10 h-full w-full ${getBgColorClasses(transitionColor)}`}
-					/>
-				)}
-			</AnimatePresence>
+			<motion.div
+				key={activeSlide}
+				initial={{ y: "100%" }}
+				animate={{ y: [null, "0%", "-100%"] }}
+				transition={{
+					duration: 0.8,
+					ease: "easeInOut",
+				}}
+				className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(transitionColor)}`}
+			/>
 		</div>
 	);
 };

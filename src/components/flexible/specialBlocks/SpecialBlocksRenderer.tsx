@@ -4,6 +4,7 @@ import LeftRightCTA from "./LeftRightCTA";
 import AllTeam from "./AllTeam";
 import TimelineScroller from "./TimelineScroller";
 import FloatingImagesCta from "./FloatingImagesCta";
+import HijackScroller from "./HijackScroller";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,
@@ -11,6 +12,7 @@ const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	all_team: AllTeam,
 	timeline_scroller: TimelineScroller,
 	floating_images_cta: FloatingImagesCta,
+	hijack_scroller: HijackScroller,
 };
 
 const SpecialBlocksRenderer = (props) => {

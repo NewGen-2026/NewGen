@@ -41,7 +41,7 @@ const FadeGrid = ({ items }) => {
 					newOpacities[cellIndex] = 1;
 					return newOpacities;
 				});
-			}, 1000);
+			}, 500);
 		};
 
 		if (isInView) {
@@ -58,7 +58,7 @@ const FadeGrid = ({ items }) => {
 	return (
 		<div ref={ref} className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:gap-8">
 			{displayedItems.map((itemIndex, i) => (
-				<motion.div key={i} animate={{ opacity: opacities[i] }} transition={{ duration: 1 }} className="aspect-[320/340] w-full">
+				<motion.div key={i} animate={{ opacity: opacities[i] }} transition={{ duration: 0.5 }} className="aspect-[320/340] w-full">
 					<Asset {...items[itemIndex].asset} className="h-full w-full object-cover" />
 				</motion.div>
 			))}

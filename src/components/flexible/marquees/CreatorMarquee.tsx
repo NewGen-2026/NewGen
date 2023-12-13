@@ -47,7 +47,6 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 							button={{
 								color: button?.background_color || "black",
 								size: "wide",
-								type: "solid",
 							}}
 						>
 							{button?.link?.title}
