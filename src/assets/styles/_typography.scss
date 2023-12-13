@@ -185,6 +185,11 @@ h6 {
 	@apply leading-[1.05] tracking-[-0.05rem];
 }
 
+.t-32{
+	@include clamp("font-size", rem(42px * $responsive_size_modifier_large), rem(32px), $md, $lg);
+	@apply leading-[1.1] tracking-[-0.04rem];
+}
+
 .t-24{
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.03rem];

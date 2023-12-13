@@ -19,6 +19,12 @@
 
 }
 
+.icon-block-marquee{
+	.rfm-initial-child-container, .rfm-marquee{
+		align-items: start !important;
+	}
+}
+
 
 .filter-candy{
 	filter: invert(0.4) sepia(1) saturate(5) hue-rotate(315deg) brightness(1);

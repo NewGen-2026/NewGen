@@ -57,15 +57,7 @@ const HijackScroller = (props) => {
 			>
 				<motion.div ref={ref} style={{ x: xSpring }} className="flex gap-4 whitespace-nowrap will-change-transform md:gap-8">
 					{items?.map((item: any, i: number) => (
-						<ScrollItem
-							key={`item-${i}`}
-							ref={itemRefs.current[i]}
-							item={item}
-							i={i}
-							length={items.length}
-							lastItem={items.length - 1}
-							scrollProgress={xBase}
-						/>
+						<ScrollItem key={`item-${i}`} ref={itemRefs.current[i]} item={item} i={i} lastItem={items.length - 1} scrollProgress={xBase} />
 					))}
 				</motion.div>
 			</motion.div>
@@ -79,10 +71,9 @@ interface ScrollItemProps {
 	i: number;
 	lastItem: number;
 	scrollProgress: MotionValue;
-	length: number;
 }
 
-const ScrollItem = forwardRef<HTMLDivElement, ScrollItemProps>(({ item, i, lastItem, scrollProgress, length }, ref) => {
+const ScrollItem = forwardRef<HTMLDivElement, ScrollItemProps>(({ item, i, lastItem, scrollProgress }, ref) => {
 	const scrollVelocity = useVelocity(scrollProgress);
 
 	const headingXBase = useTransform(scrollVelocity, [2000, 0, -2000], [-50, 0, 50], { clamp: false });
