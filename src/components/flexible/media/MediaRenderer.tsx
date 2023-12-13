@@ -1,8 +1,10 @@
 import React from "react";
 import LogoGrid from "./LogoGrid";
+import DualAsset from "./DualAsset";
 
 const MEDIA_BLOCKS_COMPONENT_MAP = {
 	logo_grid: LogoGrid,
+	dual_asset: DualAsset,
 };
 
 const MediaRenderer = (props) => {
