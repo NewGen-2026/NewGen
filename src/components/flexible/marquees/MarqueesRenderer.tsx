@@ -2,11 +2,13 @@ import React from "react";
 import AssetMarquee from "./AssetMarquee";
 import FeedMarquee from "./FeedMarquee";
 import CreatorMarquee from "./CreatorMarquee";
+import IconBlockMarquee from "./IconBlockMarquee";
 
 const MARQUEE_COMPONENT_MAP = {
 	asset_marquee: AssetMarquee,
 	feed_marquee: FeedMarquee,
 	creator_marquee: CreatorMarquee,
+	icon_block_marquee: IconBlockMarquee,
 };
 
 const MarqueesRenderer = (props) => {
