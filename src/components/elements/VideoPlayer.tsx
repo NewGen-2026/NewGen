@@ -11,9 +11,10 @@ interface VideoPlayerProps {
 	playType?: "auto" | "click";
 	parentInView?: boolean;
 	playOnHover?: boolean;
+	onVideoLoad?: () => void;
 }
 
-function VideoPlayer({ videoFile, className = "", embed, isEmbed = false, playType, parentInView, playOnHover = false }: VideoPlayerProps) {
+function VideoPlayer({ videoFile, className = "", embed, isEmbed = false, playType, parentInView, playOnHover = false, onVideoLoad }: VideoPlayerProps) {
 	const videoRef = useRef(null) as any;
 	const inViewRef = useRef(null);
 
@@ -55,6 +56,9 @@ function VideoPlayer({ videoFile, className = "", embed, isEmbed = false, playTy
 
 	const handleVideoLoad = () => {
 		videoRef.current.classList.remove("fade-in");
+		if (onVideoLoad) {
+			onVideoLoad();
+		}
 	};
 
 	const handleMouseEnter = () => {

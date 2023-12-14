@@ -23,9 +23,11 @@ const GridSubmenu = (props) => {
 			transition={{
 				delay: 0.2,
 			}}
+			layout
+			className="lg:min-h-[690px]"
 		>
 			<div className="grid grid-cols-3 gap-5">{grid_items?.map((item, i) => <GridItem key={`grid${i}`} {...item} />)}</div>
-			<div className="my-10">
+			<div className="py-10">
 				<BottomLink {...bottom_link} />
 			</div>
 		</motion.div>
@@ -42,7 +44,7 @@ const GridItem = (props) => {
 		<Link href={link} className="block">
 			<div
 				className={clsx(
-					"group flex h-full w-full flex-col p-5 transition-colors duration-200",
+					"group flex h-full max-h-[254px] w-full flex-col p-5 transition-colors duration-200",
 					getBgColorClasses(theme_color),
 					getBgContrastHoverColorClasses(theme_color),
 					getTextContrastColorClasses(theme_color),

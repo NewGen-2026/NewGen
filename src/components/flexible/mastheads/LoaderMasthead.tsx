@@ -1,22 +1,31 @@
 import Asset from "~/components/elements/Asset";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { useMeasure, useWindowSize } from "react-use";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { VideoLoadedContext } from "~/utils/context";
 
 const LoaderMasthead = (props) => {
 	const { asset } = props;
 
 	const assetRef = useRef(null);
+	const containerRef = useRef(null);
 	const { scrollY } = useScroll();
 
 	const assetScaleBase = useTransform(scrollY, [0, 400], [0.95, 1]);
 	const assetScaleSpring = useSpring(assetScaleBase, { stiffness: 200, damping: 30, mass: 1 });
+
 	const [initialY, setInitialY] = useState(0);
 	const [animationComplete, setAnimationComplete] = useState(false);
+	const { videoLoaded, setVideoLoaded } = useContext(VideoLoadedContext);
+
+	const handleVideoLoad = () => {
+		setVideoLoaded(true);
+	};
 
 	const [ref, { height }] = useMeasure() as any;
 	const { height: windowHeight } = useWindowSize();
+	const isInView = useInView(containerRef, { once: false, amount: 0.6 });
 
 	useEffect(() => {
 		if (!assetRef.current) return;
@@ -27,10 +36,12 @@ const LoaderMasthead = (props) => {
 		}
 	}, [height, assetRef, windowHeight]);
 
+	const assetYEndValue = videoLoaded ? 0 : -initialY;
+
 	return (
-		<div className="relative min-h-screen overflow-hidden bg-black pt-44 text-white">
+		<div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black pt-44 text-white">
 			<div className="absolute inset-0 flex h-screen items-center justify-center">
-				<LogoLoader />
+				<LogoLoader videoLoaded={videoLoaded} />
 			</div>
 			<div className="mx-auto w-full max-w-[3000px]  ">
 				<div className="">
@@ -57,8 +68,8 @@ const LoaderMasthead = (props) => {
 									clipPath: "inset(0% 50% 0% 50%)",
 								}}
 								animate={{
-									clipPath: "inset(0% 0% 0% 0)",
-									y: [animationComplete ? 0 : -initialY, 0],
+									clipPath: videoLoaded ? "inset(0% 0% 0% 0)" : "inset(0% 50% 0% 50%)",
+									y: [animationComplete ? assetYEndValue : -initialY, assetYEndValue],
 								}}
 								transition={{
 									duration: 0.8,
@@ -79,7 +90,7 @@ const LoaderMasthead = (props) => {
 										scale: 0.8,
 									}}
 									animate={{
-										scale: 1,
+										scale: videoLoaded ? 1 : 0.8,
 									}}
 									transition={{
 										type: "spring",
@@ -90,7 +101,7 @@ const LoaderMasthead = (props) => {
 									className="h-full w-full"
 								>
 									<div className="h-full w-full">
-										<Asset {...asset} className="h-full w-full object-cover" />
+										<Asset {...asset} parentInView={isInView} onVideoLoad={handleVideoLoad} className="h-full w-full object-cover" />
 									</div>
 								</motion.div>
 							</motion.div>
@@ -112,7 +123,7 @@ const logoLoaderVariants = {
 	},
 };
 
-const LogoLoader = () => {
+const LogoLoader = ({ videoLoaded }) => {
 	return (
 		<motion.div initial="initial" animate="animate" className="text-[8.2vw]">
 			<motion.span
@@ -121,8 +132,8 @@ const LogoLoader = () => {
 					opacity: 1,
 				}}
 				animate={{
-					x: -500,
-					opacity: 0,
+					x: videoLoaded ? -500 : 0,
+					opacity: videoLoaded ? 0 : 1,
 				}}
 				transition={{
 					duration: 0.4,
@@ -138,8 +149,8 @@ const LogoLoader = () => {
 					opacity: 1,
 				}}
 				animate={{
-					x: 500,
-					opacity: 0,
+					x: videoLoaded ? 500 : 0,
+					opacity: videoLoaded ? 0 : 1,
 				}}
 				transition={{
 					duration: 0.4,
@@ -215,7 +226,7 @@ const TextContainer = ({ children, custom = 0 }) => {
 				animate={{
 					y: 0,
 					opacity: 1,
-					transition: { type: "spring", stiffness: 1000, damping: 15, mass: 0.1, delay: 4.5 + custom * 0.15 },
+					transition: { type: "spring", stiffness: 1000, damping: 15, mass: 0.3, delay: 4.5 + custom * 0.15 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>

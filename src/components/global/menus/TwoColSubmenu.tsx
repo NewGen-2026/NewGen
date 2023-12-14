@@ -11,6 +11,7 @@ const TwoColSubmenu = (props) => {
 
 	return (
 		<motion.div
+			key="twoColMenu"
 			initial={{
 				opacity: 0,
 			}}
@@ -35,7 +36,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 	return (
 		<Link
 			href={link || "/#"}
-			className="relative flex aspect-[528/488] flex-1 items-end justify-center bg-energy text-boost transition-opacity duration-200 hover:bg-boost hover:text-energy"
+			className="relative flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden bg-energy text-boost transition-opacity duration-200 hover:bg-boost hover:text-energy"
 		>
 			<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
 				<div className="absolute inset-0 flex w-full items-center p-5 text-center">
@@ -99,7 +100,7 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 	return (
 		<Link
 			href={link || "/#"}
-			className="relative  z-[10] flex aspect-[528/488]  flex-1 items-end justify-center  bg-electric text-cobalt transition-colors duration-200 hover:bg-cobalt hover:text-electric"
+			className="relative  z-[10] flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden  bg-electric text-cobalt transition-colors duration-200 hover:bg-cobalt hover:text-electric"
 		>
 			<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
 				<div className="t-88-menu absolute inset-0 flex w-full items-center p-5 text-center  font-heading font-black uppercase !leading-[0.8]">
@@ -157,7 +158,7 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 					}}
 					className="relative w-full"
 				>
-					<WpImage image={image} className="mx-auto max-w-[71.2%]" />
+					<WpImage image={image} priority className="mx-auto max-w-[71.2%]" />
 				</motion.div>
 			</div>
 		</Link>

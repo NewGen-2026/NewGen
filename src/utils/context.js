@@ -1,5 +1,4 @@
 import { createContext } from "react";
 
 export const GlobalContext = createContext([]);
-
-export default GlobalContext;
+export const VideoLoadedContext = createContext(null);

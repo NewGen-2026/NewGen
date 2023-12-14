@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
+import { VideoLoadedContext } from "~/utils/context";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 import ScrollHeader from "../elements/animations/helpers/ScrollHeader";
 import GridSubmenu from "./menus/GridSubmenu";
@@ -12,9 +13,9 @@ import TwoColSubmenu from "./menus/TwoColSubmenu";
 const getSubMenuContent = (navItem) => {
 	switch (navItem?.submenu_layout) {
 		case "grid":
-			return <GridSubmenu data={navItem.grid_submenu} />;
+			return <GridSubmenu key="gridMenu" data={navItem.grid_submenu} />;
 		case "twoCol":
-			return <TwoColSubmenu data={navItem.two_col_submenu} />;
+			return <TwoColSubmenu key="twoColMenu" data={navItem.two_col_submenu} />;
 		default:
 			return null;
 	}
@@ -41,12 +42,21 @@ export default function Header(props) {
 		setMenuOpen(navItem?.nav_item?.has_submenu);
 	}, []);
 
-	const breakpointCrossed = useBreakpointCrossed(768);
+	const reset = useCallback(() => {
+		setActiveSubmenu(null);
+		setMenuOpen(false);
+	}, []);
+
+	const breakpointCrossed = useBreakpointCrossed(890);
+
+	const { videoLoaded } = useContext(VideoLoadedContext);
+
+	const initialYHome = path === "/" ? -100 : 0;
 
 	return (
 		<motion.div
-			initial={{ y: path === "/" ? -100 : 0 }}
-			animate={{ y: 0 }}
+			initial={{ y: initialYHome }}
+			animate={{ y: videoLoaded ? 0 : initialYHome }}
 			transition={{
 				type: "spring",
 				stiffness: 200,
@@ -56,13 +66,13 @@ export default function Header(props) {
 			className="fixed left-0 right-0 top-0 z-[200] block transition-colors duration-200"
 		>
 			<ScrollHeader
-				className={`relative transition-colors duration-300 ${scrolledBg || isMenuOpen ? "bg-white" : "bg-transparent"}`}
+				className={` transition-colors duration-300 ${scrolledBg || isMenuOpen ? "bg-white" : "bg-transparent"}`}
 				scrollY={scrollY}
 				setScrolledBg={setScrolledBg}
 				setMenuOpen={setMenuOpen}
 			>
 				<div className={clsx(`relative z-10 flex w-full items-center justify-between py-3 pl-2 md:pl-8 md-large:py-0`, isDark ? "text-black" : "text-white")}>
-					<Link href="/" className="block">
+					<Link href="/" className="block" onMouseEnter={() => reset()}>
 						<Logo />
 					</Link>
 					<div className="flex items-center gap-6 xl:gap-10">
@@ -96,25 +106,41 @@ export default function Header(props) {
 					</div>
 				</div>
 				{!breakpointCrossed && (
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{
-							opacity: isMenuOpen ? 1 : 0,
-						}}
-						layout
-						transition={{
-							layout: {
-								type: "spring",
-								stiffness: 200,
-								damping: 24,
-							},
-						}}
-						className="absolute left-0 right-0 top-0 min-h-[520px] w-full  bg-white  pb-4  pt-24"
-					>
-						<motion.div layout="position" className="container">
-							{showSubmenu && submenuContent}
+					<>
+						<motion.div
+							style={{
+								pointerEvents: isMenuOpen ? "auto" : "none",
+							}}
+							initial={{ opacity: 0 }}
+							animate={{
+								opacity: isMenuOpen ? 1 : 0,
+							}}
+							layout
+							transition={{
+								opacity: {
+									duration: 0.2,
+								},
+								layout: {
+									duration: 0.4,
+								},
+							}}
+							className="absolute left-0 right-0 top-0 z-[5] w-full bg-white pb-4  pt-24  will-change-transform  xl:min-h-[747px]"
+						>
+							<motion.div layout="position" className="container will-change-transform">
+								{showSubmenu && submenuContent}
+							</motion.div>
 						</motion.div>
-					</motion.div>
+
+						{isMenuOpen && (
+							<div
+								style={{
+									pointerEvents: isMenuOpen ? "auto" : "none",
+								}}
+								onMouseEnter={() => reset()}
+								className="fixed inset-0 z-0 h-screen w-full "
+							/>
+						)}
+					</>
 				)}
 			</ScrollHeader>
 		</motion.div>

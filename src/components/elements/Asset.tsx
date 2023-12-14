@@ -30,6 +30,7 @@ interface AssetProps {
 	fill?: boolean;
 	parentInView?: boolean;
 	playOnHover?: boolean;
+	onVideoLoad?: () => void;
 }
 
 function Asset({
@@ -55,6 +56,7 @@ function Asset({
 	fill,
 	parentInView,
 	playOnHover,
+	onVideoLoad,
 	...other
 }: AssetProps) {
 	if (type === "image") {
@@ -71,7 +73,7 @@ function Asset({
 	}
 
 	if (type === "video") {
-		return <VideoPlayer className={className} {...video} playOnHover={playOnHover} parentInView={parentInView} />;
+		return <VideoPlayer className={className} {...video} playOnHover={playOnHover} parentInView={parentInView} onVideoLoad={onVideoLoad} />;
 	}
 
 	if (type === "customAnimation") {
