@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 
 const fontMap = {
@@ -18,26 +18,27 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 	const isInView = useInView(ref);
 
 	const [activeLineIndex, setActiveLineIndex] = useState(0);
-	const [randomFonts, setRandomFonts] = useState([]);
 	const [isMounted, setIsMounted] = useState(false);
+
+	const generateRandomFonts = useCallback(() => {
+		return rotating_lines[activeLineIndex]?.line.split("").map((_, index) => (index % 3 === 0 ? getRandomFontClass() : ""));
+	}, [rotating_lines, activeLineIndex]);
+
+	const [randomFonts, setRandomFonts] = useState(generateRandomFonts());
 
 	useEffect(() => {
 		setIsMounted(true);
 
-		const updateRandomFonts = () => {
-			const newRandomFonts = rotating_lines[activeLineIndex]?.line.split("").map((_, index) => (index % 3 === 0 ? getRandomFontClass() : ""));
-			setRandomFonts(newRandomFonts);
-		};
-
 		const interval = setInterval(() => {
 			if (isInView) {
 				setActiveLineIndex((prevIndex) => (prevIndex + 1) % rotating_lines.length);
-				updateRandomFonts();
+				const newRandomFonts = generateRandomFonts();
+				setRandomFonts(newRandomFonts);
 			}
 		}, 3000);
 
 		return () => clearInterval(interval);
-	}, [activeLineIndex, rotating_lines, isInView]);
+	}, [activeLineIndex, rotating_lines, isInView, generateRandomFonts]);
 
 	const activeLine = rotating_lines[activeLineIndex]?.line.split("");
 
