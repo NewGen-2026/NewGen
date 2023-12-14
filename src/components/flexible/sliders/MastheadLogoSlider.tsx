@@ -1,0 +1,47 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import WpImage from "~/components/elements/WpImage";
+
+const MastheadLogoSlider = ({ items, setSwiper, handleSlideChange, activeSlide, duplicatedItems, handleLogoClick, logoOpacity, filterClassMap }) => {
+	return (
+		<Swiper
+			className="!pointer-events-none w-full"
+			onSwiper={setSwiper}
+			onSlideChange={(s) => handleSlideChange(s)}
+			// slidesPerView={7}
+			loop
+			noSwiping
+			centeredSlides
+			modules={[Autoplay]}
+			autoplay={{
+				delay: 2500,
+				disableOnInteraction: false,
+			}}
+			breakpoints={{
+				"@0.00": {
+					slidesPerView: 4,
+					spaceBetween: -20,
+				},
+				"@0.6": {
+					slidesPerView: 7,
+					spaceBetween: 0,
+				},
+			}}
+		>
+			{duplicatedItems.map((item, i) => (
+				<SwiperSlide
+					key={`logo-${i}`}
+					onClick={() => handleLogoClick(i % items.length)}
+					className={`w-full max-w-[150px]  transition-opacity ${
+						activeSlide === i % items.length ? filterClassMap[items[activeSlide]?.active_color] : ""
+					}  duration-200 md:max-w-[206px] ${activeSlide === i % items.length ? "" : logoOpacity}`}
+				>
+					<WpImage image={item?.logo} priority />
+				</SwiperSlide>
+			))}
+		</Swiper>
+	);
+};
+export default MastheadLogoSlider;

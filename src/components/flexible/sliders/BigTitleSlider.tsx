@@ -38,7 +38,7 @@ const BigTitleSlider = (props) => {
 					{items?.map((item, i) => (
 						<span
 							key={`content${i}`}
-							className={`t-20 absolute top-0 block font-medium opacity-75 transition-opacity duration-200 sm:bottom-0 sm:top-[unset] ${
+							className={`t-20 absolute top-0 block font-medium transition-opacity duration-200 sm:bottom-0 sm:top-[unset] ${
 								activeSlide === i ? "opacity-100" : "opacity-0"
 							}`}
 						>

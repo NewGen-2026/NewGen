@@ -121,7 +121,9 @@ export default function Header(props) {
 									duration: 0.2,
 								},
 								layout: {
-									duration: 0.4,
+									type: "spring",
+									stiffness: 200,
+									damping: 20,
 								},
 							}}
 							className="absolute left-0 right-0 top-0 z-[5] w-full bg-white pb-4  pt-24  will-change-transform  xl:min-h-[747px]"

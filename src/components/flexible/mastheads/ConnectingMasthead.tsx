@@ -3,10 +3,9 @@ import WpImage from "~/components/elements/WpImage";
 import { getBgColorClasses } from "~/utils/getColors";
 import { motion, useInView } from "framer-motion";
 import getFontClass from "~/utils/getFontClass";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import dynamic from "next/dynamic";
 
-import "swiper/css";
+const MastheadLogoSlider = dynamic(() => import("../sliders/MastheadLogoSlider"), { ssr: false });
 
 const ConnectingMasthead = (props) => {
 	const { top_line, middle_line_left, middle_line_right, bottom_line, items } = props;
@@ -23,7 +22,7 @@ const ConnectingMasthead = (props) => {
 	const [isInitialLoad, setIsInitialLoad] = useState(true);
 
 	useEffect(() => {
-		const initialLoadDelay = 1500;
+		const initialLoadDelay = 500;
 		const timer = setTimeout(() => {
 			setIsInitialLoad(false);
 		}, initialLoadDelay);
@@ -45,16 +44,17 @@ const ConnectingMasthead = (props) => {
 	};
 
 	useEffect(() => {
+		if (!swiper) return;
 		if (swiper) {
-			if (isInView) {
-				swiper.autoplay.start();
+			if (isInView && !isInitialLoad) {
+				swiper?.autoplay?.start();
 			} else {
-				swiper.autoplay.pause();
+				swiper?.autoplay?.pause();
 			}
 		}
-	}, [isInView, swiper]);
+	}, [isInView, swiper, isInitialLoad]);
 
-	const logoOpacity = !isInitialLoad ? "opacity-50" : "opacity-100";
+	const logoOpacity = !isInitialLoad ? "opacity-50" : "!opacity-100 ";
 
 	const filterClassMap = {
 		candy: "filter-candy",
@@ -63,7 +63,7 @@ const ConnectingMasthead = (props) => {
 	};
 
 	return (
-		<div ref={ref} className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
+		<div ref={ref} className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 laptop:pt-44 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
 			<div className="container">
 				<Title
 					top_line={top_line}
@@ -75,43 +75,17 @@ const ConnectingMasthead = (props) => {
 				/>
 			</div>
 
-			<div className="mx-auto mt-12 max-w-[1440px]  md:mt-[175px] ">
-				<Swiper
-					className="!pointer-events-none w-full"
-					onSwiper={setSwiper}
-					onSlideChange={(s) => handleSlideChange(s)}
-					// slidesPerView={7}
-					loop
-					noSwiping
-					centeredSlides
-					modules={[Autoplay]}
-					autoplay={{
-						delay: !isInitialLoad ? 2500 : 1500,
-						disableOnInteraction: false,
-					}}
-					breakpoints={{
-						"@0.00": {
-							slidesPerView: 4,
-							spaceBetween: -20,
-						},
-						"@0.6": {
-							slidesPerView: 7,
-							spaceBetween: 0,
-						},
-					}}
-				>
-					{duplicatedItems.map((item, i) => (
-						<SwiperSlide
-							key={`logo-${i}`}
-							onClick={() => handleLogoClick(i % items.length)}
-							className={`w-full max-w-[150px]  transition-opacity ${
-								activeSlide === i % items.length ? filterClassMap[items[activeSlide]?.active_color] : ""
-							}  duration-200 md:max-w-[206px] ${activeSlide === i % items.length ? "" : logoOpacity}`}
-						>
-							<WpImage image={item?.logo} priority />
-						</SwiperSlide>
-					))}
-				</Swiper>
+			<div className="mx-auto mt-12 max-w-[1440px] md:mt-[175px]  xl:min-h-[87.5px] laptop:mt-32 ">
+				<MastheadLogoSlider
+					items={items}
+					setSwiper={setSwiper}
+					handleSlideChange={handleSlideChange}
+					activeSlide={activeSlide}
+					duplicatedItems={duplicatedItems}
+					handleLogoClick={handleLogoClick}
+					logoOpacity={logoOpacity}
+					filterClassMap={filterClassMap}
+				/>
 			</div>
 		</div>
 	);

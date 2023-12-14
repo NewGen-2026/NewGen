@@ -124,7 +124,7 @@ export const getTextColorHoverClasses = (color: Color) => {
 		ketchup: "hover:!text-ketchup group-hover:text-ketchup",
 		sand: "hover:!text-sand group-hover:text-sand",
 		candy: "hover:!text-candy group-hover:text-candy",
-		boost: "hover:!text-boost group-hover:text-boost",
+		boost: "hover:!text-boost group-hover:!text-boost",
 		energy: "hover:text-energy group-hover:!text-energy",
 		forest: "hover:text-forest group-hover:text-forest",
 		spark: "hover:text-spark group-hover:text-spark",

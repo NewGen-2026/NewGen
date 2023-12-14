@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { getBgColorClasses, getTextColorClasses } from "~/utils/getColors";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
@@ -19,6 +19,8 @@ const LinkSlider = (props) => {
 		overrideActiveSlide: overrideSlide,
 	});
 
+	const isInViewOnce = useInView(ref, { once: true });
+
 	return (
 		<div ref={ref} className="flex w-full flex-col-reverse justify-between gap-6 gap-y-5 sm:flex-row">
 			<div className="flex max-w-[620px] flex-1 flex-col justify-between gap-6 text-center sm:text-left">
@@ -35,19 +37,20 @@ const LinkSlider = (props) => {
 								onMouseLeave={() => setIshovered(i)}
 							>
 								<FontSwitcher hover isHovered={activeSlide === i || ishovered === i} text={item?.heading} />
-
-								<motion.div
-									initial={{
-										x: "-100%",
-									}}
-									animate={{
-										x: activeSlide === i ? "0%" : "-100%",
-									}}
-									transition={{
-										duration: activeSlide === i ? 6 : 0.4,
-									}}
-									className={`absolute inset-0 mix-blend-screen ${getBgColorClasses(item?.hover_color)}`}
-								/>
+								{isInViewOnce && (
+									<motion.div
+										initial={{
+											x: "-100%",
+										}}
+										animate={{
+											x: activeSlide === i ? "0%" : "-100%",
+										}}
+										transition={{
+											duration: activeSlide === i ? 6 : 0.4,
+										}}
+										className={`absolute inset-0 mix-blend-screen ${getBgColorClasses(item?.hover_color)}`}
+									/>
+								)}
 							</button>
 						</li>
 					))}
