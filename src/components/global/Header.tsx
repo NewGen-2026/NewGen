@@ -1,17 +1,47 @@
 import Link from "next/link";
-import React, { use, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useCallback, useMemo, useState } from "react";
+import { motion, useScroll } from "framer-motion";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
+import ScrollHeader from "../elements/animations/helpers/ScrollHeader";
+import GridSubmenu from "./menus/GridSubmenu";
+import TwoColSubmenu from "./menus/TwoColSubmenu";
+
+const getSubMenuContent = (navItem) => {
+	switch (navItem?.submenu_layout) {
+		case "grid":
+			return <GridSubmenu data={navItem.grid_submenu} />;
+		case "twoCol":
+			return <TwoColSubmenu data={navItem.two_col_submenu} />;
+		default:
+			return null;
+	}
+};
 
 export default function Header(props) {
 	const { menu, pageOptions } = props;
 	const [isHovered, setIsHovered] = useState(false);
+	const [scrolledBg, setScrolledBg] = useState(false);
+	const [isMenuOpen, setMenuOpen] = useState(false);
+	const [activeSubmenu, setActiveSubmenu] = useState(null);
 
-	const isDark = pageOptions?.header_color === "dark";
+	const { scrollY } = useScroll();
+	const isDark = isMenuOpen || pageOptions?.header_color === "dark" || scrolledBg;
 
 	const path = useRouter().asPath;
+
+	const showSubmenu = activeSubmenu && activeSubmenu.has_submenu;
+
+	const submenuContent = useMemo(() => getSubMenuContent(activeSubmenu), [activeSubmenu]);
+
+	const handleMouseEnter = useCallback((navItem) => {
+		setActiveSubmenu(navItem?.nav_item);
+		setMenuOpen(navItem?.nav_item?.has_submenu);
+	}, []);
+
+	const breakpointCrossed = useBreakpointCrossed(768);
 
 	return (
 		<motion.div
@@ -23,44 +53,81 @@ export default function Header(props) {
 				damping: 20,
 				delay: path === "/" ? 4.2 : 0,
 			}}
-			className="fixed left-0 right-0 top-0 z-[200] block"
+			className="fixed left-0 right-0 top-0 z-[200] block transition-colors duration-200"
 		>
-			<div
-				className={clsx(
-					`flex w-full items-center justify-between py-3 pl-2 md:pl-8 md-large:py-0`,
-
-					isDark ? "text-blacke" : "text-white"
-				)}
+			<ScrollHeader
+				className={`relative transition-colors duration-300 ${scrolledBg || isMenuOpen ? "bg-white" : "bg-transparent"}`}
+				scrollY={scrollY}
+				setScrolledBg={setScrolledBg}
+				setMenuOpen={setMenuOpen}
 			>
-				<Link href="/" className="block">
-					<svg width="144" height="24" viewBox="0 0 144 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M14.3682 12.7494L4.10519 0.0185043H0V23.9815H6.15779V11.2506L16.4208 23.9815H20.526V0.0185043H14.3682V12.7494ZM22.671 23.9815H35.3379V18.5042H28.8288V14.2298H35.3194V9.08558H28.8288V5.49576H35.3379V0.0185043H22.671V23.9815ZM61.5779 14.4518H61.5039L56.9179 0H51.6108L47.0248 14.4518H46.9508L43.049 0H36.7248L43.5668 23.963H50.0574L54.2736 8.82652L58.4527 23.963H64.9619L71.8039 0H65.4796L61.5779 14.4518ZM94.5119 0.0370083H76.5748C74.5961 0.0370083 73.4866 1.12876 73.4866 3.12722V20.9283C73.4866 22.9083 74.5776 24 76.5748 24H92.977C94.9557 24 96.0652 22.9083 96.0652 20.9283V13.7301C96.0652 11.7502 94.9742 10.6399 92.977 10.6399H87.8733C86.8747 10.6399 86.3385 11.121 86.3385 12.0093V12.1758C86.3385 13.064 86.8932 13.5451 87.8733 13.5451H92.1264C92.6812 13.5451 92.977 13.8597 92.977 14.3963V20.2251C92.977 20.7803 92.6627 21.0763 92.1264 21.0763H77.4254C76.8706 21.0763 76.5748 20.7618 76.5748 20.2251V3.79337C76.5748 3.23824 76.8891 2.94217 77.4254 2.94217H94.5119C95.5104 2.94217 96.0467 2.46106 96.0467 1.57286V1.40632C96.0467 0.518119 95.5104 0.0370083 94.5119 0.0370083ZM116.647 17.616V20.2436C116.647 20.6877 116.314 21.0393 115.87 21.0393L101.872 21.0578C101.428 21.0578 101.076 20.7247 101.076 20.2806L101.058 14.3408C101.058 13.8967 101.391 13.5451 101.835 13.5451L113.133 13.5266V10.6399L101.853 10.6584C101.409 10.6584 101.058 10.3254 101.058 9.88127L101.039 3.75636C101.039 3.31226 101.372 2.96068 101.816 2.96068L115.814 2.94217C116.258 2.94217 116.61 3.27525 116.61 3.71935V6.34696H119.679V3.64534C119.679 3.20123 119.328 2.90517 118.884 2.90517H117.386C116.942 2.90517 116.591 2.51658 116.591 2.07247V0.777178C116.591 0.333076 116.24 0 115.796 0L101.798 0.0185043C101.354 0.0185043 101.021 0.370085 101.021 0.814187V2.10948C101.021 2.55359 100.688 2.94217 100.244 2.94217H98.7095C98.2657 2.94217 97.9329 3.29375 97.9329 3.73786L97.9514 9.86276C97.9514 10.3069 98.3027 10.6399 98.7465 10.6399H100.281C100.725 10.6399 101.076 10.973 101.076 11.4171V12.7309C101.076 13.175 100.744 13.5266 100.3 13.5266H98.765C98.3212 13.5266 97.9883 13.8782 97.9883 14.3223L98.0068 20.2621C98.0068 20.7062 98.3582 21.0393 98.802 21.0393H100.337C100.781 21.0393 101.132 21.3724 101.132 21.8165V23.1858C101.132 23.6299 101.483 23.963 101.927 23.963L115.925 23.9445C116.369 23.9445 116.702 23.5929 116.702 23.1488V21.7795C116.702 21.3354 117.035 20.9838 117.479 20.9838H118.977C119.42 20.9838 119.753 20.6322 119.753 20.1881V17.5605L116.647 17.616ZM142.646 1.20278C141.999 0.555127 141.093 0.222051 139.854 0.222051C138.892 0.222051 138.19 0.499615 137.801 1.07325C137.117 2.03547 137.191 3.84888 138.005 6.32845L141.426 16.7093C141.648 17.394 141.98 18.8003 141.98 19.6885C141.98 21.7425 140.945 22.9823 139.207 22.9823C138.541 22.9823 137.968 22.7232 137.579 22.2791C137.284 21.946 136.969 21.3169 137.136 20.3177L137.413 18.5783C137.82 15.9322 136.266 13.3971 135.305 12.1203L129.665 4.62606C129.351 4.20046 129.073 3.83038 128.796 3.46029C127.187 1.2953 126.392 0.222051 124.949 0.222051C123.082 0.222051 121.972 1.7579 121.917 4.44102L121.584 18.5413C121.528 20.7062 121.954 22.2976 122.786 23.1673C123.304 23.7039 124.025 23.9815 124.912 23.9815C127.816 23.9815 127.964 21.2799 127.964 20.7248C127.964 20.5952 127.982 20.4472 127.982 20.2992C128.019 19.596 128.093 18.6523 127.298 17.2089L123.285 9.99229C122.73 9.01157 122.619 8.14187 122.619 7.60524C122.619 6.77255 123.119 6.32845 124.025 6.32845C124.728 6.32845 125.153 6.84657 125.948 8.03084L133.9 19.596C135.878 22.5012 137.247 23.9815 139.188 23.9815C140.871 23.9815 141.943 23.4819 142.406 22.0941C143.793 18.1157 145.05 3.58982 142.646 1.20278Z"
-							fill="currentColor"
-						/>
-					</svg>
-				</Link>
-				<div className="flex items-center gap-6 xl:gap-10">
-					<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-electric")}>
-						{menu?.nav?.map((navItem, i) => (
-							<Link key={`nav-item-${i}`} href={navItem?.nav_item?.link?.url || "/#"} className="t-16 font-heading font-black uppercase">
-								{navItem?.nav_item?.link?.title}
-							</Link>
-						))}
-					</nav>
-					<Link
-						onMouseEnter={() => setIsHovered(true)}
-						onMouseLeave={() => setIsHovered(false)}
-						href={menu?.button?.url || "/#"}
-						className={clsx(
-							`t-16 hidden min-w-[150px] justify-center  px-4 py-[26.5px] text-center font-black uppercase  transition-colors duration-200 md-large:flex`,
-							isDark ? "bg-black text-white hover:bg-cobalt hover:text-electric" : "bg-white text-black hover:bg-electric hover:text-cobalt"
-						)}
-					>
-						<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
+				<div className={clsx(`relative z-10 flex w-full items-center justify-between py-3 pl-2 md:pl-8 md-large:py-0`, isDark ? "text-black" : "text-white")}>
+					<Link href="/" className="block">
+						<Logo />
 					</Link>
+					<div className="flex items-center gap-6 xl:gap-10">
+						<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-electric")}>
+							{menu?.nav?.map((navItem, i) => (
+								<motion.button
+									key={`nav-item-${i}`}
+									onHoverStart={() => handleMouseEnter(navItem)}
+									onKeyDown={(e) => {
+										if (e.key === "Enter" || e.key === " ") {
+											handleMouseEnter(navItem);
+										}
+									}}
+									className="t-16 block font-heading font-black uppercase"
+								>
+									<Link href={navItem?.nav_item?.link?.url || "/#"}>{navItem?.nav_item?.link?.title}</Link>
+								</motion.button>
+							))}
+						</nav>
+						<Link
+							onMouseEnter={() => setIsHovered(true)}
+							onMouseLeave={() => setIsHovered(false)}
+							href={menu?.button?.url || "/#"}
+							className={clsx(
+								`t-16 hidden min-h-[68.2px] min-w-[150px] justify-center  px-4 py-[26.5px] text-center font-black uppercase  transition-colors duration-200 md-large:flex`,
+								isDark ? "bg-black text-white hover:bg-cobalt hover:text-electric" : "bg-white text-black hover:bg-electric hover:text-cobalt"
+							)}
+						>
+							<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
+						</Link>
+					</div>
 				</div>
-			</div>
+				{!breakpointCrossed && (
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{
+							opacity: isMenuOpen ? 1 : 0,
+						}}
+						layout
+						transition={{
+							layout: {
+								type: "spring",
+								stiffness: 200,
+								damping: 24,
+							},
+						}}
+						className="absolute left-0 right-0 top-0 min-h-[520px] w-full  bg-white  pb-4  pt-24"
+					>
+						<motion.div layout="position" className="container">
+							{showSubmenu && submenuContent}
+						</motion.div>
+					</motion.div>
+				)}
+			</ScrollHeader>
 		</motion.div>
 	);
 }
+
+const Logo = () => {
+	return (
+		<svg width="144" height="24" viewBox="0 0 144 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				d="M14.3682 12.7494L4.10519 0.0185043H0V23.9815H6.15779V11.2506L16.4208 23.9815H20.526V0.0185043H14.3682V12.7494ZM22.671 23.9815H35.3379V18.5042H28.8288V14.2298H35.3194V9.08558H28.8288V5.49576H35.3379V0.0185043H22.671V23.9815ZM61.5779 14.4518H61.5039L56.9179 0H51.6108L47.0248 14.4518H46.9508L43.049 0H36.7248L43.5668 23.963H50.0574L54.2736 8.82652L58.4527 23.963H64.9619L71.8039 0H65.4796L61.5779 14.4518ZM94.5119 0.0370083H76.5748C74.5961 0.0370083 73.4866 1.12876 73.4866 3.12722V20.9283C73.4866 22.9083 74.5776 24 76.5748 24H92.977C94.9557 24 96.0652 22.9083 96.0652 20.9283V13.7301C96.0652 11.7502 94.9742 10.6399 92.977 10.6399H87.8733C86.8747 10.6399 86.3385 11.121 86.3385 12.0093V12.1758C86.3385 13.064 86.8932 13.5451 87.8733 13.5451H92.1264C92.6812 13.5451 92.977 13.8597 92.977 14.3963V20.2251C92.977 20.7803 92.6627 21.0763 92.1264 21.0763H77.4254C76.8706 21.0763 76.5748 20.7618 76.5748 20.2251V3.79337C76.5748 3.23824 76.8891 2.94217 77.4254 2.94217H94.5119C95.5104 2.94217 96.0467 2.46106 96.0467 1.57286V1.40632C96.0467 0.518119 95.5104 0.0370083 94.5119 0.0370083ZM116.647 17.616V20.2436C116.647 20.6877 116.314 21.0393 115.87 21.0393L101.872 21.0578C101.428 21.0578 101.076 20.7247 101.076 20.2806L101.058 14.3408C101.058 13.8967 101.391 13.5451 101.835 13.5451L113.133 13.5266V10.6399L101.853 10.6584C101.409 10.6584 101.058 10.3254 101.058 9.88127L101.039 3.75636C101.039 3.31226 101.372 2.96068 101.816 2.96068L115.814 2.94217C116.258 2.94217 116.61 3.27525 116.61 3.71935V6.34696H119.679V3.64534C119.679 3.20123 119.328 2.90517 118.884 2.90517H117.386C116.942 2.90517 116.591 2.51658 116.591 2.07247V0.777178C116.591 0.333076 116.24 0 115.796 0L101.798 0.0185043C101.354 0.0185043 101.021 0.370085 101.021 0.814187V2.10948C101.021 2.55359 100.688 2.94217 100.244 2.94217H98.7095C98.2657 2.94217 97.9329 3.29375 97.9329 3.73786L97.9514 9.86276C97.9514 10.3069 98.3027 10.6399 98.7465 10.6399H100.281C100.725 10.6399 101.076 10.973 101.076 11.4171V12.7309C101.076 13.175 100.744 13.5266 100.3 13.5266H98.765C98.3212 13.5266 97.9883 13.8782 97.9883 14.3223L98.0068 20.2621C98.0068 20.7062 98.3582 21.0393 98.802 21.0393H100.337C100.781 21.0393 101.132 21.3724 101.132 21.8165V23.1858C101.132 23.6299 101.483 23.963 101.927 23.963L115.925 23.9445C116.369 23.9445 116.702 23.5929 116.702 23.1488V21.7795C116.702 21.3354 117.035 20.9838 117.479 20.9838H118.977C119.42 20.9838 119.753 20.6322 119.753 20.1881V17.5605L116.647 17.616ZM142.646 1.20278C141.999 0.555127 141.093 0.222051 139.854 0.222051C138.892 0.222051 138.19 0.499615 137.801 1.07325C137.117 2.03547 137.191 3.84888 138.005 6.32845L141.426 16.7093C141.648 17.394 141.98 18.8003 141.98 19.6885C141.98 21.7425 140.945 22.9823 139.207 22.9823C138.541 22.9823 137.968 22.7232 137.579 22.2791C137.284 21.946 136.969 21.3169 137.136 20.3177L137.413 18.5783C137.82 15.9322 136.266 13.3971 135.305 12.1203L129.665 4.62606C129.351 4.20046 129.073 3.83038 128.796 3.46029C127.187 1.2953 126.392 0.222051 124.949 0.222051C123.082 0.222051 121.972 1.7579 121.917 4.44102L121.584 18.5413C121.528 20.7062 121.954 22.2976 122.786 23.1673C123.304 23.7039 124.025 23.9815 124.912 23.9815C127.816 23.9815 127.964 21.2799 127.964 20.7248C127.964 20.5952 127.982 20.4472 127.982 20.2992C128.019 19.596 128.093 18.6523 127.298 17.2089L123.285 9.99229C122.73 9.01157 122.619 8.14187 122.619 7.60524C122.619 6.77255 123.119 6.32845 124.025 6.32845C124.728 6.32845 125.153 6.84657 125.948 8.03084L133.9 19.596C135.878 22.5012 137.247 23.9815 139.188 23.9815C140.871 23.9815 141.943 23.4819 142.406 22.0941C143.793 18.1157 145.05 3.58982 142.646 1.20278Z"
+				fill="currentColor"
+			/>
+		</svg>
+	);
+};

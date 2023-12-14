@@ -140,6 +140,13 @@ h6 {
 	@apply leading-[0.95] tracking-[-0.12rem];
 }
 
+.t-88-menu
+{
+	@include clamp("font-size", rem(88px * $responsive_size_modifier_large), rem(100px), $md, $xl);
+	@apply  tracking-[-0.11rem];
+
+}
+
 .t-80
 {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(80px), $md, $lg);
