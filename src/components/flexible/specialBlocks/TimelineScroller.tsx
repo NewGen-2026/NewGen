@@ -12,7 +12,7 @@ const TimelineScroller = (props) => {
 	});
 
 	const yBase = useTransform(scrollYProgress, [0, 1], [-100, 0]);
-	const ySpring = useSpring(yBase, { stiffness: 300, damping: 20, mass: 0.5 });
+	const ySpring = useSpring(yBase, { stiffness: 200, damping: 20, mass: 0.8 });
 
 	const yTemplate = useMotionTemplate`translateY(${ySpring}%)`;
 

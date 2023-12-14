@@ -24,7 +24,7 @@ const AssetAtBottomVariant = (props) => {
 							<div className="relative z-0 flex justify-center gap-[0.1em] md:gap-[1em]">
 								<motion.span
 									initial={{
-										x: "0.5em",
+										x: "0.45em",
 									}}
 									animate={{
 										x: 0,
@@ -38,7 +38,7 @@ const AssetAtBottomVariant = (props) => {
 								</motion.span>
 								<motion.span
 									initial={{
-										x: "-0.5em",
+										x: "-0.45em",
 									}}
 									animate={{
 										x: 0,
