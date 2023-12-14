@@ -36,9 +36,9 @@ export function Button({ link, button, size, className = "", children, ...other 
 		getBgHoverColors(button?.hover_background_color),
 		getTextColorClasses(button?.text_color),
 		getTextColorHoverClasses(button?.text_hover_color),
-		buttonSize === "small" && "inline-block rounded text-13px px-5 py-2 font-medium",
-		buttonSize === "wide" && "block rounded-[100px] text-16px px-7 py-5 leading-[1.3] text-center font-bold",
-		buttonSize === "huge" && "w-full rounded-[100px] text-16px  py-5 px-5 font-bold cursor-pointer text-center"
+		buttonSize === "small" && "px-5 py-2",
+		buttonSize === "wide" && "px-7 py-5",
+		buttonSize === "huge" && "py-5 px-5 "
 	);
 
 	return link?.title ? (
@@ -70,24 +70,37 @@ type TextLinkProps = {
 	className?: string;
 	children?: React.ReactNode;
 	underlineColour?: "black" | "white";
+	isParentHovered?: boolean;
 };
 
-export function TextLink({ className = "", link, children, underlineColour = "black" }: TextLinkProps) {
+export function TextLink({ className = "", link, children, underlineColour = "black", isParentHovered }: TextLinkProps) {
 	const [isHovered, setIsHovered] = useState(false);
+
+	const hoverState = isParentHovered !== undefined ? isParentHovered : isHovered;
+
+	const mouseEventHandlers =
+		isParentHovered === undefined
+			? {
+					onMouseEnter: () => setIsHovered(true),
+					onMouseLeave: () => setIsHovered(false),
+			  }
+			: {};
 
 	return (
 		<div
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}
+			{...mouseEventHandlers}
 			className={`t-18 l group inline-flex cursor-pointer select-none items-center font-heading font-black uppercase text-white ${className}`}
 		>
 			{(link?.title || children) && (
 				<div className="group-hover:text-orange inline-block font-black ">
-					{(link?.title || children) && <FontSwitcher hover isHovered={isHovered} text={link?.title || children} />}
-					<div
-						className={` mt-1 h-[2px] w-full rounded bg-white
-        opacity-0 transition-colors duration-300 ease-in-out group-hover:opacity-100`}
-					/>
+					{(link?.title || children) && <FontSwitcher hover isHovered={hoverState} text={link?.title || children} />}
+					<div className={` relative mt-1 h-[1px] w-full overflow-hidden will-change-transform`}>
+						<div
+							className={`absolute inset-0 h-full w-full transition-transform duration-200 ${getBgColorClasses(underlineColour)}
+						${hoverState ? "translate-x-0" : "-translate-x-full"}
+						`}
+						/>
+					</div>
 				</div>
 			)}
 		</div>
