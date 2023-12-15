@@ -19,7 +19,11 @@ const TwoColTextAsset = (props) => {
 				<TextCard {...content?.text_card} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
 			</div>
 			<div className="w-full max-w-[672px] md:flex-1">
-				<TransitionSlider transitionColor="electric" className="relative aspect-[672/672] w-full overflow-hidden bg-stone/10">
+				<TransitionSlider
+					transitionColor="electric"
+					transitionColors={media?.assets?.map((asset) => asset?.transition_color)}
+					className="relative aspect-[672/672] w-full overflow-hidden bg-stone/10"
+				>
 					{media?.assets && media?.assets?.map((asset, index) => <Asset key={`asset${index}`} {...asset} className="h-full w-full object-cover" />)}
 				</TransitionSlider>
 			</div>

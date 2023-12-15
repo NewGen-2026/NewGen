@@ -17,25 +17,29 @@ interface WpImageProps {
 	style?: any;
 	pageId?: number;
 	layout?: "fill" | "fixed" | "intrinsic" | "responsive";
+	onLoadComplete?: () => void;
 }
 
-function WpImage({ image, fill = false, className, pageId, ...props }: WpImageProps) {
+function WpImage({ image, fill = false, className, pageId, onLoadComplete, ...props }: WpImageProps) {
 	const imgRef = useRef(null) as any;
 	const imageUrl = image?.src || image?.url;
 
 	useEffect(() => {
 		if (!imgRef.current) return;
 		if (imgRef.current && imgRef.current.complete) {
-			imgRef?.current?.classList?.remove("fade-in");
+			handleImageLoad();
 		} else if (imgRef?.current) {
 			imgRef.current.onload = () => {
-				imgRef?.current?.classList?.remove("fade-in");
+				handleImageLoad();
 			};
 		}
 	}, [imgRef.current]);
 
 	const handleImageLoad = () => {
 		imgRef.current.classList.remove("fade-in");
+		if (onLoadComplete) {
+			onLoadComplete();
+		}
 	};
 
 	if (!image || !imageUrl) return null;

@@ -2,6 +2,7 @@ import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses } from "~/utils/getColors";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const variantThemeStyles = {
 	talent: {
@@ -15,6 +16,8 @@ const variantThemeStyles = {
 const AssetAtBottomVariant = (props) => {
 	const { background_color, top_line_left, top_line_right, middle_line, bottom_line, image, variant } = props;
 
+	const [imageLoaded, setImageLoaded] = useState(false);
+
 	return (
 		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
 			<div className="mx-auto w-full max-w-[1440px]">
@@ -27,7 +30,7 @@ const AssetAtBottomVariant = (props) => {
 										x: "0.45em",
 									}}
 									animate={{
-										x: 0,
+										x: imageLoaded ? 0 : "0.45em",
 									}}
 									transition={{
 										delay: 0.4,
@@ -41,7 +44,7 @@ const AssetAtBottomVariant = (props) => {
 										x: "-0.45em",
 									}}
 									animate={{
-										x: 0,
+										x: imageLoaded ? 0 : "-0.45em",
 									}}
 									transition={{
 										delay: 0.4,
@@ -67,8 +70,8 @@ const AssetAtBottomVariant = (props) => {
 						y: 50,
 					}}
 					animate={{
-						opacity: 1,
-						y: 0,
+						opacity: imageLoaded ? 1 : 0,
+						y: imageLoaded ? 0 : 50,
 					}}
 					transition={{
 						opacity: {
@@ -79,7 +82,14 @@ const AssetAtBottomVariant = (props) => {
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
-					<WpImage image={image} priority className={`mx-auto ${variantThemeStyles[variant]?.imageClass}`} />
+					<WpImage
+						image={image}
+						priority
+						onLoadComplete={() => {
+							setImageLoaded(true);
+						}}
+						className={`mx-auto ${variantThemeStyles[variant]?.imageClass}`}
+					/>
 				</motion.div>
 			</div>
 		</div>
@@ -88,6 +98,8 @@ const AssetAtBottomVariant = (props) => {
 
 const TextOnTopVariant = (props) => {
 	const { top_line, middle_line, bottom_line, image, variant } = props;
+
+	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<div className="pt-6 md:pt-0">
@@ -104,8 +116,15 @@ const TextOnTopVariant = (props) => {
 				</span>
 			</h1>
 
-			<div className="-mt-3 md:-mt-[4.5rem]">
-				<WpImage image={image} priority className={`mx-auto ${variantThemeStyles[variant]?.imageClass}`} />
+			<div className="-mt-3 bg-stone/10 md:-mt-[4.5rem]">
+				<WpImage
+					image={image}
+					priority
+					onLoadComplete={() => {
+						setImageLoaded(true);
+					}}
+					className={`mx-auto ${variantThemeStyles[variant]?.imageClass}`}
+				/>
 			</div>
 		</div>
 	);
@@ -113,6 +132,9 @@ const TextOnTopVariant = (props) => {
 
 const AssetInCenterVariant = (props) => {
 	const { top_line_left, top_line_right, middle_line_left, middle_line_right, second_middle_line, bottom_line, content, image } = props;
+
+	const [imageLoaded, setImageLoaded] = useState(false);
+
 	return (
 		<div className="relative flex flex-col pt-24 md:min-h-[800px] md:pb-32 md:pt-[300px]">
 			<h1 className="t-120 text-center font-black uppercase !leading-[0.9]">
@@ -122,7 +144,7 @@ const AssetInCenterVariant = (props) => {
 							x: "0.5em",
 						}}
 						animate={{
-							x: 0,
+							x: imageLoaded ? 0 : "0.5em",
 						}}
 						transition={{
 							delay: 0.4,
@@ -136,7 +158,7 @@ const AssetInCenterVariant = (props) => {
 							x: "-0.5em",
 						}}
 						animate={{
-							x: 0,
+							x: imageLoaded ? 0 : "-0.5em",
 						}}
 						transition={{
 							delay: 0.4,
@@ -152,7 +174,7 @@ const AssetInCenterVariant = (props) => {
 							x: "0.9em",
 						}}
 						animate={{
-							x: 0,
+							x: imageLoaded ? 0 : "0.9em",
 						}}
 						transition={{
 							delay: 0.4,
@@ -166,7 +188,7 @@ const AssetInCenterVariant = (props) => {
 							x: "-0.9em",
 						}}
 						animate={{
-							x: 0,
+							x: imageLoaded ? 0 : "-0.9em",
 						}}
 						transition={{
 							delay: 0.4,
@@ -192,8 +214,8 @@ const AssetInCenterVariant = (props) => {
 					y: 50,
 				}}
 				animate={{
-					opacity: 1,
-					y: 0,
+					opacity: imageLoaded ? 1 : 0,
+					y: imageLoaded ? 0 : 50,
 				}}
 				transition={{
 					opacity: {
@@ -205,7 +227,14 @@ const AssetInCenterVariant = (props) => {
 				className="inset-0 z-[5] mt-7 flex w-full items-center justify-center md:absolute md:mt-0"
 			>
 				<div className="w-full max-w-[75%] translate-y-[5%] md:max-w-[35.11%] md:translate-x-[2%] md:translate-y-[-18%]">
-					<WpImage image={image} priority className="mx-auto w-full  object-contain" />
+					<WpImage
+						image={image}
+						onLoadComplete={() => {
+							setImageLoaded(true);
+						}}
+						priority
+						className="mx-auto w-full  object-contain"
+					/>
 				</div>
 			</motion.div>
 		</div>

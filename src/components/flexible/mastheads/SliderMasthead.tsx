@@ -1,8 +1,10 @@
 import TextCard from "~/components/elements/text/TextCard";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import WpImage from "~/components/elements/WpImage";
+import { getBgColorClasses } from "~/utils/getColors";
 
 const MastheadTransitionSlider = dynamic(() => import("../sliders/MastheadTransitionSlider"), { ssr: false });
 
@@ -26,9 +28,9 @@ const SliderMasthead = (props) => {
 		if (!swiper) return;
 		if (swiper) {
 			if (isInView) {
-				swiper.autoplay.start();
+				swiper?.autoplay?.start();
 			} else {
-				swiper.autoplay.pause();
+				swiper?.autoplay?.pause();
 			}
 		}
 	}, [isInView, swiper]);
@@ -36,12 +38,38 @@ const SliderMasthead = (props) => {
 	return (
 		<div className="pt-8 md:pt-12">
 			<div className="container">
-				<div className="flex w-full flex-col items-center justify-between gap-5 gap-y-8 md:flex-row">
-					<div className="max-w-[704px] flex-1">
-						<TextCard {...text_card} />
+				<div className="flex w-full flex-col justify-between gap-5 gap-y-8 md:flex-row">
+					<div className="flex max-w-[704px] flex-1 flex-col items-center gap-y-5 md:items-start md:justify-between">
+						<h1 className="t-15 font-bold uppercase">{subheading}</h1>
+						<div className="flex w-full flex-1 items-center justify-center md:justify-start">
+							<TextCard {...text_card} containerClass="!mx-0" />
+						</div>
 					</div>
 					<div className="w-full flex-1 bg-stone/10 md:w-[unset] md:max-w-[555px]">
-						<div className="aspect-[555/600]  w-full" />
+						<div className="relative aspect-[555/600] w-full overflow-hidden">
+							{items?.map((item, i) => (
+								<motion.div
+									key={`image${i}`}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: activeSlide === i ? 1 : 0 }}
+									transition={{ delay: 0.3 }}
+									className="absolute inset-0 h-full w-full bg-stone/20"
+								>
+									<WpImage image={item?.image} priority className="h-full w-full object-cover" />
+								</motion.div>
+							))}
+
+							<motion.div
+								key={activeSlide}
+								initial={{ y: "100%" }}
+								animate={{ y: [null, "0%", "-100%"] }}
+								transition={{
+									duration: 0.6,
+									ease: "easeInOut",
+								}}
+								className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(items[activeSlide]?.transition_color || "boost")}`}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

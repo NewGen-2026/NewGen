@@ -46,7 +46,9 @@ const ConnectingMasthead = (props) => {
 	useEffect(() => {
 		if (!swiper) return;
 		if (swiper) {
-			if (isInView && !isInitialLoad) {
+			if (isInitialLoad) {
+				swiper.autoplay.stop();
+			} else if (isInView && !isInitialLoad) {
 				swiper?.autoplay?.start();
 			} else {
 				swiper?.autoplay?.pause();
