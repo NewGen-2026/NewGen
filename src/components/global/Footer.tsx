@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { getBgColorClasses } from "~/utils/getColors";
-import Asset from "../elements/Asset";
+import FooterLogoAnimation from "../elements/animations/FooterLogoAnimation";
 
 const themeStyles = {
 	boost: {
@@ -89,10 +89,10 @@ export default function Footer(props) {
 				</div>
 
 				<div className="relative mt-20 lg:mt-[240px]">
-					<div className="aspect-[1376/242] w-full overflow-hidden">
-						<Asset {...footer_menu?.asset} className="h-full w-full object-cover" />
-					</div>
+					<FooterLogoAnimation />
 				</div>
+
+				<div className="t-16 mt-10 pb-8 font-medium">&copy; {new Date().getFullYear()} NewGen 2023. All rights reserved.</div>
 			</div>
 		</footer>
 	);

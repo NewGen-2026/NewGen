@@ -60,7 +60,7 @@ const TwoColTestimonialSlider = (props) => {
 		<div
 			ref={ref}
 			className={clsx(
-				`flex flex-col gap-y-6 text-center transition-colors duration-200  lg:flex-row lg:text-left`,
+				`flex flex-col gap-y-6 text-center transition-colors duration-200 lg:flex-row lg:text-left`,
 				getBgColorClasses(items[activeSlide]?.theme_color),
 				boxedVariant ? "justify-between gap-6" : "items-end px-5 md:px-8 lg:min-h-[720px]"
 			)}
