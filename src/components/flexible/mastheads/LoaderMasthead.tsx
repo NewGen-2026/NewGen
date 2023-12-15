@@ -83,7 +83,7 @@ const LoaderMasthead = (props) => {
 										onComplete: () => setAnimationComplete(true),
 									},
 								}}
-								className="bg-stone/0.01 mx-auto aspect-[1920/1080] max-h-[90vh] w-full "
+								className="bg-stone/0.01 mx-auto aspect-[1920/1080]  w-full "
 							>
 								<motion.div
 									initial={{
@@ -101,7 +101,7 @@ const LoaderMasthead = (props) => {
 									className="h-full w-full"
 								>
 									<div className="h-full w-full">
-										<Asset {...asset} parentInView={isInView} onVideoLoad={handleVideoLoad} className="h-full w-full object-cover" />
+										<Asset {...asset} parentInView={isInView} onVideoLoad={handleVideoLoad} className="h-full w-full object-cover object-center" />
 									</div>
 								</motion.div>
 							</motion.div>
@@ -217,7 +217,7 @@ const LogoLoader = ({ videoLoaded }) => {
 
 const TextContainer = ({ children, custom = 0 }) => {
 	return (
-		<div className="inline-flex overflow-hidden">
+		<div className="inline-flex ">
 			<motion.span
 				initial={{
 					y: 50,
