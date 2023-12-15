@@ -4,6 +4,7 @@ import BigTitleSlider from "./BigTitleSlider";
 import DualAssetSlider from "./DualAssetSlider";
 import AssetSlider from "./AssetSlider";
 import LinkSlider from "./LinkSlider";
+import TwoColTestimonialSlider from "./TwoColTestimonialSlider";
 
 const SLIDERS_COMPONENT_MAP = {
 	testimonial_slider: TestimonialSlider,
@@ -11,6 +12,7 @@ const SLIDERS_COMPONENT_MAP = {
 	dual_asset_slider: DualAssetSlider,
 	asset_slider: AssetSlider,
 	link_slider: LinkSlider,
+	two_col_testimonial_slider: TwoColTestimonialSlider,
 };
 
 const SlidersRenderer = (props) => {
