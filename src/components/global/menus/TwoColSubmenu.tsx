@@ -32,6 +32,7 @@ export default TwoColSubmenu;
 
 const LeftCol = ({ line_left, line_right, left_image, link }) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<Link
@@ -46,7 +47,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 								x: 0,
 							}}
 							animate={{
-								x: "-0.4em",
+								x: imageLoaded ? "-0.4em" : 0,
 							}}
 							transition={{
 								delay: 0.5,
@@ -59,7 +60,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 								x: 0,
 							}}
 							animate={{
-								x: "0.4em",
+								x: imageLoaded ? "0.4em" : 0,
 							}}
 							transition={{
 								delay: 0.5,
@@ -75,8 +76,8 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 						y: 50,
 					}}
 					animate={{
-						opacity: 1,
-						y: 0,
+						opacity: imageLoaded ? 1 : 0,
+						y: imageLoaded ? 0 : 50,
 					}}
 					transition={{
 						opacity: {
@@ -87,7 +88,14 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 					}}
 					className="w-full"
 				>
-					<WpImage image={left_image} priority className="relative mx-auto max-w-[57.8%]" />
+					<WpImage
+						image={left_image}
+						priority
+						onLoadComplete={() => {
+							setImageLoaded(true);
+						}}
+						className="relative mx-auto max-w-[57.8%]"
+					/>
 				</motion.div>
 			</div>
 		</Link>
@@ -96,6 +104,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 
 const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<Link
@@ -111,7 +120,7 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 									x: 0,
 								}}
 								animate={{
-									x: "-0.4em",
+									x: imageLoaded ? "-0.4em" : 0,
 								}}
 								transition={{
 									delay: 1,
@@ -125,7 +134,7 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 									x: 0,
 								}}
 								animate={{
-									x: "0.4em",
+									x: imageLoaded ? "0.4em" : 0,
 								}}
 								transition={{
 									delay: 1,
@@ -146,8 +155,8 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 						y: 50,
 					}}
 					animate={{
-						opacity: 1,
-						y: 0,
+						opacity: imageLoaded ? 1 : 0,
+						y: imageLoaded ? 0 : 50,
 					}}
 					transition={{
 						opacity: {
@@ -158,7 +167,14 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 					}}
 					className="relative w-full"
 				>
-					<WpImage image={image} priority className="mx-auto max-w-[71.2%]" />
+					<WpImage
+						image={image}
+						priority
+						onLoadComplete={() => {
+							setImageLoaded(true);
+						}}
+						className="mx-auto max-w-[71.2%]"
+					/>
 				</motion.div>
 			</div>
 		</Link>

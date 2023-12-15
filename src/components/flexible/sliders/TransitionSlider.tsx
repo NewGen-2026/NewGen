@@ -9,9 +9,17 @@ type TransitionSliderProps = {
 	startDelay?: number;
 	transitionColor?: Color;
 	children: React.ReactNode;
+	transitionColors?: Color[];
 };
 
-const TransitionSlider = ({ className = "", children, intervalDuration = 3000, startDelay = 0, transitionColor = "ketchup" }: TransitionSliderProps) => {
+const TransitionSlider = ({
+	className = "",
+	children,
+	intervalDuration = 3000,
+	startDelay = 0,
+	transitionColor = "ketchup",
+	transitionColors = [],
+}: TransitionSliderProps) => {
 	const ref = useRef(null);
 	const [hasStarted, setHasStarted] = useState(false);
 
@@ -27,6 +35,8 @@ const TransitionSlider = ({ className = "", children, intervalDuration = 3000, s
 
 		return () => clearTimeout(timer);
 	}, [startDelay]);
+
+	const currentTransitionColor = transitionColors[activeSlide] || transitionColor;
 
 	return (
 		<div ref={ref} className={`relative overflow-hidden ${className}`}>
@@ -49,10 +59,10 @@ const TransitionSlider = ({ className = "", children, intervalDuration = 3000, s
 					initial={{ y: "100%" }}
 					animate={{ y: [null, "0%", "-100%"] }}
 					transition={{
-						duration: 0.8,
+						duration: 0.6,
 						ease: "easeInOut",
 					}}
-					className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(transitionColor)}`}
+					className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(currentTransitionColor)}`}
 				/>
 			)}
 		</div>

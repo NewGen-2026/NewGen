@@ -8,7 +8,6 @@ import TextCardHeading from "./TextCardHeading";
 import TextCardContent from "./TextCardContent";
 
 export type TextCardProps = {
-	subheading?: string;
 	heading?: string;
 	content?: string;
 	links?: LinkGroupProps["links"];
@@ -41,10 +40,10 @@ export type TextCardProps = {
 		mobile_section_alignment?: string;
 	};
 	className?: string;
+	containerClass?: string;
 };
 
 function TextCard({
-	subheading = "",
 	heading = "",
 	content = "",
 	links = [],
@@ -56,9 +55,6 @@ function TextCard({
 		has_mobile_text_alignment = false,
 		mobile_text_alignment = "left",
 		section_alignment = "left",
-		subheading_tag = "h6",
-		subheading_font_size = "default",
-		subheading_classes = "",
 		heading_tag = "h2",
 		heading_font_size = "default",
 		heading_font_color,
@@ -70,11 +66,9 @@ function TextCard({
 		content_font_color,
 		mobile_section_alignment = "",
 	} = {},
+	containerClass = "",
 	className = "",
 }: TextCardProps) {
-	const SubheadingTag = (subheading_tag as keyof React.JSX.IntrinsicElements) || "h6";
-	const subheadingFontSize = subheading_font_size === "default" ? SubheadingTag : subheading_font_size;
-
 	const breakpointCrossed = useBreakpointCrossed(breakpoint);
 
 	const [maxWidthStyle, setMaxWidthStyle] = useState<MaxWidthStyleType>(maxWidthProps(section_max_width));
@@ -101,16 +95,13 @@ function TextCard({
 	);
 
 	return (
-		<div className="container">
+		<div className={clsx(`container`, containerClass)}>
 			<div
 				style={{
 					...maxWidthStyle?.style,
 				}}
 				className={clsx(classes, className)}
 			>
-				{subheading && (
-					<SubheadingTag className={`text-${subheadingFontSize} w-full ${subheading_classes || ""}`} dangerouslySetInnerHTML={{ __html: subheading }} />
-				)}
 				<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between md:flex-row md:gap-6")}>
 					{heading && (
 						<TextCardHeading

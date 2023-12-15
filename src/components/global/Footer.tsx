@@ -61,7 +61,13 @@ export default function Footer(props) {
 					<ul className="t-18 flex flex-1 items-center justify-center font-heading font-medium md:justify-start">
 						{footer_menu?.socials?.map((social, i) => (
 							<li key={`social${i}`} className={`mr-6 ${themeStyles[footer_theme]?.hoverColor}`}>
-								<Link href={social?.link?.url}>{social?.link?.title}</Link>
+								<Link href={social?.link?.url}>
+									<span
+										dangerouslySetInnerHTML={{
+											__html: social?.link?.title,
+										}}
+									/>
+								</Link>
 							</li>
 						))}
 					</ul>
