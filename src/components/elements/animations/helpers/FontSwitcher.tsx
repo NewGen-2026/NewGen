@@ -2,7 +2,7 @@
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-const FontSwitcher = ({ text, switchInterval = 500, loop = false, startDelay = 0, hover = false, isHovered = false }) => {
+const FontSwitcher = ({ text, switchInterval = 1000, loop = true, startDelay = 0, hover = false, isHovered = false }) => {
 	const [segmentIndices, setSegmentIndices] = useState([]);
 	const [segments, setSegments] = useState([]);
 
