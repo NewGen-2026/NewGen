@@ -7,6 +7,7 @@ import FloatingImagesCta from "./FloatingImagesCta";
 import HijackScroller from "./HijackScroller";
 import Offices from "./Offices";
 import Jobs from "./Jobs";
+import ContactForm from "./ContactForm";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,
@@ -17,6 +18,7 @@ const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	hijack_scroller: HijackScroller,
 	offices: Offices,
 	jobs: Jobs,
+	contact_form: ContactForm,
 };
 
 const SpecialBlocksRenderer = (props) => {

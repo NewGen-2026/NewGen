@@ -1,0 +1,32 @@
+.default-input{
+	@apply w-full relative font-medium border-b py-[18px] border-l-0 border-r-0 border-t-0 bg-transparent pl-0 opacity-60 focus:opacity-100 focus:ring-0 leading-[1.3] tracking-[-0.0125rem];
+	@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(20px), $md, $lg);
+}
+
+select{
+	background-image: unset !important;
+}
+
+.bg-cobalt{
+	.default-input{
+		@apply border-electric text-electric placeholder:text-electric;
+	}
+}
+
+.bg-sand{
+	.default-input{
+		@apply border-forest text-forest placeholder:text-forest;
+	}
+}
+
+.bg-energy{
+	.default-input{
+		@apply border-boost text-boost placeholder:text-boost;
+	}
+}
+
+.bg-electric{
+	.default-input{
+		@apply border-cobalt text-cobalt placeholder:text-cobalt;
+	}
+}

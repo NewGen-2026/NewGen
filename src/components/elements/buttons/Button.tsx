@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import clsx from "clsx";
 import React, { useState } from "react";
 import { Color, getBgColorClasses, getBgHoverColors, getTextColorClasses, getTextColorHoverClasses } from "~/utils/getColors";
@@ -9,8 +10,8 @@ export type ButtonProps = {
 		url: string;
 	};
 	button?: {
-		color: "black" | "white";
-		background_color?: "black" | "white";
+		color?: "black" | "white";
+		background_color?: Color;
 		hover_background_color?: Color;
 		text_color?: Color;
 		text_hover_color?: Color;
@@ -23,6 +24,8 @@ export type ButtonProps = {
 	size?: "small" | "medium" | "wide" | "huge";
 	className?: string;
 	children?: React.ReactNode;
+	type?: "button" | "submit" | "reset";
+	buttonClass?: string;
 };
 
 export function Button({ link, button, size, className = "", children, ...other }: ButtonProps) {
@@ -30,14 +33,15 @@ export function Button({ link, button, size, className = "", children, ...other 
 	const buttonSize = button?.size || "medium";
 
 	const classes = clsx(
-		"text-white  transition-colors duration-300 select-none appearance-none inline-block t-18 uppercase px-[30px] !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
+		"transition-colors duration-100 select-none appearance-none inline-block t-18 uppercase !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
 		className,
 		getBgColorClasses(backgroundColor),
 		getBgHoverColors(button?.hover_background_color),
 		getTextColorClasses(button?.text_color),
 		getTextColorHoverClasses(button?.text_hover_color),
 		buttonSize === "small" && "px-5 py-2",
-		buttonSize === "wide" && "px-7 py-5",
+		buttonSize === "medium" && "px-[30px]",
+		buttonSize === "wide" && "px-12 py-5",
 		buttonSize === "huge" && "py-5 px-5 "
 	);
 
@@ -50,12 +54,12 @@ export function Button({ link, button, size, className = "", children, ...other 
 	);
 }
 
-export const HoverButton = ({ link, button, size, className = "", children, ...other }: ButtonProps) => {
+export const HoverButton = ({ link, button, size, className = "", buttonClass = "", children, type = "button", ...other }: ButtonProps) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
-		<button type="button" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-			<Button button={button}>
+		<button className={className} type={type} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+			<Button button={button} className={buttonClass}>
 				<FontSwitcher hover isHovered={isHovered} text={link?.title || button?.link?.title || children} />
 			</Button>
 		</button>
@@ -92,7 +96,7 @@ export function TextLink({ className = "", link, children, underlineColour = "bl
 			className={`t-18 l group inline-flex cursor-pointer select-none items-center font-heading font-black uppercase text-white ${className}`}
 		>
 			{(link?.title || children) && (
-				<div className="group-hover:text-orange inline-block font-black ">
+				<div className="inline-block font-black">
 					{(link?.title || children) && <FontSwitcher hover isHovered={hoverState} text={link?.title || children} />}
 					<div className={` relative mt-1 h-[1px] w-full overflow-hidden will-change-transform`}>
 						<div

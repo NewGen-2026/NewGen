@@ -36,6 +36,8 @@ function WpImage({ image, fill = false, className, pageId, onLoadComplete, ...pr
 	}, [imgRef.current]);
 
 	const handleImageLoad = () => {
+		if (!imgRef.current) return;
+
 		imgRef.current.classList.remove("fade-in");
 		if (onLoadComplete) {
 			onLoadComplete();

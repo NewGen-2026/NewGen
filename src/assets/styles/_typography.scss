@@ -36,9 +36,10 @@ h6 {
 .bg-cobalt,
 .bg-ketchup,
 .bg-boost,
-.bg-black
-{
-	@apply text-white;
+.bg-black {
+    &:not(button > div) {
+        @apply text-white;
+    }
 }
 
 .bg-cobalt{
@@ -102,7 +103,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6
+ {
 	@apply text-energy;
 }
 }
@@ -113,7 +115,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.select-dropdown
+{
 	@apply text-boost;
 }
 }

@@ -71,39 +71,47 @@ export default function Header(props) {
 				setScrolledBg={setScrolledBg}
 				setMenuOpen={setMenuOpen}
 			>
-				<div className={clsx(`relative z-10 flex w-full items-center justify-between py-3 pl-2 md:pl-8 md-large:py-0`, isDark ? "text-black" : "text-white")}>
+				<div
+					className={clsx(
+						`relative z-10 flex w-full items-center justify-between py-3 pl-2 md:pl-8 `,
+						isDark ? "text-black" : "text-white",
+						pageOptions?.remove_nav_menu ? "md-large:py-5" : "md-large:py-0"
+					)}
+				>
 					<Link href="/" className="block" onMouseEnter={() => reset()}>
 						<Logo />
 					</Link>
-					<div className="flex items-center gap-6 xl:gap-10">
-						<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-electric")}>
-							{menu?.nav?.map((navItem, i) => (
-								<motion.button
-									key={`nav-item-${i}`}
-									onHoverStart={() => handleMouseEnter(navItem)}
-									onKeyDown={(e) => {
-										if (e.key === "Enter" || e.key === " ") {
-											handleMouseEnter(navItem);
-										}
-									}}
-									className="t-16 block font-heading font-black uppercase"
-								>
-									<Link href={navItem?.nav_item?.link?.url || "/#"}>{navItem?.nav_item?.link?.title}</Link>
-								</motion.button>
-							))}
-						</nav>
-						<Link
-							onMouseEnter={() => setIsHovered(true)}
-							onMouseLeave={() => setIsHovered(false)}
-							href={menu?.button?.url || "/#"}
-							className={clsx(
-								`t-16 hidden min-h-[68.2px] min-w-[150px] justify-center  px-4 py-[26.5px] text-center font-black uppercase  transition-colors duration-200 md-large:flex`,
-								isDark ? "bg-black text-white hover:bg-cobalt hover:text-electric" : "bg-white text-black hover:bg-electric hover:text-cobalt"
-							)}
-						>
-							<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
-						</Link>
-					</div>
+					{!pageOptions?.remove_nav_menu && (
+						<div className="flex items-center gap-6 xl:gap-10">
+							<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-electric")}>
+								{menu?.nav?.map((navItem, i) => (
+									<motion.button
+										key={`nav-item-${i}`}
+										onHoverStart={() => handleMouseEnter(navItem)}
+										onKeyDown={(e) => {
+											if (e.key === "Enter" || e.key === " ") {
+												handleMouseEnter(navItem);
+											}
+										}}
+										className="t-16 block font-heading font-black uppercase"
+									>
+										<Link href={navItem?.nav_item?.link?.url || "/#"}>{navItem?.nav_item?.link?.title}</Link>
+									</motion.button>
+								))}
+							</nav>
+							<Link
+								onMouseEnter={() => setIsHovered(true)}
+								onMouseLeave={() => setIsHovered(false)}
+								href={menu?.button?.url || "/#"}
+								className={clsx(
+									`t-16 hidden min-h-[68.2px] min-w-[150px] justify-center  px-4 py-[26.5px] text-center font-black uppercase  transition-colors duration-200 md-large:flex`,
+									isDark ? "bg-black text-white hover:bg-cobalt hover:text-electric" : "bg-white text-black hover:bg-electric hover:text-cobalt"
+								)}
+							>
+								<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
+							</Link>
+						</div>
+					)}
 				</div>
 				{!breakpointCrossed && (
 					<>

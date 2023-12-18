@@ -95,6 +95,25 @@ export const getTextColorClasses = (color: Color) => {
 	return colors[color];
 };
 
+export const getTextAlwaysDarkClasses = (color: Color) => {
+	const colors = {
+		white: "text-black",
+		black: "text-white",
+		cobalt: "text-cobalt",
+		electric: "text-cobalt",
+		stone: "text-spark",
+		spark: "text-spark",
+		ketchup: "text-ketchup",
+		candy: "text-ketchup",
+		sand: "text-forest",
+		forest: "text-forest",
+		boost: "text-boost",
+		energy: "text-boost",
+	};
+
+	return colors[color];
+};
+
 export const getTextContrastColorClasses = (color: Color) => {
 	const colors = {
 		white: "text-black",
