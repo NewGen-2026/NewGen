@@ -29,7 +29,7 @@ export default function Header(props) {
 	const [activeSubmenu, setActiveSubmenu] = useState(null);
 
 	const { scrollY } = useScroll();
-	const isDark = isMenuOpen || pageOptions?.header_color === "dark" || scrolledBg;
+	const isDark = !pageOptions?.header_color || pageOptions?.header_color === "dark" || isMenuOpen || scrolledBg;
 
 	const path = useRouter().asPath;
 

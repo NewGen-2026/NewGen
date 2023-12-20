@@ -48,11 +48,13 @@ const LoaderMasthead = (props) => {
 					<div className="px-8">
 						<h1 className="t-144 mx-auto max-w-[1376px] text-center font-black uppercase">
 							<span className="whitespace-nowrap">
-								<TextContainer custom={4}>
+								<TextContainer startAnimation={videoLoaded} custom={4}>
 									<FontSwitcher startDelay={4800} text="F<pst-grid-pst>i</>nd" />
 								</TextContainer>{" "}
-								<TextContainer custom={3}>your</TextContainer>{" "}
-								<TextContainer custom={2}>
+								<TextContainer startAnimation={videoLoaded} custom={3}>
+									your
+								</TextContainer>{" "}
+								<TextContainer startAnimation={videoLoaded} custom={2}>
 									{" "}
 									<FontSwitcher startDelay={5000} text="n<pst-grid-pst>e</>w" />
 								</TextContainer>{" "}
@@ -215,7 +217,7 @@ const LogoLoader = ({ videoLoaded }) => {
 	);
 };
 
-const TextContainer = ({ children, custom = 0 }) => {
+const TextContainer = ({ children, custom = 0, startAnimation }) => {
 	return (
 		<div className="inline-flex ">
 			<motion.span
@@ -224,8 +226,8 @@ const TextContainer = ({ children, custom = 0 }) => {
 					opacity: 0,
 				}}
 				animate={{
-					y: 0,
-					opacity: 1,
+					y: startAnimation ? 0 : 50,
+					opacity: startAnimation ? 1 : 0,
 					transition: { type: "spring", stiffness: 1000, damping: 15, mass: 0.3, delay: 4.5 + custom * 0.15 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}

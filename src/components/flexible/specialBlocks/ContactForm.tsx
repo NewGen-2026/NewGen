@@ -96,7 +96,7 @@ const ContactForm = (props) => {
 					form_layout === "press" && "flex items-center"
 				)}
 			>
-				<div className="mx-auto w-full max-w-[640px]">
+				<motion.div layout className="mx-auto w-full max-w-[640px]">
 					<div>
 						<h2 className="t-48 font-heading uppercase">{form?.heading}</h2>
 						<p className="t-20 mt-3 font-medium md:mt-6">{form?.content}</p>
@@ -132,7 +132,7 @@ const ContactForm = (props) => {
 
 						{add_faqs && faqs && <FAQs faqs={faqs} theme_color={theme_color} />}
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</div>
 	);

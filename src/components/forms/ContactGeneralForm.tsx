@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { motion } from "framer-motion";
 import FormikForm from "./formik/FormikForm";
 import FormikField from "./formik/FormikField";
 import { HoverButton } from "../elements/buttons/Button";
@@ -37,7 +38,18 @@ const fields = [
 ];
 
 const layout = (
-	<div className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6">
+	<motion.div
+		initial={{
+			opacity: 0,
+		}}
+		animate={{
+			opacity: 1,
+		}}
+		transition={{
+			delay: 0.1,
+		}}
+		className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6"
+	>
 		<FormikField {...fields[0]} />
 		<FormikField {...fields[1]} />
 		<FormikField {...fields[2]} />
@@ -56,7 +68,7 @@ const layout = (
 		>
 			{`s<pst-hal>u</>bmit`}
 		</HoverButton>
-	</div>
+	</motion.div>
 );
 
 const ContactGeneralForm = ({ onSubmit }) => {
