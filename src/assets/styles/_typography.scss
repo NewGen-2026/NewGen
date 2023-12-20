@@ -202,6 +202,11 @@ h6,
 	@apply leading-[1.1] tracking-[-0.04rem];
 }
 
+.t-30{
+	@include clamp("font-size", rem(45px * $responsive_size_modifier_large), rem(30px), $md, $lg);
+	@apply leading-[1.05] tracking-[-0.01875rem];
+}
+
 .t-24{
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.03rem];
@@ -241,5 +246,21 @@ h6,
 .prose {
 	max-width: 100%;
 	color: inherit;
+	p{
+
+		@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(20px), $md, $lg);
+		@apply leading-[1.3] tracking-[-0.0125rem] text-black font-medium opacity-70;
+	}
+	a{
+		@apply text-cobalt no-underline;
+	}
+	h2{
+		@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
+		@apply leading-[0.95] tracking-[-0.06rem];
+	}
+	h3{
+		@include clamp("font-size", rem(48px * $responsive_size_modifier_large), rem(36px), $md, $lg);
+		@apply leading-[1.105] tracking-[-0.045rem];
+	}
 }
 

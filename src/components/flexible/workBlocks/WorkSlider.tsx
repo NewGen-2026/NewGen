@@ -106,6 +106,7 @@ const WorkSlider = (props) => {
 								{work_slides.map((slide, i) => (
 									<div
 										key={`slide-block${i}`}
+										id={`slide${i}`}
 										className={`flex aspect-[688/700] min-h-full w-full flex-col justify-between gap-5 overflow-hidden p-6 ${getBgColorClasses(
 											slide?.work?.acf?.general?.theme_color
 										)}`}
@@ -158,10 +159,11 @@ const NavBar = ({ items, active, setActiveSlide }) => {
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
 						{items.map((_, i) => (
-							<motion.div
+							<motion.a
 								animate={{
 									scale: active === i ? 1.4 : 1,
 								}}
+								href={`#slide${i}`}
 								key={`nav-item-${i}`}
 								className={`h-[6px] w-[6px] ${active === i ? "bg-cobalt" : "bg-stone "}`}
 							/>

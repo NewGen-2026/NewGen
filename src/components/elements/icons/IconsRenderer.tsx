@@ -175,6 +175,41 @@ const Events = () => {
 	);
 };
 
+const Home = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M14.9984 6.5625L25.2201 13.7366H4.77662L14.9984 6.5625Z" fill="currentColor" />
+			<path fillRule="evenodd" clipRule="evenodd" d="M22.4098 13.4922H7.75V23.4382H12.8145V17.376H17.3477V23.4382H22.4098V13.4922Z" fill="currentColor" />
+		</svg>
+	);
+};
+
+const Article = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M6.95312 4.6875H18.5236L23.0507 9.21463V25.3125H6.95312V4.6875ZM19.5286 10.7241H9.9707V12.2332H19.5286V10.7241ZM9.9707 15.2515H19.5286V16.7607H9.9707V15.2515ZM19.5286 19.7789H9.9707V21.2881H19.5286V19.7789Z"
+				fill="currentColor"
+			/>
+		</svg>
+	);
+};
+
+const Podcast = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M18.5856 7.5V22.5L4.72656 17.8803V12.1197L18.5856 7.5ZM25.2791 14.121H21.7637V15.8788H25.2791V14.121ZM24.2851 10.4783L21.276 12.2483L20.3848 10.7333L23.3939 8.9632L24.2851 10.4783ZM24.2851 19.5219L21.276 17.7518L20.3848 19.2669L23.3939 21.037L24.2851 19.5219Z"
+				fill="currentColor"
+			/>
+		</svg>
+	);
+};
+
 const IconMap = {
 	crown: Crown,
 	diversify: Diversify,
@@ -188,6 +223,9 @@ const IconMap = {
 	creative: Creative,
 	data: Data,
 	events: Events,
+	home: Home,
+	article: Article,
+	podcast: Podcast,
 };
 
 const IconsRenderer = ({ icon }) => {

@@ -93,17 +93,20 @@ export function TextLink({ className = "", link, children, underlineColour = "bl
 	return (
 		<div
 			{...mouseEventHandlers}
-			className={`t-18 l group inline-flex cursor-pointer select-none items-center font-heading font-black uppercase text-white ${className}`}
+			className={`t-18 group inline-flex cursor-pointer select-none items-center pb-[1px] font-heading font-black uppercase  ${className}`}
 		>
 			{(link?.title || children) && (
-				<div className="inline-block font-black">
+				<div className="relative inline-block overflow-hidden pb-[1px] font-black">
 					{(link?.title || children) && <FontSwitcher hover isHovered={hoverState} text={link?.title || children} />}
-					<div className={` relative mt-1 h-[1px] w-full overflow-hidden will-change-transform`}>
-						<div
-							className={`absolute inset-0 h-full w-full transition-transform duration-200 ${getBgColorClasses(underlineColour)}
+
+					<div className="absolute h-[1px] w-full  ">
+						<div className={` relative h-full w-full  will-change-transform`}>
+							<div
+								className={`absolute inset-0 h-full w-full transition-transform duration-200 ${getBgColorClasses(underlineColour)}
 						${hoverState ? "translate-x-0" : "-translate-x-full"}
 						`}
-						/>
+							/>
+						</div>
 					</div>
 				</div>
 			)}
