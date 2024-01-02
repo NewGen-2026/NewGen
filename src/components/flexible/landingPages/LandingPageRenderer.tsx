@@ -1,8 +1,10 @@
 import React from "react";
 import LegalLandingPage from "./LegalLandingPage";
+import ErrorLandingPage from "./ErrorLandingPage";
 
 const LANDING_PAGE_COMPONENT_MAP = {
 	legal: LegalLandingPage,
+	error_page: ErrorLandingPage,
 };
 
 const LandingPageRenderer = (props) => {
