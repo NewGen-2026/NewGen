@@ -107,7 +107,7 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 						x: 0,
 					}}
 					animate={{
-						x: activeSlide !== null ? -50 : 0,
+						x: activeSlide !== null ? "-0.5em" : 0,
 					}}
 				>
 					{middle_line_left}
@@ -117,7 +117,7 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 						x: 0,
 					}}
 					animate={{
-						x: activeSlide !== null ? 50 : 0,
+						x: activeSlide !== null ? "0.5em" : 0,
 					}}
 					className="relative inline-block"
 				>

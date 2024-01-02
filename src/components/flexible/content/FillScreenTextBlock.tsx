@@ -24,7 +24,7 @@ const FillScreenTextBlock = (props) => {
 			style={{
 				clipPath: clipTemplate,
 			}}
-			className={clsx("flex min-h-screen w-full items-center justify-center px-5 py-44 md:py-[230px]", getBgColorClasses(theme_color))}
+			className={clsx("flex w-full items-center justify-center px-5 py-24 sm:py-44 md:min-h-screen md:py-[230px]", getBgColorClasses(theme_color))}
 		>
 			<h2
 				style={{

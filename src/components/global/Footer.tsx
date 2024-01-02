@@ -32,7 +32,7 @@ const themeStyles = {
 };
 
 export default function Footer(props) {
-	const { footer_menu, pageOptions } = props;
+	const { footer_menu, pageOptions, addresses, legal_links } = props;
 
 	const footer_theme = pageOptions?.footer_theme || "white";
 
@@ -92,7 +92,17 @@ export default function Footer(props) {
 					<FooterLogoAnimation isHover={false} />
 				</div>
 
-				<div className="t-16 mt-10 pb-8 font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
+				<div className="t-16 mt-10 flex flex-wrap items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
+					<div className="font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
+
+					<div className="flex items-center gap-6 font-medium md:gap-12">
+						{legal_links?.map((link, i) => (
+							<Link key={`link${i}`} href={link?.link?.url} className={`${themeStyles[footer_theme]?.hoverColor}`}>
+								{link?.link?.title}
+							</Link>
+						))}
+					</div>
+				</div>
 			</div>
 		</footer>
 	);

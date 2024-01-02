@@ -262,5 +262,10 @@ h6,
 		@include clamp("font-size", rem(48px * $responsive_size_modifier_large), rem(36px), $md, $lg);
 		@apply leading-[1.105] tracking-[-0.045rem];
 	}
+
 }
 
+.prose :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker{
+	font-weight: 500;
+	color: black
+}

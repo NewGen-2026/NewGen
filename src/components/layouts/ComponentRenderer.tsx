@@ -9,6 +9,7 @@ import WorkBlocksRenderer from "../flexible/workBlocks/WorkBlocksRenderer";
 import ContentRenderer from "../flexible/content/ContentRenderer";
 import SlidersRenderer from "../flexible/sliders/SlidersRenderer";
 import MediaRenderer from "../flexible/media/MediaRenderer";
+import LandingPageRenderer from "../flexible/landingPages/LandingPageRenderer";
 
 const COMPONENT_MAP = {
 	test_component: TestComponent,
@@ -21,6 +22,7 @@ const COMPONENT_MAP = {
 	sliders: SlidersRenderer,
 	content: ContentRenderer,
 	media: MediaRenderer,
+	landing_page: LandingPageRenderer,
 };
 
 const ComponentRenderer = ({ components = [], pageId = null, static_posts }) => {
