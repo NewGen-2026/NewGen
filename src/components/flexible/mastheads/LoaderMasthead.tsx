@@ -4,6 +4,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import { useMeasure, useWindowSize } from "react-use";
 import { useContext, useEffect, useRef, useState } from "react";
 import { VideoLoadedContext } from "~/utils/context";
+import LogoLoader from "~/components/elements/animations/LogoLoader";
 
 const LoaderMasthead = (props) => {
 	const { asset } = props;
@@ -40,8 +41,10 @@ const LoaderMasthead = (props) => {
 
 	return (
 		<div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black pt-44 text-white">
-			<div className="absolute inset-0 flex h-screen items-center justify-center">
-				<LogoLoader videoLoaded={videoLoaded} />
+			<div className="container absolute inset-0 flex h-screen items-center justify-center">
+				<div className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
+					<LogoLoader videoLoaded={videoLoaded} />
+				</div>
 			</div>
 			<div className="mx-auto w-full max-w-[3000px]  ">
 				<div className="">
@@ -116,119 +119,18 @@ const LoaderMasthead = (props) => {
 };
 export default LoaderMasthead;
 
-const logoLoaderVariants = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: [null, 1, 0],
-	},
-};
-
-const LogoLoader = ({ videoLoaded }) => {
-	return (
-		<motion.div initial="initial" animate="animate" className="text-[8.2vw]">
-			<motion.span
-				initial={{
-					x: 0,
-					opacity: 1,
-				}}
-				animate={{
-					x: videoLoaded ? -500 : 0,
-					opacity: videoLoaded ? 0 : 1,
-				}}
-				transition={{
-					duration: 0.4,
-					delay: 1.5,
-				}}
-				className="inline-block font-heading font-black"
-			>
-				NEW
-			</motion.span>
-			<motion.div
-				initial={{
-					x: 0,
-					opacity: 1,
-				}}
-				animate={{
-					x: videoLoaded ? 500 : 0,
-					opacity: videoLoaded ? 0 : 1,
-				}}
-				transition={{
-					duration: 0.4,
-					delay: 1.5,
-				}}
-				className=" relative inline-block"
-			>
-				<motion.div
-					initial={{
-						opacity: 0,
-					}}
-					animate={{
-						opacity: 1,
-					}}
-					transition={{
-						duration: 0.4,
-						delay: 1.2,
-					}}
-					className="absolute inset-0  "
-				>
-					<span className="font-">G</span>
-					<span className="font-gridular">E</span>
-					<span className="font-recoleta">N</span>
-				</motion.div>
-				<motion.span
-					variants={logoLoaderVariants}
-					transition={{
-						duration: 0.4,
-						delay: 0.9,
-					}}
-					className="absolute inset-0 font-gridular "
-				>
-					GEN
-				</motion.span>
-				<motion.span
-					variants={logoLoaderVariants}
-					transition={{
-						duration: 0.4,
-						delay: 0.6,
-					}}
-					className="absolute inset-0 font-pilowlava "
-				>
-					GEN
-				</motion.span>
-				<motion.span
-					initial={{
-						opacity: 1,
-					}}
-					animate={{
-						opacity: 0,
-					}}
-					transition={{
-						duration: 0.4,
-						delay: 0.3,
-					}}
-					className="font-haltwins "
-				>
-					GEN
-				</motion.span>
-			</motion.div>
-		</motion.div>
-	);
-};
-
 const TextContainer = ({ children, custom = 0, startAnimation }) => {
 	return (
 		<div className="inline-flex ">
 			<motion.span
 				initial={{
-					y: 50,
+					y: "50%",
 					opacity: 0,
 				}}
 				animate={{
-					y: startAnimation ? 0 : 50,
+					y: startAnimation ? 0 : "50%",
 					opacity: startAnimation ? 1 : 0,
-					transition: { type: "spring", stiffness: 1000, damping: 15, mass: 0.3, delay: 4.5 + custom * 0.15 },
+					transition: { type: "spring", stiffness: 1200, damping: 15, mass: 0.2, delay: 4.5 + custom * 0.15 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>
