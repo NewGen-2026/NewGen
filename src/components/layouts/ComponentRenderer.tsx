@@ -23,12 +23,12 @@ const COMPONENT_MAP = {
 	media: MediaRenderer,
 };
 
-const ComponentRenderer = ({ components = [], pageId = null }) => {
+const ComponentRenderer = ({ components = [], pageId = null, static_posts }) => {
 	return components.map((layout, i) => {
 		const Component = COMPONENT_MAP[layout.acf_fc_layout];
 		return Component ? (
 			<React.Fragment key={pageId + layout.acf_fc_layout + i}>
-				<Component {...layout} pageId={pageId + layout.acf_fc_layout} />
+				<Component {...layout} pageId={pageId + layout.acf_fc_layout} static_posts={static_posts} />
 			</React.Fragment>
 		) : null;
 	});

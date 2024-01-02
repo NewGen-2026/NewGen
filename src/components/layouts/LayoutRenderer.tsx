@@ -8,14 +8,14 @@ const LAYOUT_COMPONENT_MAP = {
 	section: Section,
 };
 
-const LayoutRenderer = ({ sections, ID }: WpPage) => {
+const LayoutRenderer = ({ sections, ID, static_posts }: WpPage) => {
 	if (!sections) return null;
 
 	return sections.map((section, i) => {
 		const Component = LAYOUT_COMPONENT_MAP[section.acf_fc_layout];
 		return Component ? (
 			<React.Fragment key={`${ID + section.acf_fc_layout + i}`}>
-				<Component pageId={ID} {...section} />
+				<Component pageId={ID} {...section} static_posts={static_posts} />
 			</React.Fragment>
 		) : null;
 	});

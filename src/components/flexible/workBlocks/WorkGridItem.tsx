@@ -1,0 +1,108 @@
+import { useState } from "react";
+import { useMeasure } from "react-use";
+import WpImage from "~/components/elements/WpImage";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
+import { getBgColorClasses, getIsLightColor, getTextContrastColorClasses } from "~/utils/getColors";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+const WorkGridItem = ({ work, variant }) => {
+	const [isHovered, setIsHovered] = useState(false);
+
+	const [containerRef, { height: containerHeight }] = useMeasure() as any;
+	const [headingRef, { height: headingHeight }] = useMeasure() as any;
+	const [dataRef, { height: dataHeight }] = useMeasure() as any;
+
+	const isBreakpointCrossed = useBreakpointCrossed(768);
+
+	const isThreeCol = variant === "3col";
+
+	const headingDistanceHover = isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
+
+	const logoClass = isHovered ? "invert" : "";
+	return (
+		<div
+			onMouseEnter={() => setIsHovered(!isBreakpointCrossed)}
+			onMouseLeave={() => setIsHovered(false)}
+			className={`relative ${
+				isThreeCol ? "aspect-[437/540]" : "aspect-1"
+			}  w-full overflow-hidden bg-stone/5 will-change-transform ${getTextContrastColorClasses(isHovered ? work?.acf?.general?.theme_color : "black")}`}
+		>
+			<motion.div
+				initial={{
+					opacity: 0,
+					y: "100%",
+				}}
+				animate={{
+					opacity: isHovered ? 1 : 0,
+					y: isHovered ? 0 : "100%",
+				}}
+				transition={{
+					duration: 0.3,
+					ease: "easeInOut",
+				}}
+				className={`pointer-events-none absolute inset-0 z-10 will-change-transform ${getBgColorClasses(work?.acf?.general?.theme_color)}`}
+			/>
+			<Link ref={containerRef} href={work?.permalink} className="flex h-full  flex-col justify-between p-4 md:p-6">
+				<div className="absolute inset-0 h-full w-full">
+					<WpImage image={work?.featured_image} className="h-full w-full object-cover" />
+				</div>
+				<WpImage
+					removeFadeIn
+					className={`relative z-20 transition-[filter] duration-200 will-change-transform ${
+						getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
+					}`}
+					image={work?.acf?.work_logos?.light_logo}
+				/>
+
+				{work?.acf?.work_masthead?.heading && (
+					<motion.h3
+						ref={headingRef}
+						initial={{
+							y: 0,
+						}}
+						animate={{
+							y: isHovered ? headingDistanceHover : 0,
+						}}
+						transition={{
+							type: "spring",
+							stiffness: 220,
+							damping: 24,
+						}}
+						className="t-44 relative z-20 line-clamp-3 w-full max-w-[502.5px] font-black uppercase will-change-transform xl:line-clamp-none"
+					>
+						<FontSwitcher hover isHovered={isHovered} text={work?.acf?.work_masthead?.heading} />
+					</motion.h3>
+				)}
+
+				<div className="absolute inset-0 hidden h-full w-full items-end p-6 md:flex">
+					<motion.div
+						initial={{
+							opacity: 0,
+						}}
+						animate={{
+							opacity: isHovered ? 1 : 0,
+						}}
+						ref={dataRef}
+						className={`relative z-20 flex w-full flex-wrap gap-4 ${isThreeCol ? "flex-col" : "lg:flex-nowrap"}`}
+					>
+						<InfoBlock />
+						<InfoBlock heading="Services" content="Influencer Marketing" />
+						<InfoBlock heading="Sector" content="Technology" />
+					</motion.div>
+				</div>
+			</Link>
+		</div>
+	);
+};
+export default WorkGridItem;
+
+const InfoBlock = ({ heading = "Client", content = "Revolut" }) => {
+	return (
+		<div className="flex-auto">
+			<div className="text-[15px] font-bold leading-[1.5] opacity-70">{heading}</div>
+			<div className="t-20 mt-2 font-black uppercase !leading-[1]">{content}</div>
+		</div>
+	);
+};

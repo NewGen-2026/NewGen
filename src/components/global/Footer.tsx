@@ -39,7 +39,7 @@ export default function Footer(props) {
 	const isLight = themeStyles[footer_theme]?.isLight;
 
 	return (
-		<footer className={`${getBgColorClasses(footer_theme)} pb-16 pt-20 md:pb-0`}>
+		<footer className={`${getBgColorClasses(footer_theme)} pb-8 pt-8 md:pb-0 md:pt-20`}>
 			<div className="container">
 				<div className="relative z-10 flex w-full flex-wrap items-start justify-between gap-6 gap-y-12 lg:flex-nowrap">
 					<nav className="flex flex-[1_1_1080px] flex-wrap gap-4 gap-y-10 sm:gap-6 md-large:flex-nowrap xl:gap-10">
@@ -92,7 +92,7 @@ export default function Footer(props) {
 					<FooterLogoAnimation />
 				</div>
 
-				<div className="t-16 mt-10 pb-8 font-medium">&copy; {new Date().getFullYear()} NewGen 2023. All rights reserved.</div>
+				<div className="t-16 mt-10 pb-8 font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
 			</div>
 		</footer>
 	);
