@@ -22,13 +22,13 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 	const slideVariant = variant === "slide";
 
 	return (
-		<Link
-			href={permalink || "/#"}
-			className={clsx(`flex flex-col justify-between `, slideVariant ? "mx-2 w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
-		>
+		<div className={clsx(`flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}>
 			<div className={clsx(`mb-4 flex flex-1 justify-between gap-2 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
 				<div className={clsx(`h-8 w-8 flex-none overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")} />
-				<div className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}>
+				<Link
+					href={permalink || "/#"}
+					className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}
+				>
 					<div>
 						<div className="text-[15px] font-bold">Sammy Hardesty</div>
 						<h3
@@ -47,15 +47,15 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 						<span>#revolut</span>
 						<span>#sidemen</span>
 					</div>
-				</div>
+				</Link>
 			</div>
 			<div className={clsx(`flex justify-between gap-2`)}>
-				<div className="aspect-[438/615] w-full max-w-[438px] bg-stone/20">
+				<Link href={permalink || "/#"} className="block aspect-[438/615] w-full max-w-[438px]">
 					<WpImage
-						className={clsx(` relative z-[5]  h-full w-full object-cover `, slideVariant ? "marquee-asset max-w-[168px] md:max-w-[340px]" : "")}
+						className={clsx(` relative z-[5]  h-full w-full bg-stone/20 object-cover `, slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "")}
 						image={post?.image || featured_image}
 					/>
-				</div>
+				</Link>
 				<div className="flex flex-col gap-4">
 					<motion.span
 						initial="initial"
@@ -112,7 +112,7 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 						animate="animate"
 						whileTap="tap"
 						onHoverStart={() => setOpenShare(true)}
-						onHoverEnd={() => setOpenShare(false)}
+						// onHoverEnd={() => setOpenShare(false)}
 						className="relative h-5 w-5 hover:text-cobalt md:h-8 md:w-8"
 					>
 						<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,6 +135,7 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 									exit={{
 										clipPath: "inset(0% 100% 100% 0% round 0px)",
 									}}
+									onHoverEnd={() => setOpenShare(false)}
 									className="absolute bottom-[-150%] left-[-45%] z-[10] h-[45px] w-[200px] flex-1 rounded bg-stone will-change-transform"
 								/>
 							)}
@@ -150,7 +151,7 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 					<div className="max-w-[20px] flex-1 md:max-w-[32px]" />
 				</div>
 			)}
-		</Link>
+		</div>
 	);
 };
 

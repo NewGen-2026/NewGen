@@ -1,11 +1,12 @@
 import { useInView } from "framer-motion";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRef } from "react";
-import { Button } from "~/components/elements/buttons/Button";
+import { HoverButton } from "~/components/elements/buttons/Button";
 import FeedPreview from "~/components/feed/FeedPreview";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 
-const Marquee = dynamic(() => import("react-easy-marquee"), { ssr: false });
+const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
 const FeedMarquee = (props) => {
 	const { posts } = props;
@@ -18,20 +19,28 @@ const FeedMarquee = (props) => {
 		once: false,
 	});
 
-	const duration = breakpointCrossed ? 20000 : 58000;
-	const height = breakpointCrossed ? "346px" : "640px";
-	const pauseDuration = isInView ? duration : 0;
-
 	return (
 		<div>
 			<div ref={ref} className="feed-marquee w-full md:min-h-[640px] ">
-				<Marquee duration={pauseDuration} pauseOnHover axis="X" align="center" height={height} width="100%">
-					{posts?.map((post, i) => <FeedPreview variant="slide" key={`post-${i}`} post={post} i={i} />)}
+				<Marquee play={isInView} direction="left" pauseOnHover>
+					{posts?.map((post, i) => <FeedPreview variant="slide" key={`post-${i}`} {...post?.post} i={i} />)}
 				</Marquee>
 			</div>
 
 			<div className="mt-12 flex justify-center md:mt-24">
-				<Button>View all</Button>
+				<Link href="/blog-and-podcasts">
+					<HoverButton
+						button={{
+							size: "medium",
+							background_color: "black",
+							text_color: "white",
+							hover_background_color: "cobalt",
+							text_hover_color: "electric",
+						}}
+					>
+						{`Vi<pst-grid>e</>w all`}
+					</HoverButton>
+				</Link>
 			</div>
 		</div>
 	);
