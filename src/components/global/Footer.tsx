@@ -89,7 +89,7 @@ export default function Footer(props) {
 				</div>
 
 				<div className="relative mt-20 lg:mt-[240px]">
-					<FooterLogoAnimation />
+					<FooterLogoAnimation isHover={false} />
 				</div>
 
 				<div className="t-16 mt-10 pb-8 font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>

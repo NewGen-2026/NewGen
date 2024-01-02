@@ -9,6 +9,7 @@ import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 import ScrollHeader from "../elements/animations/helpers/ScrollHeader";
 import GridSubmenu from "./menus/GridSubmenu";
 import TwoColSubmenu from "./menus/TwoColSubmenu";
+import FooterLogoAnimation from "../elements/animations/FooterLogoAnimation";
 
 const getSubMenuContent = (navItem) => {
 	switch (navItem?.submenu_layout) {
@@ -79,7 +80,9 @@ export default function Header(props) {
 					)}
 				>
 					<Link href="/" className="block" onMouseEnter={() => reset()}>
-						<Logo />
+						<div className="w-full max-w-[144px]">
+							<FooterLogoAnimation isHover />
+						</div>
 					</Link>
 					{!pageOptions?.remove_nav_menu && (
 						<div className="flex items-center gap-6 xl:gap-10">

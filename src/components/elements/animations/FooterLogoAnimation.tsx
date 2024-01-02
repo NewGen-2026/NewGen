@@ -46,14 +46,21 @@ const nPaths = [
 	"M1342.67 210.632L1342.23 1.28322L1376.73 1.21094V229.167H1313.97L1199.27 19.4143L1196.68 19.4198L1197.45 229.093L1163.1 229.167L1162.62 1.61322L1225.8 1.47839L1340.4 210.637L1342.67 210.632Z",
 ];
 
-const FooterLogoAnimation = () => {
+const FooterLogoAnimation = ({ isHover = false }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, {
 		once: false,
 	});
 
+	const [hover, setHover] = useState(false);
+
 	return (
-		<motion.div ref={ref} className="text-center font-heading text-[348px] font-black uppercase !leading-[0.5]">
+		<motion.div
+			ref={ref}
+			onMouseEnter={() => setHover(!!isHover)}
+			onMouseLeave={() => setHover(false)}
+			className="text-center font-heading text-[348px] font-black uppercase !leading-[0.5]"
+		>
 			<svg width="100%" height="100%" viewBox="0 0 1377 230" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g className="NEW">
 					<path d="M0.730469 228.451V1.17188H39.6765L137.041 121.954V1.17188H195.46V228.451H156.514L59.1495 107.668V228.451H0.730469Z" fill="currentColor" />
@@ -64,14 +71,13 @@ const FooterLogoAnimation = () => {
 					/>
 				</g>
 				<g className="G">
-					<LetterSwapper paths={gPaths} isInView={isInView} />
+					<LetterSwapper paths={gPaths} isInView={isInView} hover={hover} isHover={isHover} />
 				</g>
-
 				<g className="E">
-					<LetterSwapper paths={ePaths} isInView={isInView} delay={0.2} />
+					<LetterSwapper paths={ePaths} isInView={isInView} hover={hover} isHover={isHover} delay={0.2} />
 				</g>
 				<g className="N">
-					<LetterSwapper paths={nPaths} isInView={isInView} delay={0.4} />
+					<LetterSwapper paths={nPaths} isInView={isInView} hover={hover} isHover={isHover} delay={0.4} />
 				</g>
 			</svg>
 		</motion.div>
@@ -79,23 +85,26 @@ const FooterLogoAnimation = () => {
 };
 export default FooterLogoAnimation;
 
-const LetterSwapper = ({ paths, isInView, delay = 0 }) => {
+const LetterSwapper = ({ paths, isInView, delay = 0, hover, isHover }) => {
 	const [active, setActive] = useState(0);
 
 	useEffect(() => {
-		const updateActiveSlide = () => {
-			if (isInView) {
+		if (hover) {
+			setActive((prevIndex) => (prevIndex === paths.length - 1 ? 0 : prevIndex + 1));
+		}
+	}, [hover, paths.length]);
+
+	useEffect(() => {
+		if (isInView && !isHover) {
+			const intervalDuration = 2000;
+			const interval = setInterval(() => {
 				setActive((prevIndex) => (prevIndex === paths.length - 1 ? 0 : prevIndex + 1));
-			}
-		};
+			}, intervalDuration);
 
-		const intervalDuration = 2000;
-		const interval = setInterval(updateActiveSlide, intervalDuration);
-
-		return () => {
-			clearInterval(interval);
-		};
-	}, [paths.length, active, isInView]);
+			return () => clearInterval(interval);
+		}
+		return () => {};
+	}, [isInView, isHover, paths.length]);
 
 	return (
 		<AnimatePresence mode="sync">
