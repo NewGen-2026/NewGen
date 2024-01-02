@@ -63,6 +63,7 @@ function Section(props: SectionProps) {
 		padding_bottom = "medium",
 		is_rounded = false,
 		rounded_options = {},
+		static_posts,
 	} = props;
 
 	// Set section outer classes
@@ -85,7 +86,7 @@ function Section(props: SectionProps) {
 	return (
 		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
-				<ComponentRenderer pageId={pageId} components={components} />
+				<ComponentRenderer pageId={pageId} components={components} static_posts={static_posts} />
 			</div>
 		</section>
 	);

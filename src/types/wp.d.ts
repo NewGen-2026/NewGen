@@ -11,6 +11,7 @@ export type SectionProps = {
 	background?: {
 		background_color?: Color;
 	};
+	fetch_static_posts?: string[];
 	padding_top?: string;
 	padding_bottom?: string;
 	is_rounded?: boolean;
@@ -20,6 +21,7 @@ export type SectionProps = {
 		inner_padding_top?: string;
 		inner_padding_bottom?: string;
 	};
+	static_posts?: any[];
 };
 
 export type WpPage = {
@@ -45,6 +47,7 @@ export type WpPage = {
 	flexible_content: FlexibleContent[];
 	sections: FlexibleContent[];
 	seo: WpSeo;
+	static_posts: any[];
 };
 
 export type WpSeo = {
@@ -62,4 +65,5 @@ export type FlexibleContent = {
 	acf_fc_layout: "section" | "landing_page";
 	landing_page: any;
 	section: SectionProps;
+	fetch_static_posts?: string[];
 };

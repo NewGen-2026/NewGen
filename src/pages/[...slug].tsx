@@ -1,10 +1,12 @@
 import React from "react";
-import Feed from "~/components/templates/Feed";
 import Layout from "~/components/templates/Layout";
 import Page from "~/components/templates/Page";
 import Post from "~/components/templates/Post";
 import { WpOptions, WpPage } from "~/types/wp";
 import cms from "~/utils/cms";
+import dynamic from "next/dynamic";
+
+const WorkPost = dynamic(() => import("~/components/templates/WorkPost"), { ssr: false });
 
 type TemplateProps = {
 	page: WpPage;
@@ -15,7 +17,7 @@ export default function Template(data: TemplateProps) {
 	const { page } = data;
 
 	return (
-		<Layout data={data}>{page?.page_options?.is_posts_page ? <Feed {...data} /> : page?.post_type === "post" ? <Post {...data} /> : <Page {...data} />}</Layout>
+		<Layout data={data}>{page?.post_type === "post" ? <Post {...data} /> : page?.post_type === "work" ? <WorkPost {...data} /> : <Page {...data} />}</Layout>
 	);
 }
 
@@ -30,21 +32,24 @@ export async function getStaticProps({ params }) {
 	const slug = typeof params.slug !== "string" ? `/${params.slug.join("/")}` : params.slug;
 	const [page, options] = await Promise.all([cms().page(slug), cms().options()]);
 
-	if (page?.page_options?.is_posts_page) {
-		const posts = await cms().postType("post", 100);
+	const staticPosts = {};
 
-		return {
-			props: {
-				page: { ...page, posts },
-				options,
-			},
-			revalidate: 6000,
-		};
+	if (page.sections) {
+		await Promise.all(
+			page.sections.map(async (section) => {
+				if (section.fetch_static_posts) {
+					await Promise.all(
+						section.fetch_static_posts.map(async (postType) => {
+							staticPosts[postType] = await cms().postType(postType, 100);
+						})
+					);
+				}
+			})
+		);
 	}
-
 	return {
 		props: {
-			page,
+			page: { ...page, static_posts: staticPosts },
 			options,
 		},
 		revalidate: 6000,
