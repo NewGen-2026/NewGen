@@ -1,11 +1,10 @@
 import React from "react";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import AnimationRenderer from "./animations/AnimationRenderer";
 import VideoPlayer from "./VideoPlayer";
 import WpImage from "./WpImage";
-// import LottiePlayer from "./LottiePlayer";
 
-// const LottiePlayer = dynamic(() => import("./LottiePlayer"), { ssr: false });
+const VimeoPlayer = dynamic(() => import("./VimeoPlayer"), { ssr: false });
 
 interface AssetProps {
 	type?: "image" | "video" | "lottie" | "multiple" | "customAnimation";
@@ -73,34 +72,22 @@ function Asset({
 	}
 
 	if (type === "video") {
-		return <VideoPlayer className={className} {...video} playOnHover={playOnHover} parentInView={parentInView} onVideoLoad={onVideoLoad} />;
+		return video?.type === "vimeo" ? (
+			<VimeoPlayer {...video} />
+		) : (
+			<VideoPlayer className={className} {...video} playOnHover={playOnHover} parentInView={parentInView} onVideoLoad={onVideoLoad} />
+		);
 	}
 
 	if (type === "customAnimation") {
 		return (
-			<div className="w-full} h-full">
+			<div className="h-full w-full">
 				<AnimationRenderer {...custom_animation} />
 			</div>
 		);
 	}
 
-	// if (type === "lottie") {
-	// 	return (
-	// 		<div className={`h-full w-full ${getAspectRatio(lottie?.aspect)} `}>
-	// 			<LottiePlayer lottie={lottie} className={classes || className} loop_lottie={loop_lottie} />
-	// 		</div>
-	// 	);
-	// }
 	return <div>Asset {type} not implemented yet</div>;
 }
 
 export default Asset;
-
-const getAspectRatio = (aspect) => {
-	const sizes = {
-		"615-625": "xl:aspect-[615/625] xl:min-h-[625px] ",
-		"762-452": "xl:aspect-[762/452] xl:min-h-[500px] ",
-		"398-544": "xl:aspect-[398/544] max-w-[500px] xl:min-h-[544px] ",
-	};
-	return sizes[aspect];
-};

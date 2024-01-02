@@ -127,7 +127,7 @@ export const getTextContrastColorClasses = (color: Color) => {
 		boost: "!text-energy",
 		energy: "text-boost",
 		forest: "text-sand",
-		spark: "text-stone",
+		spark: "text-white",
 	};
 
 	return colors[color];
@@ -223,6 +223,25 @@ export const getColorGradients = (color) => {
 		energy: "from-energy/100 to-energy/0",
 		forest: "from-forest/100 to-forest/0",
 		spark: "from-spark/100 to-spark/0",
+	};
+
+	return colors[color];
+};
+
+export const getIsLightColor = (color) => {
+	const colors = {
+		white: true,
+		black: false,
+		cobalt: false,
+		electric: true,
+		stone: false,
+		ketchup: false,
+		sand: true,
+		candy: false,
+		boost: false,
+		energy: true,
+		forest: false,
+		spark: false,
 	};
 
 	return colors[color];

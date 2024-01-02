@@ -1613,6 +1613,15 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/react@^17.0.0 || ^18.0.0":
+  version "18.2.45"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.45.tgz#253f4fac288e7e751ab3dc542000fb687422c15c"
+  integrity sha512-TtAxCNrlrBp8GoeEp1npd5g+d/OejJHFxS3OWmrPBMFaVQMSN0OFySozJio5BHxTuTeug00AVXVAjfDSfk+lUg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
 "@types/responselike@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/responselike/-/responselike-1.0.0.tgz#251f4fe7d154d2bad125abe1b429b23afd262e29"
@@ -1629,6 +1638,11 @@
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@types/stylis/-/stylis-4.2.2.tgz#baabb6b3aa6787e90a6bd6cd75cd8fb9a4f256a3"
   integrity sha512-Rm17MsTpQQP5Jq4BF7CdrxJsDufoiL/q5IbJZYZmOZAJALyijgF7BzLgobXUqraNcQdqFYLYGeglDp6QzaxPpg==
+
+"@types/vimeo__player@^2.10.0":
+  version "2.18.3"
+  resolved "https://registry.yarnpkg.com/@types/vimeo__player/-/vimeo__player-2.18.3.tgz#585ccafd483304561c26897d48aa7695f7b36ed7"
+  integrity sha512-IzSzb6doT4I4uAnBHa+mBCiNtK7iAllEJjtpkX0sKY6/s1Vi+aX1134IAiPgiyFlMvFab/oZQpSeccK4r0/T2A==
 
 "@typescript-eslint/parser@^5.4.2 || ^6.0.0":
   version "6.8.0"
@@ -1674,6 +1688,24 @@
   dependencies:
     "@typescript-eslint/types" "6.8.0"
     eslint-visitor-keys "^3.4.1"
+
+"@u-wave/react-vimeo@^0.9.10":
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/@u-wave/react-vimeo/-/react-vimeo-0.9.10.tgz#155a033a34ad04b155a4b8814fc18f8452081e97"
+  integrity sha512-fNpRZHPTDvz3J/6aFC7C4aB4rD3WjJ7h0f1VO7OC/GtGwXUsKSqDbEG2J8TdT5gQVtLGwupZMGzfbD5f0dZs1w==
+  dependencies:
+    "@types/react" "^17.0.0 || ^18.0.0"
+    "@types/vimeo__player" "^2.10.0"
+    "@vimeo/player" "^2.16.4"
+    prop-types "^15.7.2"
+
+"@vimeo/player@^2.16.4":
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/@vimeo/player/-/player-2.20.1.tgz#b2db8651cfed71009475528019977bf8e8c3dadf"
+  integrity sha512-eoKkqsMY33RQn8lFtlUbb3uo+xDL3V8PTN01SdrJ1E9PI+5pLyqNGh/GO/2EyX9Vr6antLm0/v36ABF2rcwXIQ==
+  dependencies:
+    native-promise-only "0.8.1"
+    weakmap-polyfill "2.0.4"
 
 "@wordpress/env@^8.10.0":
   version "8.10.0"
@@ -4483,6 +4515,11 @@ nanoid@^3.3.6:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
   integrity sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==
 
+native-promise-only@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/native-promise-only/-/native-promise-only-0.8.1.tgz#20a318c30cb45f71fe7adfbf7b21c99c1472ef11"
+  integrity sha512-zkVhZUA3y8mbz652WrL5x0fB0ehrBkulWT3TomAQ9iDtyXZvzKeEA6GPxAItBYeNYl5yngKRX612qHOhvMkDeg==
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -4910,7 +4947,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-prop-types@^15.8.1:
+prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -6063,6 +6100,11 @@ wcwidth@^1.0.1:
   integrity sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==
   dependencies:
     defaults "^1.0.3"
+
+weakmap-polyfill@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/weakmap-polyfill/-/weakmap-polyfill-2.0.4.tgz#bcc301e4c8eb4eda3e406f08f1a691093e407884"
+  integrity sha512-ZzxBf288iALJseijWelmECm/1x7ZwQn3sMYIkDr2VvZp7r6SEKuT8D0O9Wiq6L9Nl5mazrOMcmiZE/2NCenaxw==
 
 webpack-bundle-analyzer@4.7.0:
   version "4.7.0"

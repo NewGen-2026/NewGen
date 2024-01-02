@@ -18,9 +18,10 @@ interface WpImageProps {
 	pageId?: number;
 	layout?: "fill" | "fixed" | "intrinsic" | "responsive";
 	onLoadComplete?: () => void;
+	removeFadeIn?: boolean;
 }
 
-function WpImage({ image, fill = false, className, pageId, onLoadComplete, ...props }: WpImageProps) {
+function WpImage({ image, fill = false, className, pageId, onLoadComplete, removeFadeIn = false, ...props }: WpImageProps) {
 	const imgRef = useRef(null) as any;
 	const imageUrl = image?.src || image?.url;
 
@@ -54,7 +55,7 @@ function WpImage({ image, fill = false, className, pageId, onLoadComplete, ...pr
 				fill
 				alt={image.alt || image.title}
 				// sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-				className={`fade-in opacity-100 transition-opacity duration-200 ${className}`}
+				className={`${removeFadeIn ? "" : "fade-in "} opacity-100 transition-opacity duration-200 ${className}`}
 				onLoad={handleImageLoad}
 				{...props}
 			/>
@@ -67,7 +68,7 @@ function WpImage({ image, fill = false, className, pageId, onLoadComplete, ...pr
 			width={image.width}
 			height={image.height}
 			alt={image.alt || image.title}
-			className={`fade-in opacity-100 transition-opacity duration-200  ${className}`}
+			className={`${removeFadeIn ? "" : "fade-in "} opacity-100 transition-opacity duration-200  ${className}`}
 			onLoad={handleImageLoad}
 			{...props}
 		/>
