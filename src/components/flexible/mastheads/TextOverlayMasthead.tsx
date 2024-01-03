@@ -3,7 +3,43 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import { getBgColorClasses } from "~/utils/getColors";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useWindowSize } from "react-use";
 
+const SplitTextFontSwitcher = ({ text, delay = 0, stagger = 0.1, reverse = false, fontSwitchStartDelay = 1500 }) => {
+	const words = text.split(" ");
+	const totalWords = words.length;
+
+	return words.map((word, index) => {
+		const delayIndex = reverse ? totalWords - 1 - index : index;
+
+		return (
+			<motion.span
+				key={word + index}
+				initial={{
+					y: "0.5em",
+					opacity: 0,
+				}}
+				animate={{
+					y: 0,
+					opacity: 1,
+				}}
+				transition={{
+					delay: delay + delayIndex * stagger + 0.2,
+					type: "tween",
+					duration: 0.1,
+					opacity: {
+						duration: 0.05,
+						delay: delay + delayIndex * stagger + 0.2,
+					},
+				}}
+				style={{ marginRight: index < totalWords - 1 ? "0.1em" : "0" }}
+				className="inline-block will-change-transform"
+			>
+				<FontSwitcher startDelay={fontSwitchStartDelay} text={word + (index < totalWords - 1 ? " " : "")} />
+			</motion.span>
+		);
+	});
+};
 const variantThemeStyles = {
 	talent: {
 		imageClass: "max-w-[42.8%] translate-x-[-5%]",
@@ -18,6 +54,13 @@ const AssetAtBottomVariant = (props) => {
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
+	const { width: windowWidth } = useWindowSize();
+
+	const breakpointCrossed = windowWidth < 768;
+
+	const textXDistanceLeft = breakpointCrossed ? 0 : "0.45em";
+	const textXDistanceRight = breakpointCrossed ? 0 : "-0.45em";
+
 	return (
 		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
 			<div className="mx-auto w-full max-w-[1440px]">
@@ -27,38 +70,38 @@ const AssetAtBottomVariant = (props) => {
 							<div className="relative z-0 flex justify-center gap-[0.1em] md:gap-[1em]">
 								<motion.span
 									initial={{
-										x: "0.45em",
+										x: textXDistanceLeft,
 									}}
 									animate={{
-										x: imageLoaded ? 0 : "0.45em",
+										x: imageLoaded ? 0 : textXDistanceLeft,
 									}}
 									transition={{
-										delay: 0.4,
+										delay: 1.1,
 									}}
-									className="inline-block"
+									className="inline-block min-h-[0.5em]"
 								>
-									<FontSwitcher startDelay={600} text={top_line_left} />
+									<SplitTextFontSwitcher delay={0.3} fontSwitchStartDelay={600} text={top_line_left} />
 								</motion.span>
 								<motion.span
 									initial={{
-										x: "-0.45em",
+										x: textXDistanceRight,
 									}}
 									animate={{
-										x: imageLoaded ? 0 : "-0.45em",
+										x: imageLoaded ? 0 : textXDistanceRight,
 									}}
 									transition={{
-										delay: 0.4,
+										delay: 1.1,
 									}}
 									className="inline-block"
 								>
-									<FontSwitcher text={top_line_right} />
+									<SplitTextFontSwitcher delay={0.5} text={top_line_right} />
 								</motion.span>
 							</div>
 							<span className="relative z-10 block">
-								<FontSwitcher text={middle_line} />
+								<SplitTextFontSwitcher delay={0.2} stagger={0.2} text={middle_line} reverse />
 							</span>
 							<span className="relative z-10 block">
-								<FontSwitcher startDelay={700} text={bottom_line} />
+								<SplitTextFontSwitcher delay={0.6} fontSwitchStartDelay={700} text={bottom_line} />
 							</span>
 						</h1>
 					</div>
@@ -76,9 +119,9 @@ const AssetAtBottomVariant = (props) => {
 					transition={{
 						opacity: {
 							duration: 0.3,
-							delay: 0.6,
+							delay: 1.3,
 						},
-						delay: 0.6,
+						delay: 1.3,
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
@@ -135,16 +178,26 @@ const AssetInCenterVariant = (props) => {
 
 	const [imageLoaded, setImageLoaded] = useState(false);
 
+	const { width: windowWidth } = useWindowSize();
+
+	const breakpointCrossed = windowWidth < 768;
+
+	const textXDistanceLeftTop = breakpointCrossed ? 0 : "0.5em";
+	const textXDistanceRightTop = breakpointCrossed ? 0 : "-0.5em";
+
+	const textXDistanceLeftMiddle = breakpointCrossed ? 0 : "0.9em";
+	const textXDistanceRightMiddle = breakpointCrossed ? 0 : "-0.9em";
+
 	return (
 		<div className="relative flex flex-col pt-24 md:min-h-[800px] md:pb-32 md:pt-[300px]">
 			<h1 className="t-120 text-center font-black uppercase !leading-[0.9]">
-				<div className="relative z-0 flex  justify-center gap-[0.1em] md:gap-[1em]">
+				<div className="relative z-0 flex  justify-center gap-[0.02em] md:gap-[1em]">
 					<motion.span
 						initial={{
-							x: "0.5em",
+							x: textXDistanceLeftTop,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : "0.5em",
+							x: imageLoaded ? 0 : textXDistanceLeftTop,
 						}}
 						transition={{
 							delay: 0.4,
@@ -155,10 +208,10 @@ const AssetInCenterVariant = (props) => {
 					</motion.span>
 					<motion.span
 						initial={{
-							x: "-0.5em",
+							x: textXDistanceRightTop,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : "-0.5em",
+							x: imageLoaded ? 0 : textXDistanceRightTop,
 						}}
 						transition={{
 							delay: 0.4,
@@ -168,13 +221,13 @@ const AssetInCenterVariant = (props) => {
 						<FontSwitcher text={top_line_right} />
 					</motion.span>
 				</div>
-				<div className="relative  flex justify-center gap-[0.1em] md:gap-[1.8em]">
+				<div className="relative  flex justify-center gap-[0.02em] md:gap-[1.8em]">
 					<motion.span
 						initial={{
-							x: "0.9em",
+							x: textXDistanceLeftMiddle,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : "0.9em",
+							x: imageLoaded ? 0 : textXDistanceLeftMiddle,
 						}}
 						transition={{
 							delay: 0.4,
@@ -185,10 +238,10 @@ const AssetInCenterVariant = (props) => {
 					</motion.span>
 					<motion.span
 						initial={{
-							x: "-0.9em",
+							x: textXDistanceRightMiddle,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : "-0.9em",
+							x: imageLoaded ? 0 : textXDistanceRightMiddle,
 						}}
 						transition={{
 							delay: 0.4,
