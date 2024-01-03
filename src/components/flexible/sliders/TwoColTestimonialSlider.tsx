@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 import clsx from "clsx";
-import { AnimatePresence, useInView, motion } from "framer-motion";
+import { AnimatePresence, useInView, motion, useIsomorphicLayoutEffect } from "framer-motion";
 import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
@@ -48,7 +48,7 @@ const TwoColTestimonialSlider = (props) => {
 		return () => clearInterval(interval);
 	}, [items.length, activeSlide, isInView]);
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const heights = quoteRefs.current.map((ref: { current: { offsetHeight: any } }) => ref.current?.offsetHeight || 0);
 		const maxHeight = Math.max(...heights);
 		setMaxQuoteHeight(maxHeight);

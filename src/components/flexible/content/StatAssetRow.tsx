@@ -16,7 +16,7 @@ const DefaultVariant = ({ left_asset, right_asset, left_stat_block, right_stat_b
 				<div className="aspect-[240/320] max-w-[240px] flex-[0_1_35%] sm:flex-[0_1_240px]">
 					<Asset {...left_asset} className="h-full w-full object-cover" />
 				</div>
-				<div className={`flex  flex-[0_1_60%] flex-col justify-between gap-6 p-4 sm:flex-[0_1_400px] ${getBgColorClasses(left_stat_block?.theme_color)}`}>
+				<div className={`flex  flex-[0_1_62%] flex-col justify-between gap-6 p-4 sm:flex-[0_1_400px] ${getBgColorClasses(left_stat_block?.theme_color)}`}>
 					<h3 className="t-120 font-black uppercase">
 						<FontSwitcher text={left_stat_block?.stat} />
 					</h3>
@@ -27,7 +27,7 @@ const DefaultVariant = ({ left_asset, right_asset, left_stat_block, right_stat_b
 				<div className="aspect-[240/320] max-w-[240px] flex-[0_1_35%] sm:flex-[0_1_240px]">
 					<Asset {...right_asset} className="h-full w-full object-cover" />
 				</div>
-				<div className={`flex  flex-[0_1_60%] flex-col justify-between gap-6 p-4 sm:flex-[0_1_400px] ${getBgColorClasses(left_stat_block?.theme_color)}`}>
+				<div className={`flex  flex-[0_1_62%] flex-col justify-between gap-6 p-4 sm:flex-[0_1_400px] ${getBgColorClasses(left_stat_block?.theme_color)}`}>
 					<h3 className="t-120 font-black uppercase">
 						<FontSwitcher text={right_stat_block?.stat} />
 					</h3>

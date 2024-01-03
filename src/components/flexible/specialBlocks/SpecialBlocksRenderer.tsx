@@ -2,15 +2,15 @@ import React from "react";
 import dynamic from "next/dynamic";
 import ServicesOverview from "./ServicesOverview";
 import LeftRightCTA from "./LeftRightCTA";
-import AllTeam from "./AllTeam";
 import TimelineScroller from "./TimelineScroller";
 import FloatingImagesCta from "./FloatingImagesCta";
 import HijackScroller from "./HijackScroller";
 import Offices from "./Offices";
 import Jobs from "./Jobs";
 import ContactForm from "./ContactForm";
+import FeedListFlexible from "./FeedListFlexible";
 
-const FeedListFlexible = dynamic(() => import("./FeedListFlexible"), { ssr: false });
+const AllTeam = dynamic(() => import("./AllTeam"), { ssr: false });
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,

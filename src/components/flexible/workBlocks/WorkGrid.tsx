@@ -1,4 +1,4 @@
-import { Button } from "~/components/elements/buttons/Button";
+import { HoverButton } from "~/components/elements/buttons/Button";
 import clsx from "clsx";
 import WorkGridItem from "./WorkGridItem";
 
@@ -13,7 +13,17 @@ const WorkGrid = (props) => {
 				{works?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work?.work} variant={variant} />)}
 			</div>
 			<div className="mt-8 flex w-full justify-center md:mt-24">
-				<Button>All Projects</Button>
+				<HoverButton
+					button={{
+						text_color: "white",
+						background_color: "black",
+						hover_background_color: "electric",
+						text_hover_color: "cobalt",
+						size: "medium",
+					}}
+				>
+					{`All Pr<pst-rec>o</>jects`}
+				</HoverButton>
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
-import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView } from "framer-motion";
+import { createRef, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView, useIsomorphicLayoutEffect } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
@@ -48,7 +48,7 @@ const TestimonialSlider = (props) => {
 		};
 	}, [items.length, activeSlide, isInView]);
 
-	useLayoutEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		const heights = quoteRefs.current.map((ref: { current: { offsetHeight: any } }) => ref.current?.offsetHeight || 0);
 		const maxHeight = Math.max(...heights);
 		setMaxQuoteHeight(maxHeight);

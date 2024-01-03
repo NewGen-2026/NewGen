@@ -34,9 +34,11 @@ const MobileMenu = ({ mobileMenuOpen, menu, setMobileMenuOpen, breakpointCrossed
 		};
 	}, [router.events, setMobileMenuOpen]);
 
-	if (!breakpointCrossed) {
-		setMobileMenuOpen(false);
-	}
+	useEffect(() => {
+		if (!breakpointCrossed) {
+			setMobileMenuOpen(false);
+		}
+	}, [breakpointCrossed, setMobileMenuOpen]);
 
 	return (
 		<div
@@ -48,11 +50,10 @@ const MobileMenu = ({ mobileMenuOpen, menu, setMobileMenuOpen, breakpointCrossed
 			<div className="flex w-full items-center gap-6 xl:gap-8">
 				<nav className={clsx(`flex w-full flex-col  text-black`)}>
 					{menu?.nav?.map((navItem, i) => (
-						<div className="relative">
+						<div className="relative" key={`nav-item-${i}`}>
 							<button
 								type="button"
 								aria-label="Open submenu"
-								key={`nav-item-${i}`}
 								onClick={() => setActiveSubmenu(i === activeSubmenu ? null : i)}
 								className="flex w-full items-center justify-between py-4 text-left font-heading text-[2rem] font-black uppercase leading-[1.1] tracking-[-0.02em]"
 							>
