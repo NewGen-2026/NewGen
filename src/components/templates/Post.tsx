@@ -29,7 +29,7 @@ export default function Post(data) {
 		<div className="container pt-20 md:pt-36">
 			<div className="flex w-full max-w-[1090px] justify-between gap-4">
 				<div className="hidden max-w-[150px] flex-1 text-black md:block">
-					<Link href="/feed-2">
+					<Link href="/blog-and-podcasts">
 						<TextLink underlineColour="black">{`T<pst-hal>a</>ke me <pst-hal>b</>ack`}</TextLink>
 					</Link>
 				</div>

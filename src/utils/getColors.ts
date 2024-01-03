@@ -38,6 +38,25 @@ export const getBgContrastColorClasses = (color: Color) => {
 	return colors[color];
 };
 
+export const getBgContrastColorName = (color: Color) => {
+	const colors = {
+		white: "black",
+		black: "white",
+		cobalt: "electric",
+		electric: "cobalt",
+		stone: "spark",
+		ketchup: "candy",
+		sand: "forest",
+		candy: "ketchup",
+		boost: "energy",
+		energy: "boost",
+		forest: "sand",
+		spark: "white",
+	};
+
+	return colors[color];
+};
+
 export const getBgContrastHoverColorClasses = (color: Color) => {
 	const colors = {
 		white: "hover:bg-black",

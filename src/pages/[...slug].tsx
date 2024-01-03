@@ -34,6 +34,12 @@ export async function getStaticProps({ params }) {
 
 	const staticPosts = {};
 
+	if (!page || Object.keys(page).length === 0) {
+		return {
+			notFound: true,
+		};
+	}
+
 	if (page.sections) {
 		await Promise.all(
 			page.sections.map(async (section) => {

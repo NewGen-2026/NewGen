@@ -7,6 +7,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 const TwoColSubmenu = (props) => {
 	const {
 		data: { left_col, right_col },
+		isMobile,
 	} = props;
 
 	return (
@@ -21,23 +22,25 @@ const TwoColSubmenu = (props) => {
 			transition={{
 				delay: 0.1,
 			}}
-			className="mx-auto flex w-full  "
+			className="mx-auto flex w-full flex-col gap-4 py-6 md:flex-row md:gap-0 md:py-0 "
 		>
-			<LeftCol {...left_col} />
-			<RightCol {...right_col} />
+			<LeftCol {...left_col} isMobile={isMobile} />
+			<RightCol {...right_col} isMobile={isMobile} />
 		</motion.div>
 	);
 };
 export default TwoColSubmenu;
 
-const LeftCol = ({ line_left, line_right, left_image, link }) => {
+const LeftCol = ({ line_left, line_right, left_image, link, isMobile }) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<Link
 			href={link || "/#"}
-			className="relative flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden bg-energy text-boost transition-opacity duration-200 hover:bg-boost hover:text-energy"
+			className={`relative flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden bg-energy text-boost transition-opacity duration-200 hover:bg-boost hover:text-energy ${
+				isMobile ? "!bg-boost !text-energy" : ""
+			}`}
 		>
 			<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
 				<div className="absolute inset-0 flex w-full items-center p-5 text-center">
@@ -53,7 +56,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 								delay: 0.5,
 							}}
 						>
-							<FontSwitcher hover isHovered={isHovered} text={line_left} />
+							<FontSwitcher hover isHovered={isHovered || isMobile} text={line_left} />
 						</motion.span>
 						<motion.span
 							initial={{
@@ -66,7 +69,7 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 								delay: 0.5,
 							}}
 						>
-							<FontSwitcher hover isHovered={isHovered} text={line_right} />
+							<FontSwitcher hover isHovered={isHovered || isMobile} text={line_right} />
 						</motion.span>
 					</div>
 				</div>
@@ -102,14 +105,16 @@ const LeftCol = ({ line_left, line_right, left_image, link }) => {
 	);
 };
 
-const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) => {
+const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link, isMobile }) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [imageLoaded, setImageLoaded] = useState(false);
 
 	return (
 		<Link
 			href={link || "/#"}
-			className="relative  z-[10] flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden  bg-electric text-cobalt transition-colors duration-200 hover:bg-cobalt hover:text-electric"
+			className={`relative  z-[10] flex aspect-[528/488] flex-1 items-end justify-center overflow-hidden  bg-electric text-cobalt transition-colors duration-200 hover:bg-cobalt hover:text-electric ${
+				isMobile ? "!bg-cobalt !text-electric" : ""
+			}`}
 		>
 			<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
 				<div className="t-88-menu absolute inset-0 flex w-full items-center p-5 text-center  font-heading font-black uppercase !leading-[0.8]">
@@ -127,7 +132,7 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 								}}
 								className="inline-block"
 							>
-								<FontSwitcher hover isHovered={isHovered} text={top_line_left} />
+								<FontSwitcher hover isHovered={isHovered || isMobile} text={top_line_left} />
 							</motion.span>
 							<motion.span
 								initial={{
@@ -141,10 +146,10 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link }) =
 								}}
 								className="inline-block"
 							>
-								<FontSwitcher hover isHovered={isHovered} text={top_line_right} />
+								<FontSwitcher hover isHovered={isHovered || isMobile} text={top_line_right} />
 							</motion.span>
 							<div className="relative z-10">
-								<FontSwitcher hover isHovered={isHovered} text={bottom_line} />
+								<FontSwitcher hover isHovered={isHovered || isMobile} text={bottom_line} />
 							</div>
 						</div>
 					</div>
