@@ -112,10 +112,12 @@ export default function Header(props) {
 									href={menu?.button?.url || "/#"}
 									className={clsx(
 										`t-16 hidden min-h-[68.2px] min-w-[150px] justify-center  px-4 py-[26.5px] text-center font-black uppercase  transition-colors duration-200 md-large:flex`,
-										isDark ? "bg-black text-white hover:bg-cobalt hover:text-electric" : "bg-white text-black hover:bg-electric hover:text-cobalt"
+										isDark
+											? headerButtonThemes[pageOptions?.header_button_theme]?.dark?.buttonClass || "bg-black text-cobalt hover:bg-cobalt hover:text-electric"
+											: headerButtonThemes[pageOptions?.header_button_theme]?.light?.buttonClass || "bg-white text-black hover:bg-electric hover:text-cobalt"
 									)}
 								>
-									<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
+									<FontSwitcher hover isHovered={isHovered} text={headerButtonThemes[pageOptions?.header_button_theme]?.text || menu?.button?.title} />
 								</Link>
 							</div>
 						)}
@@ -168,3 +170,42 @@ export default function Header(props) {
 		</>
 	);
 }
+
+const headerButtonThemes = {
+	"boost-pil": {
+		light: {
+			buttonClass: "bg-white text-black hover:bg-energy hover:text-boost",
+		},
+		dark: {
+			buttonClass: "bg-black text-white hover:bg-boost hover:text-energy",
+		},
+		text: `G<pst-pil>e</>t in to<pst-pil>u</>ch`,
+	},
+	"cobalt-rec": {
+		light: {
+			buttonClass: "bg-white text-black hover:bg-electric hover:text-cobalt",
+		},
+		dark: {
+			buttonClass: "bg-black text-white hover:bg-cobalt hover:text-electric",
+		},
+		text: `G<pst-rec>e</>t in to<pst-rec>u</>ch`,
+	},
+	"ketchup-bec": {
+		light: {
+			buttonClass: "bg-white text-black hover:bg-candy hover:text-ketchup",
+		},
+		dark: {
+			buttonClass: "bg-black text-white hover:bg-ketchup hover:text-candy",
+		},
+		text: `G<pst-bec>e</>t in to<pst-bec>u</>ch`,
+	},
+	default: {
+		light: {
+			buttonClass: "bg-white text-black hover:bg-electric hover:text-cobalt",
+			dark: {
+				buttonClass: "bg-black text-white hover:bg-cobalt hover:text-electric",
+			},
+		},
+		text: `G<pst-grid>e</>t in to<pst-grid>u</>ch`,
+	},
+};
