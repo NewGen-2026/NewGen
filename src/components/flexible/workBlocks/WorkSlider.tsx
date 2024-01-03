@@ -8,7 +8,9 @@ import { Button } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses } from "~/utils/getColors";
-import MobileWorkSlider from "../sliders/MobileWorkSlider";
+import dynamic from "next/dynamic";
+
+const MobileWorkSlider = dynamic(() => import("../sliders/MobileWorkSlider"), { ssr: false });
 
 const WorkSlider = (props) => {
 	const breakpointCrossed = useBreakpointCrossed(768);

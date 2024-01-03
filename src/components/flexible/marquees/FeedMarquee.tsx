@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRef } from "react";
 import { HoverButton } from "~/components/elements/buttons/Button";
 import FeedPreview from "~/components/feed/FeedPreview";
-import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 
 const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
@@ -12,8 +11,6 @@ const FeedMarquee = (props) => {
 	const { posts } = props;
 
 	const ref = useRef(null);
-
-	const breakpointCrossed = useBreakpointCrossed(768);
 
 	const isInView = useInView(ref, {
 		once: false,

@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import clsx from "clsx";
 import { AnimatePresence, useInView, motion, useIsomorphicLayoutEffect } from "framer-motion";
-import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";

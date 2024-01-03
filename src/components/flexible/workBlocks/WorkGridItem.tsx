@@ -92,18 +92,14 @@ const WorkGridItem = ({ work, variant }) => {
 						{work?.services?.length > 0 && (
 							<InfoBlock heading="Services">
 								{work?.services?.map((service, i) => (
-									<span key={`service-${i}`} className="t-20 block font-black uppercase">
-										{service?.name}
-									</span>
+									<span key={`service-${i}`} className="t-20 block font-black uppercase" dangerouslySetInnerHTML={{ __html: service?.name }} />
 								))}
 							</InfoBlock>
 						)}
 						{work?.sector?.length > 0 && (
 							<InfoBlock heading="Sector">
 								{work?.sector?.map((sector, i) => (
-									<span key={`sector-${i}`} className="t-20 block font-black uppercase">
-										{sector?.name}
-									</span>
+									<span key={`sector-${i}`} className="t-20 block font-black uppercase" dangerouslySetInnerHTML={{ __html: sector?.name }} />
 								))}
 							</InfoBlock>
 						)}

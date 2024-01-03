@@ -8,9 +8,9 @@ import HijackScroller from "./HijackScroller";
 import Offices from "./Offices";
 import Jobs from "./Jobs";
 import ContactForm from "./ContactForm";
-import FeedListFlexible from "./FeedListFlexible";
 
 const AllTeam = dynamic(() => import("./AllTeam"), { ssr: false });
+const FeedListFlexible = dynamic(() => import("./FeedListFlexible"), { ssr: false });
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,

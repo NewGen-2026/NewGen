@@ -1,18 +1,18 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import TextCard from "../elements/text/TextCard";
-import TestComponent from "../flexible/TestComponent";
 import Asset from "../elements/Asset";
 import SpecialBlocksRenderer from "../flexible/specialBlocks/SpecialBlocksRenderer";
 import MastheadsRenderer from "../flexible/mastheads/MastheadsRenderer";
 import MarqueesRenderer from "../flexible/marquees/MarqueesRenderer";
-import WorkBlocksRenderer from "../flexible/workBlocks/WorkBlocksRenderer";
 import ContentRenderer from "../flexible/content/ContentRenderer";
 import SlidersRenderer from "../flexible/sliders/SlidersRenderer";
 import MediaRenderer from "../flexible/media/MediaRenderer";
-import LandingPageRenderer from "../flexible/landingPages/LandingPageRenderer";
+
+const LandingPageRenderer = dynamic(() => import("../flexible/landingPages/LandingPageRenderer"), { ssr: false });
+const WorkBlocksRenderer = dynamic(() => import("../flexible/workBlocks/WorkBlocksRenderer"), { ssr: false });
 
 const COMPONENT_MAP = {
-	test_component: TestComponent,
 	text_card: (props) => <TextCard {...props.text_card} />,
 	asset: Asset,
 	special_blocks: SpecialBlocksRenderer,
