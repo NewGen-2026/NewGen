@@ -8,10 +8,16 @@ import { Button } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses } from "~/utils/getColors";
+import MobileWorkSlider from "../sliders/MobileWorkSlider";
 
 const WorkSlider = (props) => {
-	const scrollRef = useRef(null);
 	const breakpointCrossed = useBreakpointCrossed(768);
+
+	return breakpointCrossed ? <MobileWorkSlider {...props} /> : <WorkSliderDesktop {...props} />;
+};
+
+const WorkSliderDesktop = (props) => {
+	const scrollRef = useRef(null);
 	const [activeSlide, setActiveSlide] = useState(0);
 
 	const { work_slides } = props;
@@ -163,7 +169,6 @@ const NavBar = ({ items, active, setActiveSlide }) => {
 								animate={{
 									scale: active === i ? 1.4 : 1,
 								}}
-								href={`#slide${i}`}
 								key={`nav-item-${i}`}
 								className={`h-[6px] w-[6px] ${active === i ? "bg-cobalt" : "bg-stone "}`}
 							/>
