@@ -21,6 +21,7 @@ const WorkGridItem = ({ work, variant }) => {
 	const headingDistanceHover = isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
 
 	const logoClass = isHovered ? "invert" : "";
+
 	return (
 		<div
 			onMouseEnter={() => setIsHovered(!isBreakpointCrossed)}
@@ -88,8 +89,24 @@ const WorkGridItem = ({ work, variant }) => {
 						className={`relative z-20 flex w-full flex-wrap gap-4 ${isThreeCol ? "flex-col" : "lg:flex-nowrap"}`}
 					>
 						<InfoBlock />
-						<InfoBlock heading="Services" content="Influencer Marketing" />
-						<InfoBlock heading="Sector" content="Technology" />
+						{work?.services?.length > 0 && (
+							<InfoBlock heading="Services">
+								{work?.services?.map((service, i) => (
+									<span key={`service-${i}`} className="t-20 block font-black uppercase">
+										{service?.name}
+									</span>
+								))}
+							</InfoBlock>
+						)}
+						{work?.sector?.length > 0 && (
+							<InfoBlock heading="Sector">
+								{work?.sector?.map((sector, i) => (
+									<span key={`sector-${i}`} className="t-20 block font-black uppercase">
+										{sector?.name}
+									</span>
+								))}
+							</InfoBlock>
+						)}
 					</motion.div>
 				</div>
 			</Link>
@@ -98,11 +115,11 @@ const WorkGridItem = ({ work, variant }) => {
 };
 export default WorkGridItem;
 
-const InfoBlock = ({ heading = "Client", content = "Revolut" }) => {
+const InfoBlock = ({ heading = "Client", children = "Revolut" }) => {
 	return (
 		<div className="flex-auto">
 			<div className="text-[15px] font-bold leading-[1.5] opacity-70">{heading}</div>
-			<div className="t-20 mt-2 font-black uppercase !leading-[1]">{content}</div>
+			<div className="t-20 mt-2 font-black uppercase !leading-[1]">{children}</div>
 		</div>
 	);
 };
