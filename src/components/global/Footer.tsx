@@ -38,6 +38,8 @@ export default function Footer(props) {
 
 	const isLight = themeStyles[footer_theme]?.isLight;
 
+	console.log(addresses);
+
 	return (
 		<footer className={`${getBgColorClasses(footer_theme)} pb-8 pt-8 md:pb-0 md:pt-20`}>
 			<div className="container">
@@ -87,8 +89,16 @@ export default function Footer(props) {
 						</button>
 					</form>
 				</div>
+				<div className="mt-16 flex w-full flex-wrap gap-3 sm:gap-8 md:mt-24 md:gap-20">
+					{addresses?.map((address, i) => (
+						<div key={`address${i}`} className="max-w-[240px] flex-1">
+							<div className="t-18 font-black uppercase">{address?.city}</div>
+							<div className="t-16 font-mediumo mt-4  !leading-[1.5] opacity-[0.35]" dangerouslySetInnerHTML={{ __html: address?.address }} />
+						</div>
+					))}
+				</div>
 
-				<div className="relative mt-20 lg:mt-[240px]">
+				<div className="relative mt-20 lg:mt-[200px]">
 					<FooterLogoAnimation isHover={false} />
 				</div>
 
