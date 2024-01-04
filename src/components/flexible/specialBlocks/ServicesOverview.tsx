@@ -1,10 +1,12 @@
 /* eslint-disable no-shadow */
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import Asset from "~/components/elements/Asset";
 import WpImage from "~/components/elements/WpImage";
 import Link from "next/link";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import useAutoSlider from "~/hooks/useAutoSlider";
 
 const activeHoverLayouts = {
 	influencer: {
@@ -13,6 +15,7 @@ const activeHoverLayouts = {
 		button: {
 			bgColor: "bg-energy",
 			textColor: "!text-boost",
+			text: `Expl<pst-pil>o</>re Se<pst-pil>r</>vices`,
 		},
 		blockColor: "bg-energy text-boost",
 		font: "font-pilowlava  !leading-[0.5] !text-[0.92em]",
@@ -23,6 +26,7 @@ const activeHoverLayouts = {
 		button: {
 			bgColor: "bg-electric",
 			textColor: "!text-cobalt",
+			text: `Exp<pst-bec>l</>ore S<pst-bec>e</>rvices`,
 		},
 		blockColor: "bg-electric text-cobalt",
 		font: "font-become  !leading-[0.8]",
@@ -33,6 +37,7 @@ const activeHoverLayouts = {
 		button: {
 			bgColor: "bg-sand",
 			textColor: "!text-forest",
+			text: `Ex<pst-hal>p</>lore S<pst-hal>e</>rvices`,
 		},
 		blockColor: "bg-sand text-forest",
 		font: "font-haltwins !leading-[0.8]",
@@ -40,37 +45,60 @@ const activeHoverLayouts = {
 };
 
 const ServicesOverview = (props) => {
+	const ref = useRef(null);
+
 	const [activeHover, setActiveHover] = useState("influencer");
+	const [buttonHovered, setButtonHovered] = useState(false);
+	const [overrideHover, setOverrideHover] = useState(null);
 
 	const { creative_layout, influencer_layout, social_layout } = props;
 
-	const layouts = [
-		{
-			id: "influencer",
-			leftImage: influencer_layout?.influencer_left_image,
-			rightImage: influencer_layout?.influencer_right_image,
-			statBlock: influencer_layout?.stat_block,
-		},
-		{
-			id: "social",
-			leftImage: social_layout?.social_left_image,
-			rightImage: social_layout?.social_right_image,
-			statBlock: social_layout?.stat_block,
-		},
-		{
-			id: "creative",
-			leftImage: creative_layout?.creative_left_image,
-			rightImage: creative_layout?.creative_right_image,
-			statBlock: creative_layout?.stat_block,
-		},
-	];
+	const layouts = useMemo(
+		() => [
+			{
+				id: "influencer",
+				leftImage: influencer_layout?.influencer_left_image,
+				rightImage: influencer_layout?.influencer_right_image,
+				statBlock: influencer_layout?.stat_block,
+			},
+			{
+				id: "social",
+				leftImage: social_layout?.social_left_image,
+				rightImage: social_layout?.social_right_image,
+				statBlock: social_layout?.stat_block,
+			},
+			{
+				id: "creative",
+				leftImage: creative_layout?.creative_left_image,
+				rightImage: creative_layout?.creative_right_image,
+				statBlock: creative_layout?.stat_block,
+			},
+		],
+		[creative_layout, influencer_layout, social_layout]
+	);
+
+	const activeSlide = useAutoSlider(ref, layouts?.length, {
+		intervalDuration: 6000,
+		startDelay: 0,
+		overrideActiveSlide: overrideHover,
+	});
+
+	useEffect(() => {
+		setActiveHover(layouts[activeSlide]?.id);
+	}, [activeSlide, layouts]);
+
+	const handleHoverChange = (newHover) => {
+		setActiveHover(newHover);
+		const newOverrideSlide = layouts.findIndex((layout) => layout.id === newHover);
+		setOverrideHover(newOverrideSlide);
+	};
 
 	const parseSentence = (sentence) => {
 		return sentence
 			.split("||")
 			.map((segment, index) => {
 				if (index % 2 === 1) {
-					return <HoverWord key={index} word={segment} activeWord={activeHover} setActiveHover={setActiveHover} />;
+					return <HoverWord key={index} word={segment} activeWord={activeHover} setActiveHover={handleHoverChange} />;
 				}
 				return segment.split(" ").map((word, wordIndex) => (
 					<span key={`${index}-${wordIndex}`}>
@@ -86,7 +114,7 @@ const ServicesOverview = (props) => {
 		"From ||in|f|luencer|| marketing to razor-sharp ||socia|l|| & thumb-stopping ||cre|a|tive||, we get whole generations excited about your brand";
 
 	return (
-		<div className="relative overflow-hidden py-16 md:py-[88px]">
+		<div ref={ref} className="relative overflow-hidden py-16 md:py-[88px]">
 			<motion.div className={`pointer-events-none absolute inset-0 transition-colors duration-300 ease-in-out  ${activeHoverLayouts[activeHover]?.color}`} />
 			<motion.div layout className="container relative z-[5]">
 				<motion.div layout className="relative z-[5] mx-auto  w-full max-w-[1139px]  text-center">
@@ -100,15 +128,21 @@ const ServicesOverview = (props) => {
 					</motion.h2>
 					<div className="mt-12 flex justify-center md:mt-[72px]">
 						<button
+							onMouseEnter={() => setButtonHovered(true)}
+							onMouseLeave={() => setButtonHovered(false)}
 							type="button"
 							className={clsx(
-								`t-18 inline-block select-none appearance-none bg-black px-[17.5px] pb-[19px] pt-[21px] font-black uppercase !leading-[0.95] !tracking-[-0.0225rem]  transition-colors duration-300`,
+								`t-18 inline-block min-w-[11.25em] select-none appearance-none bg-black px-[17.5px] pb-[19px] pt-[21px] font-black uppercase !leading-[0.95] !tracking-[-0.0225rem]  transition-colors duration-300`,
 								activeHover === "" && "hover bg-black text-white ",
 								activeHoverLayouts[activeHover]?.button?.bgColor,
 								activeHoverLayouts[activeHover]?.button?.textColor
 							)}
 						>
-							Explore Services
+							<FontSwitcher
+								text={activeHoverLayouts[activeHover]?.button?.text || `Expl<pst-pil>o</>re Se<pst-pil>r</>vices`}
+								hover
+								isHovered={buttonHovered}
+							/>
 						</button>
 					</div>
 				</motion.div>
