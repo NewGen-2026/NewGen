@@ -1,17 +1,23 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import FeedPreview from "./FeedPreview";
 import IconsRenderer from "../elements/icons/IconsRenderer";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 import { HoverButton, TextLink } from "../elements/buttons/Button";
 import WpImage from "../elements/WpImage";
 
-const FeedList = ({ posts: initialPosts }) => {
+const FeedList = ({ posts: initialPosts, featured_tags }) => {
+	const router = useRouter();
+
 	const [visiblePostsCount, setVisiblePostsCount] = useState(10);
+	const [selectedCategory, setSelectedCategory] = useState("home") as any;
+	const [selectedTag, setSelectedTag] = useState("all") as any;
 	const [activeArticle, setActiveArticle] = useState(`post-0`);
 	const [navState, setNavState] = useState("nextPrev");
 	const [searchText, setSearchText] = useState("");
@@ -20,6 +26,7 @@ const FeedList = ({ posts: initialPosts }) => {
 	const [email, setEmail] = useState("");
 	const [isEmailValid, setEmailValid] = useState(true);
 	const [isSubscribed, setSubscribed] = useState(false);
+	const [availableTags, setAvailableTags] = useState(new Set());
 
 	const observer = useRef() as any;
 
@@ -89,6 +96,72 @@ const FeedList = ({ posts: initialPosts }) => {
 		}
 	};
 
+	const handleCategoryClick = (categorySlug) => {
+		setSelectedCategory(categorySlug);
+		setSelectedTag("all");
+		router.push(
+			{
+				pathname: router.pathname,
+				query: { ...router.query, category: categorySlug, tag: "all" },
+			},
+			undefined,
+			{ shallow: true }
+		);
+	};
+
+	const handleTagClick = (tagSlug) => {
+		setSelectedTag(tagSlug);
+		router.push(
+			{
+				pathname: router.pathname,
+				query: { ...router.query, tag: tagSlug },
+			},
+			undefined,
+			{ shallow: true }
+		);
+	};
+
+	const categoryCounts = initialPosts.reduce((acc, post) => {
+		post.categories.forEach((category) => {
+			acc[category.slug] = (acc[category.slug] || 0) + 1;
+		});
+		return acc;
+	}, {});
+
+	const filteredPosts = useMemo(() => {
+		return initialPosts.filter((post) => {
+			const categoryMatch = selectedCategory === "home" || post.categories.some((category) => category.slug === selectedCategory);
+			const tagMatch = selectedTag === "all" || post.post_tag.some((tag) => tag.slug === selectedTag);
+			return categoryMatch && tagMatch;
+		});
+	}, [initialPosts, selectedCategory, selectedTag]);
+
+	const getTagsForSelectedCategory = useCallback(
+		(categorySlug) => {
+			const tagsSet = new Set();
+			initialPosts.forEach((post) => {
+				if (categorySlug === "home" || post.categories.some((category) => category.slug === categorySlug)) {
+					post.post_tag.forEach((tag) => {
+						tagsSet.add(tag.slug);
+					});
+				}
+			});
+			return tagsSet;
+		},
+		[initialPosts]
+	);
+
+	useEffect(() => {
+		const tags = getTagsForSelectedCategory(selectedCategory);
+		setAvailableTags(tags);
+	}, [getTagsForSelectedCategory, selectedCategory]);
+
+	useEffect(() => {
+		const { category, tag } = router.query;
+		setSelectedCategory(category || "home");
+		setSelectedTag(tag || "all");
+	}, [router.query]);
+
 	return (
 		<>
 			<motion.div
@@ -101,14 +174,30 @@ const FeedList = ({ posts: initialPosts }) => {
 			>
 				<div className="hidden max-w-[203px] flex-1 sm:block">
 					<div className="space-y-4">
-						<CategoryLink icon="home" title="F<pst-hal>o</>r you" />
-						<CategoryLink icon="article" title="112 articl<pst-grid>e</>s" />
-						<CategoryLink icon="podcast" title="28 podc<pst-nip>a</>sts" />
+						<CategoryLink active={selectedCategory === "home"} onClick={() => handleCategoryClick("home")} icon="home" title="F<pst-hal>o</>r you" />
+						{Object.entries(categoryCounts).map(([slug, count]) => (
+							<CategoryLink
+								onClick={() => handleCategoryClick(slug)}
+								active={selectedCategory === slug}
+								key={slug}
+								icon={slug}
+								title={`${count} ${slug === "article" ? "articl<pst-grid>e</>" : slug === "podcast" ? "podc<pst-nip>a</>st" : slug}s`}
+							/>
+						))}
 					</div>
+					<ul className="t-16 mt-16 space-y-6 font-medium">
+						<FeaturedTag tag={{ slug: "all", name: "all" }} onClick={() => handleTagClick("all")} active={selectedTag === "all"} />
+						{featured_tags.map(
+							(tag) =>
+								availableTags.has(tag.slug) && (
+									<FeaturedTag key={tag?.term_id} tag={tag} onClick={() => handleTagClick(tag?.slug)} active={selectedTag === tag?.slug} />
+								)
+						)}
+					</ul>
 				</div>
 				<div className="max-w-[502px] flex-1 space-y-12 md:space-y-24">
-					{initialPosts.slice(0, visiblePostsCount).map((post, i) => (
-						<div key={`post-${i}`} id={`post-${i}`} ref={i + 1 === visiblePostsCount ? lastPostElementRef : null} className="relative scroll-mt-20">
+					{filteredPosts.slice(0, visiblePostsCount).map((post, i) => (
+						<div key={`post-${post?.ID}`} id={`post-${i}`} ref={i + 1 === visiblePostsCount ? lastPostElementRef : null} className="relative scroll-mt-20">
 							<PreviewWrapper setActiveArticle={setActiveArticle} id={`post-${i}`}>
 								<FeedPreview i={i} {...post} />
 							</PreviewWrapper>
@@ -253,6 +342,31 @@ const FeedList = ({ posts: initialPosts }) => {
 };
 export default FeedList;
 
+const FeaturedTag = ({ tag, onClick, active }) => {
+	return (
+		<li onClick={onClick} className={clsx("gap group flex cursor-pointer items-center ")}>
+			<div className="flex items-center justify-center md:w-[30px]">
+				{active && (
+					<motion.div
+						layoutId="tagBlock"
+						transition={{
+							layout: {
+								type: "spring",
+								stiffness: 300,
+								damping: 28,
+							},
+						}}
+						className="h-2 w-2 bg-cobalt"
+					/>
+				)}
+			</div>
+			<div className={clsx(active ? "opacity-100" : "opacity-50", " translate-y-[1px] transition-opacity duration-200 group-hover:opacity-100")}>
+				#{tag?.name}
+			</div>
+		</li>
+	);
+};
+
 const navAnimationVariants = {
 	initial: {
 		opacity: 0,
@@ -345,20 +459,21 @@ const Arrow = () => {
 	);
 };
 
-const CategoryLink = ({ icon = "home", title = "F<pst-hal>o</>r you" }) => {
+const CategoryLink = ({ icon = "home", title = "F<pst-hal>o</>r you", onClick, active }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<div
+			onClick={onClick}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			className="flex items-center gap-2 transition-colors duration-200 hover:text-cobalt"
+			className={`flex cursor-pointer items-center gap-2 transition-colors duration-200 hover:text-cobalt ${active && "!text-cobalt"}`}
 		>
 			<div className="w-6 md:h-[30px] md:w-[30px]">
 				<IconsRenderer icon={icon} />
 			</div>
 			<div className="t-16 mt-1 font-black uppercase">
-				<FontSwitcher hover isHovered={isHovered} text={title} />
+				<FontSwitcher hover isHovered={isHovered || active} text={title} />
 			</div>
 		</div>
 	);

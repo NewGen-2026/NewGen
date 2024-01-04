@@ -13,9 +13,10 @@ type FeedPreviewProps = {
 	post_title?: string;
 	variant?: "default" | "slide";
 	acf?: any;
+	post_tag?: any[];
 };
 
-const FeedPreview = ({ post, i, featured_image, categories, permalink, post_title, variant = "default", acf }: FeedPreviewProps) => {
+const FeedPreview = ({ post, i, featured_image, post_tag, permalink, post_title, variant = "default", acf }: FeedPreviewProps) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
 
@@ -41,11 +42,8 @@ const FeedPreview = ({ post, i, featured_image, categories, permalink, post_titl
 						</h3>
 					</div>
 
-					<div className="mt-2 hidden gap-2 font-medium opacity-50 md:flex md:gap-[14px]">
-						<span>#article</span>
-						<span>#work</span>
-						<span>#revolut</span>
-						<span>#sidemen</span>
+					<div className="mt-2 hidden flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:flex md:gap-[14px] md:gap-y-1 ">
+						{post_tag?.map((tag, j) => <span key={`category${j}`}>#{tag?.name}</span>)}
 					</div>
 				</Link>
 			</div>
