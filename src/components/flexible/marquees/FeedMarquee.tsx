@@ -8,7 +8,7 @@ import FeedPreview from "~/components/feed/FeedPreview";
 const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
 const FeedMarquee = (props) => {
-	const { posts } = props;
+	const { posts, hide_button = false } = props;
 
 	const ref = useRef(null);
 
@@ -23,22 +23,23 @@ const FeedMarquee = (props) => {
 					{posts?.map((post, i) => <FeedPreview variant="slide" key={`post-${i}`} {...post?.post} i={i} />)}
 				</Marquee>
 			</div>
-
-			<div className="mt-12 flex justify-center md:mt-24">
-				<Link href="/blog-and-podcasts">
-					<HoverButton
-						button={{
-							size: "medium",
-							background_color: "black",
-							text_color: "white",
-							hover_background_color: "cobalt",
-							text_hover_color: "electric",
-						}}
-					>
-						{`Vi<pst-grid>e</>w all`}
-					</HoverButton>
-				</Link>
-			</div>
+			{!hide_button && (
+				<div className="mt-12 flex justify-center md:mt-24">
+					<Link href="/blog-and-podcasts">
+						<HoverButton
+							button={{
+								size: "medium",
+								background_color: "black",
+								text_color: "white",
+								hover_background_color: "cobalt",
+								text_hover_color: "electric",
+							}}
+						>
+							{`Vi<pst-grid>e</>w all`}
+						</HoverButton>
+					</Link>
+				</div>
+			)}
 		</div>
 	);
 };
