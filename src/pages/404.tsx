@@ -5,7 +5,7 @@ import cms from "~/utils/cms";
 export default function FourOhFour(data) {
 	return (
 		<Layout data={data}>
-			<Page {...data} />;
+			<Page {...data} />
 		</Layout>
 	);
 }

@@ -55,3 +55,35 @@
 		}
 	}
 }
+
+@media (max-width: 640px) {
+  .scroll-container::before,
+  .scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, #fff, transparent);
+  }
+
+  .scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, #fff, transparent);
+  }
+}
+
+.hide-scrollbars {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbars::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

@@ -80,7 +80,7 @@ const LeftCol = ({ line_left, line_right, left_image, link, isMobile }) => {
 					}}
 					animate={{
 						opacity: imageLoaded ? 1 : 0,
-						y: imageLoaded ? 0 : 50,
+						y: imageLoaded ? 5 : 50,
 					}}
 					transition={{
 						opacity: {
@@ -88,6 +88,9 @@ const LeftCol = ({ line_left, line_right, left_image, link, isMobile }) => {
 							delay: 0.6,
 						},
 						delay: 0.6,
+						type: "spring",
+						damping: 22,
+						stiffness: 200,
 					}}
 					className="w-full"
 				>
@@ -169,6 +172,9 @@ const RightCol = ({ top_line_left, top_line_right, bottom_line, image, link, isM
 							delay: 1.1,
 						},
 						delay: 1.1,
+						type: "spring",
+						damping: 22,
+						stiffness: 200,
 					}}
 					className="relative w-full"
 				>

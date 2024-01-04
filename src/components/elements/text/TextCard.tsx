@@ -89,7 +89,7 @@ function TextCard({
 		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "text-left",
 		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "text-center mx-auto",
 		breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "text-right",
-		!breakpointCrossed && text_alignment === "left" && "text-left !mx-0",
+		!breakpointCrossed && text_alignment === "left" && "text-left",
 		!breakpointCrossed && text_alignment === "center" && "text-center",
 		!breakpointCrossed && text_alignment === "right" && "text-right mx-0"
 	);

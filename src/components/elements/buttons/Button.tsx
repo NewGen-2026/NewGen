@@ -26,6 +26,7 @@ export type ButtonProps = {
 	children?: React.ReactNode;
 	type?: "button" | "submit" | "reset";
 	buttonClass?: string;
+	externalFontTrigger?: boolean;
 };
 
 export function Button({ link, button, size, className = "", children, ...other }: ButtonProps) {
@@ -54,13 +55,23 @@ export function Button({ link, button, size, className = "", children, ...other 
 	);
 }
 
-export const HoverButton = ({ link, button, size, className = "", buttonClass = "", children, type = "button", ...other }: ButtonProps) => {
+export const HoverButton = ({
+	link,
+	button,
+	size,
+	className = "",
+	buttonClass = "",
+	children,
+	type = "button",
+	externalFontTrigger,
+	...other
+}: ButtonProps) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
 		<button className={className} type={type} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
 			<Button button={button} className={buttonClass}>
-				<FontSwitcher hover isHovered={isHovered} text={link?.title || button?.link?.title || children} />
+				<FontSwitcher hover isHovered={isHovered || externalFontTrigger} text={link?.title || button?.link?.title || children} />
 			</Button>
 		</button>
 	);
