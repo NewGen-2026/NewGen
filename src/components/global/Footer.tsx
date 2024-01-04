@@ -38,8 +38,6 @@ export default function Footer(props) {
 
 	const isLight = themeStyles[footer_theme]?.isLight;
 
-	console.log(addresses);
-
 	return (
 		<footer className={`${getBgColorClasses(footer_theme)} pb-8 pt-8 md:pb-0 md:pt-20`}>
 			<div className="container">

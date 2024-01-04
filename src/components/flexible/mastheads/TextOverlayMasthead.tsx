@@ -16,7 +16,7 @@ const SplitTextFontSwitcher = ({ text, delay = 0, stagger = 0.1, reverse = false
 			<motion.span
 				key={word + index}
 				initial={{
-					y: "0.5em",
+					y: "0.2em",
 					opacity: 0,
 				}}
 				animate={{
@@ -98,7 +98,7 @@ const AssetAtBottomVariant = (props) => {
 								</motion.span>
 							</div>
 							<span className="relative z-10 block">
-								<SplitTextFontSwitcher delay={0.2} stagger={0.2} text={middle_line} reverse />
+								<SplitTextFontSwitcher delay={variant === "talent" ? 0.4 : 0.2} stagger={0.2} text={middle_line} reverse />
 							</span>
 							<span className="relative z-10 block">
 								<SplitTextFontSwitcher delay={0.6} fontSwitchStartDelay={700} text={bottom_line} />
@@ -114,7 +114,7 @@ const AssetAtBottomVariant = (props) => {
 					}}
 					animate={{
 						opacity: imageLoaded ? 1 : 0,
-						y: imageLoaded ? 0 : 50,
+						y: imageLoaded ? 5 : 50,
 					}}
 					transition={{
 						opacity: {
@@ -122,6 +122,9 @@ const AssetAtBottomVariant = (props) => {
 							delay: 1.3,
 						},
 						delay: 1.3,
+						type: "spring",
+						damping: 20,
+						stiffness: 200,
 					}}
 					className="relative z-[5] flex w-full justify-center"
 				>
@@ -276,6 +279,9 @@ const AssetInCenterVariant = (props) => {
 						delay: 0.6,
 					},
 					delay: 0.6,
+					type: "spring",
+					damping: 22,
+					stiffness: 200,
 				}}
 				className="inset-0 z-[5] mt-7 flex w-full items-center justify-center md:absolute md:mt-0"
 			>
