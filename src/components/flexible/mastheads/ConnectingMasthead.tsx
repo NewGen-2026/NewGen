@@ -20,6 +20,7 @@ const ConnectingMasthead = (props) => {
 	const duplicatedItems = [...items, ...items, ...items];
 
 	const [isInitialLoad, setIsInitialLoad] = useState(true);
+	const [autoplayStarted, setAutoplayStarted] = useState(false);
 
 	useEffect(() => {
 		const initialLoadDelay = 500;
@@ -32,6 +33,7 @@ const ConnectingMasthead = (props) => {
 
 	const handleSlideChange = (s) => {
 		if (!isInitialLoad) {
+			setAutoplayStarted(true);
 			const totalUniqueItems = items.length;
 			const correctActiveIndex = (s.realIndex + totalUniqueItems) % totalUniqueItems;
 			setActiveSlide(correctActiveIndex);
@@ -45,18 +47,16 @@ const ConnectingMasthead = (props) => {
 
 	useEffect(() => {
 		if (!swiper) return;
-		if (swiper) {
-			if (isInitialLoad) {
-				swiper.autoplay.stop();
-			} else if (isInView && !isInitialLoad) {
-				swiper?.autoplay?.start();
-			} else {
-				swiper?.autoplay?.pause();
-			}
+		if (isInitialLoad) {
+			swiper.autoplay.stop();
+		} else if (isInView) {
+			swiper?.autoplay?.start();
+		} else {
+			swiper?.autoplay?.pause();
 		}
 	}, [isInView, swiper, isInitialLoad]);
 
-	const logoOpacity = !isInitialLoad ? "opacity-50" : "!opacity-100 ";
+	const logoOpacity = isInitialLoad || !autoplayStarted ? "!opacity-100" : "opacity-50";
 
 	const filterClassMap = {
 		candy: "filter-candy",
