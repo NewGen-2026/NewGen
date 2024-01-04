@@ -53,11 +53,23 @@ const FooterLogoAnimation = ({ isHover = false }) => {
 	});
 
 	const [hover, setHover] = useState(false);
+	const [isDebounced, setIsDebounced] = useState(false);
+
+	const handleMouseEnter = () => {
+		if (!isDebounced && isHover) {
+			setHover(true);
+			setIsDebounced(true);
+
+			setTimeout(() => {
+				setIsDebounced(false);
+			}, 500);
+		}
+	};
 
 	return (
 		<motion.div
 			ref={ref}
-			onMouseEnter={() => setHover(!!isHover)}
+			onMouseEnter={handleMouseEnter}
 			onMouseLeave={() => setHover(false)}
 			className="text-center font-heading text-[348px] font-black uppercase !leading-[0.5]"
 		>
