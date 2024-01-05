@@ -41,7 +41,7 @@ const HoverRevealIconGrid = (props) => {
 
 					<div
 						className={clsx(
-							`absolute bottom-0 right-[-2px] top-0 w-[20%] bg-gradient-to-l  will-change-transform group-hover:opacity-0`,
+							`absolute bottom-0 right-[-2px] top-0 hidden w-[20%] bg-gradient-to-l will-change-transform  group-hover:opacity-0 md:block`,
 							getColorGradients(theme_color)
 						)}
 					/>

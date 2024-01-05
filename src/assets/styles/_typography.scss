@@ -199,8 +199,15 @@ h6,
 .t-48
 {
 	@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
-	@apply leading-[0.95] tracking-[-0.06rem];
+	@apply leading-[0.95] tracking-[-0.02em];
 }
+
+.t-48-small
+{
+	@include clamp("font-size", rem(40px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
+	@apply leading-[0.95] tracking-[-0.02em];
+}
+
 
 .text-h2,
 .t-44
