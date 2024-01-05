@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useMeasure } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
@@ -26,9 +26,9 @@ const WorkGridItem = ({ work, variant }) => {
 		<div
 			onMouseEnter={() => setIsHovered(!isBreakpointCrossed)}
 			onMouseLeave={() => setIsHovered(false)}
-			className={`relative ${
-				isThreeCol ? "aspect-[437/540]" : "aspect-1"
-			}  w-full overflow-hidden bg-stone/5 will-change-transform ${getTextContrastColorClasses(isHovered ? work?.acf?.general?.theme_color : "black")}`}
+			className={`relative ${isThreeCol ? "aspect-[437/540]" : "aspect-1"}  w-full overflow-hidden  ${getBgColorClasses(
+				work?.acf?.general?.theme_color
+			)} ${getTextContrastColorClasses(isHovered ? work?.acf?.general?.theme_color : "black")}`}
 		>
 			<motion.div
 				initial={{
@@ -109,7 +109,7 @@ const WorkGridItem = ({ work, variant }) => {
 		</div>
 	);
 };
-export default WorkGridItem;
+export default memo(WorkGridItem);
 
 const InfoBlock = ({ heading = "Client", children = "Revolut" }) => {
 	return (

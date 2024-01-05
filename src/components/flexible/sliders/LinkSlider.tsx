@@ -55,7 +55,7 @@ const LinkSlider = (props) => {
 						</li>
 					))}
 				</ul>
-				<div className="pointer-events-none relative min-h-[80px] max-w-[580px] sm:min-h-[80px]">
+				<div className=" relative min-h-[80px] max-w-[580px] sm:min-h-[80px]">
 					{items?.map((item, i) => (
 						<div
 							key={`content${i}`}
@@ -64,7 +64,9 @@ const LinkSlider = (props) => {
 							}`}
 						>
 							<span className="block opacity-75">{item?.content}</span>
-							<TextLink className="mt-4 !text-black md:mt-8">Learn more</TextLink>
+							<TextLink className="z-10 mt-4 pb-1 !text-black md:mt-8" underlineColour="black">
+								Learn more
+							</TextLink>
 						</div>
 					))}
 				</div>

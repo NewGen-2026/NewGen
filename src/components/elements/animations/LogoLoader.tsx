@@ -117,7 +117,7 @@ const LetterSwapper = ({ paths, videoLoaded, delay = 0 }) => {
 			setActive((prevIndex) => (prevIndex === paths.length - 1 ? 0 : prevIndex + 1));
 		};
 
-		intervalRef.current = setInterval(updateActiveSlide, 500);
+		intervalRef.current = setInterval(updateActiveSlide, 200);
 
 		return () => {
 			clearInterval(intervalRef.current);
@@ -143,14 +143,14 @@ const LetterSwapper = ({ paths, videoLoaded, delay = 0 }) => {
 							initial={{ opacity: 1 }}
 							animate={{ opacity: 1 }}
 							exit={{
-								opacity: 0,
+								opacity: 1,
 							}}
 							transition={{
 								type: "spring",
 								stiffness: 250,
 								damping: 24,
 								delay,
-								opacity: { duration: 0.1, delay: delay + 0.1 },
+								opacity: { duration: 0, delay: delay + 0.1 },
 							}}
 						/>
 					)
