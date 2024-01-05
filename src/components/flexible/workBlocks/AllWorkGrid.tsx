@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { HoverButton, TextLink } from "~/components/elements/buttons/Button";
 import WorkGridItem from "./WorkGridItem";
 
-const LOAD_MORE_AMOUNT = 2;
+const LOAD_MORE_AMOUNT = 9;
 
 const AllWorkGrid = (props) => {
 	const { static_posts } = props;

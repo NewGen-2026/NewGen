@@ -12,6 +12,7 @@ import TwoColSubmenu from "./menus/TwoColSubmenu";
 import FooterLogoAnimation from "../elements/animations/FooterLogoAnimation";
 import MobileMenu from "./menus/MobileMenu";
 import MobileNavButton from "../elements/buttons/MobileNavButton";
+import ScrollProgress from "./ScrollProgress";
 
 const getSubMenuContent = (navItem) => {
 	switch (navItem?.submenu_layout) {
@@ -25,7 +26,7 @@ const getSubMenuContent = (navItem) => {
 };
 
 export default function Header(props) {
-	const { menu, pageOptions } = props;
+	const { menu, pageOptions, pagePostType } = props;
 	const [isHovered, setIsHovered] = useState(false);
 	const [scrolledBg, setScrolledBg] = useState(false);
 	const [isMenuOpen, setMenuOpen] = useState(false);
@@ -123,6 +124,7 @@ export default function Header(props) {
 						)}
 
 						<MobileNavButton mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} scrolledBg={scrolledBg} />
+						{(pageOptions?.add_scroll_progress || pagePostType === "post") && <ScrollProgress color={pageOptions?.scroll_progress?.color || "cobalt"} />}
 					</div>
 					{!breakpointCrossed && (
 						<>
