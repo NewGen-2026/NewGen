@@ -1,54 +1,72 @@
 /* eslint-disable consistent-return */
 import { useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 
-const FontSwitcher = ({ text, switchInterval = 1000, loop = true, startDelay = 0, hover = false, isHovered = false }) => {
-	const [segmentIndices, setSegmentIndices] = useState([]);
-	const [segments, setSegments] = useState([]);
+interface FontSwitcherProps {
+	text: string;
+	switchInterval?: number;
+	loop?: boolean;
+	startDelay?: number;
+	hover?: boolean;
+	isHovered?: boolean;
+}
 
-	const ref = useRef(null);
-	const isInView = useInView(ref, { once: true });
-
-	const mapFontName = (shortName) => {
-		const fontMap = {
-			pst: "font-heading",
-			pil: "font-pilowlava !leading-[0.5] !font-normal",
-			grid: "font-gridular !leading-[0.5] !font-normal",
-			rec: "font-recoleta !leading-[0.5] !font-semibold",
-			nip: "font-nippo !leading-[0.5] !font-bold",
-			bec: "font-become !leading-[0.5] !font-medium",
-			hal: "font-haltwins !leading-[0.5] !font-normal",
-		};
-		return fontMap[shortName] || shortName;
+const mapFontName = (shortName) => {
+	const fontMap = {
+		pst: "font-heading",
+		pil: "font-pilowlava !leading-[0.5] !font-normal",
+		grid: "font-gridular !leading-[0.5] !font-normal",
+		rec: "font-recoleta !leading-[0.5] !font-semibold",
+		nip: "font-nippo !leading-[0.5] !font-bold",
+		bec: "font-become !leading-[0.5] !font-medium",
+		hal: "font-haltwins !leading-[0.5] !font-normal",
 	};
+	return fontMap[shortName] || shortName;
+};
 
-	useEffect(() => {
+interface Segment {
+	content: any;
+	fonts?: string[];
+	index?: number;
+	isBreak?: boolean;
+}
+
+const FontSwitcher = memo(({ text, switchInterval = 1000, loop = true, startDelay = 0, hover = false, isHovered = false }: FontSwitcherProps) => {
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: false });
+
+	const { parsedSegments, fontSwitchCount } = useMemo(() => {
+		let count = 0;
 		const lines = text.split("\\n");
-		let fontSwitchCount = 0;
-
-		const parsedSegments = lines.flatMap((line, lineIndex) => {
-			return line
+		const segs: Segment[] = lines.flatMap((line, lineIndex) => {
+			const lineSegments: Segment[] = line
 				.split(/(<[^>]+>.\s*<\/>)/g)
 				.filter(Boolean)
-				.map((segment) => {
+				.map((segment): Segment => {
 					const fontSwitchMatch = segment.match(/<([^>]+)>(.)\s*<\/>/);
 					if (fontSwitchMatch) {
-						fontSwitchCount += 1;
 						const fontNames = fontSwitchMatch[1].split("-").map(mapFontName);
 						const content = fontSwitchMatch[2];
-						return { content, fonts: fontNames, index: fontSwitchCount - 1 };
+						count += 1;
+						return { content, fonts: fontNames, index: count - 1 };
 					}
 					return { content: segment };
-				})
-				.concat(lineIndex < lines.length - 1 ? { content: <br />, isBreak: true } : []);
+				});
+
+			if (lineIndex < lines.length - 1) {
+				lineSegments.push({ content: <br />, isBreak: true });
+			}
+
+			return lineSegments;
 		});
 
-		setSegments(parsedSegments);
-		setSegmentIndices(new Array(fontSwitchCount).fill(0));
+		return { parsedSegments: segs, fontSwitchCount: count };
 	}, [text]);
 
+	const [segmentIndices, setSegmentIndices] = useState(new Array(fontSwitchCount).fill(0));
+
 	useEffect(() => {
-		if (!hover && isInView && segments.length > 0) {
+		if (!hover && isInView && parsedSegments.length > 0) {
 			const intervals = [];
 
 			const startInterval = (segment, i) => {
@@ -75,7 +93,7 @@ const FontSwitcher = ({ text, switchInterval = 1000, loop = true, startDelay = 0
 				}
 			};
 
-			segments.forEach((segment, i) => {
+			parsedSegments.forEach((segment, i) => {
 				setTimeout(() => startInterval(segment, i), startDelay);
 			});
 
@@ -83,11 +101,11 @@ const FontSwitcher = ({ text, switchInterval = 1000, loop = true, startDelay = 0
 				intervals.forEach((interval) => interval && clearInterval(interval));
 			};
 		}
-	}, [isInView, segments, switchInterval, loop, hover, startDelay]);
+	}, [isInView, parsedSegments, switchInterval, loop, hover, startDelay]);
 
 	return (
 		<span ref={ref}>
-			{segments.map((segment, index) => {
+			{parsedSegments.map((segment, index) => {
 				if (segment.isBreak) {
 					return <span key={index}>{segment.content}</span>;
 				}
@@ -106,6 +124,6 @@ const FontSwitcher = ({ text, switchInterval = 1000, loop = true, startDelay = 0
 			})}
 		</span>
 	);
-};
+});
 
 export default FontSwitcher;
