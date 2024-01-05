@@ -1,8 +1,8 @@
 import clsx from "clsx";
-import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses } from "~/utils/getColors";
-import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useMotionTemplate, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
+import SplitTextFontSwitcher from "~/components/elements/animations/helpers/SplitTextFontSwitcher";
 
 const FillScreenTextBlock = (props) => {
 	const { text, theme_color, max_width } = props;
@@ -11,6 +11,10 @@ const FillScreenTextBlock = (props) => {
 	const { scrollYProgress } = useScroll({
 		target: ref,
 		offset: ["start end", "end start"],
+	});
+	const isInView = useInView(ref, {
+		once: true,
+		amount: 0.5,
 	});
 
 	const clipBaseTransform = useTransform(scrollYProgress, [0, 0.5], [2.3, 0]);
@@ -32,7 +36,7 @@ const FillScreenTextBlock = (props) => {
 				}}
 				className="t-96 mx-auto w-full text-center font-black uppercase"
 			>
-				<FontSwitcher text={text} />
+				<SplitTextFontSwitcher text={text} startAnimation={isInView} randomStagger direction="none" delay={0.2} />
 			</h2>
 		</motion.div>
 	);
