@@ -3,7 +3,7 @@ import { useInView } from "framer-motion";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 
 interface FontSwitcherProps {
-	text: string;
+	text: string | any;
 	switchInterval?: number;
 	loop?: boolean;
 	startDelay?: number;
