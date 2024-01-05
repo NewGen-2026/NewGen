@@ -8,7 +8,7 @@ const TextOnTopVariant = (props) => {
 		<div className="pt-6 md:pt-0">
 			<h1 className="t-144 text-center font-black uppercase !leading-[0.8]">
 				<span className="relative z-10 block translate-x-[-12%]">
-					<SplitTextFontSwitcher delay={0.1} reverse stagger={0.5} fontSwitchStartDelay={700} text={top_line} />
+					<SplitTextFontSwitcher delay={0.1} reverse stagger={0.6} fontSwitchStartDelay={700} text={top_line} />
 				</span>
 
 				<span className="relative z-10 block translate-x-[14%]">

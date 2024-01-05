@@ -55,7 +55,7 @@ const LinkSlider = (props) => {
 						</li>
 					))}
 				</ul>
-				<div className="pointer-events-none relative min-h-[120px] max-w-[580px] sm:min-h-[80px]">
+				<div className="pointer-events-none relative min-h-[80px] max-w-[580px] sm:min-h-[80px]">
 					{items?.map((item, i) => (
 						<div
 							key={`content${i}`}
