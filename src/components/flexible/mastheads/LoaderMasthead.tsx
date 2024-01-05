@@ -124,13 +124,13 @@ const TextContainer = ({ children, custom = 0, startAnimation }) => {
 		<div className="inline-flex ">
 			<motion.span
 				initial={{
-					y: "50%",
+					y: "0.2em",
 					opacity: 0,
 				}}
 				animate={{
-					y: startAnimation ? 0 : "50%",
+					y: startAnimation ? 0 : "0.2em",
 					opacity: startAnimation ? 1 : 0,
-					transition: { type: "spring", stiffness: 1200, damping: 15, mass: 0.2, delay: 4.5 + custom * 0.15 },
+					transition: { type: "spring", stiffness: 1200, damping: 15, mass: 0.2, delay: 4.5 + custom * 0.1 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>
