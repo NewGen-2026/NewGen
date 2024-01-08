@@ -5,11 +5,13 @@ import VideoPlayer from "./VideoPlayer";
 import WpImage from "./WpImage";
 
 const VimeoPlayer = dynamic(() => import("./VimeoPlayer"), { ssr: false });
+const TikTokEmbed = dynamic(() => import("./TikTokEmbed"), { ssr: false });
 
 interface AssetProps {
-	type?: "image" | "video" | "lottie" | "multiple" | "customAnimation";
+	type?: "image" | "video" | "lottie" | "multiple" | "customAnimation" | "tiktok";
 	image?: any;
 	video?: any;
+	tiktok?: any;
 	custom_animation?: any;
 	className?: string;
 	classes?: string;
@@ -36,6 +38,7 @@ function Asset({
 	type = "image",
 	image,
 	video,
+	tiktok,
 	custom_animation,
 	className,
 	classes,
@@ -77,6 +80,10 @@ function Asset({
 		) : (
 			<VideoPlayer className={className} {...video} playOnHover={playOnHover} parentInView={parentInView} onVideoLoad={onVideoLoad} />
 		);
+	}
+
+	if (type === "tiktok") {
+		return <TikTokEmbed {...tiktok} />;
 	}
 
 	if (type === "customAnimation") {
