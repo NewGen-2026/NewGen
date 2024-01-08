@@ -121,7 +121,7 @@ const WorkSliderDesktop = (props) => {
 									>
 										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
 										<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">
-											<FontSwitcher text={slide?.work?.acf?.work_masthead?.heading} />
+											<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
 										</h2>
 										<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
 									</div>

@@ -3,7 +3,7 @@ import { useMeasure } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
-import { getBgColorClasses, getIsLightColor, getTextContrastColorClasses } from "~/utils/getColors";
+import { getBgColorClasses, getIsLightColor, getTextContrastColorClasses, getTextContrastColorClassesImportant } from "~/utils/getColors";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ const WorkGridItem = ({ work, variant }) => {
 				}}
 				className={`pointer-events-none absolute inset-0 z-10 will-change-transform ${getBgColorClasses(work?.acf?.general?.theme_color)}`}
 			/>
-			<Link ref={containerRef} href={work?.permalink} className="flex h-full  flex-col justify-between p-4 md:p-6">
+			<Link ref={containerRef} href={work?.permalink} className="flex h-full flex-col justify-between p-4 md:p-6">
 				<div className="absolute inset-0 h-full w-full">
 					<WpImage image={work?.featured_image} className="h-full w-full object-cover" />
 				</div>
@@ -71,7 +71,9 @@ const WorkGridItem = ({ work, variant }) => {
 							stiffness: 220,
 							damping: 24,
 						}}
-						className="t-44 relative z-20 line-clamp-3 w-full max-w-[502.5px] font-black uppercase will-change-transform xl:line-clamp-none"
+						className={`t-44 relative z-20 line-clamp-3 w-full max-w-[502.5px] font-black uppercase will-change-transform xl:line-clamp-none ${getTextContrastColorClassesImportant(
+							isHovered ? work?.acf?.general?.theme_color : "black"
+						)}`}
 					>
 						<FontSwitcher hover isHovered={isHovered} text={work?.acf?.work_masthead?.heading} />
 					</motion.h3>
@@ -88,16 +90,16 @@ const WorkGridItem = ({ work, variant }) => {
 						ref={dataRef}
 						className={`relative z-20 flex w-full flex-wrap gap-4 ${isThreeCol ? "flex-col" : "lg:flex-nowrap"}`}
 					>
-						<InfoBlock />
+						<InfoBlock theme_color={work?.acf?.general?.theme_color} />
 						{work?.services?.length > 0 && (
-							<InfoBlock heading="Services">
+							<InfoBlock heading="Services" theme_color={work?.acf?.general?.theme_color}>
 								{work?.services?.map((service, i) => (
 									<span key={`service-${i}`} className="t-20 block font-black uppercase" dangerouslySetInnerHTML={{ __html: service?.name }} />
 								))}
 							</InfoBlock>
 						)}
 						{work?.sector?.length > 0 && (
-							<InfoBlock heading="Sector">
+							<InfoBlock heading="Sector" theme_color={work?.acf?.general?.theme_color}>
 								{work?.sector?.map((sector, i) => (
 									<span key={`sector-${i}`} className="t-20 block font-black uppercase" dangerouslySetInnerHTML={{ __html: sector?.name }} />
 								))}
@@ -111,11 +113,11 @@ const WorkGridItem = ({ work, variant }) => {
 };
 export default memo(WorkGridItem);
 
-const InfoBlock = ({ heading = "Client", children = "Revolut" }) => {
+const InfoBlock = ({ heading = "Client", children = "Revolut", theme_color = "cobalt" }) => {
 	return (
 		<div className="flex-auto">
 			<div className="text-[15px] font-bold leading-[1.5] opacity-70">{heading}</div>
-			<div className="t-20 mt-2 font-black uppercase !leading-[1]">{children}</div>
+			<div className={`t-20 mt-2 font-black uppercase !leading-[1] ${getTextContrastColorClassesImportant(theme_color)}`}>{children}</div>
 		</div>
 	);
 };
