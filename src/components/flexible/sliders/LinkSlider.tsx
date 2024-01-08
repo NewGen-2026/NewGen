@@ -5,6 +5,7 @@ import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { TextLink } from "~/components/elements/buttons/Button";
 import useAutoSlider from "~/hooks/useAutoSlider";
+import Link from "next/link";
 
 const LinkSlider = (props) => {
 	const { items } = props;
@@ -60,13 +61,16 @@ const LinkSlider = (props) => {
 						<div
 							key={`content${i}`}
 							className={`t-22 absolute top-0 block font-medium  transition-opacity duration-200 sm:bottom-0 sm:top-[unset] ${
-								activeSlide === i ? "opacity-100" : "opacity-0"
-							}`}
+								activeSlide === i ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+							}
+							`}
 						>
 							<span className="block opacity-75">{item?.content}</span>
-							<TextLink className="z-10 mt-4 pb-1 !text-black md:mt-8" underlineColour="black">
-								Learn more
-							</TextLink>
+							<Link href={item?.link || "/"}>
+								<TextLink className="z-10 mt-4 pb-1 !text-black md:mt-8" underlineColour="black">
+									Learn more
+								</TextLink>
+							</Link>
 						</div>
 					))}
 				</div>

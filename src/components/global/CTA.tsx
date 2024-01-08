@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 
 const themeStyles = {
@@ -42,17 +43,18 @@ const CTA = ({ pageOptions }) => {
 	return (
 		<div className={`${themeStyles[footer_theme]?.backgroundColor || "bg-white"}`}>
 			<div className={`container pb-12 pt-8 md:pt-20 `}>
-				<div
+				<Link
+					href="/contact"
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 					className={`w-full  ${
 						isHovered ? themeStyles[footer_theme]?.hoveredClasses : themeStyles[footer_theme]?.unhoveredClasses
-					} t-144 px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
+					} t-144 block px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
 				>
 					<h2 className={`!bg-transparent ${isHovered ? themeStyles[footer_theme]?.hoveredClasses : ""}`}>
 						<FontSwitcher hover isHovered={isHovered} text={themeStyles[footer_theme]?.ctaText || "G<pst-grid>e</>t in to<pst-grid>u</>ch"} />
 					</h2>
-				</div>
+				</Link>
 			</div>
 		</div>
 	);

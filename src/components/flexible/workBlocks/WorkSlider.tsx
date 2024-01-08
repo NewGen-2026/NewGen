@@ -89,7 +89,7 @@ const WorkSliderDesktop = (props) => {
 			style={{
 				height: `${work_slides?.length * 100}vh`,
 			}}
-			className="relative mx-auto hidden max-w-[1920px] overflow-x-clip pt-8 md:block "
+			className="relative mx-auto hidden max-w-[1520px] overflow-x-clip pt-8 md:block 3xl2:max-w-[1920px] "
 		>
 			<div
 				style={{
