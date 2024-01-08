@@ -14,9 +14,11 @@ type FeedPreviewProps = {
 	variant?: "default" | "slide";
 	acf?: any;
 	post_tag?: any[];
+	post_date_gmt?: string;
+	author?: any;
 };
 
-const FeedPreview = ({ post, i, featured_image, post_tag, permalink, post_title, variant = "default", acf }: FeedPreviewProps) => {
+const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author, permalink, post_title, variant = "default", acf }: FeedPreviewProps) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
 
@@ -27,14 +29,19 @@ const FeedPreview = ({ post, i, featured_image, post_tag, permalink, post_title,
 	return (
 		<div className={clsx(`flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}>
 			<div className={clsx(`mb-4 flex flex-1 justify-between gap-2 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
-				<div className={clsx(`h-8 w-8 flex-none overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")} />
+				<div className={clsx(`h-8 w-8 flex-none transform-gpu overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")}>
+					<WpImage image={author?.acf?.profile_picture} className="h-full w-full object-cover" />
+				</div>
 				<Link
 					href={link || "/#"}
 					target={acf?.is_external_link ? "_blank" : "_self"}
 					className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}
 				>
 					<div>
-						<div className="text-[15px] font-bold">Sammy Hardesty</div>
+						<div className="flex items-center gap-4">
+							<div className="text-[15px] font-bold">{author?.name}</div>
+							<div className="text-[15px] font-medium opacity-50">{post_date_gmt}</div>
+						</div>
 						<h3
 							className={clsx(
 								` mt-1 line-clamp-3 whitespace-normal md:mt-2  `,

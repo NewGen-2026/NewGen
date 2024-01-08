@@ -21,7 +21,7 @@ const FlexiblePostContent = dynamic(() => import("../feed/FlexiblePostContent"),
 
 export default function Post(data) {
 	const {
-		page: { post_title, post_content, author, featured_image, related_posts },
+		page: { post_title, post_content, author, featured_image, related_posts, post_date_formatted },
 	} = data;
 
 	const ref = useRef(null);
@@ -49,7 +49,7 @@ export default function Post(data) {
 							<div className="mb-6 md:mb-12">
 								<div className="t-15 font-bold">Article</div>
 								<h1 className="t-44 mt-1 md:mt-3">{post_title}</h1>
-								<div className="t-16 mt-4 font-medium opacity-50 md:mt-8">24 August 2022</div>
+								<div className="t-16 mt-4 font-medium opacity-50 md:mt-8">{post_date_formatted}</div>
 							</div>
 						</div>
 						<div className="relative max-w-[40px] flex-1 " />
@@ -108,10 +108,12 @@ export default function Post(data) {
 											))}
 										</div>
 										<div className="mt-3 flex items-center gap-3 text-white md:mt-5">
-											<div className="h-10 w-10 flex-none overflow-hidden rounded-full bg-energy sm:h-16 sm:w-16" />
+											<div className="h-10 w-10 flex-none transform-gpu overflow-hidden rounded-full bg-energy sm:h-16 sm:w-16">
+												<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
+											</div>
 											<div className="mt-1">
 												<div className="t-18 font-medium">{author?.name}</div>
-												<div className="t-16 mt-[4px] font-medium text-stone">Personal Brand Executive</div>
+												<div className="t-16 mt-[4px] font-medium text-stone">{author?.acf?.job_title}</div>
 											</div>
 										</div>
 									</div>
