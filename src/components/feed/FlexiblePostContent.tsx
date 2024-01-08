@@ -10,7 +10,7 @@ const AssetBlock = (props) => {
 	const { asset, caption } = props;
 	return (
 		<div>
-			<Asset {...asset} />
+			<Asset {...asset} className="bg-stone/20" />
 			{caption && <div className="mt-6" dangerouslySetInnerHTML={{ __html: caption }} />}
 		</div>
 	);
