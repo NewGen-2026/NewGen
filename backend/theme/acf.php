@@ -3,24 +3,24 @@
 /**
  * Save ACF JSON
  */
-add_filter('acf/settings/save_json', function ($path) {
-	$custom_path = get_stylesheet_directory() . '/acf-json';
-	if ($path !== $custom_path) {
-		$path = $custom_path;
-	}
-	return $path;
-});
+// add_filter('acf/settings/save_json', function ($path) {
+// 	$custom_path = get_stylesheet_directory() . '/acf-json';
+// 	if ($path !== $custom_path) {
+// 		$path = $custom_path;
+// 	}
+// 	return $path;
+// });
 
 /**
  * Load ACF JSON
  */
-add_filter('acf/settings/load_json', function ($paths) {
-	$custom_path = get_stylesheet_directory() . '/acf-json';
-	if (!in_array($custom_path, $paths)) {
-		$paths[] = $custom_path;
-	}
-	return $paths;
-});
+// add_filter('acf/settings/load_json', function ($paths) {
+// 	$custom_path = get_stylesheet_directory() . '/acf-json';
+// 	if (!in_array($custom_path, $paths)) {
+// 		$paths[] = $custom_path;
+// 	}
+// 	return $paths;
+// });
 
 /**
  * Add options pages
