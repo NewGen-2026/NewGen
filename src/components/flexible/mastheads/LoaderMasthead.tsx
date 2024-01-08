@@ -10,23 +10,37 @@ const LoaderMasthead = (props) => {
 	const { asset } = props;
 
 	const assetRef = useRef(null);
+	const logoRef = useRef(null);
 	const containerRef = useRef(null);
 	const { scrollY } = useScroll();
 
-	const assetScaleBase = useTransform(scrollY, [0, 400], [0.95, 1]);
-	const assetScaleSpring = useSpring(assetScaleBase, { stiffness: 200, damping: 30, mass: 1 });
-
 	const [initialY, setInitialY] = useState(0);
+	const [initialYMobile, setInitialYMobile] = useState(0);
 	const [animationComplete, setAnimationComplete] = useState(false);
 	const { videoLoaded, setVideoLoaded } = useContext(VideoLoadedContext);
+
+	const [ref, { height }] = useMeasure() as any;
+	const { height: windowHeight, width: windowWidth } = useWindowSize();
+	const isInView = useInView(containerRef, { once: false, amount: 0.6 });
+
+	const assetScaleBase = useTransform(scrollY, [0, 400], [windowWidth < 768 ? 1 : 0.95, 1]);
+	const assetScaleSpring = useSpring(assetScaleBase, { stiffness: 200, damping: 30, mass: 1 });
 
 	const handleVideoLoad = () => {
 		setVideoLoaded(true);
 	};
 
-	const [ref, { height }] = useMeasure() as any;
-	const { height: windowHeight } = useWindowSize();
-	const isInView = useInView(containerRef, { once: false, amount: 0.6 });
+	useEffect(() => {
+		if (!assetRef.current || !logoRef.current) return;
+		if (height && typeof window !== "undefined") {
+			const logoTopRelativeToViewport = logoRef.current.getBoundingClientRect().top;
+			const logoHeight = logoRef.current.offsetHeight;
+			const assetHeight = assetRef.current.offsetHeight;
+
+			const calculatedY = logoTopRelativeToViewport + logoHeight / 2 - assetHeight / 2;
+			setInitialYMobile(calculatedY);
+		}
+	}, [height, assetRef, logoRef, windowHeight]);
 
 	useEffect(() => {
 		if (!assetRef.current) return;
@@ -37,12 +51,13 @@ const LoaderMasthead = (props) => {
 		}
 	}, [height, assetRef, windowHeight]);
 
-	const assetYEndValue = videoLoaded ? 0 : -initialY;
+	const assetInitialY = windowWidth < 768 ? initialYMobile : initialY;
+	const assetYEndValue = videoLoaded ? 0 : -assetInitialY;
 
 	return (
-		<div ref={containerRef} className="relative min-h-screen overflow-hidden bg-black pt-44 text-white">
-			<div className="container absolute inset-0 flex h-screen items-center justify-center">
-				<div className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
+		<div ref={containerRef} className="relative overflow-hidden bg-black pt-32 text-white md:min-h-screen md:pt-44">
+			<div className="container absolute inset-0 flex items-center justify-center md:h-screen">
+				<div ref={logoRef} className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
 					<LogoLoader videoLoaded={videoLoaded} />
 				</div>
 			</div>
@@ -74,7 +89,7 @@ const LoaderMasthead = (props) => {
 								}}
 								animate={{
 									clipPath: videoLoaded ? "inset(0% 0% 0% 0)" : "inset(0% 50% 0% 50%)",
-									y: [animationComplete ? assetYEndValue : -initialY, assetYEndValue],
+									y: [animationComplete ? assetYEndValue : -assetInitialY, assetYEndValue],
 								}}
 								transition={{
 									duration: 0.8,

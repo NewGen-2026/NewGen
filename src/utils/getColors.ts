@@ -142,11 +142,29 @@ export const getTextContrastColorClasses = (color: Color) => {
 		stone: "text-spark",
 		ketchup: "text-candy",
 		sand: "text-forest",
-		candy: "text-ketchup",
+		candy: "!text-ketchup",
 		boost: "!text-energy",
 		energy: "text-boost",
 		forest: "text-sand",
 		spark: "text-white",
+	};
+
+	return colors[color];
+};
+export const getTextContrastColorClassesImportant = (color: Color) => {
+	const colors = {
+		white: "!text-black",
+		black: "!text-white",
+		cobalt: "!text-electric",
+		electric: "!text-cobalt",
+		stone: "!text-spark",
+		ketchup: "!text-candy",
+		sand: "!text-forest",
+		candy: "!text-ketchup",
+		boost: "!text-energy",
+		energy: "!text-boost",
+		forest: "!text-sand",
+		spark: "!text-white",
 	};
 
 	return colors[color];
