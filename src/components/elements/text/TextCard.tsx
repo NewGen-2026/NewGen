@@ -41,6 +41,7 @@ export type TextCardProps = {
 	};
 	className?: string;
 	containerClass?: string;
+	loopHeading?: boolean;
 };
 
 function TextCard({
@@ -68,6 +69,7 @@ function TextCard({
 	} = {},
 	containerClass = "",
 	className = "",
+	loopHeading = false,
 }: TextCardProps) {
 	const breakpointCrossed = useBreakpointCrossed(breakpoint);
 
@@ -116,6 +118,7 @@ function TextCard({
 								margin_bottom: heading_margin_bottom,
 								heading_tag,
 							}}
+							loopHeading={loopHeading}
 						/>
 					)}
 					{content && (

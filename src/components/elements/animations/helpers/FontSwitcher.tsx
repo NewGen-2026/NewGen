@@ -31,7 +31,7 @@ interface Segment {
 	isBreak?: boolean;
 }
 
-const FontSwitcher = memo(({ text, switchInterval = 1000, loop = true, startDelay = 0, hover = false, isHovered = false }: FontSwitcherProps) => {
+const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDelay = 0, hover = false, isHovered = false }: FontSwitcherProps) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: false });
 

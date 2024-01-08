@@ -34,11 +34,11 @@ const socialLinks = [
 	{ platform: "TikTok", acfField: "tiktok", IconComponent: TikTok },
 ];
 
-const LOAD_MORE_AMOUNT = 2;
+const LOAD_MORE_AMOUNT = 6;
 
 const AllCreatorsList = (props) => {
 	const [creators, setCreators] = useState([]);
-	const [displayedCreatorsCount, setDisplayedCreatorsCount] = useState(2);
+	const [displayedCreatorsCount, setDisplayedCreatorsCount] = useState(6);
 
 	useEffect(() => {
 		const fetchCreators = async () => {

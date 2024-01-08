@@ -240,7 +240,7 @@ const LikeHearts = () => {
 				<Heart />
 			</motion.span>
 			<motion.span
-				key="heart-2"
+				key="heart-3"
 				initial={{
 					opacity: 0,
 					scale: 0,
@@ -266,7 +266,7 @@ const LikeHearts = () => {
 				<Heart />
 			</motion.span>
 			<motion.span
-				key="heart-3"
+				key="heart-4"
 				initial={{
 					opacity: 0,
 					scale: 0,

@@ -16,7 +16,7 @@ const TwoColTextAsset = (props) => {
 			}`}
 		>
 			<div className={` w-auto  md:max-w-[50%] ${options?.reverse ? "xl:mr-3" : ""}`}>
-				<TextCard {...content?.text_card} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
+				<TextCard {...content?.text_card} loopHeading={media?.assets?.length > 0} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
 			</div>
 			<div className="w-full max-w-[672px] md:flex-1">
 				<TransitionSlider

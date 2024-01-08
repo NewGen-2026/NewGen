@@ -19,6 +19,7 @@ export interface HeadingProps {
 	};
 	breakpointCrossed?: boolean;
 	text_alignment?: string;
+	loopHeading?: boolean;
 }
 
 function TextCardHeading({
@@ -27,6 +28,7 @@ function TextCardHeading({
 	options: { font_size, font_color, max_width, margin_bottom, heading_tag },
 	breakpointCrossed,
 	text_alignment,
+	loopHeading,
 }: HeadingProps) {
 	const HeadingTag = (heading_tag as keyof React.JSX.IntrinsicElements) || "h2";
 	const [maxWidthStyle, setMaxWidthStyle] = useState<MaxWidthStyleType>(maxWidthProps(max_width));
@@ -53,7 +55,7 @@ function TextCardHeading({
 				...maxWidthStyle?.style,
 			}}
 		>
-			<FontSwitcher text={heading} />
+			<FontSwitcher text={heading} loop={loopHeading} />
 		</HeadingTag>
 	);
 }
