@@ -374,6 +374,7 @@ function get_post_preview_data_for_post($post)
 								'id' => $customTaxonomyItem->term_id,
 								'name' => $customTaxonomyItem->name,
 								'slug' => $customTaxonomyItem->slug,
+								'acf' => get_fields($customTaxonomyItem) ?: [],
 							];
 						}, $customTaxonomy);
 					}
