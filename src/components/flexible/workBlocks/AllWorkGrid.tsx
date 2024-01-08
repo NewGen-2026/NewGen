@@ -54,7 +54,7 @@ const AllWorkGrid = (props) => {
 	const uniqueWorkTypes = new Map();
 	workPosts?.forEach((work) => {
 		work["work-type"]?.forEach((type) => {
-			uniqueWorkTypes.set(type.name, type.slug);
+			uniqueWorkTypes.set(type.name, { slug: type.slug, hoverName: type?.acf?.hover_style });
 		});
 	});
 
@@ -78,7 +78,7 @@ const AllWorkGrid = (props) => {
 		<div>
 			<div className="mb-8 flex flex-col items-center gap-y-5 md:mb-20 lg:flex-row lg:justify-between">
 				<ul className="t-15  flex gap-4 font-bold lg:gap-2">
-					{workTypeNames.map(([name, slug], i) => (
+					{workTypeNames.map(([name, { slug, hoverName }], i) => (
 						<li
 							key={`workType-${i}`}
 							className="block cursor-pointer"
@@ -98,7 +98,7 @@ const AllWorkGrid = (props) => {
 									size: "medium",
 								}}
 							>
-								{name}
+								{hoverName || name}
 							</HoverButton>
 						</li>
 					))}
