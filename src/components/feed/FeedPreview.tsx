@@ -22,12 +22,15 @@ const FeedPreview = ({ post, i, featured_image, post_tag, permalink, post_title,
 
 	const slideVariant = variant === "slide";
 
+	const link = acf?.is_external_link ? acf?.external_link : permalink;
+
 	return (
 		<div className={clsx(`flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}>
 			<div className={clsx(`mb-4 flex flex-1 justify-between gap-2 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
 				<div className={clsx(`h-8 w-8 flex-none overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")} />
 				<Link
-					href={permalink || "/#"}
+					href={link || "/#"}
+					target={acf?.is_external_link ? "_blank" : "_self"}
 					className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}
 				>
 					<div>
@@ -48,7 +51,7 @@ const FeedPreview = ({ post, i, featured_image, post_tag, permalink, post_title,
 				</Link>
 			</div>
 			<div className={clsx(`flex justify-between gap-2`)}>
-				<Link href={permalink || "/#"} className="block aspect-[438/615] w-full max-w-[438px]">
+				<Link href={link || "/#"} target={acf?.is_external_link ? "_blank" : "_self"} className="block aspect-[438/615] w-full max-w-[438px]">
 					<WpImage
 						className={clsx(` relative z-[5]  h-full w-full bg-stone/20 object-cover `, slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "")}
 						image={post?.image || featured_image}
