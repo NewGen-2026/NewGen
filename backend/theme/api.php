@@ -336,7 +336,7 @@ function get_post_preview_data_for_post($post)
 	foreach ($postTypeFields as $key => $field) {
 		if ($field === 'post_date_gmt') {
 			// Format dates
-			$mappedPost[$field] = date_format(date_create($post->post_date_gmt), 'jS M Y');
+			$mappedPost[$field] = date_format(date_create($post->post_date_gmt), 'j M Y');
 		} elseif ($key === 'acf') {
 			// Get specified ACF fields
 			$mappedPost['acf'] = [];
@@ -379,13 +379,32 @@ function get_post_preview_data_for_post($post)
 					}
 				}
 			}
-		} else {
+		} elseif ($field === 'author') {
+            $author_id = $post->post_author;
+            $author_data = get_userdata($author_id);
+
+            $acf_author_id = 'user_' . $author_id;
+						$profile_picture = get_field('profile_picture', $acf_author_id);
+						$job_title = get_field('job_title', $acf_author_id);
+
+						$mappedPost['author'] = [
+											'id' => $author_id,
+											'name' => $author_data->display_name,
+											'slug' => $author_data->user_nicename,
+											'acf' => [
+													'profile_picture' => $profile_picture,
+													'job_title' => $job_title,
+											],
+									];
+        }
+		else {
 			$mappedPost[$field] = $post->$field;
 		}
 	}
 
 	return $mappedPost;
 }
+
 
 
 function get_global_options()
@@ -520,6 +539,13 @@ function include_rest_data_for_post($post)
 
 	// template slug (if applicable)
 	$post['template_slug'] = get_page_template_slug($post['ID']);
+
+	// Format the post date
+	if (isset($post['post_date'])) {
+		$date = date_create($post['post_date']);
+		$formatted_date = date_format($date, 'j F Y'); // '24 August 2022'
+		$post['post_date_formatted'] = $formatted_date;
+	}
 
 	// acf data
 	$maybe_acf = function_exists('get_fields') ? get_fields($post['ID']) : null;
