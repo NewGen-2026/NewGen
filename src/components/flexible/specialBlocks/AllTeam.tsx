@@ -38,7 +38,7 @@ const TeamMember = ({ member }) => {
 		<div
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			className="flex w-full flex-[1_1_45%] flex-col md:flex-[1_1_320px] xxl:flex-[0_1_320px]"
+			className="flex w-full max-w-[50%] flex-[1_1_45%] flex-col md:flex-[1_1_300px] 2xl:flex-[0_1_320px]"
 		>
 			<div className="relative w-full overflow-hidden text-white md:flex-[0_1_400px]">
 				<WpImage image={member?.team_member?.featured_image} className="h-full w-full object-cover" />

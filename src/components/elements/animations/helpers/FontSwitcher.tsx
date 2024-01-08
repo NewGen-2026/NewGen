@@ -93,15 +93,12 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 				}
 			};
 
-			const startDelayTimeout = setTimeout(() => {
-				parsedSegments.forEach((segment, i) => {
-					startInterval(segment, i);
-				});
-			}, startDelay);
+			parsedSegments.forEach((segment, i) => {
+				setTimeout(() => startInterval(segment, i), startDelay);
+			});
 
 			return () => {
 				intervals.forEach((interval) => interval && clearInterval(interval));
-				clearTimeout(startDelayTimeout);
 			};
 		}
 	}, [isInView, parsedSegments, switchInterval, loop, hover, startDelay]);
@@ -118,6 +115,7 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 					const currentFontIndex = hover && isHovered ? Math.min(segment.fonts.length - 1, 1) : segmentIndices[segment.index] % segment.fonts.length;
 					className = segment.fonts[currentFontIndex];
 				}
+
 				return (
 					<span key={index} className={className}>
 						{segment.content}
