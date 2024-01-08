@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useMeasure, useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
-import { Button } from "~/components/elements/buttons/Button";
+import { Button, TextLink } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses } from "~/utils/getColors";
@@ -181,11 +181,8 @@ const NavBar = ({ items, active, setActiveSlide }) => {
 					</div>
 				</div>
 				<div className="flex flex-1 items-center gap-5">
-					<Link
-						href={items[active]?.work?.permalink}
-						className="t-18 whitespace-nowrap font-heading font-black transition-colors duration-150 hover:text-cobalt"
-					>
-						VIEW CASE STUDY
+					<Link href={items[active]?.work?.permalink} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
+						<TextLink underlineColour="black">{`VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
 					</Link>
 					<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
 						<Button className="w-full text-center">

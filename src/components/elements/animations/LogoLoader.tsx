@@ -99,8 +99,8 @@ const LogoLoader = ({ videoLoaded }) => {
 					className="G"
 				>
 					<LetterSwapper paths={gPaths} videoLoaded={videoLoaded} />
-					<LetterSwapper paths={ePaths} videoLoaded={videoLoaded} delay={0.2} />
-					<LetterSwapper paths={nPaths} videoLoaded={videoLoaded} delay={0.4} />
+					<LetterSwapper paths={ePaths} videoLoaded={videoLoaded} startDelay={0.2} delay={0.05} />
+					<LetterSwapper paths={nPaths} videoLoaded={videoLoaded} startDelay={0.5} delay={0.05} />
 				</motion.g>
 			</svg>
 		</motion.div>
@@ -108,7 +108,7 @@ const LogoLoader = ({ videoLoaded }) => {
 };
 export default LogoLoader;
 
-const LetterSwapper = ({ paths, videoLoaded, delay = 0 }) => {
+const LetterSwapper = ({ paths, videoLoaded, delay = 0, startDelay = 0 }) => {
 	const [active, setActive] = useState(0);
 	const intervalRef = useRef() as any;
 
@@ -131,6 +131,10 @@ const LetterSwapper = ({ paths, videoLoaded, delay = 0 }) => {
 		}
 	}, [videoLoaded]);
 
+	const getStartDelay = (i) => {
+		return i === 0 ? startDelay : 0;
+	};
+
 	return (
 		<AnimatePresence mode="wait">
 			{paths.map(
@@ -149,8 +153,8 @@ const LetterSwapper = ({ paths, videoLoaded, delay = 0 }) => {
 								type: "spring",
 								stiffness: 250,
 								damping: 24,
-								delay,
-								opacity: { duration: 0, delay: delay + 0.1 },
+								delay: getStartDelay(i) + delay,
+								opacity: { duration: 0, delay: getStartDelay(i) + delay + 0.1 },
 							}}
 						/>
 					)

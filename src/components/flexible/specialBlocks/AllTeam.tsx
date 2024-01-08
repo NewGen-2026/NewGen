@@ -2,6 +2,7 @@ import { useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const socialVariants = {
 	initial: {
@@ -80,13 +81,13 @@ const TeamMember = ({ member }) => {
 							className="flex justify-center gap-[10px]"
 						>
 							{member?.team_member?.acf?.linkedin && (
-								<SocialIcon variants={socialVariants}>
+								<SocialIcon variants={socialVariants} link={member?.team_member?.acf?.linkedin}>
 									<LinkedIn />
 								</SocialIcon>
 							)}
 
 							{member?.team_member?.acf?.twitter && (
-								<SocialIcon variants={socialVariants}>
+								<SocialIcon variants={socialVariants} link={member?.team_member?.acf?.twitter}>
 									<Twitter />
 								</SocialIcon>
 							)}
@@ -98,10 +99,12 @@ const TeamMember = ({ member }) => {
 	);
 };
 
-const SocialIcon = ({ children, variants }) => {
+const SocialIcon = ({ children, variants, link }) => {
 	return (
-		<motion.div className="h-12 w-12 will-change-transform" variants={variants}>
-			{children}
+		<motion.div className="h-12 w-12 will-change-transform hover:text-cobalt" variants={variants}>
+			<Link href={link || "/#"} target="_blank" referrerPolicy="no-referrer">
+				{children}
+			</Link>
 		</motion.div>
 	);
 };
@@ -113,7 +116,7 @@ const LinkedIn = () => {
 				fillRule="evenodd"
 				clipRule="evenodd"
 				d="M26.5984 26.0984H23.2698V20.4291C23.2698 18.8747 22.6792 18.0061 21.4489 18.0061C20.1105 18.0061 19.4113 18.91 19.4113 20.4291V26.0984H16.2034V15.2984H19.4113V16.7532C19.4113 16.7532 20.3758 14.9685 22.6676 14.9685C24.9584 14.9685 26.5984 16.3674 26.5984 19.2605V26.0984ZM12.3765 13.8843C11.2838 13.8843 10.3984 12.9919 10.3984 11.8914C10.3984 10.7908 11.2838 9.89844 12.3765 9.89844C13.4692 9.89844 14.354 10.7908 14.354 11.8914C14.354 12.9919 13.4692 13.8843 12.3765 13.8843ZM10.7201 26.0984H14.0651V15.2984H10.7201V26.0984Z"
-				fill="white"
+				fill="currentColor"
 			/>
 		</svg>
 	);
@@ -125,12 +128,12 @@ const Twitter = () => {
 			<g clipPath="url(#clip0_616_8018)">
 				<path
 					d="M19.8611 16.8989L25.2182 10.8008H23.9492L19.2956 16.0946L15.5816 10.8008H11.2969L16.9144 18.8067L11.2969 25.2007H12.5659L17.477 19.6091L21.4001 25.2007H25.6848M13.0239 11.7379H14.9735L23.9482 24.3096H21.9982"
-					fill="white"
+					fill="currentColor"
 				/>
 			</g>
 			<defs>
 				<clipPath id="clip0_616_8018">
-					<rect width="14.388" height="14.4" fill="white" transform="translate(11.2969 10.8008)" />
+					<rect width="14.388" height="14.4" fill="currentColor" transform="translate(11.2969 10.8008)" />
 				</clipPath>
 			</defs>
 		</svg>

@@ -30,3 +30,10 @@ select{
 		@apply border-cobalt text-cobalt placeholder:text-cobalt;
 	}
 }
+
+
+select{
+	option{
+		color: black !important;
+	}
+}

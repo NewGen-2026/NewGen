@@ -3,7 +3,7 @@ import { useMeasure } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
-import { getBgColorClasses, getIsLightColor, getTextContrastColorClasses, getTextContrastColorClassesImportant } from "~/utils/getColors";
+import { Color, getBgColorClasses, getIsLightColor, getTextContrastColorClasses, getTextContrastColorClassesImportant } from "~/utils/getColors";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -113,7 +113,13 @@ const WorkGridItem = ({ work, variant }) => {
 };
 export default memo(WorkGridItem);
 
-const InfoBlock = ({ heading = "Client", children = "Revolut", theme_color = "cobalt" }) => {
+type InfoBlockProps = {
+	heading?: string;
+	children?: any;
+	theme_color?: Color;
+};
+
+const InfoBlock = ({ heading = "Client", children = "Revolut", theme_color = "cobalt" }: InfoBlockProps) => {
 	return (
 		<div className="flex-auto">
 			<div className="text-[15px] font-bold leading-[1.5] opacity-70">{heading}</div>

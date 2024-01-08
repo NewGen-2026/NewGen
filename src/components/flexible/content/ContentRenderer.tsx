@@ -1,17 +1,19 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import TwoColTextAsset from "./TwoColTextAsset";
 import FadeGrid from "./FadeGrid";
 import RotatingHeading from "./RotatingHeading";
 import LinkGrid from "./LinkGrid";
 import StatAssetRow from "./StatAssetRow";
 import HoverRevealIconGrid from "./HoverRevealIconGrid";
-import RosterGrid from "./RosterGrid";
-import AllCreatorsList from "./AllCreatorsList";
 import TwoColStatContent from "./TwoColStatContent";
 import FillScreenTextBlock from "./FillScreenTextBlock";
 import TwoColContentLinks from "./TwoColContentLinks";
 import StatRow from "./StatRow";
 import NumberedGrid from "./NumberedGrid";
+
+const RosterGrid = dynamic(() => import("./RosterGrid"), { ssr: false });
+const AllCreatorsList = dynamic(() => import("./AllCreatorsList"), { ssr: false });
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,

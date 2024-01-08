@@ -1,10 +1,12 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import TestimonialSlider from "./TestimonialSlider";
 import BigTitleSlider from "./BigTitleSlider";
 import DualAssetSlider from "./DualAssetSlider";
 import AssetSlider from "./AssetSlider";
 import LinkSlider from "./LinkSlider";
-import TwoColTestimonialSlider from "./TwoColTestimonialSlider";
+
+const TwoColTestimonialSlider = dynamic(() => import("./TwoColTestimonialSlider"), { ssr: false });
 
 const SLIDERS_COMPONENT_MAP = {
 	testimonial_slider: TestimonialSlider,

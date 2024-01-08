@@ -1,10 +1,10 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import AssetMarquee from "./AssetMarquee";
-import CreatorMarquee from "./CreatorMarquee";
 import IconBlockMarquee from "./IconBlockMarquee";
 
 const FeedMarquee = dynamic(() => import("./FeedMarquee"), { ssr: false });
+const CreatorMarquee = dynamic(() => import("./CreatorMarquee"), { ssr: false });
 
 const MARQUEE_COMPONENT_MAP = {
 	asset_marquee: AssetMarquee,

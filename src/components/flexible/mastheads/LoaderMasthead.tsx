@@ -23,7 +23,7 @@ const LoaderMasthead = (props) => {
 	const { height: windowHeight, width: windowWidth } = useWindowSize();
 	const isInView = useInView(containerRef, { once: false, amount: 0.6 });
 
-	const assetScaleBase = useTransform(scrollY, [0, 400], [windowWidth < 768 ? 1 : 0.95, 1]);
+	const assetScaleBase = useTransform(scrollY, [0, 400], [windowWidth < 1024 ? 1 : 0.95, 1]);
 	const assetScaleSpring = useSpring(assetScaleBase, { stiffness: 200, damping: 30, mass: 1 });
 
 	const handleVideoLoad = () => {
@@ -51,12 +51,12 @@ const LoaderMasthead = (props) => {
 		}
 	}, [height, assetRef, windowHeight]);
 
-	const assetInitialY = windowWidth < 768 ? initialYMobile : initialY;
+	const assetInitialY = windowWidth < 1024 ? initialYMobile : initialY;
 	const assetYEndValue = videoLoaded ? 0 : -assetInitialY;
 
 	return (
-		<div ref={containerRef} className="relative overflow-hidden bg-black pt-32 text-white md:min-h-screen md:pt-44">
-			<div className="container absolute inset-0 flex items-center justify-center md:h-screen">
+		<div ref={containerRef} className="relative overflow-hidden bg-black pt-32 text-white md:pt-44 lg:min-h-screen">
+			<div className="container absolute inset-0 flex items-center justify-center lg:h-screen">
 				<div ref={logoRef} className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
 					<LogoLoader videoLoaded={videoLoaded} />
 				</div>

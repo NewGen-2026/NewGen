@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { HoverButton } from "~/components/elements/buttons/Button";
@@ -13,9 +14,14 @@ const FloatingImagesCta = (props) => {
 				<h2 className="t-80 mx-auto w-full max-w-[500px] text-center font-black uppercase !text-black">
 					<FontSwitcher text={heading} />
 				</h2>
-				<div className="mt-6 flex justify-center md:mt-10">
-					<HoverButton button={button} />
-				</div>
+
+				{button?.link?.url && (
+					<div className="mt-6 flex justify-center md:mt-10">
+						<Link href={button?.link?.url}>
+							<HoverButton button={button} />
+						</Link>
+					</div>
+				)}
 			</div>
 			<div className="absolute left-[8%] top-[-2%] aspect-[357/260] w-full max-w-[40%] bg-stone/20 sm:max-w-[26%]">
 				<WpImage image={top_left_asset} className="h-full w-full object-cover" />

@@ -63,7 +63,7 @@ const AssetAtBottomVariant = (props) => {
 								</motion.span>
 							</div>
 							<span className="relative z-10 block">
-								<SplitTextFontSwitcher delay={variant === "talent" ? 0.4 : 0.2} stagger={0.2} text={middle_line} reverse />
+								<SplitTextFontSwitcher delay={variant === "talent" ? 0.4 : 0.2} fontSwitchStartDelay={400} stagger={0.2} text={middle_line} reverse />
 							</span>
 							<span className="relative z-10 block">
 								<SplitTextFontSwitcher delay={0.6} fontSwitchStartDelay={700} text={bottom_line} />
