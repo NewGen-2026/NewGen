@@ -2,6 +2,7 @@ import { useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import { TextLink } from "~/components/elements/buttons/Button";
 
 const LeftRightCTA = (props) => {
 	const [activeSide, setActiveSide] = useState("left");
@@ -33,10 +34,10 @@ const LeftRightCTA = (props) => {
 			</div>
 			<div className="pointer-events-none inset-0 z-[20] flex w-full items-end md-large:absolute md-large:pb-[146px]">
 				<div className="container !w-full">
-					<div className="mx-auto w-full max-w-[1046px]">
+					<div className="mx-auto w-full max-w-[1146px]">
 						<div className="t-18 flex w-full items-end justify-between font-heading font-black uppercase text-white">
-							<div>for creators</div>
-							<div>for talent managers</div>
+							<TextLink className="!pointer-events-auto" underlineColour="white">{`Fo<pst-pil>r</> Creat<pst-pil>o</>rs`}</TextLink>
+							<TextLink className="!pointer-events-auto" underlineColour="white">{`F<pst-rec>o</>r Talent Mana<pst-rec>g</>ers`}</TextLink>
 						</div>
 					</div>
 				</div>
@@ -44,7 +45,11 @@ const LeftRightCTA = (props) => {
 			<div className="flex w-full items-center justify-center text-center">
 				<div className="container">
 					<AnimatePresence mode="wait">
-						{activeSide === "left" ? <TextContainer key="textLeft" {...left} /> : <TextContainer key="textRight" {...right} />}
+						{activeSide === "left" ? (
+							<TextContainer key="textLeft" className="!text-energy" {...left} />
+						) : (
+							<TextContainer className="!text-electric" key="textRight" {...right} />
+						)}
 					</AnimatePresence>
 				</div>
 			</div>
@@ -80,9 +85,9 @@ const LeftRightCTA = (props) => {
 };
 export default LeftRightCTA;
 
-const TextContainer = ({ top_line_left, top_line_right, middle_line, bottom_line }) => {
+const TextContainer = ({ top_line_left, top_line_right, middle_line, bottom_line, className = "" }) => {
 	return (
-		<motion.h2 className="t-144 pointer-events-none w-full  max-w-[1000px] font-heading uppercase">
+		<motion.h2 className={`t-144 pointer-events-none w-full  max-w-[1000px] font-heading uppercase ${className}`}>
 			<div className="flex justify-center gap-[0.1em] md-large:gap-[10rem]">
 				<span className="relative z-[0] inline-flex whitespace-nowrap">
 					<FontSwitcher text={top_line_left} />
