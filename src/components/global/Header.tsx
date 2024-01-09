@@ -91,7 +91,7 @@ export default function Header(props) {
 						</Link>
 						{!pageOptions?.remove_nav_menu && (
 							<div className="flex items-center gap-6 xl:gap-10">
-								<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-electric")}>
+								<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-white")}>
 									{menu?.nav?.map((navItem, i) => (
 										<motion.button
 											key={`nav-item-${i}`}

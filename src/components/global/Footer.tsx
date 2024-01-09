@@ -91,7 +91,7 @@ export default function Footer(props) {
 					{addresses?.map((address, i) => (
 						<div key={`address${i}`} className="max-w-[240px] flex-1">
 							<div className="t-18 font-black uppercase">{address?.city}</div>
-							<div className="t-16 font-mediumo mt-4  !leading-[1.5] opacity-[0.35]" dangerouslySetInnerHTML={{ __html: address?.address }} />
+							<div className="t-16 font-mediumo mt-4  !leading-[1.5] opacity-[0.4]" dangerouslySetInnerHTML={{ __html: address?.address }} />
 						</div>
 					))}
 				</div>

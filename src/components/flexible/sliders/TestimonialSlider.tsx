@@ -3,7 +3,7 @@ import { createRef, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useIsomorphicLayoutEffect } from "framer-motion";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
-import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
+import { getBgColorClasses, getTextColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
 
 const TestimonialSlider = (props) => {
 	const { items, background, variant, mode } = props;
@@ -100,8 +100,8 @@ const TestimonialSlider = (props) => {
 										style={{ minHeight: maxQuoteHeight }}
 										onMouseEnter={() => setIsHovered(true)}
 										onMouseLeave={() => setIsHovered(false)}
-										className={`t-40 cursor-pointer font-black uppercase transition-colors duration-200  ${
-											isHovered ? getTextContrastColorClasses(background?.color) : textClass
+										className={`t-40 cursor-default font-black uppercase transition-colors duration-200  ${
+											isHovered ? getTextColorClasses(item?.theme_color) : textClass
 										}`}
 									>
 										<span className="font-gridular ">“</span>
@@ -144,14 +144,14 @@ const TestimonialSlider = (props) => {
 						</AnimatePresence>
 					</div>
 					<div className="mt-16 flex items-center justify-center gap-3">
-						{items?.map((_, i) => (
+						{items?.map((item, i) => (
 							<motion.div
 								key={`navItem${i}`}
 								onClick={() => setActiveSlide(i)}
 								initial={{ scale: 1 }}
 								animate={{ scale: activeSlide === i ? 1.5 : 1 }}
-								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 ${getBgContrastColorClasses(background?.color)} ${
-									activeSlide === i ? getBgContrastColorClasses(background?.color) : navClass
+								className={`h-[6px] w-[6px] cursor-pointer transition-colors duration-200 ${getBgColorClasses(item?.theme_color || "cobalt")} ${
+									activeSlide === i ? getBgColorClasses(item?.theme_color || "cobalt") : navClass
 								}`}
 							/>
 						))}

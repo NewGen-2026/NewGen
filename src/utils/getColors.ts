@@ -32,7 +32,7 @@ export const getBgContrastColorClasses = (color: Color) => {
 		boost: "bg-energy",
 		energy: "bg-boost",
 		forest: "bg-sand",
-		spark: "bg-white",
+		spark: "bg-slate",
 	};
 
 	return colors[color];
@@ -146,7 +146,7 @@ export const getTextContrastColorClasses = (color: Color) => {
 		boost: "!text-energy",
 		energy: "text-boost",
 		forest: "text-sand",
-		spark: "text-white",
+		spark: "text-stone",
 	};
 
 	return colors[color];
@@ -164,7 +164,7 @@ export const getTextContrastColorClassesImportant = (color: Color) => {
 		boost: "!text-energy",
 		energy: "!text-boost",
 		forest: "!text-sand",
-		spark: "!text-white",
+		spark: "!text-stone",
 	};
 
 	return colors[color];
