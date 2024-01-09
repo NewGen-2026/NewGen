@@ -64,8 +64,10 @@ const ContactForm = (props) => {
 					{links?.map((link, i) => (
 						<FormLink
 							key={`form-link${i}`}
-							className={`t-32 block font-heading font-black uppercase transition-colors duration-100
-							${getTextColorHoverClasses(link?.hover_color)}`}
+							className={`t-32 block font-heading font-black uppercase transition-colors duration-200
+
+
+							`}
 							first={i === 0}
 							{...link}
 						/>
@@ -91,11 +93,12 @@ const ContactForm = (props) => {
 			</div>
 			<div
 				className={clsx(
-					`max-w-[853px] flex-1 px-[15px] py-16 md:px-5 md:py-32 md-large:py-[160px]`,
+					`relative max-w-[853px] flex-1 px-[15px] py-16 md:px-5 md:py-32 md-large:py-[160px]`,
 					getBgColorClasses(theme_color),
 					form_layout === "press" && "flex items-center"
 				)}
 			>
+				<div className={`absolute bottom-0 right-[-100%] top-0 hidden w-full md:block ${getBgColorClasses(theme_color)}`} />
 				<motion.div layout className="mx-auto w-full max-w-[640px]">
 					<div>
 						<h2 className="t-48 font-heading uppercase">{form?.heading}</h2>

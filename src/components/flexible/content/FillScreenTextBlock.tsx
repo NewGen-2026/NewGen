@@ -36,7 +36,14 @@ const FillScreenTextBlock = (props) => {
 				}}
 				className="t-96 mx-auto w-full text-center font-black uppercase"
 			>
-				<SplitTextFontSwitcher text={text} startAnimation={isInView} randomStagger direction="none" delay={0.2} />
+				<SplitTextFontSwitcher
+					text={text}
+					startAnimation={isInView}
+					fontSwitchStartDelay={Math.floor(Math.random() * (900 - 600 + 1)) + 600}
+					randomStagger
+					direction="none"
+					delay={0.2}
+				/>
 			</h2>
 		</motion.div>
 	);

@@ -4,6 +4,7 @@ import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { Link } from "~/components/elements/links/Link";
 import { getTextColorGroupHoverClasses } from "~/utils/getColors";
+import { motion } from "framer-motion";
 
 const LinkGrid = (props) => {
 	const { items, variant } = props;
@@ -27,10 +28,27 @@ const GridItem = ({ item, variant }) => {
 	const threeColVariant = variant === "3col";
 
 	return (
-		<div className="group flex flex-1 flex-col" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-			<Link href={item?.link || "/#"} className="flex h-full flex-col">
-				<div className="bg-stone-5  aspect-[672/400] w-full">
-					<WpImage image={item?.image} className="h-full w-full object-cover" />
+		<div
+			className={` ${item?.link ? "group" : ""} flex flex-1 flex-col`}
+			onMouseEnter={() => setIsHovered(!!item?.link)}
+			onMouseLeave={() => setIsHovered(false)}
+		>
+			<IsLinkWrapper link={item?.link} className="flex h-full flex-col">
+				<div className="bg-stone-5 aspect-[672/400]  w-full overflow-hidden">
+					<motion.div
+						initial={{ scale: 1 }}
+						animate={{
+							scale: isHovered ? 1.05 : 1,
+						}}
+						transition={{
+							type: "spring",
+							stiffness: 200,
+							damping: 22,
+						}}
+						className="h-full w-full"
+					>
+						<WpImage image={item?.image} className="h-full w-full object-cover" />
+					</motion.div>
 				</div>
 				<div className={`flex ${threeColVariant ? "" : "flex-1"}  flex-col justify-between`}>
 					<h3
@@ -45,7 +63,17 @@ const GridItem = ({ item, variant }) => {
 						{item?.content || "Description"}
 					</p>
 				</div>
-			</Link>
+			</IsLinkWrapper>
 		</div>
 	);
+};
+
+const IsLinkWrapper = ({ className = "", link, children }) => {
+	if (link)
+		return (
+			<Link href={link || "/#"} className={className}>
+				{children}
+			</Link>
+		);
+	return children;
 };

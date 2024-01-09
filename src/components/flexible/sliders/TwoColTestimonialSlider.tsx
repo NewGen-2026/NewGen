@@ -83,14 +83,14 @@ const TwoColTestimonialSlider = (props) => {
 									}}
 									onMouseEnter={() => setIsHovered(true)}
 									onMouseLeave={() => setIsHovered(false)}
-									className={`t-40 absolute left-0 top-0 cursor-pointer  font-black uppercase  lg:max-w-[680px] ${
+									className={`t-40 absolute left-0 top-0 cursor-default  font-black uppercase  lg:max-w-[680px] ${
 										isHovered ? getTextContrastColorClasses(items[activeSlide]?.theme_color) : ""
 									}
 								${activeSlide === i ? "" : "delay-[400ms]"}
 								`}
 								>
 									<span
-										className={`mb-[-10px] mr-5 inline-flex h-[0.1em] translate-y-[0.4em] items-center font-haltwins text-[3rem] !leading-[0] md:text-[6rem]  ${getTextContrastColorClasses(
+										className={`mb-[-10px] mr-5 inline-flex h-[0.1em] translate-y-[0.4em] items-center font-haltwins text-[3rem] !font-normal !leading-[0] !tracking-[0.02em]  md:text-[6rem]  ${getTextContrastColorClasses(
 											items[activeSlide]?.theme_color
 										)} ${boxedVariant ? "lg:mr-16" : "lg:mr-28"} `}
 									>

@@ -14,7 +14,7 @@ const DefaultVariant = ({ items }) => {
 			{items?.map((item, i) => (
 				<div key={`stat${i}`} className="lg:flex-[0_1_412px]">
 					<h3 className="t-120 font-heading font-black uppercase">
-						<FontSwitcher text={item?.number} />
+						<FontSwitcher text={item?.number} startDelay={i * 400} />
 					</h3>
 					<div className="mt-5 md:mt-10">
 						{item?.heading && (

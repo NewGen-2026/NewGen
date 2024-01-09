@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { Color, getTextColorClasses } from "~/utils/getColors";
+import { Color, getTextColorClasses, getTextColorClassesImportant } from "~/utils/getColors";
 import getFontSize from "~/utils/getFontSize";
 import getMarginBottom from "~/utils/getMarginBottom";
 import maxWidthProps, { MaxWidthStyleType } from "~/utils/maxWidthProps";
@@ -46,7 +46,7 @@ function TextCardHeading({
 			className={clsx(
 				"font-black uppercase",
 				getFontSize(font_size),
-				getTextColorClasses(font_color),
+				getTextColorClassesImportant(font_color),
 				getMarginBottom(margin_bottom),
 				max_width !== null && text_alignment === "center" && "mx-auto",
 				className
