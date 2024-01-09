@@ -4,10 +4,10 @@ import { useRef, useState } from "react";
 import { useMeasure, useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
-import { Button, TextLink } from "~/components/elements/buttons/Button";
+import { HoverButton, TextLink } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
-import { getBgColorClasses } from "~/utils/getColors";
+import { Color, getBgColorClasses, getBgContrastColorName } from "~/utils/getColors";
 import dynamic from "next/dynamic";
 
 const MobileWorkSlider = dynamic(() => import("../sliders/MobileWorkSlider"), { ssr: false });
@@ -149,7 +149,7 @@ const WorkSliderDesktop = (props) => {
 						</motion.div>
 					</div>
 					<div className="mt-16 flex justify-center laptop:mt-12">
-						<NavBar items={work_slides} active={activeSlide} setActiveSlide={setActiveSlide} />
+						<NavBar items={work_slides} active={activeSlide} />
 					</div>
 				</div>
 			</div>
@@ -158,9 +158,7 @@ const WorkSliderDesktop = (props) => {
 };
 export default WorkSlider;
 
-const NavBar = ({ items, active, setActiveSlide }) => {
-	const [isHovered, setIsHovered] = useState(false);
-
+const NavBar = ({ items, active }) => {
 	return (
 		<div className="w-full max-w-[680px] bg-stone/25 p-3">
 			<div className="flex items-center justify-between pl-2">
@@ -172,7 +170,7 @@ const NavBar = ({ items, active, setActiveSlide }) => {
 									scale: active === i ? 1.4 : 1,
 								}}
 								key={`nav-item-${i}`}
-								className={`h-[6px] w-[6px] ${active === i ? "bg-cobalt" : "bg-stone "}`}
+								className={`h-[6px] w-[6px] ${active === i ? getBgColorClasses(items[active]?.work?.acf?.general?.theme_color) : "bg-stone "}`}
 							/>
 						))}
 					</div>
@@ -184,10 +182,17 @@ const NavBar = ({ items, active, setActiveSlide }) => {
 					<Link href={items[active]?.work?.permalink} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
 						<TextLink underlineColour="black">{`VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
 					</Link>
-					<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
-						<Button className="w-full text-center">
-							<FontSwitcher hover isHovered={isHovered} text="All w<pst-rec>o</>rk" />
-						</Button>
+					<div className="w-full">
+						<HoverButton
+							button={{
+								background_color: "black",
+								text_color: "white",
+								text_hover_color: getBgContrastColorName(items[active]?.work?.acf?.general?.theme_color) as Color,
+								hover_background_color: items[active]?.work?.acf?.general?.theme_color,
+								size: "medium",
+							}}
+							className="!w-full text-center"
+						>{`All w<pst-rec>o</>rk`}</HoverButton>
 					</div>
 				</div>
 			</div>
