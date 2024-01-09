@@ -34,14 +34,14 @@ export function Button({ link, button, size, className = "", children, ...other 
 	const buttonSize = button?.size || "medium";
 
 	const classes = clsx(
-		"transition-colors duration-100 select-none appearance-none inline-block t-18 uppercase !tracking-[-0.0225rem] !leading-[0.95] pt-[21px] pb-[19px] font-black",
+		"transition-colors duration-100 select-none appearance-none inline-block t-18 uppercase !tracking-[-0.0225rem] !leading-[0.95] px-5 py-3 py-[16px] pb-[14px] md:pt-[21px] md:pb-[19px] font-black",
 		className,
 		getBgColorClasses(backgroundColor),
 		getBgHoverColors(button?.hover_background_color),
 		getTextColorClasses(button?.text_color),
 		getTextColorHoverClasses(button?.text_hover_color),
 		buttonSize === "small" && "px-5 py-2",
-		buttonSize === "medium" && "px-[30px]",
+		buttonSize === "medium" && "md:px-[30px]",
 		buttonSize === "wide" && "px-12 py-5",
 		buttonSize === "huge" && "py-5 px-5 "
 	);
@@ -104,7 +104,7 @@ export function TextLink({ className = "", link, children, underlineColour = "bl
 	return (
 		<div
 			{...mouseEventHandlers}
-			className={`t-18 group inline-flex cursor-pointer select-none items-center pb-[1px] font-heading font-black uppercase  ${className}`}
+			className={`t-18-small group inline-flex cursor-pointer select-none items-center pb-[1px] font-heading font-black uppercase  ${className}`}
 		>
 			{(link?.title || children) && (
 				<div className="relative inline-block overflow-hidden pb-[1px] font-black">

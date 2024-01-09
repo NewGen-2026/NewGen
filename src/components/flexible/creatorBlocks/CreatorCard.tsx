@@ -77,7 +77,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 					initial="initial"
 					animate={isHovered ? "animate" : "initial"}
 					transition={{
-						staggerChildren: 0.1,
+						staggerChildren: 0.075,
 						delayChildren: 0.1,
 						staggerDirection: isHovered ? 1 : -1,
 					}}

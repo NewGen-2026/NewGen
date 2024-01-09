@@ -7,7 +7,7 @@ const themeStyles = {
 	boost: {
 		isLight: true,
 		hoverColor: "hover:text-energy",
-		focusClasses: "focus:border-energy",
+		focusClasses: "border-white/50 focus:border-white opacity-95",
 	},
 	cobalt: {
 		isLight: true,
@@ -42,23 +42,25 @@ export default function Footer(props) {
 		<footer className={`${getBgColorClasses(footer_theme)} my-[-1px] pb-8 pt-8 md:pb-0 md:pt-20`}>
 			<div className="container">
 				<div className="relative z-10 flex w-full flex-wrap items-start justify-between gap-6 gap-y-12 lg:flex-nowrap">
-					<nav className="flex flex-[1_1_1080px] flex-wrap gap-4 gap-y-10 sm:gap-6 md-large:flex-nowrap xl:gap-10">
+					<nav className="flex flex-[1_1_1080px] flex-wrap gap-1 gap-y-10 sm:gap-6 md-large:flex-nowrap xl:gap-10">
 						{footer_menu?.nav?.map((navItem, i) => (
 							<div key={`navItem${i}`} className="flex-[1_1_45%] sm:flex-[1_1_240px]">
 								<div className={`t-18 mb-6 font-heading font-black uppercase ${isLight ? "text-stone opacity-70" : "opacity-20 "} md:mb-12`}>
 									{navItem?.nav_item?.heading}
 								</div>
-								<ul className="t-16 mt-4 space-y-3 font-heading font-black uppercase md:space-y-6">
+								<ul className="t-16-small mt-4 space-y-3 font-heading font-black uppercase md:space-y-6">
 									{navItem?.nav_item?.links?.map((link, j) => (
 										<li key={`link${j}`} className={`block transition-colors duration-300 ${themeStyles[footer_theme]?.hoverColor}`}>
-											<Link href={link?.link?.url}>{link?.link?.title}</Link>
+											<Link className="whitespace-nowrap" href={link?.link?.url}>
+												{link?.link?.title}
+											</Link>
 										</li>
 									))}
 								</ul>
 							</div>
 						))}
 					</nav>
-					<ul className="t-18 flex flex-1 items-center justify-center font-heading font-medium md:justify-start">
+					<ul className="t-18 flex flex-1 items-center  justify-start font-heading font-medium">
 						{footer_menu?.socials?.map((social, i) => (
 							<li key={`social${i}`} className={`mr-6 ${themeStyles[footer_theme]?.hoverColor}`}>
 								<Link href={social?.link?.url}>
@@ -73,7 +75,7 @@ export default function Footer(props) {
 					</ul>
 				</div>
 				<div className="relative z-10 mt-16 md:mt-24">
-					<form className="flex max-w-[760px] gap-2 md:gap-6">
+					<form className="flex max-w-[760px] flex-wrap gap-2 sm:flex-nowrap md:gap-6">
 						<input
 							type="text"
 							className={`focus t-22 w-full border-b border-l-0 border-r-0 border-t-0 !bg-transparent pl-0 font-heading font-black uppercase   focus:ring-0
@@ -82,14 +84,17 @@ export default function Footer(props) {
 							`}
 							placeholder="Our Newsletter"
 						/>
-						<button type="submit" className={`t-18 px-[30px] py-5 font-black uppercase  ${isLight ? "bg-white text-black" : "bg-black text-white"} `}>
+						<button
+							type="submit"
+							className={`t-18 w-full  px-[30px] py-5 font-black uppercase sm:w-auto  ${isLight ? "bg-white text-black" : "bg-black text-white"} `}
+						>
 							Subscribe
 						</button>
 					</form>
 				</div>
-				<div className="mt-16 flex w-full flex-wrap gap-3 sm:gap-8 md:mt-24 md:gap-20">
+				<div className="mt-16 flex w-full flex-wrap gap-5 gap-y-14 sm:gap-8 md:mt-24 md:gap-20">
 					{addresses?.map((address, i) => (
-						<div key={`address${i}`} className="max-w-[240px] flex-1">
+						<div key={`address${i}`} className="max-w-[240px] flex-[1_1_45%] md:flex-1">
 							<div className="t-18 font-black uppercase">{address?.city}</div>
 							<div className="t-16 font-mediumo mt-4  !leading-[1.5] opacity-[0.4]" dangerouslySetInnerHTML={{ __html: address?.address }} />
 						</div>
@@ -100,12 +105,12 @@ export default function Footer(props) {
 					<FooterLogoAnimation isHover={false} />
 				</div>
 
-				<div className="t-16 mt-10 flex flex-wrap items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
+				<div className="t-16 mt-10 flex flex-wrap flex-wrap-reverse items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
 					<div className="font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
 
 					<div className="flex items-center gap-6 font-medium md:gap-12">
 						{legal_links?.map((link, i) => (
-							<Link key={`link${i}`} href={link?.link?.url} className={`${themeStyles[footer_theme]?.hoverColor}`}>
+							<Link key={`link${i}`} href={link?.link?.url} className={`${themeStyles[footer_theme]?.hoverColor} `}>
 								{link?.link?.title}
 							</Link>
 						))}
