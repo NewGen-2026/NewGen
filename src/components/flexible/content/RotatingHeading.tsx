@@ -21,7 +21,22 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 	const [isMounted, setIsMounted] = useState(false);
 
 	const generateRandomFonts = useCallback(() => {
-		return rotating_lines[activeLineIndex]?.line.split("").map((_, index) => (index % 3 === 0 ? getRandomFontClass() : ""));
+		const lineText = rotating_lines[activeLineIndex]?.line.split("");
+		const switchFontClass = fontMap[rotating_lines[activeLineIndex]?.switch_font];
+
+		const lineFonts = new Array(lineText.length).fill("");
+
+		const indices = new Set();
+		while (indices.size < 2) {
+			indices.add(Math.floor(Math.random() * lineText.length));
+		}
+
+		if (switchFontClass) {
+			indices.forEach((index: any) => {
+				lineFonts[index] = switchFontClass;
+			});
+		}
+		return lineFonts;
 	}, [rotating_lines, activeLineIndex]);
 
 	const [randomFonts, setRandomFonts] = useState(generateRandomFonts());
@@ -67,12 +82,6 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 			</span>
 		</HeadingTag>
 	);
-};
-
-const getRandomFontClass = () => {
-	const fontKeys = Object.keys(fontMap);
-	const randomIndex = Math.floor(Math.random() * fontKeys.length);
-	return fontMap[fontKeys[randomIndex]];
 };
 
 export default RotatingHeading;
