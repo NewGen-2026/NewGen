@@ -42,7 +42,7 @@ const CTA = ({ pageOptions }) => {
 
 	return (
 		<div className={`${themeStyles[footer_theme]?.backgroundColor || "bg-white"}`}>
-			<div className={`container pb-12 pt-8 md:pt-20 `}>
+			<div className={` mx-auto max-w-[1376px] pb-12 pt-8 md:pt-20 `}>
 				<Link
 					href="/contact"
 					onMouseEnter={() => setIsHovered(true)}

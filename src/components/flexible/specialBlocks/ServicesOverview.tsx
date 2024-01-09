@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
-import Asset from "~/components/elements/Asset";
 import WpImage from "~/components/elements/WpImage";
 import Link from "next/link";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
@@ -12,6 +11,7 @@ const activeHoverLayouts = {
 	influencer: {
 		color: "bg-boost",
 		hoverTextColor: "text-energy",
+		link: "/influencer-performance",
 		button: {
 			bgColor: "bg-energy",
 			textColor: "!text-boost",
@@ -23,6 +23,7 @@ const activeHoverLayouts = {
 	social: {
 		color: "bg-cobalt",
 		hoverTextColor: "text-electric",
+		link: "/social-strategy",
 		button: {
 			bgColor: "bg-electric",
 			textColor: "!text-cobalt",
@@ -34,6 +35,7 @@ const activeHoverLayouts = {
 	creative: {
 		color: "bg-forest",
 		hoverTextColor: "text-sand",
+		link: "/creative-and-studio",
 		button: {
 			bgColor: "bg-sand",
 			textColor: "!text-forest",
@@ -146,7 +148,7 @@ const ServicesOverview = (props) => {
 						</button>
 					</div>
 				</motion.div>
-				<div className="mt-12 flex flex-wrap gap-2 sm:gap-5 md:mt-[72px] lg:gap-8">
+				<div className="mt-16 flex flex-wrap gap-2 sm:gap-5 md:mt-[72px] lg:gap-8">
 					<div className={`relative aspect-[438/348] w-full flex-[1_1_45%] overflow-hidden sm:flex-1 ${activeHoverLayouts[activeHover]?.blockColor}`}>
 						{layouts.map((layout) => (
 							<motion.div key={layout.id} className="absolute inset-0 h-full w-full" animate={{ opacity: activeHover === layout.id ? 1 : 0 }}>
@@ -162,7 +164,7 @@ const ServicesOverview = (props) => {
 						))}
 					</div>
 					<div
-						className={`relative flex min-h-[200px] flex-[1_1_438px] flex-col justify-between gap-6 overflow-hidden p-4 sm:aspect-[438/348] sm:flex-1 md:p-6 ${activeHoverLayouts[activeHover]?.blockColor}`}
+						className={`relative flex min-h-[120px] flex-[1_1_438px] flex-col justify-between gap-6 overflow-hidden p-4 sm:aspect-[438/348] sm:flex-1 md:min-h-[200px] md:p-6 ${activeHoverLayouts[activeHover]?.blockColor}`}
 					>
 						{layouts.map((layout, i) => (
 							<motion.div
@@ -187,12 +189,6 @@ const ServicesOverview = (props) => {
 
 export default ServicesOverview;
 
-const LayoutTransitionSpan = ({ children, className }: { children?: any; className?: string }) => (
-	<motion.span layout className={clsx("inline-flex", className)}>
-		{children}
-	</motion.span>
-);
-
 const HoverWord = ({ word, setActiveHover, activeWord }) => {
 	const originalWord = word.replace(/\|/g, "");
 	const isActive = activeWord === originalWord;
@@ -212,7 +208,7 @@ const HoverWord = ({ word, setActiveHover, activeWord }) => {
 						isActive ? activeHoverLayouts[originalWord]?.hoverTextColor : "text-white/75"
 					)}
 				>
-					<Link href="/for-creators">{part}</Link>
+					<Link href={activeHoverLayouts[originalWord]?.link || "/"}>{part}</Link>
 				</motion.span>
 			);
 		});
@@ -220,51 +216,9 @@ const HoverWord = ({ word, setActiveHover, activeWord }) => {
 	return (
 		<motion.span
 			onMouseEnter={() => setActiveHover(originalWord)}
-			// onMouseLeave={() => setActiveHover("")}
 			className={clsx("transition-colors duration-300", isActive ? activeHoverLayouts[originalWord]?.hoverTextColor : "text-black")}
 		>
 			{parseWord(word)}
 		</motion.span>
 	);
 };
-
-// const BackgroundLayer = ({ word, activeWord }) => {
-// 	const isActive = activeWord === word;
-// 	const backgroundColor = activeHoverLayouts[word]?.color || "bg-white";
-
-// 	const yMotionValue = useMotionValue(100);
-
-// 	if (isActive) {
-// 		yMotionValue.set(0);
-// 	} else {
-// 		yMotionValue.set(100);
-// 	}
-
-// 	const ySpring = useSpring(yMotionValue, {
-// 		stiffness: 150,
-// 		damping: 25,
-// 	});
-
-// 	const yTemplate = useMotionTemplate`translateY(${ySpring}%)`;
-
-// 	return (
-// 		<motion.div
-// 			style={{
-// 				// 	transform: yTemplate,
-// 				zIndex: isActive ? 1 : 0,
-// 			}}
-// 			className={`pointer-events-none absolute inset-0  ${backgroundColor}`}
-// 		/>
-// 	);
-// };
-
-const AssetWrapper = ({ asset, active, className, variants }) => (
-	<motion.div
-		initial="initial"
-		animate={active ? "animate" : "initial"}
-		variants={variants}
-		className={`pointer-events-none absolute w-full rounded-lg  ${active ? "z-[10]" : "z-[5]"} ${className}`}
-	>
-		<Asset {...asset} priority className=" h-full w-full rounded-lg object-cover" />
-	</motion.div>
-);
