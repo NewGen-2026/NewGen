@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import WpImage from "../elements/WpImage";
-import { Facebook, LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
+import { LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
 
 const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod.TwitterShareButton), {
 	ssr: false,
@@ -52,36 +52,50 @@ const FeedPreview = ({
 	return (
 		<div
 			onMouseLeave={() => setOpenShare(false)}
-			className={clsx(className, `flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
+			className={clsx(className, `flex flex-col justify-between`, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
 		>
-			<div className={clsx(`mb-4 flex flex-1 justify-between gap-2 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
-				<div className={clsx(`h-8 w-8 flex-none overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")}>
-					<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
-				</div>
-				<Link
-					href={link || "/#"}
-					target={acf?.is_external_link ? "_blank" : "_self"}
-					className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}
-				>
-					<div>
-						<div className="flex items-center gap-4">
-							<div className="text-[15px] font-bold">{author?.name}</div>
-							<div className="hidden text-[15px] font-medium opacity-50 md:block">{post_date_gmt}</div>
+			<div className="mb-6 flex justify-between gap-2 ">
+				<div className={clsx(`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
+					<div
+						className={clsx(
+							`flex-none overflow-hidden rounded-full bg-energy `,
+							slideVariant ? "h-8 w-8 md:h-12 md:w-12" : "h-[43px] w-[43px] md:h-16 md:w-16"
+						)}
+					>
+						<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
+					</div>
+					<Link
+						href={link || "/#"}
+						target={acf?.is_external_link ? "_blank" : "_self"}
+						className={clsx(`flex flex-1 flex-col flex-wrap justify-between whitespace-normal`, slideVariant ? "" : "max-w-[350px]")}
+					>
+						<div>
+							<div className="flex items-center gap-4">
+								<div className="t-15 font-bold">{author?.name}</div>
+								<div className={`${slideVariant ? "hidden" : ""}  t-15 font-medium opacity-50 md:block`}>{post_date_gmt}</div>
+							</div>
+							<h3
+								className={clsx(
+									` line-clamp-3 whitespace-normal md:mt-2  `,
+									slideVariant ? "t-24 mt-1 font-black !leading-[-0.015rem]" : "t-30 mt-2 font-bold !leading-[1.05]"
+								)}
+							>
+								{post?.heading || post_title}
+							</h3>
 						</div>
-						<h3
-							className={clsx(
-								` mt-1 line-clamp-3 whitespace-normal md:mt-2  `,
-								slideVariant ? "t-24 font-black !leading-[-0.015rem]" : "t-30 font-bold !leading-[1.05]"
-							)}
-						>
-							{post?.heading || post_title}
-						</h3>
-					</div>
 
-					<div className="mt-2 hidden flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:flex md:gap-[14px] md:gap-y-1 ">
-						{post_tag?.map((tag, j) => <span key={`category${j}`}>#{tag?.name}</span>)}
-					</div>
-				</Link>
+						<div
+							className={`mt-2 ${slideVariant ? "hidden" : ""} t-tag  flex flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:gap-[14px] md:gap-y-1 `}
+						>
+							{post_tag?.map((tag, j) => (
+								<span className="inline-block" key={`category${j}`}>
+									#{tag?.name}
+								</span>
+							))}
+						</div>
+					</Link>
+					<div className="h-5 w-5 md:h-8 md:w-8" />
+				</div>
 			</div>
 			<div className={clsx(`flex justify-between gap-2`)}>
 				<Link href={link || "/#"} target={acf?.is_external_link ? "_blank" : "_self"} className="block aspect-[438/615] w-full max-w-[438px]">

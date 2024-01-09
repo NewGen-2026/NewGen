@@ -170,32 +170,34 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 				transition={{
 					delay: 0.1,
 				}}
-				className="flex w-full max-w-[971px] justify-between gap-2"
+				className="flex w-full max-w-[971px] flex-col justify-between gap-2 gap-y-12 md:flex-row"
 			>
-				<div className="hidden max-w-[203px] flex-1 sm:block">
-					<div className="space-y-4">
-						<CategoryLink active={selectedCategory === "home"} onClick={() => handleCategoryClick("home")} icon="home" title="F<pst-hal>o</>r you" />
-						{Object.entries(categoryCounts).map(([slug, count]) => (
-							<CategoryLink
-								onClick={() => handleCategoryClick(slug)}
-								active={selectedCategory === slug}
-								key={slug}
-								icon={slug}
-								title={`${count} ${slug === "article" ? "articl<pst-grid>e</>" : slug === "podcast" ? "podc<pst-nip>a</>st" : slug}s`}
-							/>
-						))}
+				<div className=" relative w-full md:w-auto md:max-w-[203px] md:flex-1">
+					<div className="sticky top-20">
+						<div className="space-y-4">
+							<CategoryLink active={selectedCategory === "home"} onClick={() => handleCategoryClick("home")} icon="home" title="F<pst-hal>o</>r you" />
+							{Object.entries(categoryCounts).map(([slug, count]) => (
+								<CategoryLink
+									onClick={() => handleCategoryClick(slug)}
+									active={selectedCategory === slug}
+									key={slug}
+									icon={slug}
+									title={`${count} ${slug === "article" ? "articl<pst-grid>e</>" : slug === "podcast" ? "podc<pst-nip>a</>st" : slug}s`}
+								/>
+							))}
+						</div>
+						<ul className="t-16 mt-12 flex w-full flex-wrap items-center gap-6 font-medium md:mt-16 md:block md:flex-nowrap md:space-y-6">
+							<FeaturedTag tag={{ slug: "all", name: "all" }} onClick={() => handleTagClick("all")} active={selectedTag === "all"} />
+							{featured_tags.map(
+								(tag) =>
+									availableTags.has(tag.slug) && (
+										<FeaturedTag key={tag?.term_id} tag={tag} onClick={() => handleTagClick(tag?.slug)} active={selectedTag === tag?.slug} />
+									)
+							)}
+						</ul>
 					</div>
-					<ul className="t-16 mt-16 space-y-6 font-medium">
-						<FeaturedTag tag={{ slug: "all", name: "all" }} onClick={() => handleTagClick("all")} active={selectedTag === "all"} />
-						{featured_tags.map(
-							(tag) =>
-								availableTags.has(tag.slug) && (
-									<FeaturedTag key={tag?.term_id} tag={tag} onClick={() => handleTagClick(tag?.slug)} active={selectedTag === tag?.slug} />
-								)
-						)}
-					</ul>
 				</div>
-				<div className="max-w-[502px] flex-1 space-y-12 md:space-y-24">
+				<div className="max-w-[502px] flex-1 space-y-16 md:space-y-24">
 					{filteredPosts.slice(0, visiblePostsCount).map((post, i) => (
 						<div key={`post-${post?.ID}`} id={`post-${i}`} ref={i + 1 === visiblePostsCount ? lastPostElementRef : null} className="relative scroll-mt-20">
 							<PreviewWrapper setActiveArticle={setActiveArticle} id={`post-${i}`}>
@@ -215,7 +217,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 				className="fixed inset-0 bg-black/10"
 			/>
 
-			<div className="z-5 fixed bottom-[120px] left-0 right-0 hidden w-full justify-center px-5 md:flex">
+			<div className="z-5 fixed bottom-[100px] left-0 right-0 flex  w-full justify-center px-[15px] md:bottom-[120px] md:px-5">
 				<AnimatePresence>
 					{showSearchResults && (
 						<motion.div
@@ -223,23 +225,23 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 							initial={{ opacity: 0, y: 20, scale: 0.9 }}
 							animate={{ opacity: 1, y: 0, scale: 1 }}
 							exit={{ opacity: 0, y: 0, scale: 1 }}
-							className="max-h-[500px] w-full max-w-[860px] !origin-bottom overflow-y-scroll bg-white p-4 py-4 will-change-transform laptop:max-h-[400px]"
+							className="max-h-[500px] w-full max-w-[860px] !origin-bottom overflow-y-scroll bg-white px-[15px] py-4 will-change-transform md:p-4 laptop:max-h-[400px]"
 						>
 							{searchedPosts?.length ? (
 								searchedPosts?.map((post) => (
 									<Link
 										key={`searchedPost-${post?.ID}`}
 										href={post?.permalink || "/#"}
-										className="flex items-center justify-between gap-5 p-2 transition-colors duration-200 hover:bg-stone/20"
+										className="flex items-center justify-between gap-2 py-2 transition-colors duration-200 hover:bg-stone/20 md:gap-5 md:p-2"
 									>
 										<div className="flex items-center gap-5">
-											<div className="h-10 w-10">
+											<div className="h-10 w-10 flex-none">
 												<WpImage image={post?.featured_image} className="h-full w-full object-cover" />
 											</div>
 											<div className="t-18 mt-1 font-medium">{post?.post_title}</div>
 										</div>
 
-										<div className="h-6 w-6 rounded-full bg-energy" />
+										<div className="h-6 w-6 flex-none rounded-full bg-energy" />
 									</Link>
 								))
 							) : (
@@ -249,7 +251,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 					)}
 				</AnimatePresence>
 			</div>
-			<div className="fixed bottom-5 left-0 right-0 z-10 hidden w-full  justify-center px-5 md:flex">
+			<div className="fixed bottom-0 left-0 right-0 z-10 w-full  justify-center  md:bottom-5 md:flex md:px-5">
 				<div className="flex w-full max-w-[860px] items-center justify-between gap-5 overflow-hidden bg-black p-3 will-change-transform">
 					<div className="flex-1 pl-3">
 						<AnimatePresence mode="popLayout">
@@ -300,7 +302,14 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 									<CloseButton onClick={handleCloseSubscribe} />
 								</motion.div>
 							) : (
-								<motion.div key="nextPrev" initial="initial" animate="animate" exit="exit" variants={navAnimationVariants} className="flex items-center gap-8 ">
+								<motion.div
+									key="nextPrev"
+									initial="initial"
+									animate="animate"
+									exit="exit"
+									variants={navAnimationVariants}
+									className="flex items-center gap-4 sm:gap-8 "
+								>
 									<NextPrev disabled={nextArticleId === null} href={nextArticleId ? `#${nextArticleId}` : null} />
 									<NextPrev disabled={prevArticleId === null} href={prevArticleId ? `#${prevArticleId}` : null} directon="up" title="Previous Article" />
 								</motion.div>
@@ -313,7 +322,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 								<TextLink>{`Se<pst-rec>a</>rch`}</TextLink>
 							</button>
 						)}
-						<div className="block w-full min-w-[184px]" onClick={handleSubmit}>
+						<div className="block w-full sm:min-w-[184px]" onClick={handleSubmit}>
 							<HoverButton
 								className="!w-full"
 								buttonClass="!w-full"
@@ -356,11 +365,16 @@ const FeaturedTag = ({ tag, onClick, active }) => {
 								damping: 28,
 							},
 						}}
-						className="h-2 w-2 bg-cobalt"
+						className="hidden h-2 w-2 bg-cobalt md:block"
 					/>
 				)}
 			</div>
-			<div className={clsx(active ? "opacity-100" : "opacity-50", " translate-y-[1px] transition-opacity duration-200 group-hover:opacity-100")}>
+			<div
+				className={clsx(
+					active ? "text-cobalt opacity-100 md:text-black" : "opacity-50",
+					" translate-y-[1px] transition-opacity duration-200 group-hover:opacity-100"
+				)}
+			>
 				#{tag?.name}
 			</div>
 		</li>
@@ -443,17 +457,17 @@ const PreviewWrapper = ({ children, setActiveArticle, id }) => {
 const NextPrev = ({ directon = "down", title = "Next Article", href = "", disabled }) => {
 	return (
 		<a href={href} className={clsx(`flex items-center gap-3 transition-opacity duration-200`, disabled && "pointer-events-none opacity-50")}>
-			<span className={`${directon === "down" ? "" : "-mt-1 rotate-180"}`}>
+			<span className={`${directon === "down" ? "" : "-mt-2 rotate-180 md:-mt-1"} h-[16px] w-[16px] overflow-visible sm:h-[14px] sm:w-[14px]`}>
 				<Arrow />
 			</span>
-			<div className="t-18 font-medium">{title}</div>
+			<div className="t-18 hidden font-medium sm:block">{title}</div>
 		</a>
 	);
 };
 
 const Arrow = () => {
 	return (
-		<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg className="!overflow-visible will-change-transform" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M6.77778 0V12M6.77778 12L1 6.22222M6.77778 12L12.5556 6.22222" stroke="white" strokeWidth="2" />
 		</svg>
 	);
