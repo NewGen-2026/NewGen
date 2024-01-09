@@ -29,6 +29,7 @@ interface Segment {
 	fonts?: string[];
 	index?: number;
 	isBreak?: boolean;
+	delay?: any;
 }
 
 const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDelay = 0, hover = false, isHovered = false }: FontSwitcherProps) => {
@@ -48,7 +49,11 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 						const fontNames = fontSwitchMatch[1].split("-").map(mapFontName);
 						const content = fontSwitchMatch[2];
 						count += 1;
-						return { content, fonts: fontNames, index: count - 1 };
+
+						const delayMatch = fontSwitchMatch[1].match(/delay-(\d+)/);
+						const delay = delayMatch ? parseInt(delayMatch[1], 10) : 0;
+
+						return { content, fonts: fontNames, index: count - 1, delay };
 					}
 					return { content: segment };
 				});
@@ -94,7 +99,7 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 			};
 
 			parsedSegments.forEach((segment, i) => {
-				setTimeout(() => startInterval(segment, i), startDelay);
+				setTimeout(() => startInterval(segment, i), startDelay + segment.delay);
 			});
 
 			return () => {
