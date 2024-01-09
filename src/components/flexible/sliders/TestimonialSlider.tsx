@@ -58,9 +58,9 @@ const TestimonialSlider = (props) => {
 	const navClass = mode === "dark" ? "bg-stone" : "bg-white/40";
 
 	return (
-		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} px-3 py-12 md:py-20` : ""}`}>
+		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} mx-[-15px] px-3 py-12 md:mx-0 md:py-20` : ""}`}>
 			<div ref={ref} className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center">
-				<div className="relative aspect-[160/180] w-full max-w-[160px]">
+				<div className="relative aspect-[160/180] w-full max-w-[80px] md:max-w-[160px]">
 					{items?.map((item, i) => (
 						<motion.div
 							key={`item${i}`}
