@@ -1,10 +1,21 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import clsx from "clsx";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import WpImage from "../elements/WpImage";
+import { Facebook, LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
+
+const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod.TwitterShareButton), {
+	ssr: false,
+});
+
+const LinkedinShareButton = dynamic(() => import("react-share").then((mod) => mod.LinkedinShareButton), {
+	ssr: false,
+});
 
 type FeedPreviewProps = {
+	className?: string;
 	post?: any;
 	i?: number;
 	featured_image?: any;
@@ -18,7 +29,19 @@ type FeedPreviewProps = {
 	author?: any;
 };
 
-const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author, permalink, post_title, variant = "default", acf }: FeedPreviewProps) => {
+const FeedPreview = ({
+	className,
+	post,
+	i,
+	featured_image,
+	post_tag,
+	post_date_gmt,
+	author,
+	permalink,
+	post_title,
+	variant = "default",
+	acf,
+}: FeedPreviewProps) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
 
@@ -27,10 +50,13 @@ const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author,
 	const link = acf?.is_external_link ? acf?.external_link : permalink;
 
 	return (
-		<div className={clsx(`flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}>
+		<div
+			onMouseLeave={() => setOpenShare(false)}
+			className={clsx(className, `flex flex-col justify-between `, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
+		>
 			<div className={clsx(`mb-4 flex flex-1 justify-between gap-2 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
-				<div className={clsx(`h-8 w-8 flex-none transform-gpu overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")}>
-					<WpImage image={author?.acf?.profile_picture} className="h-full w-full object-cover" />
+				<div className={clsx(`h-8 w-8 flex-none overflow-hidden rounded-full bg-energy `, slideVariant ? "md:h-12 md:w-12" : "md:h-16 md:w-16")}>
+					<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
 				</div>
 				<Link
 					href={link || "/#"}
@@ -40,7 +66,7 @@ const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author,
 					<div>
 						<div className="flex items-center gap-4">
 							<div className="text-[15px] font-bold">{author?.name}</div>
-							<div className="text-[15px] font-medium opacity-50">{post_date_gmt}</div>
+							<div className="hidden text-[15px] font-medium opacity-50 md:block">{post_date_gmt}</div>
 						</div>
 						<h3
 							className={clsx(
@@ -121,7 +147,7 @@ const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author,
 						whileTap="tap"
 						onHoverStart={() => setOpenShare(true)}
 						// onHoverEnd={() => setOpenShare(false)}
-						className="relative h-5 w-5 hover:text-cobalt md:h-8 md:w-8"
+						className={`group relative h-5 w-5 hover:text-cobalt md:h-8 md:w-8 ${openShare ? "text-cobalt" : ""}`}
 					>
 						<svg viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
@@ -130,27 +156,41 @@ const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author,
 							/>
 						</svg>
 
-						<AnimatePresence>
-							{openShare && (
-								<motion.div
-									key={`share${i}`}
-									initial={{
-										clipPath: "inset(0% 100% 100% 0% round 0px)",
-									}}
-									animate={{
-										clipPath: "inset(0% 0% 0% 0% round 6px)",
-									}}
-									exit={{
-										clipPath: "inset(0% 100% 100% 0% round 0px)",
-									}}
-									onHoverEnd={() => setOpenShare(false)}
-									className="absolute bottom-[-150%] left-[-45%] z-[10] h-[45px] w-[200px] flex-1 rounded bg-stone will-change-transform"
-								/>
-							)}
-						</AnimatePresence>
-
 						{isLiked && <LikeHearts />}
 					</motion.span>
+
+					<motion.div
+						initial="initial"
+						animate={openShare ? "animate" : "initial"}
+						variants={{
+							initial: {
+								transition: {
+									staggerChildren: 0.1,
+								},
+							},
+							animate: {
+								transition: {
+									staggerChildren: 0.1,
+								},
+							},
+						}}
+						onMouseLeave={() => setOpenShare(false)}
+						className="flex flex-col gap-2 "
+					>
+						<SocialWrapper>
+							<TwitterShareButton url={link}>
+								<Twitter />
+							</TwitterShareButton>
+						</SocialWrapper>
+						<SocialWrapper>
+							<LinkedinShareButton url={link}>
+								<LinkedIn />
+							</LinkedinShareButton>
+						</SocialWrapper>
+						<SocialWrapper>
+							<TikTok />
+						</SocialWrapper>
+					</motion.div>
 				</div>
 			</div>
 			{variant === "default" && acf?.comments?.comments?.length > 1 && (
@@ -160,6 +200,33 @@ const FeedPreview = ({ post, i, featured_image, post_tag, post_date_gmt, author,
 				</div>
 			)}
 		</div>
+	);
+};
+
+const SocialWrapper = ({ children }) => {
+	return (
+		<motion.div
+			variants={{
+				initial: {
+					opacity: 0,
+					scale: 0,
+				},
+				animate: {
+					opacity: 1,
+					scale: 1,
+					transition: {
+						scale: {
+							type: "spring",
+							stiffness: 250,
+							damping: 20,
+						},
+					},
+				},
+			}}
+			className="group relative h-5 w-5 transition-colors duration-200 hover:text-cobalt md:h-8 md:w-8"
+		>
+			{children}
+		</motion.div>
 	);
 };
 

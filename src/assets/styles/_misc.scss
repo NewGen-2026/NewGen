@@ -13,6 +13,9 @@
 			overflow: visible !important;
 		}
 	}
+	.rfm-child{
+		@apply md:mx-3;
+	}
 }
 .feed-marquee>span{
 	overflow: visible !important;
