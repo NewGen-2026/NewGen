@@ -60,7 +60,7 @@ const ContactForm = (props) => {
 		<div className="mx-auto flex w-full max-w-[1440px] flex-col md-large:flex-row">
 			<div className="mb-16 mt-24 max-w-[588px] flex-1 px-[15px] md:my-32 md-large:my-[160px] md-large:px-8">
 				<h1 className="t-72 font-heading font-black uppercase">{heading}</h1>
-				<div className="mt-6 space-y-2 md:mt-8 lg:mt-14 lg:space-y-7">
+				<div className="mt-6 space-y-5 md:mt-8 lg:mt-14 lg:space-y-7">
 					{links?.map((link, i) => (
 						<FormLink
 							key={`form-link${i}`}
@@ -73,22 +73,25 @@ const ContactForm = (props) => {
 						/>
 					))}
 				</div>
-				<div className="mt-36 hidden space-y-10 md-large:block">
-					{contacts?.map((contact, i) => (
-						<div key={`contact${i}`} className="flex items-center gap-4 lg:gap-8">
-							<div className={`h-32 w-32 ${getBgColorClasses(theme_color)}`}>
-								<WpImage image={contact?.image} className="h-full w-full object-cover" />
-							</div>
 
-							<div>
-								<div className="t-24 font-black uppercase">{contact?.name}</div>
-								<div className="t-22 mt-2 font-medium opacity-50">{contact?.job_title}</div>
-								<a href={`mailto:${contact?.email}`} className={`t-22 mt-1 block font-medium ${getTextAlwaysDarkClasses(theme_color)}`}>
-									{contact?.email}
-								</a>
+				<div className="mx-[-15px] md-large:mx-0">
+					<div className="hide-scrollbars mt-20 flex gap-6 overflow-x-scroll px-[15px] md-large:mt-36 md-large:block md-large:space-y-10 md-large:pl-0">
+						{contacts?.map((contact, i) => (
+							<div key={`contact${i}`} className="flex items-center gap-4 lg:gap-8">
+								<div className={`h-[88px] w-[88px] flex-none md-large:h-32 md-large:w-32 ${getBgColorClasses(theme_color)}`}>
+									<WpImage image={contact?.image} className="h-full w-full object-cover" />
+								</div>
+
+								<div className="whitespace-nowrap md-large:whitespace-normal">
+									<div className="t-24 font-black uppercase">{contact?.name}</div>
+									<div className="t-22 mt-2 font-medium opacity-50">{contact?.job_title}</div>
+									<a href={`mailto:${contact?.email}`} className={`t-22 mt-1 block font-medium ${getTextAlwaysDarkClasses(theme_color)}`}>
+										{contact?.email}
+									</a>
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
 			<div
@@ -119,7 +122,7 @@ const ContactForm = (props) => {
 								transition={{
 									delay: 0.2,
 								}}
-								className="t-18 mt-5 !leading-[1.35] md:mt-10"
+								className="t-18-small mt-5 !leading-[1.35] md:mt-10"
 							>
 								<span className="opacity-50">This site is protected by reCAPTCHA and the Google </span>
 								<Link target="_blank" className={getTextContrastColorClasses(theme_color)} href="https://policies.google.com/privacy">

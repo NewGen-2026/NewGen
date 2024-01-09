@@ -64,8 +64,8 @@ const LoaderMasthead = (props) => {
 			<div className="mx-auto w-full max-w-[3000px]  ">
 				<div className="">
 					<div className="px-8">
-						<h1 className="t-144 mx-auto max-w-[1376px] text-center font-black uppercase">
-							<span className="whitespace-nowrap">
+						<h1 className="t-144-xxlarge mx-auto max-w-[1376px] text-center font-black uppercase">
+							<span className="">
 								<TextContainer startAnimation={videoLoaded} custom={4}>
 									<FontSwitcher startDelay={4800} text="F<pst-grid-pst>i</>nd" />
 								</TextContainer>{" "}

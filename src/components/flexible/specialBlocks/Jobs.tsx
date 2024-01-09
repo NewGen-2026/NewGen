@@ -67,14 +67,17 @@ const JobItem = ({ title, location, type }) => {
 		<div
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
-			className="py-6 !text-black transition-colors  duration-200 hover:!text-candy md:py-12 md:hover:bg-ketchup"
+			className="py-6 !text-black transition-colors  duration-200 md:py-12 md:hover:bg-ketchup hover:md:!text-candy"
 		>
 			<div className="container flex w-full cursor-pointer flex-col items-center justify-center gap-4 text-center md:flex-row md:items-center md:justify-between md:text-left ">
 				<div className="t-32 uupercase max-w-[500px] flex-1 font-heading font-black  uppercase">
 					<FontSwitcher hover isHovered={isHovered} text={title} />
 				</div>
-				<div className="t-20 max-w-[240px] flex-1 font-medium">{location}</div>
-				<div className="t-20 max-w-[235px] flex-[0.4] font-medium">{type}</div>
+				<div className="flex w-full flex-1 justify-center gap-4 md:max-w-[240px]">
+					<div className="t-20 font-medium">{location}</div>
+					<div className="t-20 font-medium md:hidden md:max-w-[235px] md:flex-[0.4]">{type}</div>
+				</div>
+				<div className="t-20 hidden font-medium md:block md:max-w-[235px] md:flex-[0.4]">{type}</div>
 			</div>
 		</div>
 	);

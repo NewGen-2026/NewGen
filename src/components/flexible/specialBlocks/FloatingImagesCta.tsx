@@ -9,7 +9,12 @@ const FloatingImagesCta = (props) => {
 	const { background_color, heading, button, top_left_asset, top_right_asset, bottom_left_asset, bottom_right_asset } = props;
 
 	return (
-		<div className={clsx("relative flex items-center justify-center overflow-hidden px-5 py-[150px] xs:py-[216px]", getBgColorClasses(background_color))}>
+		<div
+			className={clsx(
+				"relative mx-[-15px] flex items-center justify-center overflow-hidden px-5 py-[150px] xs:py-[216px] md:mx-0",
+				getBgColorClasses(background_color)
+			)}
+		>
 			<div>
 				<h2 className="t-80 mx-auto w-full max-w-[500px] text-center font-black uppercase !text-black">
 					<FontSwitcher text={heading} />

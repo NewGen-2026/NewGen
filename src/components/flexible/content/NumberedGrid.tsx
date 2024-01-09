@@ -12,7 +12,7 @@ const DefaultVariant = ({ items }) => {
 	return (
 		<div className="flex flex-wrap gap-6 gap-y-12 md:gap-y-20 lg:grid lg:grid-cols-3 xl:gap-[70px]">
 			{items?.map((item, i) => (
-				<div key={`stat${i}`} className="lg:flex-[0_1_412px]">
+				<div key={`stat${i}`} className="text-center md:text-left lg:flex-[0_1_412px]">
 					<h3 className="t-120 font-heading font-black uppercase">
 						<FontSwitcher text={item?.number} startDelay={i * 400} />
 					</h3>
@@ -22,7 +22,7 @@ const DefaultVariant = ({ items }) => {
 								<FontSwitcher text={item?.heading} />
 							</h4>
 						)}
-						<p className="t-20 mt-4 md:mt-7">{item?.content}</p>
+						<p className="t-20-small mt-4 md:mt-7">{item?.content}</p>
 					</div>
 				</div>
 			))}
@@ -32,7 +32,7 @@ const DefaultVariant = ({ items }) => {
 
 const CardsVariant = ({ items, background }) => {
 	return (
-		<div className="flex grid-cols-3 flex-wrap gap-4 md:grid lg:gap-8">
+		<div className="mx-[-15px] flex grid-cols-3 flex-wrap gap-4 md:mx-0 md:grid lg:gap-8">
 			{items?.map((item, i) => (
 				<div key={`stat${i}`} className={`p-6 lg:flex-[0_1_412px] ${getBgColorClasses(background)}`}>
 					<h3 className="t-48 font-heading font-black uppercase">

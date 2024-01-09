@@ -106,7 +106,7 @@ const ScrollItem = forwardRef<HTMLDivElement, ScrollItemProps>(({ item, i, lastI
 					style={{
 						x: contentXSpring,
 					}}
-					className="t-18 mt-3 whitespace-normal font-medium opacity-70 md:mt-6"
+					className="t-18 mt-3 whitespace-normal font-medium !leading-[1.35] opacity-70 md:mt-6"
 				>
 					{item?.content}
 				</motion.div>

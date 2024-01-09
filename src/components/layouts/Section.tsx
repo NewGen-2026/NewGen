@@ -13,6 +13,7 @@ const paddingSizes = {
 		xlarge: "pt-16 md:pt-[184px] laptop:pt-32",
 		xxlarge: "pt-20 md:pt-44 laptop:pt-36",
 		mastheadLarge: "pt-24 md:pt-52 laptop:pt-36",
+		extraMobileSpaceXLarge: "pt-20 md:pt-[184px] laptop:pt-32",
 	},
 	bottom: {
 		none: "pb-0",
@@ -38,6 +39,8 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 			return "space-y-14 md:space-y-32";
 		case "xxlarge":
 			return "space-y-16 md:space-y-40";
+		case "extraMobileSpaceMedium":
+			return "space-y-16 md:space-y-20";
 		default:
 			return "";
 	}

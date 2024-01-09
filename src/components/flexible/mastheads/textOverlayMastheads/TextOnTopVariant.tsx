@@ -18,8 +18,7 @@ const TextOnTopVariant = (props) => {
 					<SplitTextFontSwitcher delay={1} fontSwitchStartDelay={900} text={bottom_line} direction="down" />
 				</span>
 			</h1>
-
-			<div className="-mt-3 bg-stone/10 md:-mt-[4.5rem]">
+			<div className="mx-[-15px] -mt-3 bg-stone/10 md:mx-0 md:-mt-[4.5rem]">
 				<WpImage image={image} priority className="mx-auto" />
 			</div>
 		</div>

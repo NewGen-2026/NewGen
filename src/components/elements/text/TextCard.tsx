@@ -104,7 +104,7 @@ function TextCard({
 				}}
 				className={clsx(classes, className)}
 			>
-				<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between md:flex-row md:gap-6")}>
+				<div className={clsx(variant === "horizontal" && "flex w-full flex-col justify-between gap-y-5 md:flex-row md:gap-6")}>
 					{heading && (
 						<TextCardHeading
 							className={clsx(variant === "horizontal" && "flex-1")}

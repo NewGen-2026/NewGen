@@ -7,10 +7,10 @@ import { getBgColorClasses } from "~/utils/getColors";
 
 const variantThemeStyles = {
 	talent: {
-		imageClass: "max-w-[42.8%] translate-x-[-5%]",
+		imageClass: "max-w-[70%] md:max-w-[42.8%] translate-x-[-5%]  translate-y-[5%] md:translate-y-0",
 	},
 	creator: {
-		imageClass: "max-w-[35%]",
+		imageClass: "max-w-[75%] sm:max-w-[50%] md:max-w-[35%] translate-y-[5%] md:translate-y-0",
 	},
 };
 
@@ -31,7 +31,7 @@ const AssetAtBottomVariant = (props) => {
 			<div className="mx-auto w-full max-w-[1440px]">
 				<div className="inset-0 flex items-center md:absolute">
 					<div className="container md:pt-20">
-						<h1 className="t-144 text-center font-black uppercase">
+						<h1 className="t-144-xlarge text-center font-black uppercase">
 							<div className="relative z-0 flex justify-center gap-[0.1em] md:gap-[1em]">
 								<motion.span
 									initial={{

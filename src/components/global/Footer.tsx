@@ -95,8 +95,8 @@ export default function Footer(props) {
 				<div className="mt-16 flex w-full flex-wrap gap-5 gap-y-14 sm:gap-8 md:mt-24 md:gap-20">
 					{addresses?.map((address, i) => (
 						<div key={`address${i}`} className="max-w-[240px] flex-[1_1_45%] md:flex-1">
-							<div className="t-18 font-black uppercase">{address?.city}</div>
-							<div className="t-16 font-mediumo mt-4  !leading-[1.5] opacity-[0.4]" dangerouslySetInnerHTML={{ __html: address?.address }} />
+							<div className="t-18-small font-black uppercase">{address?.city}</div>
+							<div className="t-16 font-mediumo mt-2 !leading-[1.5]  opacity-[0.4] md:mt-4" dangerouslySetInnerHTML={{ __html: address?.address }} />
 						</div>
 					))}
 				</div>
@@ -105,7 +105,7 @@ export default function Footer(props) {
 					<FooterLogoAnimation isHover={false} />
 				</div>
 
-				<div className="t-16 mt-10 flex flex-wrap flex-wrap-reverse items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
+				<div className="t-16 mt-10 flex  flex-wrap-reverse items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
 					<div className="font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
 
 					<div className="flex items-center gap-6 font-medium md:gap-12">

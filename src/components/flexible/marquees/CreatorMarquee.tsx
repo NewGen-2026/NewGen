@@ -41,7 +41,7 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 				</Marquee>
 			</div>
 			{button?.link && (
-				<div className="mt-8 flex w-full justify-center md:mt-24">
+				<div className="mt-10 flex w-full justify-center md:mt-24">
 					<Link href={button?.link?.url}>
 						<HoverButton
 							button={{

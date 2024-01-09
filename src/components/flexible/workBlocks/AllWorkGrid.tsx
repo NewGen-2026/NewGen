@@ -105,7 +105,7 @@ const AllWorkGrid = (props) => {
 				</ul>
 
 				<div className="scroll-container relative w-full lg:w-auto">
-					<div className="t-15  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
+					<div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
 						{serviceNames.map(([name, slug], i) => (
 							<button
 								aria-label={name}

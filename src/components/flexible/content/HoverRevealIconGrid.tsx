@@ -18,7 +18,7 @@ const HoverRevealIconGrid = (props) => {
 					onMouseEnter={() => setActiveHover(i)}
 					onMouseLeave={() => setActiveHover(null)}
 					className={clsx(
-						`group relative flex flex-col overflow-hidden px-5 py-5 transition-colors duration-200 md:py-8 lg:py-10 xl:p-10 `,
+						`group relative flex flex-col overflow-hidden px-5 py-5 text-center transition-colors duration-200 md:py-8 lg:py-10 lg:text-left xl:p-10 `,
 						activeHover === i ? "w-full flex-auto xl:flex-[1_0_658px]" : "lg:flex-[1_1_448px]",
 						getBgColorClasses(theme_color),
 						getTextContrastColorClasses(theme_color),
@@ -28,12 +28,14 @@ const HoverRevealIconGrid = (props) => {
 				>
 					<motion.div
 						layout="position"
-						className={`h-16 w-16 transition-colors duration-200  ${getTextContrastColorClasses(theme_color)} ${getTextColorHoverClasses(theme_color)} `}
+						className={`mx-auto h-14 w-14 transition-colors duration-200 sm:h-16 sm:w-16 lg:mx-0  ${getTextContrastColorClasses(
+							theme_color
+						)} ${getTextColorHoverClasses(theme_color)} `}
 					>
 						<IconsRenderer icon={item?.icon_icon} />
 					</motion.div>
 					<motion.div layout="position" className="mt-8 flex h-full flex-col justify-between lg:mt-24 lg:w-[400px] xl:w-[578px]">
-						<h3 className={`t-44 max-w-[400px] font-black uppercase ${getTextColorHoverClasses(theme_color)}`}>
+						<h3 className={`t-44 mx-auto max-w-[400px] font-black uppercase lg:mx-0 ${getTextColorHoverClasses(theme_color)}`}>
 							<FontSwitcher text={item?.heading} />
 						</h3>
 						<div className="t-18 mt-5 font-medium lg:mt-8">{item?.content}</div>

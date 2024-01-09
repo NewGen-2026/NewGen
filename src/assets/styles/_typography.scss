@@ -139,6 +139,18 @@ h6,
 	@apply leading-[0.88] tracking-[-0.02em];
 }
 
+.t-144-xxlarge
+{
+	@include clamp("font-size", rem(176px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
+	@apply leading-[0.88] tracking-[-0.02em];
+}
+
+.t-144-xlarge
+{
+	@include clamp("font-size", rem(134px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
+	@apply leading-[0.88] tracking-[-0.02em];
+}
+
 .t-144-large
 {
 	@include clamp("font-size", rem(100px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
@@ -159,6 +171,11 @@ h6,
 
 .t-96{
 	@include clamp("font-size", rem(100px * $responsive_size_modifier_large), rem(96px), $md, $lg);
+	@apply leading-[0.95] tracking-[-0.02em];
+}
+
+.t-96-small{
+	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(96px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
@@ -280,6 +297,16 @@ h6,
 .t-16-small{
 	@include clamp("font-size", rem(30px * $responsive_size_modifier_large), rem(16px), $md, $lg);
 	@apply leading-[0.95];
+}
+
+.t-tag{
+	@include clamp("font-size", rem(23px * $responsive_size_modifier_large), rem(16px), $md, $lg);
+	@apply leading-[0.95];
+}
+
+.t-15-large{
+	@include clamp("font-size", rem(30px * $responsive_size_modifier_large), rem(15px), $md, $lg);
+	@apply leading-[1.45];
 }
 
 .t-15{
