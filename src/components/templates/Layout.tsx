@@ -27,7 +27,7 @@ function Layout({ data, children }: LayoutProps) {
 				<Header {...options} pageOptions={page?.page_options} pagePostType={page?.post_type} />
 				<main>{children}</main>
 				{!page?.page_options?.remove_cta && <CTA pageOptions={page?.page_options} />}
-				<Footer {...options} pageOptions={page?.page_options} />
+				{!page?.page_options?.remove_footer && <Footer {...options} pageOptions={page?.page_options} />}
 				<WpHotkey id={page?.ID} />
 			</VideoLoadedContext.Provider>
 		</PasswordProtect>
