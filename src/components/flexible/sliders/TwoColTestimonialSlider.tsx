@@ -65,7 +65,7 @@ const TwoColTestimonialSlider = (props) => {
 				boxedVariant ? "justify-between gap-6" : "items-end px-5 md:px-8 lg:min-h-[720px]"
 			)}
 		>
-			<div className={clsx(`w-full flex-1 lg:w-[unset] `, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[685px] ")}>
+			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[685px] ")}>
 				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 md:mt-[51px]")}>
 					<div className="">
 						<div style={{ minHeight: maxQuoteHeight }} className="relative w-full">
@@ -85,8 +85,7 @@ const TwoColTestimonialSlider = (props) => {
 									onMouseLeave={() => setIsHovered(false)}
 									className={`t-40 absolute left-0 top-0 cursor-default  font-black uppercase  lg:max-w-[680px] ${
 										isHovered ? getTextContrastColorClasses(items[activeSlide]?.theme_color) : ""
-									}
-								${activeSlide === i ? "" : "delay-[400ms]"}
+									} ${activeSlide === i ? "" : "delay-[400ms]"}
 								`}
 								>
 									<span

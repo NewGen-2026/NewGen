@@ -142,7 +142,19 @@ const AllWorkGrid = (props) => {
 			</div>
 			<div className="grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:gap-x-8 xl:gap-y-20">
 				{filteredWorkPosts.map((work, i) => (
-					<WorkGridItem key={`work-${i}`} work={work} variant="3col" />
+					<motion.div
+						key={`work-${i}-${selectedWorkType}`}
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={{
+							opacity: 1,
+							scale: 1,
+						}}
+						transition={{
+							delay: i * 0.05,
+						}}
+					>
+						<WorkGridItem work={work} variant="3col" />
+					</motion.div>
 				))}{" "}
 			</div>
 			{!allPostsDisplayed && (
