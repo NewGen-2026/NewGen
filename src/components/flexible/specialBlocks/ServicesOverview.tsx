@@ -6,6 +6,7 @@ import WpImage from "~/components/elements/WpImage";
 import Link from "next/link";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import useAutoSlider from "~/hooks/useAutoSlider";
+import CountUp from "~/components/elements/animations/helpers/CountUp";
 
 const activeHoverLayouts = {
 	influencer: {
@@ -174,7 +175,7 @@ const ServicesOverview = (props) => {
 								transition={{ duration: 0.3 }}
 							>
 								<h3 className="t-96 font-heading font-black uppercase">
-									{layout.statBlock?.stat}
+									<CountUp stat={layout.statBlock?.stat} startCount={activeHover === layout?.id} />
 									<span className={clsx(activeHoverLayouts[layout.id]?.font)}>k</span>+
 								</h3>
 								<p className="t-24 font-heading font-black uppercase">{layout.statBlock?.description}</p>
