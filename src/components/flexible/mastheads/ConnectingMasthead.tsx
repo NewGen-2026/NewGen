@@ -23,7 +23,7 @@ const ConnectingMasthead = (props) => {
 	const [autoplayStarted, setAutoplayStarted] = useState(false);
 
 	useEffect(() => {
-		const initialLoadDelay = 500;
+		const initialLoadDelay = 1000;
 		const timer = setTimeout(() => {
 			setIsInitialLoad(false);
 		}, initialLoadDelay);
@@ -87,6 +87,7 @@ const ConnectingMasthead = (props) => {
 					handleLogoClick={handleLogoClick}
 					logoOpacity={logoOpacity}
 					filterClassMap={filterClassMap}
+					autoplayStarted={autoplayStarted}
 				/>
 			</div>
 		</div>

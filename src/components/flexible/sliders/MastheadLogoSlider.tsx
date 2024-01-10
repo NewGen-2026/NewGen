@@ -4,7 +4,17 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import WpImage from "~/components/elements/WpImage";
 
-const MastheadLogoSlider = ({ items, setSwiper, handleSlideChange, activeSlide, duplicatedItems, handleLogoClick, logoOpacity, filterClassMap }) => {
+const MastheadLogoSlider = ({
+	items,
+	setSwiper,
+	handleSlideChange,
+	activeSlide,
+	duplicatedItems,
+	handleLogoClick,
+	logoOpacity,
+	filterClassMap,
+	autoplayStarted,
+}) => {
 	return (
 		<Swiper
 			className="!pointer-events-none w-full"
@@ -16,7 +26,7 @@ const MastheadLogoSlider = ({ items, setSwiper, handleSlideChange, activeSlide, 
 			centeredSlides
 			modules={[Autoplay]}
 			autoplay={{
-				delay: 2500,
+				delay: autoplayStarted ? 2500 : 500,
 				disableOnInteraction: false,
 			}}
 			breakpoints={{
