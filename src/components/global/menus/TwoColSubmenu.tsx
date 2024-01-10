@@ -22,7 +22,7 @@ const TwoColSubmenu = (props) => {
 			transition={{
 				delay: 0.1,
 			}}
-			className="mx-auto flex w-full flex-col gap-4 py-6 md:flex-row md:gap-0 md:py-0 "
+			className="mx-auto flex w-full flex-col gap-4 py-6 md:flex-row md:gap-0 md:px-4 md:py-4 "
 		>
 			<LeftCol {...left_col} isMobile={isMobile} />
 			<RightCol {...right_col} isMobile={isMobile} />
