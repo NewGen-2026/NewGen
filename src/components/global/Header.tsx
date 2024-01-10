@@ -34,7 +34,7 @@ export default function Header(props) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	const { scrollY } = useScroll();
-	const isDark = !pageOptions?.header_color || pageOptions?.header_color === "dark" || isMenuOpen || scrolledBg || mobileMenuOpen;
+	const isDark = !pageOptions?.header_color || pageOptions?.header_color === "dark" || (isMenuOpen && scrolledBg) || scrolledBg || mobileMenuOpen;
 
 	const path = useRouter().asPath;
 
@@ -72,7 +72,7 @@ export default function Header(props) {
 				className="fixed left-0 right-0 top-0 z-[200] block transition-colors duration-200"
 			>
 				<ScrollHeader
-					className={` transition-colors duration-300 ${scrolledBg || isMenuOpen || mobileMenuOpen ? "bg-white" : "bg-transparent"}`}
+					className={` transition-colors duration-300 ${scrolledBg || (isMenuOpen && scrolledBg) || mobileMenuOpen ? "bg-white" : "bg-transparent"}`}
 					scrollY={scrollY}
 					setScrolledBg={setScrolledBg}
 					setMenuOpen={setMenuOpen}
@@ -151,7 +151,7 @@ export default function Header(props) {
 																	damping: 20,
 																},
 															}}
-															className=" z-[5] w-full bg-white  p-4  will-change-transform   xl:min-w-[1088px]  "
+															className="z-[5] w-full bg-white p-4 will-change-transform xl:min-w-[1088px]"
 														>
 															<motion.div layout="position" className="w-full will-change-transform">
 																{showSubmenu && submenuContent}

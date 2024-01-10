@@ -76,7 +76,7 @@ const BottomLink = ({ link, heading, content, isMobile }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
-		<Link href={link} className="block px-4 md:px-0" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+		<Link href={link} className="block px-4 !text-black md:px-0" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
 			<div className="flex w-full items-end justify-between xl:px-5">
 				<div>
 					<div className="t-48-large max-w-[300px] font-heading font-black uppercase !leading-[1.05] md:max-w-none">
