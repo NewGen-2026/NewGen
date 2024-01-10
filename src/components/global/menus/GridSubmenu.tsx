@@ -29,7 +29,7 @@ const GridSubmenu = (props) => {
 			transition={{
 				delay: 0.1,
 			}}
-			layout
+			// layout
 			className="py-6 md:py-0 lg:min-h-[690px]"
 		>
 			<div className="grid gap-4 md:grid-cols-3 md:gap-5">{grid_items?.map((item, i) => <GridItem key={`grid${i}`} isMobile={isMobile} {...item} />)}</div>

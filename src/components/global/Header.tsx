@@ -93,7 +93,7 @@ export default function Header(props) {
 							<div className="flex items-center gap-6 xl:gap-10">
 								<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-white")}>
 									{menu?.nav?.map((navItem, i) => (
-										<motion.button
+										<motion.li
 											key={`nav-item-${i}`}
 											onHoverStart={() => handleMouseEnter(navItem)}
 											onKeyDown={(e) => {
@@ -101,10 +101,76 @@ export default function Header(props) {
 													handleMouseEnter(navItem);
 												}
 											}}
-											className="t-16 block font-heading font-black uppercase"
+											className="t-16 block text-left font-heading font-black xl:relative "
 										>
-											<Link href={navItem?.nav_item?.link?.url || "/#"}>{navItem?.nav_item?.link?.title}</Link>
-										</motion.button>
+											<Link className="relative uppercase" href={navItem?.nav_item?.link?.url || "/#"}>
+												{navItem?.nav_item?.link?.title}
+												<div className="absolute left-0 right-0 top-[150%] w-full will-change-transform">
+													<div className="relative flex h-full w-full items-center justify-center">
+														{activeSubmenu === navItem?.nav_item && (
+															<motion.div
+																layoutId="navUnderline"
+																transition={{
+																	layout: {
+																		type: "spring",
+																		stiffness: 200,
+																		damping: 28,
+																	},
+																}}
+																className={clsx("h-[6px] w-[6px] will-change-transform", isDark ? "bg-black" : "bg-white")}
+															/>
+														)}
+													</div>
+												</div>
+											</Link>
+
+											{!breakpointCrossed && activeSubmenu === navItem?.nav_item && (
+												<>
+													<motion.div
+														style={{
+															pointerEvents: isMenuOpen ? "auto" : "none",
+														}}
+														className="absolute left-0 top-[90px] z-[5] w-full min-w-[960px] px-5 will-change-transform  lg:min-w-[1000px] xl:left-[50%] xl:top-[400%] xl:min-w-[1088px] xl:-translate-x-1/2   xl:px-0  "
+													>
+														<motion.div
+															style={{
+																pointerEvents: isMenuOpen ? "auto" : "none",
+															}}
+															initial={{ opacity: 0 }}
+															animate={{
+																opacity: isMenuOpen ? 1 : 0,
+															}}
+															layoutId="menu"
+															transition={{
+																opacity: {
+																	duration: 0.2,
+																},
+																layout: {
+																	type: "spring",
+																	stiffness: 150,
+																	damping: 20,
+																},
+															}}
+															className=" z-[5] w-full bg-white  p-4  will-change-transform   xl:min-w-[1088px]  "
+														>
+															<motion.div layout="position" className="w-full will-change-transform">
+																{showSubmenu && submenuContent}
+															</motion.div>
+														</motion.div>
+													</motion.div>
+
+													{isMenuOpen && (
+														<div
+															style={{
+																pointerEvents: isMenuOpen ? "auto" : "none",
+															}}
+															onMouseEnter={() => reset()}
+															className="fixed bottom-0 left-0 right-0 top-[96px] z-0 h-screen w-full "
+														/>
+													)}
+												</>
+											)}
+										</motion.li>
 									))}
 								</nav>
 								<Link
@@ -126,45 +192,6 @@ export default function Header(props) {
 						<MobileNavButton mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} scrolledBg={scrolledBg} />
 						{(pageOptions?.add_scroll_progress || pagePostType === "post") && <ScrollProgress color={pageOptions?.scroll_progress?.color || "cobalt"} />}
 					</div>
-					{!breakpointCrossed && (
-						<>
-							<motion.div
-								style={{
-									pointerEvents: isMenuOpen ? "auto" : "none",
-								}}
-								initial={{ opacity: 0 }}
-								animate={{
-									opacity: isMenuOpen ? 1 : 0,
-								}}
-								layout
-								transition={{
-									opacity: {
-										duration: 0.2,
-									},
-									layout: {
-										type: "spring",
-										stiffness: 200,
-										damping: 20,
-									},
-								}}
-								className="absolute left-0 right-0 top-0 z-[5] w-full bg-white pb-4  pt-24  will-change-transform  xl:min-h-[747px]"
-							>
-								<motion.div layout="position" className="container will-change-transform">
-									{showSubmenu && submenuContent}
-								</motion.div>
-							</motion.div>
-
-							{isMenuOpen && (
-								<div
-									style={{
-										pointerEvents: isMenuOpen ? "auto" : "none",
-									}}
-									onMouseEnter={() => reset()}
-									className="fixed inset-0 z-0 h-screen w-full "
-								/>
-							)}
-						</>
-					)}
 				</ScrollHeader>
 			</motion.div>
 

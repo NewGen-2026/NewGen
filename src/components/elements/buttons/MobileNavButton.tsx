@@ -1,4 +1,8 @@
 const MobileNavButton = ({ mobileMenuOpen, setMobileMenuOpen, scrolledBg }) => {
+	const w = 24;
+	const h = 2.62;
+	const d = Math.sqrt(w * w + h * h);
+	const translateY = d / 3.3;
 	return (
 		<button
 			type="button"
@@ -8,8 +12,11 @@ const MobileNavButton = ({ mobileMenuOpen, setMobileMenuOpen, scrolledBg }) => {
 		>
 			<svg overflow="visible" width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<rect
-					className={`!origin-[12px_2.38px]
-					${mobileMenuOpen ? "translate-y-[7.25px] rotate-45" : "	translate-y-0 rotate-0"}
+					style={{
+						// transformOrigin: `${w / 2}px ${h / 2}px`,
+						transform: mobileMenuOpen ? `translateY(${translateY}px) rotate(45deg)` : "none",
+					}}
+					className={` !origin-[12px_2.38px]
 					transition-transform
 					duration-200
 				`}
@@ -26,8 +33,12 @@ const MobileNavButton = ({ mobileMenuOpen, setMobileMenuOpen, scrolledBg }) => {
 					fill="currentColor"
 				/>
 				<rect
+					style={{
+						// transformOrigin: `${w / 2}px ${h / 2}px`,
+						transform: mobileMenuOpen ? `translateY(-${translateY}px) rotate(-45deg)` : "none",
+					}}
 					className={`!origin-[12px_16.62px] transition-transform	duration-200
-					${mobileMenuOpen ? "translate-y-[-7.25px] rotate-[-45deg]" : "translate-y-0 rotate-0"}
+
 				`}
 					y="14.81"
 					width="24"
