@@ -85,7 +85,7 @@ const JobItem = ({ title, location, type }) => {
 
 const Select = ({ options }) => {
 	return (
-		<div className="t-24 relative font-medium">
+		<div className="t-24 relative -ml-2 font-medium">
 			<select
 				style={{
 					backgroundImage: "unset",

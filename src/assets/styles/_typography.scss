@@ -1,3 +1,4 @@
+$xxxs: rem(350px);
 $xxs: rem(400px);
 $xs: rem(480px);
 $sm: rem(640px);
@@ -312,6 +313,11 @@ h6,
 .t-15{
 	@include clamp("font-size", rem(26px * $responsive_size_modifier_large), rem(15px), $md, $lg);
 	@apply leading-[1.45];
+}
+
+.t-404{
+	@include clamp("font-size", rem(320px * $responsive_size_modifier_large), rem(672px), $xxxs, $xl);
+
 }
 
 
