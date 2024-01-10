@@ -50,11 +50,13 @@ const FeedPreview = ({
 	const link = acf?.is_external_link ? acf?.external_link : permalink;
 
 	return (
-		<div
+		<motion.div
+			initial="initial"
+			whileHover={openShare ? "initial" : "hover"}
 			onMouseLeave={() => setOpenShare(false)}
-			className={clsx(className, `flex flex-col justify-between`, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
+			className={clsx(className, `group flex flex-col justify-between`, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
 		>
-			<div className="mb-6 flex justify-between gap-2 ">
+			<div className={clsx(` flex w-full justify-between gap-2`, !slideVariant && "mb-6")}>
 				<div className={clsx(`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
 					<div
 						className={clsx(
@@ -76,7 +78,7 @@ const FeedPreview = ({
 							</div>
 							<h3
 								className={clsx(
-									` line-clamp-3 whitespace-normal md:mt-2  `,
+									` line-clamp-3 whitespace-normal transition-colors duration-200 group-hover:text-cobalt md:mt-2  `,
 									slideVariant ? "t-24 mt-1 font-black !leading-[-0.015rem]" : "t-30 mt-2 font-bold !leading-[1.05]"
 								)}
 							>
@@ -85,7 +87,7 @@ const FeedPreview = ({
 						</div>
 
 						<div
-							className={`mt-2 ${slideVariant ? "hidden" : ""} t-tag  flex flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:gap-[14px] md:gap-y-1 `}
+							className={`mt-2 ${slideVariant ? "md:mt-4" : ""} t-tag  flex flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:gap-[14px] md:gap-y-1 `}
 						>
 							{post_tag?.map((tag, j) => (
 								<span className="inline-block" key={`category${j}`}>
@@ -94,15 +96,43 @@ const FeedPreview = ({
 							))}
 						</div>
 					</Link>
-					<div className="h-5 w-5 md:h-8 md:w-8" />
+					{!slideVariant && <div className="h-5 w-5 md:h-8 md:w-8" />}
 				</div>
 			</div>
 			<div className={clsx(`flex justify-between gap-2`)}>
-				<Link href={link || "/#"} target={acf?.is_external_link ? "_blank" : "_self"} className="block aspect-[438/615] w-full max-w-[438px]">
-					<WpImage
-						className={clsx(` relative z-[5]  h-full w-full bg-stone/20 object-cover `, slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "")}
-						image={post?.image || featured_image}
-					/>
+				<Link
+					href={link || "/#"}
+					target={acf?.is_external_link ? "_blank" : "_self"}
+					className="block aspect-[438/615] w-full max-w-[438px] transform-gpu overflow-hidden "
+				>
+					<motion.div
+						variants={{
+							initial: {
+								scale: 1,
+								// rotate: 0,
+							},
+							hover: {
+								scale: 1.03,
+								// rotate: 5,
+								transition: {
+									stiffness: 200,
+									damping: 20,
+								},
+							},
+						}}
+						transition={{
+							transition: {
+								stiffness: 200,
+								damping: 20,
+							},
+						}}
+						className="h-full w-full"
+					>
+						<WpImage
+							className={clsx(` relative z-[5]  h-full w-full bg-stone/20 object-cover `, slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "")}
+							image={post?.image || featured_image}
+						/>
+					</motion.div>
 				</Link>
 				<div className="flex flex-col gap-4">
 					<motion.span
@@ -209,11 +239,20 @@ const FeedPreview = ({
 			</div>
 			{variant === "default" && acf?.comments?.comments?.length > 1 && (
 				<div className="mt-3 flex gap-2 md:mt-6 md:gap-4">
-					<div className="max-w-[438px] flex-1 space-y-3">{acf?.comments?.comments?.map((comment, j) => <Comment key={`comment${j}`} {...comment} />)}</div>
+					<motion.div
+						initial="initial"
+						whileInView="inView"
+						viewport={{
+							once: true,
+						}}
+						className="max-w-[438px] flex-1 space-y-3"
+					>
+						{acf?.comments?.comments?.map((comment, j) => <Comment key={`comment${j}`} {...comment} i={j} />)}
+					</motion.div>
 					<div className="max-w-[20px] flex-1 md:max-w-[32px]" />
 				</div>
 			)}
-		</div>
+		</motion.div>
 	);
 };
 
@@ -244,17 +283,95 @@ const SocialWrapper = ({ children }) => {
 	);
 };
 
-const Comment = ({ image, name = "Stacey Dean", comment = "Nisl morbi faucibus fringilla lectus. 🔥" }) => {
+const Comment = ({ image, name = "Stacey Dean", comment = "Nisl morbi faucibus fringilla lectus. 🔥", i }) => {
+	const staggerDelay = i / 2;
+
 	return (
-		<div className="flex gap-2 md:gap-4 ">
-			<div className="h-8 w-8 flex-none overflow-hidden rounded-full bg-electric will-change-transform md:h-12 md:w-12">
+		<motion.div className="flex gap-2 md:gap-4 ">
+			<motion.div
+				variants={{
+					initial: {
+						opacity: 0,
+						scale: 0,
+					},
+					inView: {
+						opacity: 1,
+						scale: 1,
+						transition: {
+							scale: {
+								type: "spring",
+								stiffness: 250,
+								damping: 20,
+								delay: 0.2 + staggerDelay,
+							},
+						},
+					},
+				}}
+				className="h-8 w-8 flex-none overflow-hidden rounded-full bg-electric will-change-transform md:h-12 md:w-12"
+			>
 				<WpImage image={image} className="h-full w-full object-cover" />
-			</div>
-			<div className="w-full  bg-stone/20 px-3 py-4 md:p-4">
-				<div className="t-18 font-medium">{name}</div>
-				<div className="t-16 mt-2 font-medium text-[#4A4A4A] md:mt-3">{comment}</div>
-			</div>
-		</div>
+			</motion.div>
+			<motion.div
+				variants={{
+					initial: {
+						clipPath: "inset(0% 100% 100% 0%)",
+					},
+					inView: {
+						clipPath: "inset(0% 0% 0% 0%)",
+						transition: {
+							type: "spring",
+							stiffness: 150,
+							damping: 20,
+							delay: 0.4 + staggerDelay,
+						},
+					},
+				}}
+				className="w-full  bg-stone/20 px-3 py-4 md:p-4"
+			>
+				<motion.div
+					variants={{
+						initial: {
+							opacity: 0,
+							y: 20,
+						},
+						inView: {
+							opacity: 1,
+							y: 0,
+							transition: {
+								type: "spring",
+								stiffness: 180,
+								damping: 20,
+								delay: 0.6 + staggerDelay,
+							},
+						},
+					}}
+					className="t-18 font-medium"
+				>
+					{name}
+				</motion.div>
+				<motion.div
+					variants={{
+						initial: {
+							opacity: 0,
+							y: 20,
+						},
+						inView: {
+							opacity: 1,
+							y: 0,
+							transition: {
+								type: "spring",
+								stiffness: 180,
+								damping: 20,
+								delay: 0.8 + staggerDelay,
+							},
+						},
+					}}
+					className="t-16 mt-2 font-medium text-[#4A4A4A] md:mt-3"
+				>
+					{comment}
+				</motion.div>
+			</motion.div>
+		</motion.div>
 	);
 };
 

@@ -172,7 +172,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 				}}
 				className="flex w-full max-w-[971px] flex-col justify-between gap-2 gap-y-12 md:flex-row"
 			>
-				<div className=" relative w-full md:w-auto md:max-w-[203px] md:flex-1">
+				<div className="relative w-full md:w-auto md:max-w-[203px] md:flex-1">
 					<div className="sticky top-20">
 						<div className="space-y-4">
 							<CategoryLink active={selectedCategory === "home"} onClick={() => handleCategoryClick("home")} icon="home" title="F<pst-hal>o</>r you" />

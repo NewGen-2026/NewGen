@@ -51,7 +51,7 @@ const LeftRightCTA = (props) => {
 
 			<div className="absolute inset-0 z-[20] flex w-full">
 				<Link href="/for-creators" onMouseEnter={() => setActiveSide("left")} className="flex-1 cursor-pointer " />
-				<Link href="/for-talent-mangagers" onMouseEnter={() => setActiveSide("right")} className="flex-1 cursor-pointer " />
+				<Link href="/for-talent-managers" onMouseEnter={() => setActiveSide("right")} className="flex-1 cursor-pointer " />
 			</div>
 			<div className="pointer-events-none inset-0 z-[20] hidden w-full items-end md-large:absolute md-large:flex md-large:pb-[146px]">
 				<div className="container !w-full">
