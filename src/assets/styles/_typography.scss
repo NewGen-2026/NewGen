@@ -181,7 +181,7 @@ h6,
 
 .t-88-menu
 {
-	@include clamp("font-size", rem(120px * 0.5), rem(100px), $xxs, $xl);
+	@include clamp("font-size", rem(120px * 0.5), rem(88px), $xxs, $xl);
 	@apply  tracking-[-0.11rem];
 
 }

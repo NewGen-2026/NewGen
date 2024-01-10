@@ -24,14 +24,14 @@ const LinkSlider = (props) => {
 
 	return (
 		<div ref={ref} className="flex w-full flex-col-reverse justify-between gap-6 gap-y-5 sm:flex-row">
-			<div className="flex max-w-[620px] flex-1 flex-col justify-between gap-6 text-center sm:text-left">
+			<div className="flex max-w-[620px] flex-1 flex-col justify-between gap-y-3 text-center sm:text-left md:gap-6">
 				<ul className="t-44 flex flex-col gap-1.5  font-heading font-black uppercase xl:gap-3">
 					{items?.map((item, i) => (
-						<li key={`title${i}`} className="inline-block">
+						<li key={`title${i}`} className={`inline-block 	${activeSlide === i ? `` : "invisible hidden md:visible md:block"}`}>
 							<button
 								type="button"
 								className={`relative inline-block max-w-max overflow-hidden whitespace-nowrap uppercase transition-colors duration-200
-							${activeSlide === i ? getTextColorClasses("black" || "boost") : "text-black"}
+							${activeSlide === i ? `${getTextColorClasses("black" || "boost")}` : "invisible hidden text-black md:visible md:block"}
 							`}
 								onClick={() => setOverrideSlide(i)}
 								onMouseEnter={() => setIshovered(i)}

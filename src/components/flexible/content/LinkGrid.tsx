@@ -34,21 +34,23 @@ const GridItem = ({ item, variant }) => {
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			<IsLinkWrapper link={item?.link} className="flex h-full flex-col">
-				<div className="bg-stone-5 aspect-[672/400]  w-full overflow-hidden">
-					<motion.div
-						initial={{ scale: 1 }}
-						animate={{
-							scale: isHovered ? 1.05 : 1,
-						}}
-						transition={{
-							type: "spring",
-							stiffness: 200,
-							damping: 22,
-						}}
-						className="h-full w-full"
-					>
-						<WpImage image={item?.image} className="h-full w-full object-cover" />
-					</motion.div>
+				<div className="mx-[-15px] md:mx-0">
+					<div className="bg-stone-5 aspect-[672/400] w-full overflow-hidden">
+						<motion.div
+							initial={{ scale: 1 }}
+							animate={{
+								scale: isHovered ? 1.05 : 1,
+							}}
+							transition={{
+								type: "spring",
+								stiffness: 200,
+								damping: 22,
+							}}
+							className="h-full w-full "
+						>
+							<WpImage image={item?.image} className="h-full w-full object-cover" />
+						</motion.div>
+					</div>
 				</div>
 				<div className={`flex ${threeColVariant ? "" : "flex-1"}  flex-col justify-between`}>
 					<h3
