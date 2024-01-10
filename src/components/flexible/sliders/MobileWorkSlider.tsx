@@ -37,12 +37,12 @@ const MobileWorkSlider = (props) => {
 				}}
 			>
 				{work_slides?.map((slide, i) => (
-					<SwiperSlide key={`item-${i}`} className="flex !h-auto min-h-[580px] flex-col overflow-hidden  sm:min-h-[350px] md:!min-h-[443px]">
+					<SwiperSlide key={`item-${i}`} className="!flex !h-auto min-h-[580px] flex-col overflow-hidden  sm:min-h-[350px] md:!min-h-[443px]">
 						<div id={`slide${i}`} key={`slide-image${i}`} className="aspect-[600/400] w-full overflow-hidden">
 							<WpImage image={slide?.work?.acf?.previews?.slider_image || slide?.work?.featured_image} className="h-full w-full object-cover" />
 						</div>
 
-						<div className={`flex h-full flex-1 flex-col justify-between gap-5 p-6  px-3 ${getBgColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
+						<div className={`flex flex-1 flex-col justify-between gap-5 p-6  px-3 ${getBgColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
 							<div className="flex flex-col gap-5">
 								<WpImage
 									image={slide?.work?.acf?.work_logos?.light_logo}
@@ -52,10 +52,10 @@ const MobileWorkSlider = (props) => {
 									<FontSwitcher text={slide?.work?.acf?.work_masthead?.heading} />
 								</h2>
 								<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
-								<Link href={slide?.work?.permalink}>
-									<TextLink>Learn more</TextLink>
-								</Link>
 							</div>
+							<Link href={slide?.work?.permalink}>
+								<TextLink>Learn more</TextLink>
+							</Link>
 						</div>
 					</SwiperSlide>
 				))}

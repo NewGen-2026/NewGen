@@ -67,7 +67,7 @@ export default function Header(props) {
 					type: "spring",
 					stiffness: 200,
 					damping: 20,
-					delay: path === "/" ? 4.2 : 0,
+					delay: path === "/" ? 3.2 : 0,
 				}}
 				className="fixed left-0 right-0 top-0 z-[200] block transition-colors duration-200"
 			>

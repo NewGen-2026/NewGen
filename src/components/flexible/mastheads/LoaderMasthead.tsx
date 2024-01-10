@@ -96,7 +96,7 @@ const LoaderMasthead = (props) => {
 									ease: "easeInOut",
 									delay: 1.3,
 									y: {
-										delay: 4,
+										delay: 3,
 										type: "spring",
 										stiffness: 180,
 										damping: 23,
@@ -107,16 +107,16 @@ const LoaderMasthead = (props) => {
 							>
 								<motion.div
 									initial={{
-										scale: 0.8,
+										scale: 1.1,
 									}}
 									animate={{
-										scale: videoLoaded ? 1 : 0.8,
+										scale: videoLoaded ? 1 : 1.1,
 									}}
 									transition={{
 										type: "spring",
 										stiffness: 80,
 										damping: 18,
-										delay: 1.4,
+										delay: 3,
 									}}
 									className="h-full w-full"
 								>
@@ -145,7 +145,7 @@ const TextContainer = ({ children, custom = 0, startAnimation }) => {
 				animate={{
 					y: startAnimation ? 0 : "0.2em",
 					opacity: startAnimation ? 1 : 0,
-					transition: { type: "spring", stiffness: 1200, damping: 15, mass: 0.2, delay: 4.5 + custom * 0.1 },
+					transition: { type: "spring", stiffness: 1200, damping: 15, mass: 0.2, delay: 3.5 + custom * 0.1 },
 				}}
 				style={{ display: "inline-flex", willChange: "transform" }}
 			>
