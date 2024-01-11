@@ -33,8 +33,10 @@ const SplitTextFontSwitcher = ({
 				transition={{
 					y: {
 						delay: delay + delayIndex * stagger + 0.2,
-						type: "tween",
-						duration: 0.1,
+						type: "spring",
+						stiffness: 1200,
+						damping: 15,
+						mass: 0.2,
 					},
 					opacity: {
 						duration: 0.05,
