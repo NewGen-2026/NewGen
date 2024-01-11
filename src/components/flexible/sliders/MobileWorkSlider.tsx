@@ -42,8 +42,8 @@ const MobileWorkSlider = (props) => {
 							<WpImage image={slide?.work?.acf?.previews?.slider_image || slide?.work?.featured_image} className="h-full w-full object-cover" />
 						</div>
 
-						<div className={`flex flex-1 flex-col justify-between gap-5 p-6  px-3 ${getBgColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
-							<div className="flex flex-col gap-5">
+						<div className={`flex flex-1 flex-col justify-between gap-5 p-8  px-4 ${getBgColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
+							<div className="flex flex-col gap-7">
 								<WpImage
 									image={slide?.work?.acf?.work_logos?.light_logo}
 									className="flex max-h-[20px] max-w-[200px] justify-start object-contain object-left"

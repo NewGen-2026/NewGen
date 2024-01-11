@@ -180,20 +180,24 @@ const NavBar = ({ items, active }) => {
 				</div>
 				<div className="flex flex-1 items-center gap-5">
 					<Link href={items[active]?.work?.permalink} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
-						<TextLink underlineColour="black">{`VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
+						<TextLink underlineColour="black">{items[active]?.override_text_link ? items[active]?.text_link : `VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
 					</Link>
-					<div className="w-full">
+					<Link href={items[active]?.override_button && items[active]?.button.link?.url ? items[active]?.button.link?.url : "/work"} className="block w-full">
 						<HoverButton
-							button={{
-								background_color: "black",
-								text_color: "white",
-								text_hover_color: getBgContrastColorName(items[active]?.work?.acf?.general?.theme_color) as Color,
-								hover_background_color: items[active]?.work?.acf?.general?.theme_color,
-								size: "medium",
-							}}
+							button={
+								items[active]?.override_button
+									? items[active].button
+									: {
+											background_color: "black",
+											text_color: "white",
+											text_hover_color: getBgContrastColorName(items[active]?.work?.acf?.general?.theme_color) as Color,
+											hover_background_color: items[active]?.work?.acf?.general?.theme_color,
+											size: "medium",
+									  }
+							}
 							className="!w-full text-center"
 						>{`All w<pst-rec>o</>rk`}</HoverButton>
-					</div>
+					</Link>
 				</div>
 			</div>
 		</div>
