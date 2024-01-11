@@ -1,9 +1,13 @@
+import { useRef } from "react";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 
 const StatRow = (props) => {
 	const { items } = props;
+
+	const ref = useRef(null);
+
 	return (
-		<div className="flex flex-wrap justify-center gap-8 text-center sm:justify-start sm:text-start lg:flex-nowrap">
+		<div ref={ref} className="flex flex-wrap justify-center gap-8 text-center sm:justify-start sm:text-start lg:flex-nowrap">
 			{items?.map((item, i) => (
 				<div key={`stat${i}`} className="lg:flex-[0_1_437px]">
 					<h3 className="t-80 font-heading font-black uppercase">

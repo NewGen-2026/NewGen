@@ -32,7 +32,7 @@ const GridSubmenu = (props) => {
 			className="py-6 md:px-4 md:py-4 lg:min-h-[690px]"
 		>
 			<div className="grid gap-4 md:grid-cols-3 md:gap-5">{grid_items?.map((item, i) => <GridItem key={`grid${i}`} isMobile={isMobile} {...item} />)}</div>
-			<div className="py-8 md:py-10">
+			<div className="pt-8 md:pt-10">
 				<BottomLink {...bottom_link} isMobile={isMobile} />
 			</div>
 		</motion.div>
