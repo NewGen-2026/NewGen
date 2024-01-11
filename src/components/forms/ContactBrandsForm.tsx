@@ -171,7 +171,7 @@ const ContactBrandsForm = ({ onSubmit }) => {
 				<h3 className="t-44 font-black uppercase">{`What's the budget`}</h3>
 				<div className="t-16 flex items-center gap-8 font-black uppercase">
 					{currencies.map((currency) => (
-						<CurrencySwitch currency={currency} selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency} />
+						<CurrencySwitch key={currency} currency={currency} selectedCurrency={selectedCurrency} setSelectedCurrency={setSelectedCurrency} />
 					))}
 				</div>
 			</div>
