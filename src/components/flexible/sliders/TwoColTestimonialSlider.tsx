@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import { AnimatePresence, useInView, motion, useIsomorphicLayoutEffect } from "framer-motion";
 import { createRef, useEffect, useRef, useState } from "react";
+import { useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
@@ -56,13 +57,18 @@ const TwoColTestimonialSlider = (props) => {
 
 	const boxedVariant = variant === "boxedImage";
 
+	const { width: windowWidth } = useWindowSize();
+
+	const xValue = windowWidth < 1024 ? 0 : "100%";
+	const yValue = windowWidth < 1024 ? "50%" : 0;
+
 	return (
 		<div
 			ref={ref}
 			className={clsx(
-				`mx-[-15px] flex flex-col-reverse gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
+				`mx-[-15px] flex  gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
 				getBgColorClasses(items[activeSlide]?.theme_color),
-				boxedVariant ? "justify-between gap-6" : "items-end px-5 md:px-8 lg:min-h-[720px]"
+				boxedVariant ? "flex-col-reverse justify-between gap-6" : "flex-col items-end overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
 			)}
 		>
 			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[685px] ")}>
@@ -152,17 +158,32 @@ const TwoColTestimonialSlider = (props) => {
 				</div>
 			</div>
 			<div className={clsx(`w-full flex-1 lg:w-[unset] `, boxedVariant ? "lg:max-w-[672px]" : "max-w-[650px]  xl:translate-x-[-5%] ")}>
-				<div className={clsx(`relative w-full`, boxedVariant ? "aspect-[672/672]" : "aspect-[650/656]")}>
+				<div
+					className={clsx(
+						`relative w-full `,
+						boxedVariant ? "aspect-[672/672] overflow-hidden" : "aspect-[650/656]",
+						items[activeSlide]?.add_background && getBgColorClasses(items[activeSlide]?.boxed_image_background?.color)
+					)}
+				>
 					{items?.map((item, i) => (
 						<motion.div
 							key={`item${i}`}
-							initial={{ opacity: 0 }}
+							initial={{ opacity: 0, x: xValue, y: yValue }}
 							animate={{
 								opacity: activeSlide === i ? 1 : 0,
+								x: activeSlide === i ? "0%" : xValue,
+								y: activeSlide === i ? "0%" : yValue,
 							}}
 							transition={{
-								duration: 0.3,
-								delay: activeSlide === i ? 0.2 : 0,
+								type: "spring",
+								stiffness: 180,
+								damping: 25,
+								delay: activeSlide === i ? 0.3 : 0,
+
+								opacity: {
+									duration: 0.2,
+									delay: activeSlide === i ? 0.3 : 0,
+								},
 							}}
 							className="absolute inset-0 h-full w-full"
 						>
