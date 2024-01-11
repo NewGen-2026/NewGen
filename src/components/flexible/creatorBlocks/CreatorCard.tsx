@@ -11,10 +11,28 @@ const socialVariants = {
 	initial: {
 		y: 48,
 		opacity: 0,
+		transition: {
+			type: "spring",
+			stiffness: 500,
+			damping: 18,
+			mass: 0.3,
+			opacity: {
+				duration: 0.1,
+			},
+		},
 	},
 	animate: {
 		y: 0,
 		opacity: 1,
+		transition: {
+			type: "spring",
+			stiffness: 500,
+			damping: 16,
+			mass: 0.3,
+			opacity: {
+				duration: 0.2,
+			},
+		},
 	},
 };
 
@@ -63,9 +81,10 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 					}}
 					transition={{
 						type: "spring",
-						delay: isHovered ? 0 : 0.5,
-						stiffness: 200,
+						delay: isHovered ? 0 : 0.4,
+						stiffness: 220,
 						damping: 20,
+						mass: 0.7,
 					}}
 					className="t-48-small text-center font-heading font-black uppercase will-change-transform"
 				>

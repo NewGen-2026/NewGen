@@ -117,7 +117,9 @@ export default function Header(props) {
 																	layout: {
 																		type: "spring",
 																		stiffness: 200,
-																		damping: 28,
+																		damping: 14,
+																		mass: 0.4,
+																		bounce: 0.3,
 																	},
 																}}
 																className={clsx("h-[6px] w-[6px] will-change-transform", isDark ? "bg-black" : "bg-white")}
