@@ -26,9 +26,10 @@ const socialVariants = {
 		opacity: 1,
 		transition: {
 			type: "spring",
-			stiffness: 500,
-			damping: 16,
-			mass: 0.3,
+			stiffness: 400,
+			damping: 18,
+			mass: 0.6,
+			bounce: 0.3,
 			opacity: {
 				duration: 0.2,
 			},
@@ -65,7 +66,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 			className={clsx(
-				`bg-stone-10 relative h-full w-full transform-gpu overflow-hidden text-white`,
+				`bg-stone-10 relative h-full w-full  overflow-hidden text-white`,
 				size === "large" ? "aspect-[907/580]  max-w-[907px]" : "aspect-[437/580] max-w-[437px]",
 				className
 			)}
@@ -100,7 +101,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 						delayChildren: 0.1,
 						staggerDirection: isHovered ? 1 : -1,
 					}}
-					className="flex justify-center"
+					className="flex justify-center will-change-transform"
 				>
 					{socialLinks.map(({ acfField, IconComponent }) => {
 						const link = creator?.creator?.acf?.[acfField];
