@@ -33,7 +33,7 @@ const HijackScroller = (props) => {
 
 	const gapOffset = windowWidth > 1024 ? 96 : windowWidth < 769 ? 45 : 160;
 
-	const xBase = useTransform(scrollYProgress, [0.2, 0.65], [0, -totalWidth + width - gapOffset]);
+	const xBase = useTransform(scrollYProgress, [windowWidth > 2000 ? 0.18 : 0.2, 0.65], [0, -totalWidth + width - gapOffset]);
 	const xSpring = useSpring(xBase, { stiffness: 250, damping: 30 });
 
 	useEffect(() => {
