@@ -1,5 +1,6 @@
 import { HoverButton } from "~/components/elements/buttons/Button";
 import clsx from "clsx";
+import Link from "next/link";
 import WorkGridItem from "./WorkGridItem";
 
 const WorkGrid = (props) => {
@@ -14,7 +15,11 @@ const WorkGrid = (props) => {
 			</div>
 			{button?.link?.title && (
 				<div className="mt-8 flex w-full justify-center md:mt-24">
-					{button?.link?.title && <HoverButton button={button}>{button?.link?.title || `All Pr<pst-rec>o</>jects`}</HoverButton>}
+					{button?.link?.title && (
+						<Link href={button?.link?.url || "/#"}>
+							<HoverButton button={button}>{button?.link?.title || `All Pr<pst-rec>o</>jects`}</HoverButton>
+						</Link>
+					)}
 				</div>
 			)}
 		</div>
