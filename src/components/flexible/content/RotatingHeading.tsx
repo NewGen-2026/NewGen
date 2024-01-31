@@ -15,10 +15,12 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 	const HeadingTag = heading_tag || "h2";
 
 	const ref = useRef(null);
-	const isInView = useInView(ref);
+	const isInView = useInView(ref, {
+		amount: 0.8,
+	});
 
 	const [activeLineIndex, setActiveLineIndex] = useState(0);
-	const [isMounted, setIsMounted] = useState(false);
+	const [initialSwapDone, setInitialSwapDone] = useState(false);
 
 	const generateRandomFonts = useCallback(() => {
 		const lineText = rotating_lines[activeLineIndex]?.line.split("");
@@ -42,18 +44,26 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 	const [randomFonts, setRandomFonts] = useState(generateRandomFonts());
 
 	useEffect(() => {
-		setIsMounted(true);
+		let interval;
 
-		const interval = setInterval(() => {
-			if (isInView) {
-				setActiveLineIndex((prevIndex) => (prevIndex + 1) % rotating_lines.length);
-				const newRandomFonts = generateRandomFonts();
-				setRandomFonts(newRandomFonts);
+		const updateLine = () => {
+			setActiveLineIndex((prevIndex) => (prevIndex + 1) % rotating_lines.length);
+			const newRandomFonts = generateRandomFonts();
+			setRandomFonts(newRandomFonts);
+		};
+
+		if (isInView) {
+			if (!initialSwapDone) {
+				updateLine();
+				setInitialSwapDone(true);
 			}
-		}, 3000);
+			interval = setInterval(updateLine, 3000);
+		}
 
-		return () => clearInterval(interval);
-	}, [activeLineIndex, rotating_lines, isInView, generateRandomFonts]);
+		return () => {
+			if (interval) clearInterval(interval);
+		};
+	}, [isInView, initialSwapDone, rotating_lines, generateRandomFonts]);
 
 	const activeLine = rotating_lines[activeLineIndex]?.line.split("");
 
@@ -71,7 +81,7 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 									duration: 0.1,
 									delay: getRandomDelay(),
 								}}
-								className={isMounted ? randomFonts[index] : ""}
+								className={randomFonts[index]}
 							>
 								{char}
 							</motion.span>

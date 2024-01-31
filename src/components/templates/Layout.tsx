@@ -14,9 +14,10 @@ type LayoutProps = {
 		options: WpOptions;
 	};
 	children: React.ReactNode;
+	hideCTA?: boolean;
 };
 
-function Layout({ data, children }: LayoutProps) {
+function Layout({ data, children, hideCTA = false }: LayoutProps) {
 	const { page, options } = data;
 	const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -26,7 +27,7 @@ function Layout({ data, children }: LayoutProps) {
 				<Seo page={data?.page} />
 				<Header {...options} pageOptions={page?.page_options} pagePostType={page?.post_type} />
 				<main>{children}</main>
-				{!page?.page_options?.remove_cta && <CTA pageOptions={page?.page_options} />}
+				{!(page?.page_options?.remove_cta || hideCTA) && <CTA pageOptions={page?.page_options} />}
 				{!page?.page_options?.remove_footer && <Footer {...options} pageOptions={page?.page_options} />}
 				<WpHotkey id={page?.ID} />
 			</VideoLoadedContext.Provider>
