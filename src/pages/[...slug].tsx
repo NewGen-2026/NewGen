@@ -17,7 +17,9 @@ export default function Template(data: TemplateProps) {
 	const { page } = data;
 
 	return (
-		<Layout data={data}>{page?.post_type === "post" ? <Post {...data} /> : page?.post_type === "work" ? <WorkPost {...data} /> : <Page {...data} />}</Layout>
+		<Layout data={data} hideCTA={page?.post_type === "post" || page?.post_type === "work"}>
+			{page?.post_type === "post" ? <Post {...data} /> : page?.post_type === "work" ? <WorkPost {...data} /> : <Page {...data} />}
+		</Layout>
 	);
 }
 

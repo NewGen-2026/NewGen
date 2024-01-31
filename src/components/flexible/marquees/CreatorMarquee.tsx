@@ -31,10 +31,10 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 
 	return (
 		<div>
-			<div ref={ref} className="asset-marquee min-h-[399px] w-full md:min-h-[580px] ">
+			<div ref={ref} className="asset-marquee min-h-[399px] w-full md:min-h-[580px] laptop:min-h-[399px]  ">
 				<Marquee play={isInView} direction="left" className="" pauseOnHover speed={breakpointCrossed ? 100 : 50}>
 					{creators?.map((creator, i) => (
-						<div key={`creator-${i}`} className="mx-1 max-w-[300px] md:mx-3 md:max-w-[unset]">
+						<div key={`creator-${i}`} className="mx-1 max-w-[300px] md:mx-3 md:max-w-[unset] laptop:max-w-[300px]">
 							<CreatorCard creator={creator} />
 						</div>
 					))}

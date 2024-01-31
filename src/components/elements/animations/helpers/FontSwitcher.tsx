@@ -29,7 +29,7 @@ interface Segment {
 	fonts?: string[];
 	index?: number;
 	isBreak?: boolean;
-	delay?: any;
+	delay?: number;
 }
 
 const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDelay = 0, hover = false, isHovered = false }: FontSwitcherProps) => {

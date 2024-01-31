@@ -74,7 +74,7 @@ export default function Footer(props) {
 						))}
 					</ul>
 				</div>
-				<div className="relative z-10 mt-16 md:mt-24">
+				{/* <div className="relative z-10 mt-16 md:mt-24">
 					<form className="flex max-w-[760px] flex-wrap gap-2 sm:flex-nowrap md:gap-6">
 						<input
 							type="text"
@@ -91,7 +91,7 @@ export default function Footer(props) {
 							Subscribe
 						</button>
 					</form>
-				</div>
+				</div> */}
 				<div className="mt-16 flex w-full flex-wrap gap-5 gap-y-14 sm:gap-8 md:mt-24 md:gap-20">
 					{addresses?.map((address, i) => (
 						<div key={`address${i}`} className="max-w-[240px] flex-[1_1_45%] md:flex-1">

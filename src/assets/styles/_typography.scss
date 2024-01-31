@@ -208,6 +208,12 @@ h6,
 	@apply leading-[0.95] tracking-[-0.08rem];
 }
 
+.t-64-small
+{
+	@include clamp("font-size", rem(54px * $responsive_size_modifier_large), rem(64px), $md, $xl);
+	@apply leading-[0.95] tracking-[-0.08rem];
+}
+
 .t-56
 {
 	@include clamp("font-size", rem(56px * $responsive_size_modifier_large), rem(56px), $md, $lg);

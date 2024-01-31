@@ -34,8 +34,9 @@ const WorkPost = (props) => {
 				)}
 			</section>
 			{more_work?.work?.length && (
-				<section>
+				<section className="mt-16 md:mt-44 laptop:mt-32">
 					<div className="container">
+						<h2 className="t-44 mb-8 uppercase md:mb-[88px] ">More work</h2>
 						<div className="grid gap-4 sm:grid-cols-2 md:gap-8">
 							{more_work?.work?.map((work, i) => <WorkGridItem key={`work-${i}`} work={work?.post} variant="2col" />)}
 						</div>
