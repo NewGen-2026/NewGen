@@ -1,7 +1,6 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { useMotionTemplate, useMotionValueEvent, useScroll, motion, useSpring, useMotionValue } from "framer-motion";
-import { useRef, useState } from "react";
-import { useMeasure, useWindowSize } from "react-use";
+import { useMotionTemplate, motion, useSpring, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { HoverButton, TextLink } from "~/components/elements/buttons/Button";
@@ -13,22 +12,15 @@ import dynamic from "next/dynamic";
 const MobileWorkSlider = dynamic(() => import("../sliders/MobileWorkSlider"), { ssr: false });
 
 const WorkSlider = (props) => {
-	const breakpointCrossed = useBreakpointCrossed(768);
+	const breakpointCrossed = useBreakpointCrossed(890);
 
-	return breakpointCrossed ? <MobileWorkSlider {...props} /> : <WorkSliderDesktop {...props} />;
+	return breakpointCrossed ? <MobileWorkSlider {...props} /> : <WorkSwiper {...props} />;
 };
 
-const WorkSliderDesktop = (props) => {
-	const scrollRef = useRef(null);
+const WorkSwiper = (props) => {
 	const [activeSlide, setActiveSlide] = useState(0);
 
 	const { work_slides } = props;
-
-	const { scrollYProgress } = useScroll({
-		target: scrollRef,
-
-		offset: ["start -0.2", "end end"],
-	});
 
 	const leftMotionValue = useMotionValue(0);
 	const leftMotionValueSpring = useSpring(leftMotionValue, { stiffness: 200, damping: 30, mass: 1 });
@@ -39,136 +31,145 @@ const WorkSliderDesktop = (props) => {
 	const rightPeekMotionValue = useMotionValue(0);
 	const rightPeekMotionValueSpring = useSpring(rightPeekMotionValue, { stiffness: 200, damping: 24 });
 
-	const thresholds = work_slides.map((_, index) => index / work_slides.length);
-	useMotionValueEvent(scrollYProgress, "change", (latest) => {
-		const closestThreshold = thresholds.reduce((prev, curr) => (Math.abs(curr - latest) < Math.abs(prev - latest) ? curr : prev));
-
-		const targetLeftY = closestThreshold * (100 * work_slides.length);
-		const targetRightY = closestThreshold * (-100 * work_slides.length);
-
-		leftMotionValue.set(targetLeftY);
-		rightMotionValue.set(targetRightY);
-
-		const scrollDirection = latest > scrollYProgress.getPrevious() ? "down" : "up";
-		const scrollVelocity = scrollYProgress.getVelocity();
-
-		let leftPeekValue = 0;
-		let rightPeekValue = 0;
-
-		if (Math.abs(scrollVelocity) < 0.15) {
-			leftPeekValue = 0;
-			rightPeekValue = 0;
-		} else if (scrollDirection === "down" && latest > closestThreshold && latest < thresholds[thresholds.indexOf(closestThreshold) + 1]) {
-			leftPeekValue = (latest - closestThreshold) * 100;
-			rightPeekValue = (closestThreshold - latest) * 100;
-		} else if (scrollDirection === "up" && latest < closestThreshold && latest > thresholds[thresholds.indexOf(closestThreshold) - 1]) {
-			leftPeekValue = (closestThreshold - latest) * -100;
-			rightPeekValue = (latest - closestThreshold) * -100;
-		}
-
-		leftPeekMotionValue.set(leftPeekValue);
-		rightPeekMotionValue.set(rightPeekValue);
-
-		const closestThresholdIndex = thresholds.indexOf(closestThreshold);
-		setActiveSlide(closestThresholdIndex);
-	});
-
 	const leftTemplate = useMotionTemplate`translateY(${leftMotionValueSpring}%)`;
 	const leftPeekTemplate = useMotionTemplate`translateY(${leftPeekMotionValueSpring}%)`;
 	const rightTemplate = useMotionTemplate`translateY(${rightMotionValueSpring}%)`;
 	const rightPeekTemplate = useMotionTemplate`translateY(${rightPeekMotionValueSpring}%)`;
 
-	const [ref, { height }] = useMeasure() as any;
-	const { height: windowHeight } = useWindowSize();
+	const dragThreshold = 100;
 
-	const stickyTop = windowHeight / 2 - height / 2;
+	const handleDragEndLeft = (event, info) => {
+		if (Math.abs(info.offset.y) > dragThreshold) {
+			if (info.offset.y < 0 && activeSlide < work_slides.length - 1) {
+				setActiveSlide((prev) => prev + 1);
+			} else if (info.offset.y > 0 && activeSlide > 0) {
+				setActiveSlide((prev) => prev - 1);
+			}
+		}
+		rightPeekMotionValue.set(0);
+	};
+
+	const handleDragEndRight = (event, info) => {
+		if (Math.abs(info.offset.y) > dragThreshold) {
+			if (info.offset.y > 0 && activeSlide < work_slides.length - 1) {
+				setActiveSlide((prev) => prev + 1);
+			} else if (info.offset.y < 0 && activeSlide > 0) {
+				setActiveSlide((prev) => prev - 1);
+			}
+		}
+		leftPeekMotionValue.set(0);
+	};
+
+	useEffect(() => {
+		const translateYPercentage = activeSlide * 100;
+		leftMotionValue.set(-translateYPercentage);
+		rightMotionValue.set(translateYPercentage);
+	}, [activeSlide, leftMotionValue, rightMotionValue]);
 
 	return (
-		<div
-			ref={scrollRef}
-			style={{
-				height: `${work_slides?.length * 100}vh`,
-			}}
-			className="relative mx-auto hidden max-w-[1520px] overflow-x-clip pt-8 md:block 3xl2:max-w-[1920px] "
-		>
-			<div
-				style={{
-					top: stickyTop || "unset",
-				}}
-				className="sticky flex w-full items-center "
-			>
-				<div ref={ref} className="w-full px-8">
-					<div className="flex aspect-[1376/696] max-h-[66vh] w-full overflow-hidden xl:min-h-[600px] ">
+		<div className="w-full px-8">
+			<div className="mx-auto flex aspect-[1376/696] max-h-[66vh] w-full max-w-[1376px] overflow-hidden xl:min-h-[600px] ">
+				<motion.div
+					style={{
+						transform: leftPeekTemplate,
+					}}
+					className="flex flex-1"
+				>
+					<motion.div
+						className="flex flex-1"
+						drag="y"
+						onDrag={(event, info) => {
+							rightPeekMotionValue.set(-info.delta.y);
+						}}
+						onDragEnd={handleDragEndLeft}
+						dragTransition={{ bounceStiffness: 200, bounceDamping: 30 }}
+						dragConstraints={{
+							top: 0,
+							bottom: 0,
+						}}
+						dragSnapToOrigin
+					>
 						<motion.div
 							style={{
-								transform: leftPeekTemplate,
+								transform: leftTemplate,
 							}}
-							className="flex flex-1"
+							className="flex flex-1 flex-col "
 						>
-							<motion.div
-								style={{
-									transform: leftTemplate,
-								}}
-								className="flex flex-1 flex-col-reverse "
-							>
-								{work_slides.map((slide, i) => (
-									<div
-										key={`slide-block${i}`}
-										id={`slide${i}`}
-										className={`flex aspect-[688/700] min-h-full w-full flex-col justify-between gap-5 overflow-hidden p-6 ${getBgColorClasses(
-											slide?.work?.acf?.general?.theme_color
-										)}`}
-									>
-										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
-										<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">
-											<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
-										</h2>
-										<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
-									</div>
-								))}
-							</motion.div>
+							{work_slides.map((slide, i) => (
+								<div
+									key={`slide-block${i}`}
+									id={`slide${i}`}
+									className={`pointer-events-none flex aspect-[688/700] min-h-full w-full flex-col justify-between gap-5 overflow-hidden p-6 ${getBgColorClasses(
+										slide?.work?.acf?.general?.theme_color
+									)}`}
+								>
+									<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
+									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
+										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
+									</h2>
+									<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
+								</div>
+							))}
 						</motion.div>
+					</motion.div>
+				</motion.div>
+				<motion.div
+					style={{
+						transform: rightPeekTemplate,
+					}}
+					className="flex flex-1"
+				>
+					<motion.div
+						className="flex flex-1"
+						drag="y"
+						onDrag={(event, info) => {
+							leftPeekMotionValue.set(-info.delta.y);
+						}}
+						onDragEnd={handleDragEndRight}
+						dragTransition={{ bounceStiffness: 200, bounceDamping: 30 }}
+						dragConstraints={{
+							top: 0,
+							bottom: 0,
+						}}
+						dragSnapToOrigin
+					>
 						<motion.div
 							style={{
-								transform: rightPeekTemplate,
+								transform: rightTemplate,
 							}}
-							className="flex flex-1"
+							className="flex flex-1 flex-col-reverse "
 						>
-							<motion.div
-								style={{
-									transform: rightTemplate,
-								}}
-								className="flex flex-1 flex-col whitespace-nowrap"
-							>
-								{work_slides.map((slide, i) => (
-									<div id={`slide${i}`} key={`slide-image${i}`} className="aspect-[688/700] min-h-full w-full overflow-hidden">
-										<WpImage image={slide?.work?.acf?.previews?.slider_image || slide?.work?.featured_image} className="h-full w-full object-cover" />
-									</div>
-								))}
-							</motion.div>
+							{work_slides.map((slide, i) => (
+								<div id={`slide${i}`} key={`slide-image${i}`} className="pointer-events-none aspect-[688/700] min-h-full w-full overflow-hidden">
+									<WpImage image={slide?.work?.acf?.previews?.slider_image || slide?.work?.featured_image} className="h-full w-full object-cover" />
+								</div>
+							))}
 						</motion.div>
-					</div>
-					<div className="mt-16 flex justify-center laptop:mt-12">
-						<NavBar items={work_slides} active={activeSlide} />
-					</div>
-				</div>
+					</motion.div>
+				</motion.div>
+			</div>
+			<div className="mt-16 flex justify-center laptop:mt-12">
+				<NavBar items={work_slides} active={activeSlide} setActive={setActiveSlide} />
 			</div>
 		</div>
 	);
 };
+
 export default WorkSlider;
 
-const NavBar = ({ items, active }) => {
+const NavBar = ({ items, active, setActive }) => {
 	return (
 		<div className="w-full max-w-[680px] bg-stone/25 p-3">
 			<div className="flex items-center justify-between pl-2">
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
 						{items.map((_, i) => (
-							<motion.a
+							<motion.button
+								aria-label={`Slide ${i}`}
 								animate={{
 									scale: active === i ? 1.4 : 1,
 								}}
+								onClick={() => setActive(i)}
 								key={`nav-item-${i}`}
 								className={`h-[6px] w-[6px] ${active === i ? getBgColorClasses(items[active]?.work?.acf?.general?.theme_color) : "bg-stone "}`}
 							/>
