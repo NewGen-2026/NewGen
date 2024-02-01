@@ -65,7 +65,7 @@ const ConnectingMasthead = (props) => {
 	};
 
 	return (
-		<div ref={ref} className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 laptop:pt-44 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
+		<div ref={ref} className={`pb-5 pt-32 transition-colors duration-200 md:pt-52 laptop:pt-40 ${getBgColorClasses(items[activeSlide]?.active_color)}`}>
 			<div className="container">
 				<Title
 					top_line={top_line}
@@ -77,7 +77,7 @@ const ConnectingMasthead = (props) => {
 				/>
 			</div>
 
-			<div className="mx-auto mt-12 max-w-[1440px] md:mt-[175px]  xl:min-h-[87.5px] laptop:mt-32 ">
+			<div className="mx-auto mt-12 max-w-[1440px] md:mt-[175px] xl:min-h-[87.5px]  tiny-laptop:mt-12 laptop:mt-12 ">
 				<MastheadLogoSlider
 					items={items}
 					setSwiper={setSwiper}

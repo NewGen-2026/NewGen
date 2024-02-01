@@ -37,7 +37,7 @@ const HijackScroller = (props) => {
 	const xSpring = useSpring(xBase, { stiffness: 250, damping: 30 });
 
 	useEffect(() => {
-		const newTop = windowHeight / 2 - height / 2 + 40;
+		const newTop = windowHeight / 2 - height / 2 + 10;
 		setTop(newTop);
 	}, [windowHeight, height]);
 

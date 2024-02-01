@@ -46,7 +46,7 @@ const LeftRightCTA = (props) => {
 	}, [windowWidth]);
 
 	return (
-		<div className="relative flex flex-col gap-y-12 bg-boost pt-20 sm:gap-y-20 md-large:min-h-[900px] md-large:flex-row md-large:py-0">
+		<div className="relative flex flex-col gap-y-12 bg-boost pt-20 sm:gap-y-20 md-large:min-h-[900px] md-large:flex-row md-large:py-0 tiny-laptop:min-h-[684px]">
 			<motion.div style={{ transform: yTemplate }} className="absolute inset-0 z-[0] bg-cobalt" />
 
 			<div className="absolute inset-0 z-[20] flex w-full">
@@ -114,7 +114,7 @@ const LeftRightCTA = (props) => {
 						animate={{
 							opacity: activeSide === "left" ? 1 : 0,
 						}}
-						className="absolute inset-0 z-[10] mx-auto mt-auto flex  max-w-[15em] translate-y-[30%] items-end sm:translate-y-0 md-large:max-w-[494px]"
+						className="absolute inset-0 z-[10] mx-auto mt-auto flex  max-w-[15em] translate-y-[30%] items-end sm:translate-y-0 md-large:max-w-[494px] tiny-laptop:max-w-[400px] tiny-laptop:translate-y-5"
 					>
 						<WpImage image={left?.left_image} />
 					</motion.div>
@@ -125,7 +125,7 @@ const LeftRightCTA = (props) => {
 						animate={{
 							opacity: activeSide === "right" ? 1 : 0,
 						}}
-						className="absolute inset-0 z-[10] mx-auto mt-auto  flex max-w-[70%] translate-y-[10%] items-end xss:max-w-[65%] xs:max-w-[50%] sm:max-w-[35%] md:translate-y-0 md-large:max-w-[629px]"
+						className="absolute inset-0 z-[10] mx-auto mt-auto  flex max-w-[70%] translate-y-[10%] items-end xss:max-w-[65%] xs:max-w-[50%] sm:max-w-[35%] md:translate-y-0 md-large:max-w-[629px] tiny-laptop:max-w-[500px]"
 					>
 						<WpImage image={right?.right_image} />
 					</motion.div>
@@ -138,7 +138,7 @@ export default LeftRightCTA;
 
 const TextContainer = ({ top_line_left, top_line_right, middle_line, bottom_line, className = "" }) => {
 	return (
-		<motion.h2 className={`t-144-large pointer-events-none w-full  max-w-[1000px] font-heading uppercase ${className}`}>
+		<motion.h2 className={`t-144-large pointer-events-none w-full max-w-[1000px]  font-heading uppercase tiny-laptop:text-[8rem] ${className}`}>
 			<div className="flex justify-center gap-[0.1em] md-large:gap-[10rem] ">
 				<span className="relative z-[0] inline-flex whitespace-nowrap">
 					<FontSwitcher text={top_line_left} />

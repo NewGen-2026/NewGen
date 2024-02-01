@@ -75,7 +75,7 @@ const LinkSlider = (props) => {
 					))}
 				</div>
 			</div>
-			<div className="max-w-[720px] flex-1 xl:translate-x-8">
+			<div className="max-w-[720px] flex-1 xl:translate-x-8 tiny-laptop:max-w-[610px]">
 				<div className="relative aspect-[720/680] w-full bg-stone/10">
 					{items?.map((item, i) => (
 						<motion.div key={`item${i}`} initial={{ opacity: 0 }} animate={{ opacity: activeSlide === i ? 1 : 0 }} className="absolute inset-0 h-full w-full">

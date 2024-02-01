@@ -23,7 +23,7 @@ const FadeGrid = ({ items }) => {
 						duration: 0.1,
 						delay: getRandomDelay(0, 0.5) + 0.4,
 					}}
-					className="relative flex aspect-[320/340] w-full items-center justify-center"
+					className="relative flex aspect-[320/340] w-full items-center justify-center tiny-laptop:aspect-[1]"
 				>
 					<Asset {...item.asset} className="h-full w-full object-cover" />
 					{item.add_logo && (

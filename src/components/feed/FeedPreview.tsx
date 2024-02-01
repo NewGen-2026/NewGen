@@ -57,7 +57,7 @@ const FeedPreview = ({
 			className={clsx(className, `group flex flex-col justify-between`, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
 		>
 			<div className={clsx(` flex w-full justify-between gap-2`, !slideVariant && "mb-6")}>
-				<div className={clsx(`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px]" : "max-w-[438px]")}>
+				<div className={clsx(`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px] tiny-laptop:mb-2" : "max-w-[438px]")}>
 					<div
 						className={clsx(
 							`flex-none overflow-hidden rounded-full bg-energy `,

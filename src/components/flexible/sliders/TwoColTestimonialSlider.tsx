@@ -68,7 +68,7 @@ const TwoColTestimonialSlider = (props) => {
 			className={clsx(
 				`mx-[-15px] flex  gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
 				getBgColorClasses(items[activeSlide]?.theme_color),
-				boxedVariant ? "flex-col-reverse justify-between gap-6" : "flex-col items-end overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
+				boxedVariant ? "flex-col-reverse justify-between gap-6" : "tiny-laptop:min-h-664px flex-col items-end overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
 			)}
 		>
 			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[685px] ")}>
@@ -140,7 +140,7 @@ const TwoColTestimonialSlider = (props) => {
 						className={clsx(
 							`mt-8 flex items-center justify-center gap-3  lg:justify-start`,
 
-							boxedVariant ? "xl:mt-32" : "lg:mt-32"
+							boxedVariant ? "xl:mt-32 tiny-laptop:mt-12" : "lg:mt-32"
 						)}
 					>
 						{items?.map((_, i) => (
@@ -157,7 +157,9 @@ const TwoColTestimonialSlider = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className={clsx(`w-full flex-1 lg:w-[unset] `, boxedVariant ? "lg:max-w-[672px]" : "max-w-[650px]  xl:translate-x-[-5%] ")}>
+			<div
+				className={clsx(`w-full flex-1 lg:w-[unset] `, boxedVariant ? "lg:max-w-[672px] tiny-laptop:max-w-[580px]" : "max-w-[650px]  xl:translate-x-[-5%] ")}
+			>
 				<div
 					className={clsx(
 						`relative w-full `,

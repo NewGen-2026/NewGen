@@ -24,7 +24,7 @@ const FeedMarquee = (props) => {
 				</Marquee>
 			</div>
 			{!hide_button && (
-				<div className="mt-12 flex justify-center md:mt-24">
+				<div className="mt-12 flex justify-center md:mt-24 tiny-laptop:mt-16">
 					<Link href="/blog-and-podcasts">
 						<HoverButton
 							button={{

@@ -36,7 +36,7 @@ const SliderMasthead = (props) => {
 	}, [isInView, swiper]);
 
 	return (
-		<div className="pt-8 md:pt-12">
+		<div className="pt-8 md:pt-12 tiny-laptop:pt-4">
 			<div className="container">
 				<div className="flex w-full flex-col justify-between gap-5 gap-y-8 md:flex-row">
 					<div className="flex max-w-[704px] flex-1 flex-col items-center gap-y-5 md:items-start md:justify-between">
