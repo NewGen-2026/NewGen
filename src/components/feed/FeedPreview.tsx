@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
@@ -44,7 +45,20 @@ const FeedPreview = ({
 }: FeedPreviewProps) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
+	const [copySuccess, setCopySuccess] = useState("");
 
+	const copyToClipboard = () => {
+		if (!window) return;
+		const absoluteUrl = `${window.location.origin}${link}`;
+
+		navigator.clipboard
+			.writeText(absoluteUrl)
+			.then(() => {
+				setCopySuccess("Link copied!");
+				setTimeout(() => setCopySuccess(""), 1000);
+			})
+			.catch((err) => console.error("Could not copy link: ", err));
+	};
 	const slideVariant = variant === "slide";
 
 	const link = acf?.is_external_link ? acf?.external_link : permalink;
@@ -232,7 +246,18 @@ const FeedPreview = ({
 							</LinkedinShareButton>
 						</SocialWrapper>
 						<SocialWrapper>
-							<TikTok />
+							<button type="button" aria-label="Copy link" onClick={copyToClipboard} title="Copy link">
+								<TikTok />
+								{copySuccess && (
+									<span
+										className={`absolute left-0 top-[100%] text-[8px]  md:whitespace-nowrap md:text-[10px] ${
+											slideVariant ? "md:left-[-8px]" : "md:left-[100%] md:top-[50%] md:-translate-y-1/2"
+										} `}
+									>
+										{copySuccess}
+									</span>
+								)}
+							</button>
 						</SocialWrapper>
 					</motion.div>
 				</div>
