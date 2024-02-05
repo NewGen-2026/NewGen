@@ -87,12 +87,20 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 	};
 
 	const handleSubmit = () => {
+		// subscribe needs removed for now
+
+		// if (navState === "search") {
+		// 	handleSearch();
+		// } else if (navState === "subscribe") {
+		// 	handleSubscribe();
+		// } else {
+		// 	setNavState("subscribe");
+		// }
+
 		if (navState === "search") {
 			handleSearch();
-		} else if (navState === "subscribe") {
-			handleSubscribe();
 		} else {
-			setNavState("subscribe");
+			setNavState("search");
 		}
 	};
 
@@ -241,7 +249,9 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 											<div className="t-18 mt-1 font-medium">{post?.post_title}</div>
 										</div>
 
-										<div className="h-6 w-6 flex-none rounded-full bg-energy" />
+										<div className="h-6 w-6 flex-none rounded-full bg-energy">
+											<WpImage image={post?.author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
+										</div>
 									</Link>
 								))
 							) : (
@@ -317,11 +327,11 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 						</AnimatePresence>
 					</div>
 					<div className="flex items-center gap-8">
-						{navState === "nextPrev" && (
+						{/* {navState === "nextPrev" && (
 							<button type="button" onClick={() => setNavState("search")} className="mt-1 block">
 								<TextLink>{`Se<pst-rec>a</>rch`}</TextLink>
 							</button>
-						)}
+						)} */}
 						<div className="block w-full sm:min-w-[184px]" onClick={handleSubmit}>
 							<HoverButton
 								className="!w-full"
@@ -336,7 +346,8 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 							>
 								{
 									{
-										nextPrev: "S<pst-grid>u</>bscribe",
+										// switch nextPrev back to Subscrib<pst-pil>e</> when subscribe is added back
+										nextPrev: "Se<pst-hal>a</>rch",
 										search: "Se<pst-hal>a</>rch",
 										subscribe: "Subscrib<pst-pil>e</>",
 									}[navState]
