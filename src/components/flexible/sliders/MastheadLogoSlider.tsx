@@ -44,9 +44,7 @@ const MastheadLogoSlider = ({
 				<SwiperSlide
 					key={`logo-${i}`}
 					onClick={() => handleLogoClick(i % items.length)}
-					className={`w-full max-w-[150px]  transition-opacity ${
-						activeSlide === i % items.length ? filterClassMap[items[activeSlide]?.active_color] : ""
-					}  duration-200 md:max-w-[206px] ${activeSlide === i % items.length ? "" : logoOpacity}`}
+					className={`w-full max-w-[150px]  transition-opacity  duration-200 md:max-w-[206px] ${activeSlide === i % items.length ? "" : logoOpacity}`}
 				>
 					<WpImage image={item?.logo} priority />
 				</SwiperSlide>

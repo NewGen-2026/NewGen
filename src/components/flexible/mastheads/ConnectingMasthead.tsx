@@ -56,7 +56,7 @@ const ConnectingMasthead = (props) => {
 		}
 	}, [isInView, swiper, isInitialLoad]);
 
-	const logoOpacity = isInitialLoad || !autoplayStarted ? "!opacity-100" : "opacity-50";
+	const logoOpacity = isInitialLoad || !autoplayStarted ? "!opacity-100 !brightness-0" : "opacity-50 !brightness-0";
 
 	const filterClassMap = {
 		candy: "filter-candy",
