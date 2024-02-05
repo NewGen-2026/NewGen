@@ -59,7 +59,17 @@ const TestimonialSlider = (props) => {
 
 	return (
 		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} mx-[-15px] px-3 py-12 md:mx-0 md:py-20 tiny-laptop:py-16` : ""}`}>
-			<div ref={ref} className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center">
+			<motion.div
+				ref={ref}
+				onPanEnd={(event, info) => {
+					if (info.offset.x < 0) {
+						setActiveSlide((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
+					} else {
+						setActiveSlide((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
+					}
+				}}
+				className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center"
+			>
 				<div className="relative aspect-[160/180] w-full max-w-[80px] md:max-w-[160px] tiny-laptop:max-w-[130px]">
 					{items?.map((item, i) => (
 						<motion.div
@@ -157,7 +167,7 @@ const TestimonialSlider = (props) => {
 						))}
 					</div>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	);
 };
