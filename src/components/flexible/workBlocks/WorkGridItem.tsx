@@ -33,11 +33,11 @@ const WorkGridItem = ({ work, variant }) => {
 			<motion.div
 				initial={{
 					opacity: 0,
-					y: "100%",
+					transform: "translateY(100%)",
 				}}
 				animate={{
 					opacity: isHovered ? 1 : 0,
-					y: isHovered ? 0 : "100%",
+					transform: isHovered ? "translateY(0%)" : "translateY(100%)",
 				}}
 				transition={{
 					duration: 0.3,
@@ -61,10 +61,12 @@ const WorkGridItem = ({ work, variant }) => {
 					<motion.h3
 						ref={headingRef}
 						initial={{
-							y: 0,
+							// y: 0,
+							transform: "translateY(0px)",
 						}}
 						animate={{
-							y: isHovered ? headingDistanceHover : 0,
+							// y: isHovered ? headingDistanceHover : 0,
+							transform: isHovered ? `translateY(${headingDistanceHover}px)` : "translateY(0px)",
 						}}
 						transition={{
 							type: "spring",
@@ -90,7 +92,7 @@ const WorkGridItem = ({ work, variant }) => {
 						ref={dataRef}
 						className={`relative z-20 flex w-full flex-wrap gap-4 ${isThreeCol ? "flex-col" : "lg:flex-nowrap"}`}
 					>
-						<InfoBlock theme_color={work?.acf?.general?.theme_color} />
+						<InfoBlock theme_color={work?.acf?.general?.theme_color}>{work?.acf?.client || work?.post_title}</InfoBlock>
 						{work?.services?.length > 0 && (
 							<InfoBlock heading="Services" theme_color={work?.acf?.general?.theme_color}>
 								{work?.services?.map((service, i) => (
