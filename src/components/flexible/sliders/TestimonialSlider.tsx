@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useInView, useIsomorphicLayoutEffect } from "f
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses, getTextColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
+import usePanSlider from "~/hooks/usePanSlider";
 
 const TestimonialSlider = (props) => {
 	const { items, background, variant, mode } = props;
@@ -57,19 +58,11 @@ const TestimonialSlider = (props) => {
 	const textClass = mode === "dark" ? "text-black" : "text-white";
 	const navClass = mode === "dark" ? "bg-stone" : "bg-white/40";
 
+	const handlePanEnd = usePanSlider(setActiveSlide, items);
+
 	return (
 		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} mx-[-15px] px-3 py-12 md:mx-0 md:py-20 tiny-laptop:py-16` : ""}`}>
-			<motion.div
-				ref={ref}
-				onPanEnd={(event, info) => {
-					if (info.offset.x < 0) {
-						setActiveSlide((prevIndex) => (prevIndex === items.length - 1 ? 0 : prevIndex + 1));
-					} else {
-						setActiveSlide((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
-					}
-				}}
-				className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center"
-			>
+			<motion.div ref={ref} onPanEnd={handlePanEnd} className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center">
 				<div className="relative aspect-[160/180] w-full max-w-[80px] md:max-w-[160px] tiny-laptop:max-w-[130px]">
 					{items?.map((item, i) => (
 						<motion.div

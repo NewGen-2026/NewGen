@@ -5,6 +5,7 @@ import { createRef, useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import usePanSlider from "~/hooks/usePanSlider";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
 
 const TwoColTestimonialSlider = (props) => {
@@ -62,8 +63,11 @@ const TwoColTestimonialSlider = (props) => {
 	const xValue = windowWidth < 1024 ? 0 : "100%";
 	const yValue = windowWidth < 1024 ? "50%" : 0;
 
+	const handlePanEnd = usePanSlider(setActiveSlide, items);
+
 	return (
-		<div
+		<motion.div
+			onPanEnd={handlePanEnd}
 			ref={ref}
 			className={clsx(
 				`mx-[-15px] flex  gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
@@ -136,13 +140,7 @@ const TwoColTestimonialSlider = (props) => {
 							</AnimatePresence>
 						</div>
 					</div>
-					<div
-						className={clsx(
-							`mt-8 flex items-center justify-center gap-3  lg:justify-start`,
-
-							boxedVariant ? "xl:mt-32 tiny-laptop:mt-12" : "lg:mt-32"
-						)}
-					>
+					<div className={clsx(`mt-8 flex items-center justify-center gap-3  lg:justify-start`, boxedVariant ? "xl:mt-32 tiny-laptop:mt-12" : "lg:mt-32")}>
 						{items?.map((_, i) => (
 							<motion.div
 								key={`navItem${i}`}
@@ -162,7 +160,7 @@ const TwoColTestimonialSlider = (props) => {
 			>
 				<div
 					className={clsx(
-						`relative w-full `,
+						`pointer-events-none relative w-full `,
 						boxedVariant ? "aspect-[672/672] overflow-hidden" : "aspect-[650/656]",
 						items[activeSlide]?.add_background && getBgColorClasses(items[activeSlide]?.boxed_image_background?.color)
 					)}
@@ -194,7 +192,7 @@ const TwoColTestimonialSlider = (props) => {
 					))}
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 export default TwoColTestimonialSlider;
