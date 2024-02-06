@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import WpImage from "../elements/WpImage";
-import { LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
+import { CopyLink, LinkedIn, Twitter } from "../flexible/creatorBlocks/Socials";
 
 const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod.TwitterShareButton), {
 	ssr: false,
@@ -54,7 +54,7 @@ const FeedPreview = ({
 		navigator.clipboard
 			.writeText(absoluteUrl)
 			.then(() => {
-				setCopySuccess("Link copied!");
+				setCopySuccess("copied!");
 				setTimeout(() => setCopySuccess(""), 1000);
 			})
 			.catch((err) => console.error("Could not copy link: ", err));
@@ -247,11 +247,11 @@ const FeedPreview = ({
 						</SocialWrapper>
 						<SocialWrapper>
 							<button type="button" aria-label="Copy link" onClick={copyToClipboard} title="Copy link">
-								<TikTok />
+								<CopyLink />
 								{copySuccess && (
 									<span
 										className={`absolute left-0 top-[100%] text-[8px]  md:whitespace-nowrap md:text-[10px] ${
-											slideVariant ? "md:left-[-8px]" : "md:left-[100%] md:top-[50%] md:-translate-y-1/2"
+											slideVariant ? "md:left-[-50%] md:translate-x-1/2" : "md:left-[100%] md:top-[50%] md:-translate-y-1/2"
 										} `}
 									>
 										{copySuccess}

@@ -102,3 +102,23 @@ export const LinkedIn = () => {
 		</svg>
 	);
 };
+
+export const CopyLink = () => {
+	return (
+		<svg width="100%" height="100%" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect width="8.75648" height="1.89848" transform="matrix(0.702803 -0.711385 0.702803 0.711385 12.0508 18.6484)" fill="currentColor" />
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M13.8203 12.5156L19.9511 6.31001L25.5713 11.9989L19.4406 18.2045L17.7058 16.4486L19.032 15.1062L19.4406 15.5198L22.919 11.9989L19.9511 8.99474L16.4727 12.5156L16.853 12.9006L15.5268 14.243L13.8203 12.5156Z"
+				fill="currentColor"
+			/>
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M12.5547 13.7969L6.42393 20.0025L12.0442 25.6914L18.1749 19.4858L16.456 17.7458L15.1298 19.0882L15.5226 19.4858L12.0442 23.0066L9.07627 20.0025L12.5547 16.4816L12.935 16.8666L14.2612 15.5242L12.5547 13.7969Z"
+				fill="currentColor"
+			/>
+		</svg>
+	);
+};
