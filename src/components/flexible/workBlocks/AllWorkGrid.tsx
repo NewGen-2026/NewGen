@@ -171,39 +171,6 @@ const AllWorkGrid = (props) => {
 
 				<div className="scroll-container relative w-full lg:w-auto">
 					<div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
-						{serviceNames.map(([name, slug], i) => (
-							<button
-								aria-label={name}
-								type="button"
-								key={`service-${i}`}
-								className=" block cursor-pointer transition-colors duration-200 hover:text-cobalt "
-								onClick={() => handleServiceSelection(slug)}
-							>
-								<div className="relative whitespace-nowrap">
-									<span dangerouslySetInnerHTML={{ __html: name }} />
-
-									<div className="absolute bottom-[-6px] left-0 flex w-full justify-center">
-										{selectedService === slug && (
-											<motion.span
-												layoutId="underline"
-												transition={{
-													layout: {
-														type: "spring",
-														stiffness: 300,
-														damping: 28,
-													},
-												}}
-												className=" h-[6px] justify-center will-change-transform"
-											>
-												<motion.span layout="position" className="block h-[6px] w-[6px] bg-cobalt" />
-											</motion.span>
-										)}
-									</div>
-								</div>
-							</button>
-						))}
-					</div>
-					{/* <div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
 						{sectorOptions.map(({ slug, name }, i) => (
 							<button
 								aria-label={name}
@@ -235,7 +202,7 @@ const AllWorkGrid = (props) => {
 								</div>
 							</button>
 						))}
-					</div> */}
+					</div>
 				</div>
 			</div>
 			<div className="grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:gap-x-8 xl:gap-y-20">
