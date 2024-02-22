@@ -7,7 +7,7 @@ import Asset from "../elements/Asset";
 import { Link } from "../elements/links/Link";
 import WpImage from "../elements/WpImage";
 import FeedMarquee from "../flexible/marquees/FeedMarquee";
-import { LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
+import { CopyLink, LinkedIn, Twitter } from "../flexible/creatorBlocks/Socials";
 
 const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod.TwitterShareButton), {
 	ssr: false,
@@ -154,6 +154,22 @@ const ArticleShare = () => {
 		setShareURL(url);
 	}, []);
 
+	const [copySuccess, setCopySuccess] = useState("");
+
+	const copyToClipboard = () => {
+		if (!window) return;
+		const absoluteUrl = `${window.location.href}`;
+
+		navigator.clipboard
+			.writeText(absoluteUrl)
+			.then(() => {
+				setCopySuccess("Copied!");
+				setTimeout(() => setCopySuccess(""), 1000);
+			})
+			// eslint-disable-next-line no-console
+			.catch((err) => console.error("Could not copy link: ", err));
+	};
+
 	return (
 		<div className="sticky top-20 space-y-1">
 			<TwitterShareButton url={shareURL}>
@@ -167,15 +183,27 @@ const ArticleShare = () => {
 				</SocialWrapper>
 			</LinkedinShareButton>
 			<SocialWrapper>
-				<div className="absolute right-[-100%] top-[20%] w-full whitespace-nowrap text-[0.7rem] opacity-0 group-hover:opacity-100">
-					tiktok does not have a share feature lads
-				</div>
-				<TikTok />
+				<button type="button" aria-label="Copy link" onClick={copyToClipboard} title="Copy link">
+					<CopyLink />
+					{copySuccess && (
+						<span
+							className={`absolute left-0 top-[100%] text-[8px]  md:left-[-50%] md:translate-x-1/2
+											md:whitespace-nowrap md:text-[10px]
+									 `}
+						>
+							{copySuccess}
+						</span>
+					)}
+				</button>
 			</SocialWrapper>
 		</div>
 	);
 };
 
 const SocialWrapper = ({ children }) => {
-	return <div className="group relative h-8 w-8 transition-colors duration-200 hover:text-cobalt">{children}</div>;
+	return (
+		<motion.div whileTap={{ scale: 1.05 }} className="group relative h-8 w-8 transition-colors duration-200 hover:text-cobalt">
+			{children}
+		</motion.div>
+	);
 };
