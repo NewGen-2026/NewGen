@@ -117,7 +117,7 @@ const TestimonialSlider = (props) => {
 						)}
 					</AnimatePresence>
 
-					<div className={`mt-8 md:mt-2 tiny-laptop:mt-12 `}>
+					<div className={`mt-8 md:mt-20 tiny-laptop:mt-12 `}>
 						<AnimatePresence mode="wait">
 							{items?.map(
 								(item, i) =>
