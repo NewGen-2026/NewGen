@@ -37,7 +37,7 @@ export default function Post(data) {
 
 	return (
 		<>
-			<div className="container pt-20 md:pt-36">
+			<div className="container bg-white pt-20 md:pt-36">
 				<div className="flex w-full max-w-[1090px] justify-between gap-4">
 					<div className="hidden max-w-[150px] flex-1 text-black md:block">
 						<Link href="/blog-and-podcasts">
@@ -138,7 +138,7 @@ export default function Post(data) {
 			</div>
 
 			{related_posts?.length > 0 && (
-				<div className="mb-8 mt-16 overflow-hidden md:mb-20 md:mt-32 lg:mt-[200px]">
+				<div className="mb-8 mt-16 overflow-hidden bg-white md:mb-20 md:mt-32 lg:mt-[200px]">
 					<FeedMarquee posts={related_posts} hide_button />
 				</div>
 			)}

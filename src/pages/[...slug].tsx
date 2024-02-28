@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "~/components/templates/Layout";
 import Page from "~/components/templates/Page";
 import Post from "~/components/templates/Post";
 import { WpOptions, WpPage } from "~/types/wp";
 import cms from "~/utils/cms";
 import dynamic from "next/dynamic";
+import BackToTopButton from "~/components/elements/buttons/BackToTopButton";
 
 const WorkPost = dynamic(() => import("~/components/templates/WorkPost"), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function Template(data: TemplateProps) {
 	return (
 		<Layout data={data} hideCTA={page?.post_type === "post" || page?.post_type === "work"}>
 			{page?.post_type === "post" ? <Post {...data} /> : page?.post_type === "work" ? <WorkPost {...data} /> : <Page {...data} />}
+			<BackToTopButton />
 		</Layout>
 	);
 }
