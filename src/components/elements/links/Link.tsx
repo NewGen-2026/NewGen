@@ -1,6 +1,6 @@
 import React from "react";
 import NextLink from "next/link";
-import { Button, TextLink } from "../buttons/Button";
+import { HoverButton, TextLink } from "../buttons/Button";
 
 export type LinkProps = {
 	link?: {
@@ -59,7 +59,7 @@ export function LinkTypeRenderer(props) {
 	return (
 		<>
 			{!type && !children && link?.title?.length > 0 && <span dangerouslySetInnerHTML={{ __html: link?.title }} />}
-			{type === "button" && <Button {...props} />}
+			{type === "button" && <HoverButton {...props} />}
 			{type === "text" && <TextLink {...props} />}
 			{children}
 		</>

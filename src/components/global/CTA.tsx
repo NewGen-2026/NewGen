@@ -8,30 +8,34 @@ const themeStyles = {
 		unhoveredClasses: "bg-energy text-energy",
 		hoveredClasses: "bg-white !text-boost",
 		ctaText: "G<pst-pil>e</>t in to<pst-pil>u</>ch",
+		ctaHoverText: "F<pst-grid>i</>nd your n<pst-pil>e</>w",
 	},
 	cobalt: {
 		backgroundColor: "bg-cobalt",
 		unhoveredClasses: "bg-electric text-electric",
 		hoveredClasses: "bg-white !text-cobalt",
 		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
+		ctaHoverText: "F<pst-rec>i</>nd your n<pst-rec>e</>w",
 	},
 	black: {
 		backgroundColor: "bg-black",
 		unhoveredClasses: "bg-electric text-electric",
 		hoveredClasses: "bg-cobalt !text-electric",
 		ctaText: "Ge<pst-rec>t</> in t<pst-rec>o</>uch",
+		ctaHoverText: "F<pst-rec>i</>nd your n<pst-rec>e</>w",
 	},
 	candy: {
 		backgroundColor: "bg-candy",
 		unhoveredClasses: "bg-ketchup text-candy",
 		hoveredClasses: "bg-white !text-ketchup",
 		ctaText: "G<pst-bec>e</>t in to<pst-bec>u</>ch",
+		ctaHoverText: "F<pst-bec>i</>nd your n<pst-bec>e</>w",
 	},
-
 	white: {
 		unhoveredClasses: "bg-cobalt text-electric",
 		hoveredClasses: "bg-electric text-cobalt",
 		ctaText: "G<pst-grid>e</>t in to<pst-grid>u</>ch",
+		ctaHoverText: "F<pst-grid>i</>nd your n<pst-grid>e</>w",
 	},
 };
 
@@ -39,6 +43,8 @@ const CTA = ({ pageOptions }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const footer_theme = pageOptions?.footer_theme || "white";
+
+	const displayedText = isHovered ? themeStyles[footer_theme]?.ctaHoverText : themeStyles[footer_theme]?.ctaText;
 
 	return (
 		<div className={`${themeStyles[footer_theme]?.backgroundColor || "bg-white"}`}>
@@ -52,7 +58,7 @@ const CTA = ({ pageOptions }) => {
 					} t-144 block px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
 				>
 					<h2 className={`!bg-transparent ${isHovered ? themeStyles[footer_theme]?.hoveredClasses : ""}`}>
-						<FontSwitcher hover isHovered={isHovered} text={themeStyles[footer_theme]?.ctaText || "G<pst-grid>e</>t in to<pst-grid>u</>ch"} />
+						<FontSwitcher hover isHovered={isHovered} text={displayedText || "G<pst-grid>e</>t in to<pst-grid>u</>ch"} />
 					</h2>
 				</Link>
 			</div>

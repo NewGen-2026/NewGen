@@ -122,20 +122,37 @@ function TextCard({
 						/>
 					)}
 					{content && (
-						<TextCardContent
-							className={clsx(variant === "horizontal" && "flex-1")}
-							content={content}
-							breakpointCrossed={breakpointCrossed}
-							options={{
-								font_size: content_font_size,
-								max_width: content_max_width,
-								font_color: content_font_color?.color,
-								content_classes,
-								text_alignment,
-							}}
-						/>
+						<div className={clsx(variant === "horizontal" && "flex-1")}>
+							<TextCardContent
+								className={clsx(variant === "horizontal" && "flex-1")}
+								content={content}
+								breakpointCrossed={breakpointCrossed}
+								options={{
+									font_size: content_font_size,
+									max_width: content_max_width,
+									font_color: content_font_color?.color,
+									content_classes,
+									text_alignment,
+								}}
+							/>
+							{variant === "horizontal" && links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && (
+								<LinkGroup
+									links={links}
+									className={clsx(
+										"mt-5 flex md:mt-8 ",
+										!breakpointCrossed && text_alignment === "center" && "justify-center",
+										!breakpointCrossed && text_alignment === "right" && "justify-end",
+										!breakpointCrossed && text_alignment === "left" && "justify-start",
+										breakpointCrossed && !has_mobile_text_alignment && "justify-center",
+										breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "center" && "justify-center",
+										breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "right" && "justify-end",
+										breakpointCrossed && has_mobile_text_alignment && mobile_text_alignment === "left" && "justify-start"
+									)}
+								/>
+							)}
+						</div>
 					)}
-					{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && (
+					{links?.length > 0 && links[0]?.link?.link?.url?.length > 0 && variant !== "horizontal" && (
 						<LinkGroup
 							links={links}
 							className={clsx(

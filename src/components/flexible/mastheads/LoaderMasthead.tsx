@@ -1,5 +1,5 @@
 import Asset from "~/components/elements/Asset";
-import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { useMeasure, useWindowSize } from "react-use";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -12,7 +12,6 @@ const LoaderMasthead = (props) => {
 	const assetRef = useRef(null);
 	const logoRef = useRef(null);
 	const containerRef = useRef(null);
-	const { scrollY } = useScroll();
 
 	const [initialY, setInitialY] = useState(0);
 	const [initialYMobile, setInitialYMobile] = useState(0);
@@ -22,9 +21,6 @@ const LoaderMasthead = (props) => {
 	const [ref, { height }] = useMeasure() as any;
 	const { height: windowHeight, width: windowWidth } = useWindowSize();
 	const isInView = useInView(containerRef, { once: false, amount: 0.6 });
-
-	const assetScaleBase = useTransform(scrollY, [0, 400], [windowWidth < 1024 ? 1 : 0.95, 1]);
-	const assetScaleSpring = useSpring(assetScaleBase, { stiffness: 200, damping: 30, mass: 1 });
 
 	const handleVideoLoad = () => {
 		setVideoLoaded(true);
@@ -51,11 +47,11 @@ const LoaderMasthead = (props) => {
 		}
 	}, [height, assetRef, windowHeight]);
 
-	const assetInitialY = windowWidth < 1024 ? initialYMobile : initialY;
+	const assetInitialY = windowWidth < 1024 ? -initialYMobile : initialY;
 	const assetYEndValue = videoLoaded ? 0 : -assetInitialY;
 
 	return (
-		<div className="relative overflow-hidden bg-black pt-32 text-white md:pt-44 lg:min-h-screen">
+		<div className="relative overflow-hidden bg-black pb-20 text-white md:pb-32   lg:min-h-screen tiny-laptop:pb-20 ">
 			<div ref={containerRef} className="container absolute inset-0 flex items-center justify-center lg:h-screen">
 				<div ref={logoRef} className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
 					<LogoLoader videoLoaded={videoLoaded} />
@@ -63,27 +59,9 @@ const LoaderMasthead = (props) => {
 			</div>
 			<div className="mx-auto w-full max-w-[3000px]  ">
 				<div className="">
-					<div className="px-8">
-						<h1 className="t-144-xxlarge mx-auto max-w-[1376px] text-center font-black uppercase">
-							<span className="">
-								<TextContainer startAnimation={videoLoaded} custom={4}>
-									<FontSwitcher startDelay={3800} text="F<pst-grid-pst>i</>nd" />
-								</TextContainer>{" "}
-								<TextContainer startAnimation={videoLoaded} custom={3}>
-									your
-								</TextContainer>{" "}
-								<TextContainer startAnimation={videoLoaded} custom={2}>
-									{" "}
-									<FontSwitcher startDelay={4000} text="n<pst-grid-pst>e</>w" />
-								</TextContainer>{" "}
-								<br />
-							</span>
-						</h1>
-					</div>
-					<div ref={assetRef} className="mt-[72px]">
+					<div ref={assetRef} className="">
 						<div ref={ref}>
 							<motion.div
-								style={{ scale: assetScaleSpring }}
 								initial={{
 									clipPath: "inset(0% 50% 0% 50%)",
 								}}
@@ -103,7 +81,7 @@ const LoaderMasthead = (props) => {
 										onComplete: () => setAnimationComplete(true),
 									},
 								}}
-								className="bg-stone/0.01 mx-auto aspect-[1920/1080]  w-full "
+								className="bg-stone/0.01 mx-auto aspect-[1920/1080] w-full will-change-transform laptop:max-h-[90vh]  "
 							>
 								<motion.div
 									initial={{
@@ -126,6 +104,29 @@ const LoaderMasthead = (props) => {
 								</motion.div>
 							</motion.div>
 						</div>
+					</div>
+
+					<div className="px-8">
+						<h1 className="t-144-xxlarge mx-auto mt-20 max-w-[1376px] text-center font-black uppercase md:mt-32 tiny-laptop:mt-20">
+							<span className="">
+								<TextContainer startAnimation={videoLoaded} custom={4}>
+									<FontSwitcher startDelay={3800} text="H<pst-grid-pst>e</>llo " />
+								</TextContainer>{" "}
+								<TextContainer startAnimation={videoLoaded} custom={3}>
+									welcome
+								</TextContainer>{" "}
+								<br />
+								<span className="whitespace-nowrap">
+									<TextContainer startAnimation={videoLoaded} custom={3}>
+										to
+									</TextContainer>{" "}
+									<TextContainer startAnimation={videoLoaded} custom={2}>
+										{" "}
+										<FontSwitcher startDelay={4000} text="newg<pst-grid-pst>e</>n" />
+									</TextContainer>{" "}
+								</span>
+							</span>
+						</h1>
 					</div>
 				</div>
 			</div>

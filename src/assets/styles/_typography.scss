@@ -142,8 +142,8 @@ h6,
 
 .t-144-xxlarge
 {
-	@include clamp("font-size", rem(176px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
-	@apply leading-[0.88] tracking-[-0.02em];
+	@include clamp("font-size", rem(120px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
+	@apply leading-[0.95] tracking-[-0.02em];
 }
 
 .t-144-xlarge
@@ -280,6 +280,7 @@ h6,
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.3] tracking-[-0.02em];
 }
+
 
 .t-20{
 	@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(20px), $md, $lg);

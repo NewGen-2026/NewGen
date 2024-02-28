@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { getBgColorClasses } from "~/utils/getColors";
 import FooterLogoAnimation from "../elements/animations/FooterLogoAnimation";
+import { Instagram, LinkedIn, TikTok, Twitter } from "../flexible/creatorBlocks/Socials";
 
 const themeStyles = {
 	boost: {
@@ -29,6 +30,13 @@ const themeStyles = {
 		hoverColor: "hover:text-cobalt",
 		focusClasses: "focus:border-cobalt",
 	},
+};
+
+const SocialIconMap = {
+	twitter: <Twitter />,
+	linkedin: <LinkedIn />,
+	tiktok: <TikTok />,
+	instagram: <Instagram />,
 };
 
 export default function Footer(props) {
@@ -60,38 +68,22 @@ export default function Footer(props) {
 							</div>
 						))}
 					</nav>
-					<ul className="t-18 flex flex-1 items-center  justify-start font-heading font-medium">
-						{footer_menu?.socials?.map((social, i) => (
-							<li key={`social${i}`} className={`mr-6 ${themeStyles[footer_theme]?.hoverColor}`}>
-								<Link href={social?.link?.url}>
-									<span
-										dangerouslySetInnerHTML={{
-											__html: social?.link?.title,
-										}}
-									/>
-								</Link>
-							</li>
-						))}
-					</ul>
+					<div className="t-18 flex w-full flex-[1_1_180px] flex-col justify-start gap-y-6 font-heading  font-medium sm:max-w-[355px] md:max-w-none">
+						<ul className="t-18 flex flex-1 items-center gap-3 font-heading font-medium md-large:justify-end">
+							{footer_menu?.socials?.map((social, i) => (
+								<li key={`social${i}`} className={` ${themeStyles[footer_theme]?.hoverColor}`}>
+									<Link href={social?.link?.url} target="_blank">
+										<span className="block h-8 w-8 ">{SocialIconMap[social?.link?.title.toLowerCase()]}</span>
+									</Link>
+								</li>
+							))}
+						</ul>
+
+						<div className="relative w-full max-w-[300px]">
+							<FooterLogoAnimation isHover={false} />
+						</div>
+					</div>
 				</div>
-				{/* <div className="relative z-10 mt-16 md:mt-24">
-					<form className="flex max-w-[760px] flex-wrap gap-2 sm:flex-nowrap md:gap-6">
-						<input
-							type="text"
-							className={`focus t-22 w-full border-b border-l-0 border-r-0 border-t-0 !bg-transparent pl-0 font-heading font-black uppercase   focus:ring-0
-							${themeStyles[footer_theme]?.focusClasses}
-							${isLight ? "placeholder:text-stone placeholder:opacity-75" : "placeholder:opacity-20"}
-							`}
-							placeholder="Our Newsletter"
-						/>
-						<button
-							type="submit"
-							className={`t-18 w-full  px-[30px] py-5 font-black uppercase sm:w-auto  ${isLight ? "bg-white text-black" : "bg-black text-white"} `}
-						>
-							Subscribe
-						</button>
-					</form>
-				</div> */}
 				<div className="mt-16 flex w-full flex-wrap gap-5 gap-y-14 sm:gap-8 md:mt-24 md:gap-20">
 					{addresses?.map((address, i) => (
 						<div key={`address${i}`} className="max-w-[240px] flex-[1_1_45%] md:flex-1">
@@ -101,11 +93,7 @@ export default function Footer(props) {
 					))}
 				</div>
 
-				<div className="relative mt-20 lg:mt-[200px]">
-					<FooterLogoAnimation isHover={false} />
-				</div>
-
-				<div className="t-16 mt-10 flex  flex-wrap-reverse items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
+				<div className="t-16 mt-20 flex  flex-wrap-reverse items-center justify-center gap-12 gap-y-5 pb-8 md:justify-start">
 					<div className="font-medium">&copy; NewGen {new Date().getFullYear()}. All rights reserved.</div>
 
 					<div className="flex items-center gap-6 font-medium md:gap-12">

@@ -171,21 +171,21 @@ const AllWorkGrid = (props) => {
 
 				<div className="scroll-container relative w-full lg:w-auto">
 					<div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
-						{sectorOptions.map(({ slug, name }, i) => (
+						{serviceNames.map(([name, slug], i) => (
 							<button
 								aria-label={name}
 								type="button"
-								key={`sector-${i}`}
+								key={`service-${i}`}
 								className=" block cursor-pointer transition-colors duration-200 hover:text-cobalt "
-								onClick={() => handleSectorSelection(slug)}
+								onClick={() => handleServiceSelection(slug)}
 							>
 								<div className="relative whitespace-nowrap">
 									<span dangerouslySetInnerHTML={{ __html: name }} />
 
 									<div className="absolute bottom-[-6px] left-0 flex w-full justify-center">
-										{selectedSector === slug && (
+										{selectedService === slug && (
 											<motion.span
-												layoutId="sectorUnderline"
+												layoutId="underline"
 												transition={{
 													layout: {
 														type: "spring",

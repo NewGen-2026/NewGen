@@ -4,13 +4,13 @@ import ServicesOverview from "./ServicesOverview";
 import LeftRightCTA from "./LeftRightCTA";
 import TimelineScroller from "./TimelineScroller";
 import FloatingImagesCta from "./FloatingImagesCta";
-import HijackScroller from "./HijackScroller";
 import Offices from "./Offices";
 import Jobs from "./Jobs";
 import ContactForm from "./ContactForm";
 
 const AllTeam = dynamic(() => import("./AllTeam"), { ssr: false });
 const FeedListFlexible = dynamic(() => import("./FeedListFlexible"), { ssr: false });
+const HijackScroller = dynamic(() => import("./HijackScroller"), { ssr: false });
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,

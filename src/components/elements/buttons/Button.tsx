@@ -86,9 +86,10 @@ type TextLinkProps = {
 	children?: React.ReactNode;
 	underlineColour?: "black" | "white";
 	isParentHovered?: boolean;
+	textClass?: string;
 };
 
-export function TextLink({ className = "", link, children, underlineColour = "black", isParentHovered }: TextLinkProps) {
+export function TextLink({ className = "", textClass = "t-18-small", link, children, underlineColour = "black", isParentHovered }: TextLinkProps) {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const hoverState = isParentHovered !== undefined ? isParentHovered : isHovered;
@@ -104,7 +105,7 @@ export function TextLink({ className = "", link, children, underlineColour = "bl
 	return (
 		<div
 			{...mouseEventHandlers}
-			className={`t-18-small group inline-flex cursor-pointer select-none items-center pb-[1px] font-heading font-black uppercase  ${className}`}
+			className={` group inline-flex cursor-pointer select-none items-center pb-[1px] font-heading font-black uppercase ${textClass} ${className}`}
 		>
 			{(link?.title || children) && (
 				<div className="relative inline-block overflow-hidden pb-[1px] font-black">

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useMotionValueEvent, useScroll, motion, useMotionValue, useSpring, useMotionTemplate, MotionValue } from "framer-motion";
+import { useMotionValueEvent, motion, MotionValue } from "framer-motion";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
@@ -14,22 +14,14 @@ type ScrollHeaderProps = {
 const ScrollHeader = ({ className = "", setMenuOpen, setScrolledBg, children, scrollY }: ScrollHeaderProps) => {
 	const router = useRouter();
 
-	const yMotionValue = useMotionValue(0);
-	const ySpring = useSpring(yMotionValue, {
-		damping: 25,
-		stiffness: 200,
-	});
-
 	useMotionValueEvent(scrollY, "change", (latest) => {
 		const prev = scrollY.getPrevious();
 
 		if (latest > 10 && latest > prev) {
-			yMotionValue.set(-100);
+			setScrolledBg(true);
 		} else if (latest > 10 && latest < prev) {
-			yMotionValue.set(0);
 			setScrolledBg(true);
 		} else {
-			yMotionValue.set(0);
 			setScrolledBg(false);
 		}
 	});
@@ -46,13 +38,8 @@ const ScrollHeader = ({ className = "", setMenuOpen, setScrolledBg, children, sc
 		};
 	}, [router.events, setMenuOpen]);
 
-	const yTemplate = useMotionTemplate`translateY(${ySpring}%)`;
-
 	return (
 		<motion.header
-			style={{
-				transform: yTemplate,
-			}}
 			transition={{
 				backgroundColor: {
 					duration: 0.2,

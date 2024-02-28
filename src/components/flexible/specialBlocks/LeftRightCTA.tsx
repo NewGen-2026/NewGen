@@ -60,6 +60,7 @@ const LeftRightCTA = (props) => {
 							<Link href="/for-creators">
 								<TextLink
 									className="!pointer-events-auto"
+									textClass="t-22"
 									isParentHovered={activeSide === "left"}
 									underlineColour="white"
 								>{`Fo<pst-pil>r</> Creat<pst-pil>o</>rs`}</TextLink>
@@ -67,6 +68,7 @@ const LeftRightCTA = (props) => {
 							<Link href="/for-talent-managers">
 								<TextLink
 									className="!pointer-events-auto"
+									textClass="t-22"
 									isParentHovered={activeSide === "right"}
 									underlineColour="white"
 								>{`F<pst-rec>o</>r Talent Mana<pst-rec>g</>ers`}</TextLink>

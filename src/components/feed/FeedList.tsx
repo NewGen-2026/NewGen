@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import FeedPreview from "./FeedPreview";
 import IconsRenderer from "../elements/icons/IconsRenderer";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
-import { HoverButton, TextLink } from "../elements/buttons/Button";
+import { HoverButton } from "../elements/buttons/Button";
 import WpImage from "../elements/WpImage";
 
 const FeedList = ({ posts: initialPosts, featured_tags }) => {
@@ -262,7 +262,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 				</AnimatePresence>
 			</div>
 			<div className="fixed bottom-0 left-0 right-0 z-10 w-full  justify-center  md:bottom-5 md:flex md:px-5">
-				<div className="flex w-full max-w-[860px] items-center justify-between gap-5 overflow-hidden bg-black p-3 will-change-transform">
+				<div className="flex w-full max-w-[860px] items-center justify-between gap-5 overflow-hidden bg-black bg-opacity-80 p-3 backdrop-blur-md will-change-transform">
 					<div className="flex-1 pl-3">
 						<AnimatePresence mode="popLayout">
 							{navState === "search" ? (
