@@ -16,6 +16,7 @@ interface WpImageProps {
 	priority?: boolean;
 	style?: any;
 	pageId?: number;
+	quality?: number;
 	layout?: "fill" | "fixed" | "intrinsic" | "responsive";
 	onLoadComplete?: () => void;
 	removeFadeIn?: boolean;

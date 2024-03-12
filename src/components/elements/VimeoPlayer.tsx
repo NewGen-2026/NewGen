@@ -12,6 +12,8 @@ const VimeoPlayer = (props) => {
 		<div className="relative block aspect-[1376/774] h-full w-full cursor-pointer" aria-label="Play video" onClick={() => setVideoPlaying(!videoPlaying)}>
 			{poster_image && (
 				<WpImage
+					priority
+					quality={85}
 					image={poster_image}
 					className={`pointer-events-none absolute z-[5] h-full w-full object-cover transition-opacity duration-200 ${
 						videoPlaying ? "!opacity-0" : "opacity-100"
