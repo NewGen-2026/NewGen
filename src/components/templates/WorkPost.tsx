@@ -21,7 +21,7 @@ const WorkPost = (props) => {
 						</h1>
 					</div>
 					<div className="mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]">
-						<Asset {...work_masthead?.asset} className="h-full w-full " />
+						<Asset priority quality={85} {...work_masthead?.asset} className="h-full w-full " />
 					</div>
 				</div>
 			</section>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Asset from "~/components/elements/Asset";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import Section from "~/components/layouts/Section";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
 import maxWidthProps, { MaxWidthStyleType } from "~/utils/maxWidthProps";
@@ -116,6 +117,7 @@ const COMPONENT_MAP = {
 	heading: Heading,
 	single_col_content: SingleColContent,
 	triple_col_content: TripleColContent,
+	page_section: Section,
 };
 
 const WorkFlexibleContent = (props) => {

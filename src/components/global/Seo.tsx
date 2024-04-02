@@ -32,12 +32,11 @@ export default function Seo({ page }: SeoProps) {
 			)}
 			<Head>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-				<link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicons/apple-touch-icon.png" />
-				<link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicons/favicon-32x32.png" />
-				<link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicons/favicon-16x16.png" />
-				<link rel="manifest" href="/static/images/favicons/site.webmanifest" />
-				<link rel="mask-icon" href="/static/images/favicons/safari-pinned-tab.svg" color="#492847" />
-				<meta name="msapplication-TileColor" content="#492847" />
+				<link rel="apple-touch-icon" sizes="180x180" href="/favicon-32x32.png" />
+				<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+				<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+				<link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
+				<meta name="msapplication-TileColor" content="#FFFFFF" />
 				<meta name="theme-color" content="#ffffff" />
 				<meta name="twitter:card" content="summary" />
 			</Head>
