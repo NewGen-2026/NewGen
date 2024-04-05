@@ -5,6 +5,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import Section from "~/components/layouts/Section";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { getBgColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
+import getFontSize from "~/utils/getFontSize";
 import maxWidthProps, { MaxWidthStyleType } from "~/utils/maxWidthProps";
 
 const Heading = (props) => {
@@ -40,13 +41,19 @@ const Heading = (props) => {
 };
 
 const StatBlock = (props) => {
-	const { heading, content, theme_color, image, stats } = props;
+	const { heading, content, theme_color, image, stats, heading_font_size, content_max_width, content_alignment } = props;
+
 	return (
 		<div className={`${getBgColorClasses(theme_color)} pt-12 md:pt-32`}>
 			<div className="container">
-				<div className="flex w-full flex-col justify-between gap-6 pb-8 md:flex-row md:pb-32">
-					<div className="flex flex-1 flex-col justify-between gap-5 md:max-w-[488px]">
-						<h2 className="t-80 font-black uppercase">
+				<div className={`flex w-full flex-col justify-between gap-6 pb-8 md:flex-row md:pb-32 ${content_alignment === "align-center" ? "items-center" : ""}`}>
+					<div
+						style={{
+							maxWidth: `${content_max_width}px`,
+						}}
+						className="flex flex-1 flex-col justify-between gap-5"
+					>
+						<h2 className={`font-black uppercase ${getFontSize(heading_font_size || "80")}`}>
 							<FontSwitcher text={heading} />
 						</h2>
 						<div className="t-20 font-medium opacity-60">{content}</div>
@@ -58,13 +65,13 @@ const StatBlock = (props) => {
 					</div>
 				</div>
 				{stats?.length && (
-					<div className="grid grid-cols-2 gap-3 pb-10 md:grid-cols-4 md:gap-8">
+					<div className="flex flex-wrap gap-3 pb-10 md:grid-cols-4 md:gap-8">
 						{stats.map((stat, i) => (
-							<div key={`stat-${i}`} className="flex-1">
+							<div key={`stat-${i}`} className="flex-[1_1_45%] md:flex-1">
 								<div className={`t-80 font-black uppercase ${getTextContrastColorClasses(theme_color)}`}>
 									<FontSwitcher text={stat?.stat} loop={false} />
 								</div>
-								<div className="t-22 mt-4 font-black uppercase !leading-[1.1]">{stat?.description}</div>
+								<div className="t-22 mt-4 max-w-[80%] font-black uppercase !leading-[1.1]">{stat?.description}</div>
 							</div>
 						))}
 					</div>

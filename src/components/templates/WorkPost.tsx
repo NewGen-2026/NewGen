@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { getBgColorClasses, getIsLightColor } from "~/utils/getColors";
+import getFontSize from "~/utils/getFontSize";
 import WpImage from "../elements/WpImage";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 import Asset from "../elements/Asset";
@@ -10,13 +11,33 @@ const WorkPost = (props) => {
 	const { page } = props;
 	const { work_logos, work_masthead, general, work_content, more_work } = page;
 
+	const logoHeights = {
+		default: "max-h-[50px]",
+		medium: "max-h-[65px]",
+		large: "max-h-[85px]",
+	};
+
 	return (
 		<>
 			<section className={clsx("pb-8 pt-24 md:pt-[160px]", getBgColorClasses(general?.theme_color))}>
 				<div className="container">
-					<div className="mx-auto w-full max-w-[958px] text-center">
-						<WpImage image={getIsLightColor(general?.theme_color) ? work_logos?.dark_logo : work_logos?.light_logo} className="mx-auto" />
-						<h1 className="t-80 mt-6 font-black uppercase md:mt-14">
+					<div
+						style={{
+							maxWidth: `${work_masthead?.heading_max_width}px`,
+						}}
+						className="mx-auto w-full text-center"
+					>
+						<WpImage
+							image={
+								work_masthead?.overrride_masthead_logo && work_masthead?.masthead_logo
+									? work_masthead?.masthead_logo
+									: getIsLightColor(general?.theme_color)
+									? work_logos?.dark_logo
+									: work_logos?.light_logo
+							}
+							className={clsx(`mx-auto object-contain`, logoHeights[work_masthead?.logo_height])}
+						/>
+						<h1 className={clsx(`mt-6 font-black uppercase md:mt-14`, getFontSize(work_masthead?.heading_font_size || "80"))}>
 							<FontSwitcher text={work_masthead?.heading} />
 						</h1>
 					</div>

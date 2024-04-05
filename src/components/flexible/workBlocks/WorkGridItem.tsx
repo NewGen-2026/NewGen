@@ -51,7 +51,7 @@ const WorkGridItem = ({ work, variant }) => {
 				</div>
 				<WpImage
 					removeFadeIn
-					className={`relative z-20 transition-[filter] duration-200 will-change-transform ${
+					className={`relative z-20 max-h-[40px] object-contain object-left transition-[filter] duration-200 will-change-transform ${
 						getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
 					}`}
 					image={work?.acf?.work_logos?.light_logo}
