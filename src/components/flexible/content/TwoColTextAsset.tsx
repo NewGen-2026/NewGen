@@ -11,14 +11,14 @@ const TwoColTextAsset = (props) => {
 	return (
 		<div
 			ref={ref}
-			className={`flex  items-center justify-between gap-6 gap-y-12 ${options?.reverse_mobile ? "flex-col-reverse" : "flex-col"} ${
+			className={`flex justify-between gap-6 gap-y-12 ${options?.reverse_mobile ? "flex-col-reverse" : "flex-col"} ${
 				options?.reverse ? "md-large:flex-row-reverse" : "md-large:flex-row"
-			}`}
+			} ${options?.alignment === "start" ? "items-start" : "items-center"}`}
 		>
 			<div className={` w-auto  md:max-w-[50%] ${options?.reverse ? "xl:mr-3" : ""}`}>
 				<TextCard {...content?.text_card} loopHeading={media?.assets?.length > 0} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
 			</div>
-			{media?.assets?.length > 0 && (
+			{media?.assets?.length > 0 ? (
 				<div className="w-full max-w-[672px] md:flex-1">
 					<TransitionSlider
 						transitionColor="electric"
@@ -28,6 +28,8 @@ const TwoColTextAsset = (props) => {
 						{media?.assets && media?.assets?.map((asset, index) => <Asset key={`asset${index}`} {...asset} className="h-full w-full object-cover" />)}
 					</TransitionSlider>
 				</div>
+			) : (
+				<Asset {...media?.asset} className="w-full max-w-[672px] md:flex-1" />
 			)}
 		</div>
 	);

@@ -18,7 +18,7 @@ const WorkGridItem = ({ work, variant }) => {
 
 	const isThreeCol = variant === "3col";
 
-	const headingDistanceHover = isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
+	const headingDistanceHover = !work?.acf?.work_logos?.light_logo ? 0 : isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
 
 	const logoClass = isHovered ? "invert" : "";
 
@@ -49,13 +49,15 @@ const WorkGridItem = ({ work, variant }) => {
 				<div className="absolute inset-0 h-full w-full">
 					<WpImage image={work?.featured_image} className="h-full w-full object-cover" />
 				</div>
-				<WpImage
-					removeFadeIn
-					className={`relative z-20 max-h-[40px] object-contain object-left transition-[filter] duration-200 will-change-transform ${
-						getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
-					}`}
-					image={work?.acf?.work_logos?.light_logo}
-				/>
+				{work?.acf?.work_logos?.light_logo && (
+					<WpImage
+						removeFadeIn
+						className={`relative z-20 max-h-[40px] object-contain object-left transition-[filter] duration-200 will-change-transform ${
+							getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
+						}`}
+						image={work?.acf?.work_logos?.light_logo}
+					/>
+				)}
 
 				{work?.acf?.work_masthead?.heading && (
 					<motion.h3
