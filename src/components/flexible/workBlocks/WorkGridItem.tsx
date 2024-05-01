@@ -45,7 +45,7 @@ const WorkGridItem = ({ work, variant }) => {
 				}}
 				className={`pointer-events-none absolute inset-0 z-10 will-change-transform ${getBgColorClasses(work?.acf?.general?.theme_color)}`}
 			/>
-			<Link ref={containerRef} href={work?.permalink} className="flex h-full flex-col justify-between p-4 md:p-6">
+			<Link ref={containerRef} href={work?.permalink || "/#"} className="flex h-full flex-col justify-between p-4 md:p-6">
 				<div className="absolute inset-0 h-full w-full">
 					<WpImage image={work?.featured_image} className="h-full w-full object-cover" />
 				</div>

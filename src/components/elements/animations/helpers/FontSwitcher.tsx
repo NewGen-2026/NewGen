@@ -38,8 +38,8 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 
 	const { parsedSegments, fontSwitchCount } = useMemo(() => {
 		let count = 0;
-		const lines = text.split("\\n");
-		const segs: Segment[] = lines.flatMap((line, lineIndex) => {
+		const lines = text?.split("\\n");
+		const segs: Segment[] = lines?.flatMap((line, lineIndex) => {
 			const lineSegments: Segment[] = line
 				.split(/(<[^>]+>.\s*<\/>)/g)
 				.filter(Boolean)
@@ -71,7 +71,7 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 	const [segmentIndices, setSegmentIndices] = useState(new Array(fontSwitchCount).fill(0));
 
 	useEffect(() => {
-		if (!hover && isInView && parsedSegments.length > 0) {
+		if (!hover && isInView && parsedSegments?.length > 0) {
 			const intervals = [];
 
 			const startInterval = (segment, i) => {
@@ -110,7 +110,7 @@ const FontSwitcher = memo(({ text, switchInterval = 1000, loop = false, startDel
 
 	return (
 		<span ref={ref}>
-			{parsedSegments.map((segment, index) => {
+			{parsedSegments?.map((segment, index) => {
 				if (segment.isBreak) {
 					return <span key={index}>{segment.content}</span>;
 				}
