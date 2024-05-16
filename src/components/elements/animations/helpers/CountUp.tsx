@@ -14,12 +14,12 @@ const CountUp = (props: CountUpProps) => {
 
 	const formatNumber = (number) => {
 		if (number % 1 === 0) {
-			return number.toString();
+			return number?.toString();
 		}
 		if (stat % 1 === 0) {
 			return Math.round(number).toString();
 		}
-		return number.toFixed(1);
+		return number?.toFixed(1);
 	};
 
 	const number = useTransform(count, (latest) => formatNumber(latest));

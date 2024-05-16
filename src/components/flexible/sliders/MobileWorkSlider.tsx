@@ -53,9 +53,11 @@ const MobileWorkSlider = (props) => {
 								</h2>
 								<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
 							</div>
-							<Link href={slide?.work?.permalink}>
-								<TextLink>Learn more</TextLink>
-							</Link>
+							{slide?.work?.permalink && (
+								<Link href={slide?.work?.permalink || "/#"}>
+									<TextLink>Learn more</TextLink>
+								</Link>
+							)}
 						</div>
 					</SwiperSlide>
 				))}

@@ -119,7 +119,7 @@ const ServicesOverview = (props) => {
 	return (
 		<div ref={ref} className="relative overflow-hidden py-16 md:py-[88px]">
 			<motion.div className={`pointer-events-none absolute inset-0 transition-colors duration-300 ease-in-out  ${activeHoverLayouts[activeHover]?.color}`} />
-			<motion.div layout className="container relative z-[5]">
+			<motion.div layout className="relative z-[5] px-[15px] md:px-8">
 				<motion.div layout className="relative z-[5] mx-auto  w-full max-w-[1139px]  text-center">
 					<motion.h2
 						layout
@@ -175,8 +175,12 @@ const ServicesOverview = (props) => {
 								transition={{ duration: 0.3 }}
 							>
 								<h3 className="t-96 font-heading font-black uppercase">
-									<CountUp stat={layout.statBlock?.stat} startCount={activeHover === layout?.id} />
-									<span className={clsx(activeHoverLayouts[layout.id]?.font)}>k</span>+
+									{layout.statBlock?.stat && typeof layout.statBlock?.stat === "number" ? (
+										<CountUp stat={layout.statBlock?.stat} startCount={activeHover === layout?.id} />
+									) : (
+										<FontSwitcher text={layout.statBlock?.stat} />
+									)}
+									{/* <span className={clsx(activeHoverLayouts[layout.id]?.font)}>k</span>+ */}
 								</h3>
 								<p className="t-24 font-heading font-black uppercase">{layout.statBlock?.description}</p>
 							</motion.div>

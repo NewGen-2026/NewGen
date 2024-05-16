@@ -180,9 +180,11 @@ const NavBar = ({ items, active, setActive }) => {
 					</div>
 				</div>
 				<div className="flex flex-1 items-center gap-5">
-					<Link href={items[active]?.work?.permalink} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
-						<TextLink underlineColour="black">{items[active]?.override_text_link ? items[active]?.text_link : `VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
-					</Link>
+					{items[active]?.work?.permalink && (
+						<Link href={items[active]?.work?.permalink || "/#"} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
+							<TextLink underlineColour="black">{items[active]?.override_text_link ? items[active]?.text_link : `VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
+						</Link>
+					)}
 					<Link href={items[active]?.override_button && items[active]?.button.link?.url ? items[active]?.button.link?.url : "/work"} className="block w-full">
 						<HoverButton
 							button={
