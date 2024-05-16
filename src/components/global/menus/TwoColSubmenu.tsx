@@ -31,7 +31,7 @@ const TwoColSubmenu = (props) => {
 };
 export default TwoColSubmenu;
 
-const LeftCol = ({ line_left, line_right, left_image, link, isMobile }) => {
+const LeftCol = ({ line_left, line_right, left_image, link, isMobile, col_style, top_line_right, top_line_left, bottom_line }) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -43,36 +43,77 @@ const LeftCol = ({ line_left, line_right, left_image, link, isMobile }) => {
 			}`}
 		>
 			<div onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} className="w-full">
-				<div className="absolute inset-0 flex w-full items-center p-5 text-center">
-					<div className="t-88-menu flex w-full justify-center font-heading font-black uppercase">
-						<motion.span
-							initial={{
-								x: 0,
-							}}
-							animate={{
-								x: imageLoaded ? "-0.4em" : 0,
-							}}
-							transition={{
-								delay: 0.5,
-							}}
-						>
-							<FontSwitcher hover isHovered={isHovered || isMobile} text={line_left} />
-						</motion.span>
-						<motion.span
-							initial={{
-								x: 0,
-							}}
-							animate={{
-								x: imageLoaded ? "0.4em" : 0,
-							}}
-							transition={{
-								delay: 0.5,
-							}}
-						>
-							<FontSwitcher hover isHovered={isHovered || isMobile} text={line_right} />
-						</motion.span>
+				{col_style === "right" ? (
+					<div className="t-88-menu absolute inset-0 flex w-full items-center p-5 text-center  font-heading font-black uppercase !leading-[0.8]">
+						<div className="flex w-full justify-center ">
+							<div>
+								<motion.span
+									initial={{
+										x: 0,
+									}}
+									animate={{
+										x: imageLoaded ? "-0.4em" : 0,
+									}}
+									transition={{
+										delay: 1,
+									}}
+									className="inline-block"
+								>
+									<FontSwitcher hover isHovered={isHovered || isMobile} text={top_line_left} />
+								</motion.span>
+								<motion.span
+									initial={{
+										x: 0,
+									}}
+									animate={{
+										x: imageLoaded ? "0.4em" : 0,
+									}}
+									transition={{
+										delay: 1,
+									}}
+									className="inline-block"
+								>
+									<FontSwitcher hover isHovered={isHovered || isMobile} text={top_line_right} />
+								</motion.span>
+								<div className="relative z-10">
+									<FontSwitcher hover isHovered={isHovered || isMobile} text={bottom_line} />
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
+				) : (
+					<div className="absolute inset-0 flex w-full items-center p-5 text-center">
+						<div className="t-88-menu flex w-full justify-center font-heading font-black uppercase">
+							<motion.span
+								initial={{
+									x: 0,
+								}}
+								animate={{
+									x: imageLoaded ? "-0.4em" : 0,
+								}}
+								transition={{
+									delay: 0.5,
+								}}
+							>
+								<FontSwitcher hover isHovered={isHovered || isMobile} text={line_left} />
+							</motion.span>
+							<motion.span
+								initial={{
+									x: 0,
+								}}
+								animate={{
+									x: imageLoaded ? "0.4em" : 0,
+								}}
+								transition={{
+									delay: 0.5,
+								}}
+							>
+								<FontSwitcher hover isHovered={isHovered || isMobile} text={line_right} />
+							</motion.span>
+						</div>
+					</div>
+				)}
+
 				<motion.div
 					initial={{
 						opacity: 0,
