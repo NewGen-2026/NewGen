@@ -15,16 +15,17 @@ const TwoColTextAsset = (props) => {
 				options?.reverse ? "md-large:flex-row-reverse" : "md-large:flex-row"
 			} ${options?.alignment === "start" ? "items-start" : "items-center"}`}
 		>
-			<div className={` w-auto  md:max-w-[50%] ${options?.reverse ? "xl:mr-3" : ""}`}>
-				<TextCard {...content?.text_card} loopHeading={media?.assets?.length > 0} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
+			<div className={`w-auto md:max-w-[50%] ${options?.reverse ? "xl:mr-3" : ""}`}>
+				<TextCard {...content?.text_card} loopHeading={media?.assets?.length > 0} className={`${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
 			</div>
 			{media?.assets?.length > 0 && options?.variant === "image-slider" ? (
 				<div className="w-full max-w-[672px] md:flex-1">
 					<TransitionSlider
+						add_nav={media?.add_nav}
 						intervalDuration={5000}
 						transitionColor="electric"
 						transitionColors={media?.assets?.map((asset) => asset?.transition_color)}
-						className="relative aspect-[672/672] w-full overflow-hidden bg-stone/10"
+						className={`relative w-full bg-stone/10 ${media?.aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672]"}`}
 					>
 						{media?.assets && media?.assets?.map((asset, index) => <Asset key={`asset${index}`} {...asset} className="h-full w-full object-cover" />)}
 					</TransitionSlider>
