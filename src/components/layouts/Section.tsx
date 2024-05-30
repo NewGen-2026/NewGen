@@ -32,7 +32,7 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 		case "small":
 			return "space-y-8";
 		case "medium":
-			return "space-y-10 md:space-y-20";
+			return "space-y-10 md:space-y-20 tiny-laptop:space-y-16";
 		case "large":
 			return "space-y-12 md:space-y-28";
 		case "xlarge":
