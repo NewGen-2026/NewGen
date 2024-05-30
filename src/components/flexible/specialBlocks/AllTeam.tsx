@@ -16,15 +16,17 @@ const socialVariants = {
 };
 
 const AllTeam = (props) => {
-	const { team_members } = props;
+	const { team_members, heading } = props;
 
 	return (
 		<div className="flex w-full flex-wrap gap-2 sm:gap-5 xl:gap-8">
-			<div className="flex flex-[1_1_45%] items-center">
-				<h2 className="t-120 font-black uppercase !leading-[1]">
-					<FontSwitcher text="Meet our te<pst-grid-pst>a</>m" />
-				</h2>
-			</div>
+			{heading && (
+				<div className="flex flex-[1_1_45%] items-center">
+					<h2 className="t-120 font-black uppercase !leading-[1]">
+						<FontSwitcher text={heading} />
+					</h2>
+				</div>
+			)}
 			{team_members?.map((member, i) => <TeamMember key={`teamMember${i}`} member={member} />)}
 		</div>
 	);
