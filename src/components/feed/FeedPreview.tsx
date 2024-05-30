@@ -28,10 +28,12 @@ type FeedPreviewProps = {
 	post_tag?: any[];
 	post_date_gmt?: string;
 	author?: any;
+	imageClass?: string;
 };
 
 const FeedPreview = ({
 	className,
+	imageClass,
 	post,
 	i,
 	featured_image,
@@ -71,7 +73,13 @@ const FeedPreview = ({
 			className={clsx(className, `group flex flex-col justify-between`, slideVariant ? "mx-2 h-full w-[200px] md:mx-3 md:w-[396px]" : "w-full max-w-[502px]")}
 		>
 			<div className={clsx(` flex w-full justify-between gap-2`, !slideVariant && "mb-6")}>
-				<div className={clsx(`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`, slideVariant ? " max-w-[340px] tiny-laptop:mb-2" : "max-w-[438px]")}>
+				<div
+					className={clsx(
+						`flex flex-1 justify-between gap-4 md:mb-8 md:gap-6`,
+						slideVariant ? " max-w-[340px] tiny-laptop:mb-2" : "max-w-[438px]",
+						!post_tag && "!mb-0"
+					)}
+				>
 					<div
 						className={clsx(
 							`flex-none overflow-hidden rounded-full bg-energy `,
@@ -99,16 +107,19 @@ const FeedPreview = ({
 								{post?.heading || post_title}
 							</h3>
 						</div>
-
-						<div
-							className={`mt-2 ${slideVariant ? "md:mt-4" : ""} t-tag  flex flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:gap-[14px] md:gap-y-1 `}
-						>
-							{post_tag?.map((tag, j) => (
-								<span className="inline-block" key={`category${j}`}>
-									#{tag?.name}
-								</span>
-							))}
-						</div>
+						{post_tag && post_tag?.length > 0 && (
+							<div
+								className={`mt-2 ${
+									slideVariant ? "md:mt-4" : ""
+								} t-tag  flex flex-wrap gap-2 gap-y-1 font-medium lowercase opacity-50 md:gap-[14px] md:gap-y-1 `}
+							>
+								{post_tag?.map((tag, j) => (
+									<span className="inline-block" key={`category${j}`}>
+										#{tag?.name}
+									</span>
+								))}
+							</div>
+						)}
 					</Link>
 					{!slideVariant && <div className="h-5 w-5 md:h-8 md:w-8" />}
 				</div>
@@ -143,7 +154,11 @@ const FeedPreview = ({
 						className="h-full w-full"
 					>
 						<WpImage
-							className={clsx(` relative z-[5]  h-full w-full bg-stone/20 object-cover `, slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "")}
+							className={clsx(
+								` relative z-[5]  h-full w-full bg-stone/20 object-cover `,
+								slideVariant ? "marquee-asset max-w-[168px]  md:max-w-[340px]" : "",
+								imageClass
+							)}
 							image={post?.image || featured_image}
 						/>
 					</motion.div>
