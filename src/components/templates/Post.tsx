@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import useAutoSlider from "~/hooks/useAutoSlider";
 import dynamic from "next/dynamic";
+import clsx from "clsx";
 import { TextLink } from "../elements/buttons/Button";
 import Asset from "../elements/Asset";
 import { Link } from "../elements/links/Link";
@@ -60,7 +61,7 @@ export default function Post(data) {
 					<div className="flex max-w-[737px] flex-1 justify-between gap-1 md:gap-4">
 						<div className="max-w-[672px] flex-1">
 							{post_content?.slider?.assets?.length ? (
-								<div className="relative aspect-[672/944] w-full bg-stone/20">
+								<div className={clsx(`relative w-full bg-stone/20`, post_content?.add_custom_masthead_image ? "" : "aspect-[672/944]")}>
 									{post_content?.slider?.assets?.map((slide, i) => (
 										<motion.div
 											key={`slide-${i}`}
@@ -118,8 +119,12 @@ export default function Post(data) {
 										</div>
 									</div>
 								</div>
+							) : post_content?.add_custom_masthead_image && post_content?.custom_masthead_image ? (
+								<div className="w-full bg-stone/20">
+									<WpImage image={post_content?.custom_masthead_image} className="bg-stone/50" />
+								</div>
 							) : featured_image ? (
-								<div className=" aspect-[672/944] w-full bg-stone/20">
+								<div className={clsx(`w-full bg-stone/20`, post_content?.feature_image_aspect === "landscape" ? "aspect-[672/472] " : "aspect-[672/944]")}>
 									<WpImage image={featured_image} className="h-full w-full object-cover" />
 								</div>
 							) : null}

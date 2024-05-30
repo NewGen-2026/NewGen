@@ -9,7 +9,7 @@ import usePanSlider from "~/hooks/usePanSlider";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
 
 const TwoColTestimonialSlider = (props) => {
-	const { variant, items } = props;
+	const { variant, items, image_aspect } = props;
 
 	const ref = useRef(null);
 	const quoteRefs = useRef(items.map(() => createRef()));
@@ -64,6 +64,9 @@ const TwoColTestimonialSlider = (props) => {
 	const yValue = windowWidth < 1024 ? "50%" : 0;
 
 	const handlePanEnd = usePanSlider(setActiveSlide, items);
+
+	const imageAspect = image_aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672]";
+	const boxImageNavClasses = image_aspect === "landscape" ? "" : "xl:mt-32 tiny-laptop:mt-12";
 
 	return (
 		<motion.div
@@ -140,7 +143,7 @@ const TwoColTestimonialSlider = (props) => {
 							</AnimatePresence>
 						</div>
 					</div>
-					<div className={clsx(`mt-8 flex items-center justify-center gap-3  lg:justify-start`, boxedVariant ? "xl:mt-32 tiny-laptop:mt-12" : "lg:mt-32")}>
+					<div className={clsx(`mt-8 flex items-center justify-center gap-3 lg:justify-start`, boxedVariant ? boxImageNavClasses : "lg:mt-32")}>
 						{items?.map((_, i) => (
 							<motion.div
 								key={`navItem${i}`}
@@ -156,12 +159,16 @@ const TwoColTestimonialSlider = (props) => {
 				</div>
 			</div>
 			<div
-				className={clsx(`w-full flex-1 lg:w-[unset] `, boxedVariant ? "lg:max-w-[672px] tiny-laptop:max-w-[580px]" : "max-w-[650px]  xl:translate-x-[-5%] ")}
+				className={clsx(
+					`w-full flex-1 lg:w-[unset] `,
+					boxedVariant && image_aspect !== "landscape" && "tiny-laptop:max-w-[580px]",
+					boxedVariant ? "lg:max-w-[672px]" : "max-w-[650px]  xl:translate-x-[-5%] "
+				)}
 			>
 				<div
 					className={clsx(
 						`pointer-events-none relative w-full `,
-						boxedVariant ? "aspect-[672/672] overflow-hidden" : "aspect-[650/656]",
+						boxedVariant ? `${imageAspect} overflow-hidden` : "aspect-[650/656]",
 						items[activeSlide]?.add_background && getBgColorClasses(items[activeSlide]?.boxed_image_background?.color)
 					)}
 				>
@@ -185,7 +192,7 @@ const TwoColTestimonialSlider = (props) => {
 									delay: activeSlide === i ? 0.3 : 0,
 								},
 							}}
-							className="absolute inset-0 h-full w-full"
+							className="absolute inset-0"
 						>
 							<WpImage image={item?.image} className="h-full w-full object-cover" />
 						</motion.div>
