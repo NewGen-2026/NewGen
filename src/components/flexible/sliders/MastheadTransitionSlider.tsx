@@ -16,7 +16,7 @@ const MastheadTransitionSlider = ({ items, setSwiper, handleSlideChange, activeS
 			centeredSlides
 			modules={[Autoplay]}
 			autoplay={{
-				delay: 2500,
+				delay: 3500,
 				disableOnInteraction: false,
 			}}
 			breakpoints={{

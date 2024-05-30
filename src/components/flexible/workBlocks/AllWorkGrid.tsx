@@ -8,18 +8,17 @@ import WorkGridItem from "./WorkGridItem";
 const LOAD_MORE_AMOUNT = 9;
 
 const AllWorkGrid = (props) => {
-	const { static_posts } = props;
+	const { work: workPosts } = props;
 
-	const { work: workPosts } = static_posts;
 	const router = useRouter();
 
-	const defaultWorkType = workPosts[0]?.["work-type"][0]?.slug;
+	const defaultWorkType = "All";
 	const defaultService = "All";
 	const defaultSector = "All";
 
 	const [selectedService, setSelectedService] = useState(defaultService) as any;
 	const [selectedSector, setSelectedSector] = useState(defaultSector) as any;
-	const [selectedWorkType, setSelectedWorkType] = useState(defaultWorkType) as any;
+	const [selectedWorkType, setSelectedWorkType] = useState("All") as any;
 	const [displayedPostsCount, setDisplayedPostsCount] = useState(LOAD_MORE_AMOUNT);
 
 	const [sectorManuallySet, setSectorManuallySet] = useState(false);
@@ -74,16 +73,16 @@ const AllWorkGrid = (props) => {
 		setDisplayedPostsCount((prevCount) => prevCount + LOAD_MORE_AMOUNT);
 	};
 
-	const uniqueWorkTypes = new Map();
+	const uniqueWorkTypes = new Map([["All", { slug: "All", hoverName: "<pst-pil>A</>ll" }]]);
 	workPosts?.forEach((work) => {
-		work["work-type"]?.forEach((type) => {
+		work?.work["work-type"]?.forEach((type) => {
 			uniqueWorkTypes.set(type.name, { slug: type.slug, hoverName: type?.acf?.hover_style });
 		});
 	});
 
 	const uniqueSectors = new Map([["All", "All"]]);
 	workPosts.forEach((work) => {
-		work.sector.forEach((sector) => {
+		work?.work.sector.forEach((sector) => {
 			if (!uniqueSectors.has(sector.slug)) {
 				uniqueSectors.set(sector.slug, sector.name);
 			}
@@ -91,19 +90,19 @@ const AllWorkGrid = (props) => {
 	});
 
 	const filteredPostsForServices = workPosts.filter((work) => {
-		const workTypeMatch = selectedWorkType === "All" || work["work-type"].some((type) => type.slug === selectedWorkType);
-		const sectorMatch = selectedSector === "All" || work.sector.some((sector) => sector.slug === selectedSector);
+		const workTypeMatch = selectedWorkType === "All" || work?.work["work-type"].some((type) => type.slug === selectedWorkType);
+		const sectorMatch = selectedSector === "All" || work?.work.sector.some((sector) => sector.slug === selectedSector);
 		return workTypeMatch && sectorMatch;
 	});
 
 	const filteredPostsForSectors = workPosts.filter((work) => {
-		const serviceMatch = selectedService === "All" || work.services.some((service) => service.slug === selectedService);
-		const workTypeMatch = selectedWorkType === "All" || work["work-type"].some((type) => type.slug === selectedWorkType);
+		const serviceMatch = selectedService === "All" || work?.work.services.some((service) => service.slug === selectedService);
+		const workTypeMatch = selectedWorkType === "All" || work?.work["work-type"].some((type) => type.slug === selectedWorkType);
 		return serviceMatch && workTypeMatch;
 	});
 
 	const availableSectors = filteredPostsForSectors
-		.flatMap((work) => work.sector)
+		.flatMap((work) => work?.work.sector)
 		.reduce(
 			(acc, sector) => {
 				acc.set(sector.slug, sector.name);
@@ -113,7 +112,7 @@ const AllWorkGrid = (props) => {
 		);
 
 	const availableServices = filteredPostsForServices
-		.flatMap((work) => work.services)
+		.flatMap((work) => work?.work.services)
 		.reduce(
 			(acc, service) => {
 				const key = service.name;
@@ -128,9 +127,9 @@ const AllWorkGrid = (props) => {
 	const workTypeNames = Array.from(uniqueWorkTypes.entries());
 	const serviceNames = Array.from(availableServices.entries()) as any;
 	const filteredAndSlicedWorkPosts = workPosts.filter((work) => {
-		const serviceMatch = selectedService === "All" || work.services.some((service) => service.slug === selectedService);
-		const workTypeMatch = selectedWorkType === "All" || work["work-type"].some((type) => type.slug === selectedWorkType); // Check for 'all' slug
-		const sectorMatch = selectedSector === "All" || work.sector.some((sector) => sector.slug === selectedSector);
+		const serviceMatch = selectedService === "All" || work?.work.services.some((service) => service.slug === selectedService);
+		const workTypeMatch = selectedWorkType === "All" || work?.work["work-type"].some((type) => type.slug === selectedWorkType); // Check for 'all' slug
+		const sectorMatch = selectedSector === "All" || work?.work.sector.some((sector) => sector.slug === selectedSector);
 		return serviceMatch && workTypeMatch && sectorMatch;
 	});
 
@@ -141,33 +140,35 @@ const AllWorkGrid = (props) => {
 
 	return (
 		<div id="all-work-grid" className="scroll-mt-20">
-			<div className="mb-8 flex flex-col items-center gap-y-5 md:mb-20 lg:flex-row lg:justify-between">
-				<ul className="t-15  flex gap-4 font-bold lg:gap-2">
-					{workTypeNames.map(([name, { slug, hoverName }], i) => (
-						<li
-							key={`workType-${i}`}
-							className="block cursor-pointer"
-							onClick={() => handleWorkTypeSelection(slug)}
-							onKeyDown={() => handleWorkTypeSelection(slug)}
-						>
-							<HoverButton
-								buttonClass={` whitespace-nowrap ${selectedWorkType === slug || selectedWorkType === "All" ? "!bg-cobalt !text-electric" : ""}`}
-								externalFontTrigger={selectedWorkType === slug || selectedWorkType === "All"}
-								aria-label={name}
-								type="button"
-								button={{
-									background_color: "white",
-									text_color: "black",
-									hover_background_color: "cobalt",
-									text_hover_color: "electric",
-									size: "medium",
-								}}
+			<div className="mb-8 flex flex-col flex-wrap items-center gap-y-5 md:mb-20 lg:flex-row lg:justify-between xl:flex-nowrap">
+				<div className="hide-scrollbars w-full overflow-x-scroll md:w-auto">
+					<ul className="t-15 hide-scrollbars flex w-full gap-4 overflow-x-scroll font-bold md:w-auto lg:gap-2">
+						{workTypeNames.map(([name, { slug, hoverName }], i) => (
+							<li
+								key={`workType-${i}`}
+								className="block cursor-pointer"
+								onClick={() => handleWorkTypeSelection(slug)}
+								onKeyDown={() => handleWorkTypeSelection(slug)}
 							>
-								{hoverName || name}
-							</HoverButton>
-						</li>
-					))}
-				</ul>
+								<HoverButton
+									buttonClass={` whitespace-nowrap ${selectedWorkType === slug ? "!bg-cobalt !text-electric" : ""}`}
+									externalFontTrigger={selectedWorkType === slug}
+									aria-label={name}
+									type="button"
+									button={{
+										background_color: "white",
+										text_color: "black",
+										hover_background_color: "cobalt",
+										text_hover_color: "electric",
+										size: "medium",
+									}}
+								>
+									{hoverName || name}
+								</HoverButton>
+							</li>
+						))}
+					</ul>
+				</div>
 
 				<div className="scroll-container relative w-full lg:w-auto">
 					<div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
@@ -219,7 +220,7 @@ const AllWorkGrid = (props) => {
 								delay: i * 0.05,
 							}}
 						>
-							<WorkGridItem work={work} variant="3col" />
+							<WorkGridItem work={work?.work} variant="3col" />
 						</motion.div>
 					))
 				) : (
