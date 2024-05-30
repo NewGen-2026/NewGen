@@ -210,6 +210,14 @@ const Podcast = () => {
 	);
 };
 
+const Arrow = () => {
+	return (
+		<svg className="" width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M6.77778 0V12M6.77778 12L1 6.22222M6.77778 12L12.5556 6.22222" stroke="currentColor" strokeWidth="2" />
+		</svg>
+	);
+};
+
 const IconMap = {
 	crown: Crown,
 	diversify: Diversify,
@@ -226,6 +234,7 @@ const IconMap = {
 	home: Home,
 	article: Article,
 	podcast: Podcast,
+	arrow: Arrow,
 };
 
 const IconsRenderer = ({ icon }) => {
