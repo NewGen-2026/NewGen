@@ -11,6 +11,7 @@ import FillScreenTextBlock from "./FillScreenTextBlock";
 import TwoColContentLinks from "./TwoColContentLinks";
 import StatRow from "./StatRow";
 import NumberedGrid from "./NumberedGrid";
+import ThreeColText from "./ThreeColText";
 
 const RosterGrid = dynamic(() => import("./RosterGrid"), { ssr: false });
 const AllCreatorsList = dynamic(() => import("./AllCreatorsList"), { ssr: false });
@@ -29,6 +30,7 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_contentlinks: TwoColContentLinks,
 	stat_row: StatRow,
 	numbered_grid: NumberedGrid,
+	three_col_text: ThreeColText,
 };
 
 const ContentRenderer = (props) => {
