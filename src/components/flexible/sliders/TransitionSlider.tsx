@@ -53,18 +53,20 @@ const TransitionSlider = ({
 					{child}
 				</motion.div>
 			))}
-			{hasStarted && (
-				<motion.div
-					key={activeSlide}
-					initial={{ y: "100%" }}
-					animate={{ y: [null, "0%", "-100%"] }}
-					transition={{
-						duration: 0.6,
-						ease: "easeInOut",
-					}}
-					className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(currentTransitionColor)}`}
-				/>
-			)}
+			<div className="absolute inset-0">
+				{hasStarted && activeSlide !== null && (
+					<motion.div
+						key={activeSlide}
+						initial={{ y: "100%" }}
+						animate={{ y: [null, "0%", "-100%"] }}
+						transition={{
+							duration: 0.8,
+							ease: "easeInOut",
+						}}
+						className={`absolute inset-0 z-10 will-change-transform ${getBgColorClasses(currentTransitionColor)}`}
+					/>
+				)}
+			</div>
 		</div>
 	);
 };

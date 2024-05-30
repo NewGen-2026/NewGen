@@ -59,17 +59,18 @@ const SliderMasthead = (props) => {
 										<WpImage image={item?.image} priority className="h-full w-full object-cover" />
 									</motion.div>
 								))}
-
-								<motion.div
-									key={activeSlide}
-									initial={{ y: "100%" }}
-									animate={{ y: [null, "0%", "-100%"] }}
-									transition={{
-										duration: 0.6,
-										ease: "easeInOut",
-									}}
-									className={`absolute inset-0 z-10 h-full w-full will-change-transform ${getBgColorClasses(items[activeSlide]?.transition_color || "boost")}`}
-								/>
+								{activeSlide !== null && (
+									<motion.div
+										key={activeSlide}
+										initial={{ y: "100%" }}
+										animate={{ y: [null, "0%", "-100%"] }}
+										transition={{
+											duration: 0.8,
+											ease: "easeInOut",
+										}}
+										className={`absolute inset-0 z-10  will-change-transform ${getBgColorClasses(items[activeSlide]?.transition_color || "boost")}`}
+									/>
+								)}
 							</div>
 						</div>
 					</div>

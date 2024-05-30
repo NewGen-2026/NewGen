@@ -44,7 +44,7 @@ const TwoColTestimonialSlider = (props) => {
 			}
 		};
 
-		const intervalDuration = 3500;
+		const intervalDuration = 5500;
 		const interval = setInterval(updateActiveSlide, intervalDuration);
 
 		return () => clearInterval(interval);

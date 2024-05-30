@@ -18,9 +18,10 @@ const TwoColTextAsset = (props) => {
 			<div className={` w-auto  md:max-w-[50%] ${options?.reverse ? "xl:mr-3" : ""}`}>
 				<TextCard {...content?.text_card} loopHeading={media?.assets?.length > 0} className={` ${options?.reverse ? "ml-auto" : "mr-auto"}`} breakpoint={890} />
 			</div>
-			{media?.assets?.length > 0 ? (
+			{media?.assets?.length > 0 && options?.variant === "image-slider" ? (
 				<div className="w-full max-w-[672px] md:flex-1">
 					<TransitionSlider
+						intervalDuration={5000}
 						transitionColor="electric"
 						transitionColors={media?.assets?.map((asset) => asset?.transition_color)}
 						className="relative aspect-[672/672] w-full overflow-hidden bg-stone/10"
