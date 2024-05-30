@@ -44,10 +44,11 @@ const MobileWorkSlider = (props) => {
 
 						<div className={`flex flex-1 flex-col justify-between gap-5 p-8  px-4 ${getBgColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
 							<div className="flex flex-col gap-7">
-								<WpImage
-									image={slide?.work?.acf?.work_logos?.light_logo}
-									className="flex max-h-[20px] max-w-[200px] justify-start object-contain object-left"
-								/>
+								{slide?.work?.acf?.work_logos?.light_logo && (
+									<div className="h-10 max-w-[80px]">
+										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} className="max-h-[40px] w-auto " />
+									</div>
+								)}
 								<h2 className="t-64 max-w-[90%] uppercase xl:max-w-[100%]">
 									<FontSwitcher text={slide?.work?.acf?.work_masthead?.heading} />
 								</h2>

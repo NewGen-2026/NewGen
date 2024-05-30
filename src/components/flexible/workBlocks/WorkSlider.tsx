@@ -103,11 +103,13 @@ const WorkSwiper = (props) => {
 										slide?.work?.acf?.general?.theme_color
 									)}`}
 								>
-									<WpImage image={slide?.work?.acf?.work_logos?.light_logo} />
+									<div className="max-w-[120px]">
+										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} className="max-h-20 w-auto" />
+									</div>
 									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
 										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
 									</h2>
-									<div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>
+									{slide?.work?.acf?.previews?.excerpt && <div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>}
 								</div>
 							))}
 						</motion.div>
@@ -159,8 +161,8 @@ export default WorkSlider;
 
 const NavBar = ({ items, active, setActive }) => {
 	return (
-		<div className="w-full max-w-[680px] bg-stone/25 p-3">
-			<div className="flex items-center justify-between pl-2">
+		<div className="h-20 w-full max-w-[680px] bg-stone/25 p-3">
+			<div className="flex h-full items-center justify-between pl-2">
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
 						{items.map((_, i) => (
@@ -175,8 +177,8 @@ const NavBar = ({ items, active, setActive }) => {
 							/>
 						))}
 					</div>
-					<div>
-						<WpImage image={items[active]?.work?.acf?.work_logos?.dark_logo} />
+					<div className=" max-h-[60px] w-auto">
+						<WpImage image={items[active]?.work?.acf?.work_logos?.dark_logo} className="max-h-[60px] w-auto" />
 					</div>
 				</div>
 				<div className="flex flex-1 items-center gap-5">
