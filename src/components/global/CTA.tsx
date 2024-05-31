@@ -43,8 +43,11 @@ const CTA = ({ pageOptions }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	const footer_theme = pageOptions?.footer_theme || "white";
+	const overrideText = pageOptions?.override_cta_text;
+	const unhoveredText = overrideText && pageOptions?.unhovered_text ? pageOptions?.unhovered_text : themeStyles[footer_theme]?.ctaText;
+	const hoveredText = overrideText && pageOptions?.hovered_text ? pageOptions?.hovered_text : themeStyles[footer_theme]?.ctaHoverText;
 
-	const displayedText = isHovered ? themeStyles[footer_theme]?.ctaHoverText : themeStyles[footer_theme]?.ctaText;
+	const displayedText = isHovered ? hoveredText : unhoveredText;
 
 	return (
 		<div className={`${themeStyles[footer_theme]?.backgroundColor || "bg-white"}`}>

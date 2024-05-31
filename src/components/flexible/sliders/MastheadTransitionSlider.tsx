@@ -39,6 +39,15 @@ const MastheadTransitionSlider = ({ items, setSwiper, handleSlideChange, activeS
 					<WpImage image={item?.logo} priority={i === 0} />
 				</SwiperSlide>
 			))}
+			{items.map((item, i) => (
+				<SwiperSlide
+					key={`logo-${i}-2`}
+					// onClick={() => handleLogoClick(i % items.length)}
+					className={`w-full max-w-[150px]  transition-opacity  duration-200 md:max-w-[206px] ${activeSlide === i % items.length ? "" : "opacity-50"}`}
+				>
+					<WpImage image={item?.logo} priority={i === 0} />
+				</SwiperSlide>
+			))}
 		</Swiper>
 	);
 };
