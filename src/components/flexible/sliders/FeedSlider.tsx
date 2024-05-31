@@ -32,7 +32,7 @@ const FeedSlider = ({ items }) => {
 							spaceBetween: 12,
 							slidesPerView: 1.3,
 						},
-						"@0.75": {
+						"@0.85": {
 							spaceBetween: 48,
 						},
 					}}
