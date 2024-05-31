@@ -17,8 +17,8 @@ const AssetInCenterVariant = (props) => {
 	const textXDistanceLeftTop = breakpointCrossed ? 0 : "0.5em";
 	const textXDistanceRightTop = breakpointCrossed ? 0 : "-0.5em";
 
-	const textXDistanceLeftMiddle = breakpointCrossed ? 0 : "0.9em";
-	const textXDistanceRightMiddle = breakpointCrossed ? 0 : "-0.9em";
+	const textXDistanceLeftMiddle = breakpointCrossed ? 0 : "0.8em";
+	const textXDistanceRightMiddle = breakpointCrossed ? 0 : "-0.8em";
 
 	const imagePopDelay = 2;
 
@@ -47,10 +47,10 @@ const AssetInCenterVariant = (props) => {
 				>
 					<motion.span
 						initial={{
-							x: textXDistanceLeftTop,
+							transform: `translateX(${textXDistanceLeftTop})`,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : textXDistanceLeftTop,
+							transform: imageLoaded ? `translateX(0em)` : `translateX(${textXDistanceLeftTop})`,
 						}}
 						transition={{
 							delay: imagePopDelay,
@@ -61,10 +61,10 @@ const AssetInCenterVariant = (props) => {
 					</motion.span>
 					<motion.span
 						initial={{
-							x: textXDistanceRightTop,
+							transform: `translateX(${textXDistanceRightTop})`,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : textXDistanceRightTop,
+							transform: imageLoaded ? `translateX(0em)` : `translateX(${textXDistanceRightTop})`,
 						}}
 						transition={{
 							delay: imagePopDelay,
@@ -76,11 +76,11 @@ const AssetInCenterVariant = (props) => {
 				</motion.div>
 				<motion.div
 					initial={{
-						y: "-0.2em",
+						transform: "translateY(-0.2em)",
 						opacity: 0,
 					}}
 					animate={{
-						y: 0,
+						transform: "translateY(0em)",
 						opacity: 1,
 					}}
 					transition={{
@@ -96,10 +96,10 @@ const AssetInCenterVariant = (props) => {
 				>
 					<motion.span
 						initial={{
-							x: textXDistanceLeftMiddle,
+							transform: `translateX(${textXDistanceLeftMiddle})`,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : textXDistanceLeftMiddle,
+							transform: imageLoaded ? `translateX(0em)` : `translateX(${textXDistanceLeftMiddle})`,
 						}}
 						transition={{
 							delay: imagePopDelay,
@@ -110,10 +110,10 @@ const AssetInCenterVariant = (props) => {
 					</motion.span>
 					<motion.span
 						initial={{
-							x: textXDistanceRightMiddle,
+							transform: `translateX(${textXDistanceRightMiddle})`,
 						}}
 						animate={{
-							x: imageLoaded ? 0 : textXDistanceRightMiddle,
+							transform: imageLoaded ? `translateX(0em)` : `translateX(${textXDistanceRightMiddle})`,
 						}}
 						transition={{
 							delay: imagePopDelay,
@@ -136,11 +136,11 @@ const AssetInCenterVariant = (props) => {
 			<motion.div
 				initial={{
 					opacity: 0,
-					y: 50,
+					transform: "translateY(50px)",
 				}}
 				animate={{
 					opacity: imageLoaded ? 1 : 0,
-					y: imageLoaded ? 0 : 50,
+					transform: imageLoaded ? "translateY(0px)" : "translateY(50px)",
 				}}
 				transition={{
 					opacity: {

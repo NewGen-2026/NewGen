@@ -18,7 +18,7 @@ const WorkGridItem = ({ work, variant }) => {
 
 	const isThreeCol = variant === "3col";
 
-	const headingDistanceHover = !work?.acf?.work_logos?.light_logo ? 0 : isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
+	const headingDistanceHover = !work?.acf?.work_logos?.light_logo ? -dataHeight - 20 : isThreeCol ? -dataHeight - 20 : -containerHeight / 2 + headingHeight / 2;
 
 	const logoClass = isHovered ? "invert" : "";
 
@@ -45,29 +45,33 @@ const WorkGridItem = ({ work, variant }) => {
 				}}
 				className={`pointer-events-none absolute inset-0 z-10 will-change-transform ${getBgColorClasses(work?.acf?.general?.theme_color)}`}
 			/>
-			<Link ref={containerRef} href={work?.permalink || "/#"} className="flex h-full flex-col justify-between p-4 md:p-6">
+			<Link
+				ref={containerRef}
+				href={work?.permalink || "/#"}
+				className={`flex h-full flex-col p-4 md:p-6 ${work?.acf?.work_logos?.light_logo ? "justify-between " : "justify-end"}`}
+			>
 				<div className="absolute inset-0 h-full w-full">
 					<WpImage image={work?.featured_image} className="h-full w-full object-cover" />
 				</div>
 				{work?.acf?.work_logos?.light_logo && (
-					<WpImage
-						removeFadeIn
-						className={`relative z-20 max-h-[40px] object-contain object-left transition-[filter] duration-200 will-change-transform ${
-							getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
-						}`}
-						image={work?.acf?.work_logos?.light_logo}
-					/>
+					<div className="w-full max-w-[120px]">
+						<WpImage
+							removeFadeIn
+							className={`relative z-20 max-h-[50px] object-contain object-left transition-[filter] duration-200 will-change-transform ${
+								getIsLightColor(work?.acf?.general?.theme_color) ? logoClass : ""
+							}`}
+							image={work?.acf?.work_logos?.light_logo}
+						/>
+					</div>
 				)}
 
 				{work?.acf?.work_masthead?.heading && (
 					<motion.h3
 						ref={headingRef}
 						initial={{
-							// y: 0,
 							transform: "translateY(0px)",
 						}}
 						animate={{
-							// y: isHovered ? headingDistanceHover : 0,
 							transform: isHovered ? `translateY(${headingDistanceHover}px)` : "translateY(0px)",
 						}}
 						transition={{
@@ -75,7 +79,7 @@ const WorkGridItem = ({ work, variant }) => {
 							stiffness: 220,
 							damping: 24,
 						}}
-						className={`t-44 relative z-20 line-clamp-3 w-full max-w-[502.5px] font-black uppercase will-change-transform xl:line-clamp-none ${getTextContrastColorClassesImportant(
+						className={`t-40 relative z-20 line-clamp-3 w-full max-w-[502.5px] font-black uppercase  xl:line-clamp-none ${getTextContrastColorClassesImportant(
 							isHovered ? work?.acf?.general?.theme_color : "black"
 						)}`}
 					>
