@@ -86,6 +86,9 @@ function Section(props: SectionProps) {
 		is_rounded ? getSectionPaddingClasses({ paddingTop: rounded_options?.inner_padding_top, paddingBottom: rounded_options?.inner_padding_bottom }) : "", // Set inner padding
 	]);
 
+	if (!components) return null;
+	if (components?.length === 0) return null;
+
 	return (
 		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
