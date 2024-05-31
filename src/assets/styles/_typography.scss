@@ -29,7 +29,7 @@ h6 {
 	@apply font-heading font-black;
 }
 
-.font-pilowlava{
+.font-pilowlava {
 	@apply text-[0.92em];
 	font-size: 0.92em !important;
 }
@@ -38,319 +38,292 @@ h6 {
 .bg-ketchup,
 .bg-boost,
 .bg-black {
-    &:not(button > div) {
-        @apply text-white;
-    }
+	&:not(button > div) {
+		@apply text-white;
+	}
 }
 
-.bg-cobalt{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-electric;
-}
-}
-
-.bg-candy{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-ketchup;
-}
+.bg-cobalt {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-electric;
+	}
 }
 
-.bg-ketchup{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-candy;
-}
-}
-
-.bg-sand{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-forest;
-}
+.bg-candy {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-ketchup;
+	}
 }
 
-.bg-electric{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-cobalt;
-}
-}
-
-.bg-spark{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@apply text-white;
-}
+.bg-ketchup {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-candy;
+	}
 }
 
-.bg-boost{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
- {
-	@apply text-energy;
-}
-}
-
-.bg-energy{
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.select-dropdown
-{
-	@apply text-boost;
-}
+.bg-sand {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-forest;
+	}
 }
 
-.t-200
-{
+.bg-electric {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-cobalt;
+	}
+}
+
+.bg-spark {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-white;
+	}
+}
+
+.bg-boost {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-energy;
+	}
+}
+
+.bg-energy {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.select-dropdown {
+		@apply text-boost;
+	}
+}
+
+.t-200 {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(200px), $xs, $xl);
 	@apply leading-[0.88] tracking-[-0.02em];
 }
 
-.t-144-xxlarge
-{
+.t-144-xxlarge {
 	@include clamp("font-size", rem(120px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-144-xlarge
-{
-	@include clamp("font-size", rem(134px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
+.t-144-xlarge {
+	@include clamp("font-size", rem(120px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
 	@apply leading-[0.88] tracking-[-0.02em];
 }
 
-.t-144-large
-{
+.t-144-large {
 	@include clamp("font-size", rem(100px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
 	@apply leading-[0.88] tracking-[-0.02em];
 }
 
-.t-144
-{
+.t-144 {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(144px), $xs, $xl);
 	@apply leading-[0.88] tracking-[-0.02em];
 }
 
-.t-120
-{
+.t-120 {
 	@include clamp("font-size", rem(100px * $responsive_size_modifier_large), rem(120px), $xs, $xl);
 	@apply leading-[0.85] tracking-[-0.15rem];
 }
 
-.t-96{
+.t-96 {
 	@include clamp("font-size", rem(100px * $responsive_size_modifier_large), rem(96px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-96-small{
+.t-96-small {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(96px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-88-menu
-{
+.t-88-menu {
 	@include clamp("font-size", rem(120px * 0.5), rem(88px), $xxs, $xl);
-	@apply  tracking-[-0.11rem];
-
+	@apply tracking-[-0.11rem];
 }
 
-.t-80
-{
+.t-80 {
 	@include clamp("font-size", rem(80px * $responsive_size_modifier_large), rem(80px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
-
 }
 
 .text-h1,
-.t-72
-{
+.t-72 {
 	@include clamp("font-size", rem(72px * $responsive_size_modifier_large), rem(72px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.09rem];
-
 }
 
-.t-64
-{
+.t-64 {
 	@include clamp("font-size", rem(64px * $responsive_size_modifier_large), rem(64px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.08rem];
 }
 
-.t-64-small
-{
+.t-64-small {
 	@include clamp("font-size", rem(54px * $responsive_size_modifier_large), rem(64px), $md, $xl);
 	@apply leading-[0.95] tracking-[-0.08rem];
 }
 
-.t-56
-{
+.t-56 {
 	@include clamp("font-size", rem(56px * $responsive_size_modifier_large), rem(56px), $md, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-48-large
-{
+.t-48-large {
 	@include clamp("font-size", rem(71px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-48
-{
+.t-48 {
 	@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-.t-48-small
-{
+.t-48-small {
 	@include clamp("font-size", rem(40px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
 	@apply leading-[0.95] tracking-[-0.02em];
 }
 
-
 .text-h2,
-.t-44
-{
+.t-44 {
 	@include clamp("font-size", rem(54px * $responsive_size_modifier_large), rem(44px), $md, $xl);
 	@apply leading-[1.05] tracking-[-0.02em];
 }
 
-.t-40{
+.t-40 {
 	@include clamp("font-size", rem(40px * $responsive_size_modifier_large), rem(40px), $md, $lg);
 	@apply leading-[1.05] tracking-[-0.02em];
 }
 
-.t-32-menu{
+.t-32-menu {
 	@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(32px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.02em];
 }
 
-.t-32{
+.t-32 {
 	@include clamp("font-size", rem(42px * $responsive_size_modifier_large), rem(32px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.02em];
 }
 
-.t-30{
+.t-30 {
 	@include clamp("font-size", rem(45px * $responsive_size_modifier_large), rem(30px), $md, $lg);
 	@apply leading-[1.05] tracking-[-0.01875rem];
 }
 
-.t-24{
+.t-24 {
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.02em];
 }
 
-.t-24-body{
+.t-24-body {
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(24px), $md, $lg);
-	@apply leading-[1.35] ;
+	@apply leading-[1.35];
 }
 
-.t-22{
+.t-22 {
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(22px), $md, $lg);
 	@apply leading-[1.3] tracking-[-0.02em];
 }
 
-
-.t-20{
+.t-20 {
 	@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(20px), $md, $lg);
 	@apply leading-[1.3] tracking-[-0.02em];
 }
 
-.t-18{
+.t-18 {
 	@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(18px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.02em];
 }
 
-.t-18-small{
+.t-18-small {
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(18px), $md, $lg);
-	@apply leading-[1.25] md:leading-[1.1] tracking-[-0.02em];
+	@apply leading-[1.25] tracking-[-0.02em] md:leading-[1.1];
 }
 
-.t-16{
+.t-16 {
 	@include clamp("font-size", rem(32px * $responsive_size_modifier_large), rem(16px), $md, $lg);
 	@apply leading-[0.95];
 }
 
-.t-16-small{
+.t-16-small {
 	@include clamp("font-size", rem(30px * $responsive_size_modifier_large), rem(16px), $md, $lg);
 	@apply leading-[0.95];
 }
 
-.t-tag{
+.t-tag {
 	@include clamp("font-size", rem(23px * $responsive_size_modifier_large), rem(16px), $md, $lg);
 	@apply leading-[0.95];
 }
 
-.t-15-large{
+.t-15-large {
 	@include clamp("font-size", rem(30px * $responsive_size_modifier_large), rem(15px), $md, $lg);
 	@apply leading-[1.45];
 }
 
-.t-15{
+.t-15 {
 	@include clamp("font-size", rem(26px * $responsive_size_modifier_large), rem(15px), $md, $lg);
 	@apply leading-[1.45];
 }
 
-.t-404{
+.t-404 {
 	@include clamp("font-size", rem(320px * $responsive_size_modifier_large), rem(672px), $xxxs, $xl);
-
 }
-
 
 .prose {
 	max-width: 100%;
 	color: inherit;
-	p{
-
+	p {
 		@include clamp("font-size", rem(38px * $responsive_size_modifier_large), rem(20px), $md, $lg);
-		@apply leading-[1.3] tracking-[-0.0125rem] text-black font-medium opacity-70;
+		@apply font-medium leading-[1.3] tracking-[-0.0125rem] text-black opacity-70;
 	}
-	a{
+	a {
 		@apply text-cobalt no-underline;
 	}
-	h2{
+	h2 {
 		@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(48px), $xs, $lg);
 		@apply leading-[0.95] tracking-[-0.06rem];
 	}
-	h3{
+	h3 {
 		@include clamp("font-size", rem(48px * $responsive_size_modifier_large), rem(36px), $md, $lg);
 		@apply leading-[1.105] tracking-[-0.045rem];
 	}
-
 }
 
-.prose :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker{
+.prose :where(ol > li):not(:where([class~="not-prose"], [class~="not-prose"] *))::marker {
 	font-weight: 500;
-	color: black
+	color: black;
 }

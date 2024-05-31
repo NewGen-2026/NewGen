@@ -20,7 +20,7 @@ const FadeGrid = ({ items }) => {
 					key={i}
 					animate={{ opacity: isInView ? 1 : 0 }}
 					transition={{
-						duration: 0.1,
+						duration: 0.5,
 						delay: getRandomDelay(0, 0.5) + 0.4,
 					}}
 					className="relative flex aspect-[320/340] w-full items-center justify-center tiny-laptop:aspect-[1]"

@@ -61,7 +61,7 @@ const modifyPathsForHover = (originalPaths, isHoverVariant, newPath) => {
 	return originalPaths;
 };
 
-const FooterLogoAnimation = ({ isHover = false }) => {
+const FooterLogoAnimation = ({ isHover = false, hoverTrigger = false }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, {
 		once: false,
@@ -73,13 +73,24 @@ const FooterLogoAnimation = ({ isHover = false }) => {
 	const handleMouseEnter = () => {
 		if (!isDebounced && isHover) {
 			setHover(true);
-			setIsDebounced(true);
-
-			setTimeout(() => {
-				setIsDebounced(false);
-			}, 500);
+			debounceHover();
 		}
 	};
+
+	const debounceHover = () => {
+		setIsDebounced(true);
+		setTimeout(() => {
+			setIsDebounced(false);
+			setHover(false);
+		}, 800);
+	};
+
+	useEffect(() => {
+		if (hoverTrigger && !isDebounced) {
+			setHover(true);
+			debounceHover();
+		}
+	}, [hoverTrigger, isDebounced]);
 
 	const modifiedGPaths = modifyPathsForHover(gPaths, isHover, gHal);
 	const modifiedEPaths = modifyPathsForHover(ePaths, isHover, eGrid);

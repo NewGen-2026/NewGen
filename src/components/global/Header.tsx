@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { use, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -33,10 +33,13 @@ export default function Header(props) {
 	const [showBg, setBg] = useState(false);
 	const [activeSubmenu, setActiveSubmenu] = useState(null);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [logoHovered, setLogoHovered] = useState(false);
+	const [routeChanged, setRouteChanged] = useState(false);
 
 	const { scrollY } = useScroll();
 	const isDark = !pageOptions?.header_color || pageOptions?.header_color === "dark" || (isMenuOpen && scrolledBg) || scrolledBg || mobileMenuOpen;
 
+	const router = useRouter();
 	const path = useRouter().asPath;
 
 	const showSubmenu = activeSubmenu && activeSubmenu.has_submenu;
@@ -55,11 +58,35 @@ export default function Header(props) {
 		setBg(false);
 	}, []);
 
+	const logoHover = useCallback(() => {
+		setLogoHovered(true);
+		reset();
+	}, [reset]);
+
 	const breakpointCrossed = useBreakpointCrossed(890);
 
 	const { videoLoaded } = useContext(VideoLoadedContext);
 
 	const initialYHome = path === "/" ? -100 : 0;
+
+	useEffect(() => {
+		const handleRouteChangeStart = () => {
+			setRouteChanged(!logoHovered);
+		};
+
+		const handleRouteChangeComplete = () => {
+			setRouteChanged(false);
+			setLogoHovered(false);
+		};
+
+		router.events.on("routeChangeStart", handleRouteChangeStart);
+		router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+		return () => {
+			router.events.off("routeChangeStart", handleRouteChangeStart);
+			router.events.off("routeChangeComplete", handleRouteChangeComplete);
+		};
+	}, [logoHovered, router.events]);
 
 	return (
 		<>
@@ -87,9 +114,9 @@ export default function Header(props) {
 							pageOptions?.remove_nav_menu ? "md-large:py-5" : "md-large:py-0"
 						)}
 					>
-						<Link href="/" className="block" onMouseEnter={() => reset()}>
+						<Link href="/" className="block" onMouseEnter={logoHover}>
 							<div className="w-full max-w-[144px]">
-								<FooterLogoAnimation isHover />
+								<FooterLogoAnimation isHover hoverTrigger={routeChanged} />
 							</div>
 						</Link>
 						{!pageOptions?.remove_nav_menu && (
