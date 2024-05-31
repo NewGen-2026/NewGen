@@ -101,7 +101,7 @@ const FooterLogoAnimation = ({ isHover = false, hoverTrigger = false }) => {
 			ref={ref}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={() => setHover(false)}
-			className="text-center font-heading text-[348px] font-black uppercase !leading-[0.5]"
+			className="text-center font-heading text-[348px] font-black uppercase !leading-[0.5] will-change-transform"
 		>
 			<svg width="100%" height="100%" viewBox="0 0 1377 230" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g className="NEW">
@@ -157,12 +157,19 @@ const LetterSwapper = ({ paths, isInView, delay = 0, hover, isHover }) => {
 							fill="currentColor"
 							key={i}
 							d={path}
-							initial={{ y: "-100%", opacity: 1 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{
-								y: "100%",
-								opacity: 0,
+							initial={{
+								opacity: 1,
+								transform: "translateY(-100%)",
 							}}
+							animate={{
+								opacity: 1,
+								transform: "translateY(0%)",
+							}}
+							exit={{
+								opacity: 0,
+								transform: "translateY(100%)",
+							}}
+							className="will-change-transform"
 							transition={{
 								type: "spring",
 								stiffness: 250,

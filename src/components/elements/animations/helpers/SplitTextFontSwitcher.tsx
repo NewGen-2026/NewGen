@@ -44,7 +44,7 @@ const SplitTextFontSwitcher = ({
 					},
 				}}
 				style={{ marginRight: index < totalWords - 1 ? "0.1em" : "0" }}
-				className="inline-block will-change-transform"
+				className="inline-block"
 			>
 				<FontSwitcher startDelay={fontSwitchStartDelay} text={word + (index < totalWords - 1 ? " " : "")} />
 			</motion.span>

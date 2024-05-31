@@ -77,7 +77,7 @@ const ConnectingMasthead = (props) => {
 				/>
 			</div>
 
-			<div className="mx-auto mt-12 max-w-[1440px] md:mt-[175px] xl:min-h-[87.5px]  tiny-laptop:mt-12 laptop:mt-12 ">
+			<div className="mx-auto mt-12 max-h-[87.5px] max-w-[1440px] md:mt-[175px]  xl:min-h-[87.5px] tiny-laptop:mt-12 laptop:mt-12 ">
 				<MastheadLogoSlider
 					items={items}
 					setSwiper={setSwiper}

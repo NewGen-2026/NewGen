@@ -68,7 +68,7 @@ const SliderMasthead = (props) => {
 											duration: 0.8,
 											ease: "easeInOut",
 										}}
-										className={`absolute inset-0 z-10  will-change-transform ${getBgColorClasses(items[activeSlide]?.transition_color || "boost")}`}
+										className={`absolute inset-0 z-10 ${getBgColorClasses(items[activeSlide]?.transition_color || "boost")}`}
 									/>
 								)}
 							</div>

@@ -84,10 +84,10 @@ const LoaderMasthead = (props) => {
 							>
 								<motion.div
 									initial={{
-										scale: 1.1,
+										transform: "scale(1.1)",
 									}}
 									animate={{
-										scale: videoLoaded ? 1 : 1.1,
+										transform: videoLoaded ? "scale(1)" : "scale(1.1)",
 									}}
 									transition={{
 										type: "spring",
