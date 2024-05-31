@@ -24,7 +24,7 @@ function Layout({ data, children, hideCTA = false }: LayoutProps) {
 	return (
 		<PasswordProtect password={page?.post_password}>
 			<VideoLoadedContext.Provider value={{ videoLoaded, setVideoLoaded }}>
-				<Seo page={data?.page} />
+				<Seo page={data?.page} globalScripts={options?.global_scripts} />
 				<Header {...options} pageOptions={page?.page_options} pagePostType={page?.post_type} />
 				<main>{children}</main>
 				{!(page?.page_options?.remove_cta || hideCTA) && <CTA pageOptions={page?.page_options} />}

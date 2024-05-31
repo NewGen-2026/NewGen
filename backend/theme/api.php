@@ -406,11 +406,54 @@ function get_post_preview_data_for_post($post)
 	return $mappedPost;
 }
 
+function sanitize_header_scripts($header_scripts) {
+	$allowed_html = [
+			'script' => [
+					'src' => true,
+					'type' => true,
+					'async' => true,
+					'defer' => true,
+					'id' => true,
+					'data-*' => true,  // Allow all data- attributes
+			],
+	];
 
+	foreach ($header_scripts as $index => $script) {
+			if (isset($script['script'])) {
+					// Handle both regular and self-closing script tags
+					preg_match('/<script\s+([^>]+)>|<script\s+([^>]+?)\/>/is', $script['script'], $matches);
+					$attributes_string = $matches[1] ?? $matches[3] ?? '';
+					$script_content = $matches[2] ?? '';
+
+					// Parse attributes
+					$attributes = [];
+
+					preg_match_all('/(\w+|data-\w+)=["\']([^"\']*)["\']/', $attributes_string, $attr_matches, PREG_SET_ORDER);
+					foreach ($attr_matches as $attr) {
+							$attributes[$attr[1]] = wp_kses($attr[2], $allowed_html);
+					}
+					// Sanitize the script content with wp_kses
+					$clean_script_content = wp_kses($script_content, $allowed_html);
+
+					// Remove all new line and carriage return characters from content
+					$clean_script_content = str_replace(["\r", "\n"], '', $clean_script_content);
+					$clean_script_content = trim(preg_replace('/\s\s+/', ' ', $clean_script_content));
+
+					// Update the script in the array
+					$header_scripts[$index]['attributes'] = $attributes;
+					$header_scripts[$index]['content'] = $clean_script_content;
+			}
+	}
+	return $header_scripts;
+}
 
 function get_global_options()
 {
 	$options = get_fields('options');
+
+	if (isset($options['global_scripts'])) {
+		$options['global_scripts'] = sanitize_header_scripts($options['global_scripts']);
+}
 	unset($options['redirects']);
 	return new WP_REST_Response($options);
 }
