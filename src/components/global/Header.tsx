@@ -1,6 +1,6 @@
 import Link from "next/link";
-import React, { use, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { motion, useScroll } from "framer-motion";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { AnimatePresence, useScroll, motion } from "framer-motion";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
@@ -42,15 +42,9 @@ export default function Header(props) {
 	const router = useRouter();
 	const path = useRouter().asPath;
 
-	const showSubmenu = activeSubmenu && activeSubmenu.has_submenu;
+	const showSubmenu = activeSubmenu !== null && menu?.nav[activeSubmenu]?.nav_item?.has_submenu;
 
-	const submenuContent = useMemo(() => getSubMenuContent(activeSubmenu), [activeSubmenu]);
-
-	const handleMouseEnter = useCallback((navItem) => {
-		setActiveSubmenu(navItem?.nav_item);
-		setMenuOpen(navItem?.nav_item?.has_submenu);
-		setBg(true);
-	}, []);
+	const submenuContent = useMemo(() => getSubMenuContent(menu?.nav[activeSubmenu]?.nav_item), [activeSubmenu, menu?.nav]);
 
 	const reset = useCallback(() => {
 		setActiveSubmenu(null);
@@ -62,6 +56,12 @@ export default function Header(props) {
 		setLogoHovered(true);
 		reset();
 	}, [reset]);
+
+	const handleMouseEnter = useCallback((index, hasSubmenu) => {
+		setActiveSubmenu(index);
+		setMenuOpen(hasSubmenu);
+		setBg(true);
+	}, []);
 
 	const breakpointCrossed = useBreakpointCrossed(890);
 
@@ -115,7 +115,7 @@ export default function Header(props) {
 						)}
 					>
 						<Link href="/" className="block" onMouseEnter={logoHover}>
-							<div className="w-full max-w-[144px]">
+							<div className="w-full max-w-[144px] will-change-transform">
 								<FooterLogoAnimation isHover hoverTrigger={routeChanged} />
 							</div>
 						</Link>
@@ -123,21 +123,21 @@ export default function Header(props) {
 							<div className="flex items-center gap-6 xl:gap-10">
 								<nav className={clsx(`hidden items-center gap-6 md-large:flex lg:gap-10`, isDark ? "text-black " : "text-white")}>
 									{menu?.nav?.map((navItem, i) => (
-										<motion.li
-											key={`nav-item-${i}`}
-											onHoverStart={() => handleMouseEnter(navItem)}
-											onKeyDown={(e) => {
-												if (e.key === "Enter" || e.key === " ") {
-													handleMouseEnter(navItem);
-												}
-											}}
-											className="t-16 block text-left font-heading font-black xl:relative "
-										>
-											<Link className="relative uppercase" href={navItem?.nav_item?.link?.url || "/#"}>
+										<motion.li key={`nav-item-${i}`} className="t-16 block text-left font-heading font-black xl:relative ">
+											<Link
+												onMouseEnter={() => handleMouseEnter(i, navItem?.nav_item?.has_submenu)}
+												onKeyDown={(e) => {
+													if (e.key === "Enter" || e.key === " ") {
+														handleMouseEnter(i, navItem?.nav_item?.has_submenu);
+													}
+												}}
+												className="relative uppercase"
+												href={navItem?.nav_item?.link?.url || "/#"}
+											>
 												{navItem?.nav_item?.link?.title}
 												<div className="absolute left-0 right-0 top-[150%] w-full will-change-transform">
 													<div className="relative flex h-full w-full items-center justify-center">
-														{activeSubmenu === navItem?.nav_item && (
+														{activeSubmenu === i && (
 															<motion.div
 																layoutId="navUnderline"
 																transition={{
@@ -156,37 +156,46 @@ export default function Header(props) {
 												</div>
 											</Link>
 
-											{!breakpointCrossed && activeSubmenu === navItem?.nav_item && navItem?.nav_item?.has_submenu && (
-												<motion.div
-													style={{
-														pointerEvents: isMenuOpen ? "auto" : "none",
-													}}
-													className="absolute left-0 top-[90px] z-[5] w-full min-w-[960px] origin-top scale-[0.9] px-5  will-change-transform lg:min-w-[1000px] xl:left-[50%] xl:top-[400%] xl:min-w-[1280px] xl:-translate-x-1/2   xl:px-0 tiny-laptop:scale-[0.8]  "
-												>
+											<AnimatePresence>
+												{!breakpointCrossed && activeSubmenu === i && navItem?.nav_item?.has_submenu && (
 													<motion.div
-														initial={{ opacity: 0 }}
-														animate={{
-															opacity: isMenuOpen ? 1 : 0,
+														key={`submenu-${i}`}
+														style={{
+															pointerEvents: activeSubmenu === i ? "auto" : "none",
 														}}
-														layoutId="menu"
-														transition={{
-															opacity: {
-																duration: 0.2,
-															},
-															layout: {
-																type: "spring",
-																stiffness: 150,
-																damping: 20,
-															},
-														}}
-														className="z-[5] w-full bg-white will-change-transform xl:min-w-[1088px]"
+														className="absolute left-0 top-[90px] z-[5] w-full min-w-[960px] origin-top scale-[0.8] px-5  will-change-transform lg:min-w-[1000px] xl:left-[50%] xl:top-[400%] xl:min-w-[1280px] xl:-translate-x-1/2   xl:px-0 tiny-laptop:scale-[0.8]  "
 													>
-														<motion.div layout="position" className="w-full will-change-transform">
-															{showSubmenu && submenuContent}
+														<motion.div
+															initial={{
+																opacity: 0,
+																transform: "scale(0.8)",
+															}}
+															animate={{
+																opacity: 1,
+																transform: "scale(1)",
+															}}
+															exit={{
+																opacity: 0,
+																transform: "scale(0.8)",
+																pointerEvents: "none",
+															}}
+															transition={{
+																opacity: {
+																	duration: 0.2,
+																},
+																transform: {
+																	type: "spring",
+																	stiffness: 150,
+																	damping: 20,
+																},
+															}}
+															className="menu-shadow z-[5] w-full !origin-top bg-white xl:min-w-[1088px]"
+														>
+															<motion.div className="w-full">{showSubmenu && submenuContent}</motion.div>
 														</motion.div>
 													</motion.div>
-												</motion.div>
-											)}
+												)}
+											</AnimatePresence>
 										</motion.li>
 									))}
 								</nav>

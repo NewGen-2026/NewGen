@@ -4,47 +4,43 @@
 	@apply delay-500;
 }
 
-.feed-marquee{
-
-	div:first-of-type{
+.feed-marquee {
+	div:first-of-type {
 		align-items: unset !important;
 		overflow: visible !important;
-		span{
+		span {
 			overflow: visible !important;
 		}
 	}
-	.rfm-child{
+	.rfm-child {
 		@apply md:mx-3;
 	}
 }
-.feed-marquee>span{
+.feed-marquee > span {
 	overflow: visible !important;
-
 }
 
-.icon-block-marquee{
-	.rfm-initial-child-container, .rfm-marquee{
+.icon-block-marquee {
+	.rfm-initial-child-container,
+	.rfm-marquee {
 		align-items: start !important;
 	}
 }
 
-
-.filter-candy{
+.filter-candy {
 	filter: invert(0.4) sepia(1) saturate(5) hue-rotate(315deg) brightness(1);
 }
 
-.filter-electric{
-  filter: invert(0.3) sepia(1) saturate(5) hue-rotate(175deg);
+.filter-electric {
+	filter: invert(0.3) sepia(1) saturate(5) hue-rotate(175deg);
 }
 
-.filter-sand{
-  filter: invert(0.3) sepia(1) saturate(5) hue-rotate(75deg);
+.filter-sand {
+	filter: invert(0.3) sepia(1) saturate(5) hue-rotate(75deg);
 }
 
-
-.vimeo-video{
-	div{
-
+.vimeo-video {
+	div {
 		position: relative;
 		padding: 56.25% 0 0 0 !important;
 		height: 0;
@@ -60,33 +56,37 @@
 }
 
 @media (max-width: 640px) {
-  .scroll-container::before,
-  .scroll-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    z-index: 1;
-    pointer-events: none;
-  }
+	.scroll-container::before,
+	.scroll-container::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 20px;
+		z-index: 1;
+		pointer-events: none;
+	}
 
-  .scroll-container::before {
-    left: 0;
-    background: linear-gradient(to right, #fff, transparent);
-  }
+	.scroll-container::before {
+		left: 0;
+		background: linear-gradient(to right, #fff, transparent);
+	}
 
-  .scroll-container::after {
-    right: 0;
-    background: linear-gradient(to left, #fff, transparent);
-  }
+	.scroll-container::after {
+		right: 0;
+		background: linear-gradient(to left, #fff, transparent);
+	}
 }
 
 .hide-scrollbars {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
 }
 
 .hide-scrollbars::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
+	display: none; /* Safari and Chrome */
+}
+
+.menu-shadow {
+	box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.05);
 }
