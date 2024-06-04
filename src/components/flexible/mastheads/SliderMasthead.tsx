@@ -48,17 +48,18 @@ const SliderMasthead = (props) => {
 					<div className="mx-[-15px] flex-1 md:mx-0  md:w-[unset] md:max-w-[555px]">
 						<div className=" w-full flex-1 bg-stone/10 md:w-[unset] md:max-w-[555px]">
 							<div className="relative aspect-[555/600] w-full overflow-hidden ">
-								{items?.map((item, i) => (
-									<motion.div
-										key={`image${i}`}
-										initial={{ opacity: 0 }}
-										animate={{ opacity: activeSlide === i ? 1 : 0 }}
-										transition={{ delay: 0.3 }}
-										className="absolute inset-0 h-full w-full bg-stone/20"
-									>
-										<WpImage image={item?.image} priority className="h-full w-full object-cover" />
-									</motion.div>
-								))}
+								{items &&
+									items?.map((item, i) => (
+										<motion.div
+											key={`image${i}`}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: activeSlide === i ? 1 : 0 }}
+											transition={{ delay: 0.3 }}
+											className="absolute inset-0 h-full w-full bg-stone/20"
+										>
+											<WpImage image={item?.image} priority className="h-full w-full object-cover" />
+										</motion.div>
+									))}
 								{activeSlide !== null && (
 									<motion.div
 										key={activeSlide}
