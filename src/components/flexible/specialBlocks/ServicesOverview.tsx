@@ -54,7 +54,7 @@ const ServicesOverview = (props) => {
 	const [buttonHovered, setButtonHovered] = useState(false);
 	const [overrideHover, setOverrideHover] = useState(null);
 
-	const { creative_layout, influencer_layout, social_layout } = props;
+	const { creative_layout, influencer_layout, social_layout, sentence } = props;
 
 	const layouts = useMemo(
 		() => [
@@ -113,8 +113,8 @@ const ServicesOverview = (props) => {
 			.flat();
 	};
 
-	const sentence =
-		"From ||in|f|luencer|| marketing to razor-sharp ||socia|l|| & thumb-stopping ||cre|a|tive||, we get whole generations excited about your brand";
+	// const sentence =
+	// 	"From ||in|f|luencer|| marketing to razor-sharp ||socia|l|| & thumb-stopping ||cre|a|tive||, we get whole generations excited about your brand";
 
 	return (
 		<div ref={ref} className="relative overflow-hidden py-16 md:py-[88px]">
