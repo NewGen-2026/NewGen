@@ -41,8 +41,8 @@ const WorkPost = (props) => {
 							<FontSwitcher text={work_masthead?.heading} />
 						</h1>
 					</div>
-					<div className="mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]">
-						<Asset priority quality={85} {...work_masthead?.asset} className="h-full w-full " />
+					<div className="relative mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]">
+						<Asset priority quality={85} {...work_masthead?.asset} className="h-full w-full object-cover object-center" fill />
 					</div>
 				</div>
 			</section>
