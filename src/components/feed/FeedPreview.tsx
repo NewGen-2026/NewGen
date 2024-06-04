@@ -80,7 +80,7 @@ const FeedPreview = ({
 						!post_tag && "!mb-0"
 					)}
 				>
-					{post_title.length < 50 && (
+					{post_title?.length < 50 && (
 						<div
 							className={clsx(
 								`flex-none overflow-hidden rounded-full bg-energy `,
