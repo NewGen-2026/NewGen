@@ -59,7 +59,7 @@ export default function Footer(props) {
 								<ul className="t-16-small mt-4 space-y-3 font-heading font-black uppercase md:space-y-6">
 									{navItem?.nav_item?.links?.map((link, j) => (
 										<li key={`link${j}`} className={`block transition-colors duration-300 ${themeStyles[footer_theme]?.hoverColor}`}>
-											<Link className="whitespace-nowrap" href={link?.link?.url}>
+											<Link className="whitespace-nowrap" href={link?.link?.url || "/#"}>
 												{link?.link?.title}
 											</Link>
 										</li>
