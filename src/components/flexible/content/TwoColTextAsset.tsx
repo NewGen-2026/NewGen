@@ -22,7 +22,7 @@ const TwoColTextAsset = (props) => {
 				<div className="w-full max-w-[672px] md:flex-1">
 					<TransitionSlider
 						add_nav={media?.add_nav}
-						intervalDuration={5000}
+						intervalDuration={5000000}
 						transitionColor="electric"
 						transitionColors={media?.assets?.map((asset) => asset?.transition_color)}
 						className={`relative w-full bg-stone/10 ${media?.aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672]"}`}
