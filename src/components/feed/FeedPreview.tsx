@@ -80,14 +80,16 @@ const FeedPreview = ({
 						!post_tag && "!mb-0"
 					)}
 				>
-					<div
-						className={clsx(
-							`flex-none overflow-hidden rounded-full bg-energy `,
-							slideVariant ? "h-8 w-8 md:h-12 md:w-12" : "h-[43px] w-[43px] md:h-16 md:w-16"
-						)}
-					>
-						<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
-					</div>
+					{post_title.length < 50 && (
+						<div
+							className={clsx(
+								`flex-none overflow-hidden rounded-full bg-energy `,
+								slideVariant ? "h-8 w-8 md:h-12 md:w-12" : "h-[43px] w-[43px] md:h-16 md:w-16"
+							)}
+						>
+							<WpImage image={author?.acf?.profile_picture} className="h-full w-full rounded-full object-cover" />
+						</div>
+					)}
 					<Link
 						href={link || "/#"}
 						target={acf?.is_external_link ? "_blank" : "_self"}
@@ -98,9 +100,10 @@ const FeedPreview = ({
 								<div className="t-15 font-bold">{author?.name}</div>
 								<div className={`${slideVariant ? "hidden" : ""}  t-15 font-medium opacity-50 md:block`}>{post_date_gmt}</div>
 							</div>
+
 							<h3
 								className={clsx(
-									` line-clamp-3 whitespace-normal transition-colors duration-200 group-hover:text-cobalt md:mt-2  `,
+									` line-clamp-3x whitespace-normal transition-colors duration-200 group-hover:text-cobalt md:mt-2  `,
 									slideVariant ? "t-24 mt-1 font-black !leading-[-0.015rem]" : "t-30 mt-2 font-bold !leading-[1.05]"
 								)}
 							>
