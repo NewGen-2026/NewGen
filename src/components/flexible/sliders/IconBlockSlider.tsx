@@ -18,7 +18,7 @@ const IconBlockSlider = ({ items }) => {
 					className="!overflow-visible"
 					spaceBetween={32}
 					loop
-					slidesPerView={3.1}
+					slidesPerView="auto"
 					modules={[FreeMode, Mousewheel]}
 					freeMode={{
 						enabled: true,
