@@ -7,6 +7,7 @@ import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import usePanSlider from "~/hooks/usePanSlider";
 import { getBgColorClasses, getBgContrastColorClasses, getTextContrastColorClasses } from "~/utils/getColors";
+import IconsRenderer from "~/components/elements/icons/IconsRenderer";
 
 const TwoColTestimonialSlider = (props) => {
 	const { variant, items, image_aspect } = props;
@@ -144,6 +145,17 @@ const TwoColTestimonialSlider = (props) => {
 						</div>
 					</div>
 					<div className={clsx(`mt-8 flex items-center justify-center gap-3 lg:justify-start`, boxedVariant ? boxImageNavClasses : "lg:mt-32")}>
+						<motion.button
+							whileTap={{ scale: 0.9 }}
+							onClick={() => {
+								setActiveSlide((prevSlide) => (prevSlide - 1 + items.length) % items.length);
+							}}
+						>
+							<div className="h-3 w-3 rotate-[90deg]">
+								<IconsRenderer icon="arrow" />
+							</div>
+						</motion.button>
+
 						{items?.map((_, i) => (
 							<motion.div
 								key={`navItem${i}`}
@@ -155,6 +167,16 @@ const TwoColTestimonialSlider = (props) => {
 								}`}
 							/>
 						))}
+						<motion.button
+							whileTap={{ scale: 0.9 }}
+							onClick={() => {
+								setActiveSlide((prevSlide) => (prevSlide + 1) % items.length);
+							}}
+						>
+							<div className="h-3 w-3 rotate-[-90deg]">
+								<IconsRenderer icon="arrow" />
+							</div>
+						</motion.button>
 					</div>
 				</div>
 			</div>
