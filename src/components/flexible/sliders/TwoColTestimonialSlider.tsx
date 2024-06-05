@@ -74,12 +74,14 @@ const TwoColTestimonialSlider = (props) => {
 			onPanEnd={handlePanEnd}
 			ref={ref}
 			className={clsx(
-				`mx-[-15px] flex  gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
+				`mx-[-15px] flex w-full gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
 				getBgColorClasses(items[activeSlide]?.theme_color),
-				boxedVariant ? "flex-col-reverse justify-between gap-6" : "tiny-laptop:min-h-664px flex-col items-end overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
+				boxedVariant
+					? "flex-col-reverse justify-between gap-6"
+					: "tiny-laptop:min-h-664px flex-col items-end justify-between overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
 			)}
 		>
-			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[685px] ")}>
+			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[585px] ")}>
 				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 md:mt-[51px]")}>
 					<div className="">
 						<div style={{ minHeight: maxQuoteHeight }} className="relative w-full">
@@ -216,7 +218,7 @@ const TwoColTestimonialSlider = (props) => {
 							}}
 							className="absolute inset-0"
 						>
-							<WpImage image={item?.image} className="h-full w-full object-cover" />
+							<WpImage image={item?.image} className="h-full w-full object-cover" fill />
 						</motion.div>
 					))}
 				</div>
