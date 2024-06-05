@@ -123,7 +123,7 @@ export default function Post(data) {
 								<div className="w-full bg-stone/20">
 									<WpImage image={post_content?.custom_masthead_image} className="bg-stone/50" />
 								</div>
-							) : featured_image ? (
+							) : featured_image?.src !== "" ? (
 								<div className={clsx(`w-full bg-stone/20`, post_content?.feature_image_aspect === "landscape" ? "aspect-[672/472] " : "aspect-[672/944]")}>
 									<WpImage image={featured_image} className="h-full w-full object-cover" />
 								</div>
