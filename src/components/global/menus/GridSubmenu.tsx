@@ -82,7 +82,8 @@ const GridItem = (props) => {
 				<motion.div
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
-					initial={{ opacity: 0, transform: "translateX(-100%)" }}
+					// initial={{ opacity: 0, transform: "translateX(-100%)" }}
+					initial={{ opacity: 0, transform: "translateX(0%)" }}
 					animate={{ opacity: 1, transform: "translateX(0%)" }}
 					transition={{
 						delay: staggerDelay,
