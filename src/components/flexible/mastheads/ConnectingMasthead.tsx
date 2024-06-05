@@ -4,6 +4,7 @@ import { getBgColorClasses } from "~/utils/getColors";
 import { motion, useInView } from "framer-motion";
 import getFontClass from "~/utils/getFontClass";
 import dynamic from "next/dynamic";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 
 const MastheadLogoSlider = dynamic(() => import("../sliders/MastheadLogoSlider"), { ssr: false });
 
@@ -99,7 +100,9 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 	return (
 		<h1 className="t-144 text-center font-black uppercase">
 			<span className="relative z-[0] block">
-				C<span className={`${getFontClass(items[activeSlide]?.hover_font)}`}>o</span>nnecting
+				<FontSwitcher text={top_line} />
+				{/* {top_line} */}
+				{/* C<span className={`${getFontClass(items[activeSlide]?.hover_font)}`}>o</span>nnecting */}
 			</span>
 			<div className="relative inline-flex">
 				<motion.span
@@ -122,11 +125,12 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 					}}
 					className="relative inline-block"
 				>
-					<span>wh</span>
+					{middle_line_right}
+					{/* <span>wh</span>
 					<span className={`${getFontClass(items[activeSlide]?.hover_font)}`}>a</span>
-					<span>{`t's`}</span>
+					<span>{`t's`}</span> */}
 				</motion.span>
-				<div className="absolute inset-0 flex items-center justify-center">
+				<div className="absolute inset-0 left-[-17%] flex items-center justify-center">
 					{items?.map((item, i) => (
 						<motion.div
 							key={`logoLoader${i}`}
