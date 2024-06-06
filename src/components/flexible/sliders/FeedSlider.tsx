@@ -5,10 +5,12 @@ import "swiper/css";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { useRef } from "react";
 import FeedPreview from "~/components/feed/FeedPreview";
+import { useWindowSize } from "react-use";
 import SliderNavigation from "./SliderNavigation";
 
 const FeedSlider = ({ items }) => {
 	const swiperRef = useRef(null);
+	const { width } = useWindowSize();
 
 	return (
 		<LazyMotion features={domAnimation}>
@@ -18,7 +20,7 @@ const FeedSlider = ({ items }) => {
 					className="!overflow-visible"
 					spaceBetween={48}
 					loop
-					slidesPerView={3.35}
+					slidesPerView="auto"
 					modules={[FreeMode, Mousewheel]}
 					freeMode={{
 						enabled: true,
@@ -44,8 +46,8 @@ const FeedSlider = ({ items }) => {
 						</SwiperSlide>
 					))}
 				</Swiper>
-
-				<SliderNavigation swiperRef={swiperRef} />
+				{/* <SliderNavigation swiperRef={swiperRef} /> */}
+				{swiperRef?.current && swiperRef?.current?.swiper?.slides?.length >= 3 && width < 1280 && <SliderNavigation swiperRef={swiperRef} />}
 			</div>
 		</LazyMotion>
 	);
