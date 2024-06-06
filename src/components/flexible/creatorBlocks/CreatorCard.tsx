@@ -60,6 +60,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 	}, [breakpointCrossed]);
 
 	const yDistance = breakpointCrossed ? -35 : -48;
+	const yDistanceType = breakpointCrossed ? -30 : -40;
 
 	return (
 		<motion.div
@@ -72,7 +73,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 			)}
 		>
 			<WpImage className="h-full w-full object-cover" image={creator?.creator?.featured_image} />
-			<div className="absolute inset-0 z-[10] flex w-full items-end justify-center p-2 md:p-8">
+			<div className="absolute inset-0 z-[10] flex w-full flex-col items-center justify-end p-2 md:p-8">
 				<motion.div
 					initial={{
 						y: 0,
@@ -91,6 +92,21 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 				>
 					<FontSwitcher text={creator?.creator?.acf?.hover_name} hover isHovered={isHovered} />
 				</motion.div>
+				{creator?.creator?.acf?.type && (
+					<motion.div
+						initial={{
+							y: 0,
+							opacity: 0,
+						}}
+						animate={{
+							y: isHovered ? yDistanceType : 0,
+							opacity: isHovered ? 1 : 0,
+						}}
+						className="t-24 flex justify-center text-center capitalize will-change-transform"
+					>
+						{creator?.creator?.acf?.type.replace(/_/g, " ")}
+					</motion.div>
+				)}
 			</div>
 			<div className="absolute inset-0 z-[10] flex w-full items-end justify-center p-2 md:p-8">
 				<motion.div
