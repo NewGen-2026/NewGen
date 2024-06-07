@@ -138,6 +138,9 @@ const AllWorkGrid = (props) => {
 	const filteredWorkPosts = filteredAndSlicedWorkPosts.slice(0, displayedPostsCount);
 	const allPostsDisplayed = displayedPostsCount >= filteredAndSlicedWorkPosts.length;
 
+	console.log(serviceNames);
+	console.log(selectedWorkType);
+
 	return (
 		<div id="all-work-grid" className="scroll-mt-20">
 			<div className="mb-8 flex flex-col flex-wrap items-center gap-y-5 md:mb-20 lg:flex-row lg:justify-between xl:flex-nowrap">
@@ -172,37 +175,47 @@ const AllWorkGrid = (props) => {
 
 				<div className="scroll-container relative w-full lg:w-auto">
 					<div className="t-15-large  hide-scrollbars relative flex min-h-[40px] w-full gap-4 overflow-x-auto  px-2 font-bold sm:justify-center sm:px-0 lg:w-auto xl:gap-8">
-						{serviceNames.map(([name, slug], i) => (
-							<button
-								aria-label={name}
-								type="button"
-								key={`service-${i}`}
-								className=" block cursor-pointer transition-colors duration-200 hover:text-cobalt "
-								onClick={() => handleServiceSelection(slug)}
-							>
-								<div className="relative whitespace-nowrap">
-									<span dangerouslySetInnerHTML={{ __html: name }} />
+						{serviceNames
+							.filter((category) => {
+								if (selectedWorkType === "for-brands") {
+									return category[0] !== "Talent Management" && category[0] !== "Social Publishing";
+								}
+								if (selectedWorkType === "for-creators") {
+									return category[0] === "Talent Management" || category[0] === "Social Publishing";
+								}
+								return category;
+							})
+							.map(([name, slug], i) => (
+								<button
+									aria-label={name}
+									type="button"
+									key={`service-${i}`}
+									className=" block cursor-pointer transition-colors duration-200 hover:text-cobalt "
+									onClick={() => handleServiceSelection(slug)}
+								>
+									<div className="relative whitespace-nowrap">
+										<span dangerouslySetInnerHTML={{ __html: name }} />
 
-									<div className="absolute bottom-[-6px] left-0 flex w-full justify-center">
-										{selectedService === slug && (
-											<motion.span
-												layoutId="underline"
-												transition={{
-													layout: {
-														type: "spring",
-														stiffness: 300,
-														damping: 28,
-													},
-												}}
-												className=" h-[6px] justify-center will-change-transform"
-											>
-												<motion.span layout="position" className="block h-[6px] w-[6px] bg-cobalt" />
-											</motion.span>
-										)}
+										<div className="absolute bottom-[-6px] left-0 flex w-full justify-center">
+											{selectedService === slug && (
+												<motion.span
+													layoutId="underline"
+													transition={{
+														layout: {
+															type: "spring",
+															stiffness: 300,
+															damping: 28,
+														},
+													}}
+													className=" h-[6px] justify-center will-change-transform"
+												>
+													<motion.span layout="position" className="block h-[6px] w-[6px] bg-cobalt" />
+												</motion.span>
+											)}
+										</div>
 									</div>
-								</div>
-							</button>
-						))}
+								</button>
+							))}
 					</div>
 				</div>
 			</div>
