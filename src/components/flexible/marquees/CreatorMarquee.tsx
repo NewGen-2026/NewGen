@@ -34,7 +34,7 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 	if (variant === "grid") {
 		return (
 			<div className="container">
-				<div className="flex w-full flex-wrap gap-2 sm:gap-5 xl:gap-8">
+				<div className="grid w-full gap-2 xss:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
 					{creators && creators.map((creator, i) => <CreatorCard key={`creator-${i}`} creator={creator} />)}
 				</div>
 			</div>
