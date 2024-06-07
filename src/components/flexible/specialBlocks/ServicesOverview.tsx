@@ -9,7 +9,7 @@ import useAutoSlider from "~/hooks/useAutoSlider";
 import CountUp from "~/components/elements/animations/helpers/CountUp";
 
 const activeHoverLayouts = {
-	influencer: {
+	creator: {
 		color: "bg-boost",
 		hoverTextColor: "text-energy",
 		link: "/influencer-performance",
@@ -59,7 +59,7 @@ const ServicesOverview = (props) => {
 	const layouts = useMemo(
 		() => [
 			{
-				id: "influencer",
+				id: "creator",
 				leftImage: influencer_layout?.influencer_left_image,
 				rightImage: influencer_layout?.influencer_right_image,
 				statBlock: influencer_layout?.stat_block,
