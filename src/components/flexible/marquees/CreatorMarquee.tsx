@@ -18,7 +18,7 @@ type CreatorMarqueeProps = {
 		};
 		background_color?: "black" | "white";
 	};
-	variant?: "slider" | "marquee";
+	variant?: "slider" | "marquee" | "grid";
 };
 const CreatorMarquee = (props: CreatorMarqueeProps) => {
 	const { creators, button, variant } = props;
@@ -30,6 +30,16 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 	const isInView = useInView(ref, {
 		once: false,
 	});
+
+	if (variant === "grid") {
+		return (
+			<div className="container">
+				<div className="flex w-full flex-wrap gap-2 sm:gap-5 xl:gap-8">
+					{creators && creators.map((creator, i) => <CreatorCard key={`creator-${i}`} creator={creator} />)}
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div>
