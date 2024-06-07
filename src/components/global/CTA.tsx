@@ -42,25 +42,25 @@ const themeStyles = {
 const CTA = ({ pageOptions }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
-	const footer_theme = pageOptions?.footer_theme || "white";
+	const cta_theme = pageOptions?.cta_theme || "white";
 	const overrideText = pageOptions?.override_cta_text;
-	const unhoveredText = overrideText && pageOptions?.unhovered_text ? pageOptions?.unhovered_text : themeStyles[footer_theme]?.ctaText;
-	const hoveredText = overrideText && pageOptions?.hovered_text ? pageOptions?.hovered_text : themeStyles[footer_theme]?.ctaHoverText;
+	const unhoveredText = overrideText && pageOptions?.unhovered_text ? pageOptions?.unhovered_text : themeStyles[cta_theme]?.ctaText;
+	const hoveredText = overrideText && pageOptions?.hovered_text ? pageOptions?.hovered_text : themeStyles[cta_theme]?.ctaHoverText;
 
 	const displayedText = isHovered ? hoveredText : unhoveredText;
 
 	return (
-		<div className={`${themeStyles[footer_theme]?.backgroundColor || "bg-white"}`}>
+		<div className={`${themeStyles[cta_theme]?.backgroundColor || "bg-white"}`}>
 			<div className={` mx-auto max-w-[1376px] pb-12 pt-8 md:pt-20 `}>
 				<Link
 					href="/contact"
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 					className={`w-full  ${
-						isHovered ? themeStyles[footer_theme]?.hoveredClasses : themeStyles[footer_theme]?.unhoveredClasses
+						isHovered ? themeStyles[cta_theme]?.hoveredClasses : themeStyles[cta_theme]?.unhoveredClasses
 					} t-96 block px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
 				>
-					<h2 className={`!bg-transparent ${isHovered ? themeStyles[footer_theme]?.hoveredClasses : ""}`}>
+					<h2 className={`!bg-transparent ${isHovered ? themeStyles[cta_theme]?.hoveredClasses : ""}`}>
 						<FontSwitcher hover isHovered={isHovered} text={displayedText || "G<pst-grid>e</>t in to<pst-grid>u</>ch"} />
 					</h2>
 				</Link>
