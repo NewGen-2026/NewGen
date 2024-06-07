@@ -22,14 +22,9 @@ const AssetMarquee = (props) => {
 	return (
 		<div ref={ref} className="asset-marquee min-h-[200px] w-full">
 			<Marquee play={isInView} direction="left" className="" speed={breakpointCrossed ? 100 : 50}>
-				{assets?.map((asset, i) => (
+				{assets?.concat(assets)?.map((asset, i) => (
 					<div key={`asset-${i}`} className="mx-3">
-						<Asset className={`marquee-asset ${maxHeight} w-full object-contain `} {...asset?.asset} />
-					</div>
-				))}
-				{assets?.map((asset, i) => (
-					<div key={`asset2-${i}`} className="mx-3">
-						<Asset className={`marquee-asset ${maxHeight} w-full object-contain `} {...asset?.asset} />
+						<Asset className={`marquee-asset ${maxHeight} w-auto object-contain `} {...asset?.asset} />
 					</div>
 				))}
 			</Marquee>
