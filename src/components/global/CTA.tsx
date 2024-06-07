@@ -58,7 +58,7 @@ const CTA = ({ pageOptions }) => {
 					onMouseLeave={() => setIsHovered(false)}
 					className={`w-full  ${
 						isHovered ? themeStyles[footer_theme]?.hoveredClasses : themeStyles[footer_theme]?.unhoveredClasses
-					} t-144 block px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
+					} t-96 block px-5 py-20 text-center font-heading font-black uppercase transition-colors duration-200 md:py-32`}
 				>
 					<h2 className={`!bg-transparent ${isHovered ? themeStyles[footer_theme]?.hoveredClasses : ""}`}>
 						<FontSwitcher hover isHovered={isHovered} text={displayedText || "G<pst-grid>e</>t in to<pst-grid>u</>ch"} />
