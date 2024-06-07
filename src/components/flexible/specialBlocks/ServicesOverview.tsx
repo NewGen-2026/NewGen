@@ -130,7 +130,8 @@ const ServicesOverview = (props) => {
 						{parseSentence(sentence)}
 					</motion.h2>
 					<div className="mt-12 flex justify-center md:mt-[72px]">
-						<button
+						<Link
+							href={activeHoverLayouts[activeHover]?.link || "/"}
 							onMouseEnter={() => setButtonHovered(true)}
 							onMouseLeave={() => setButtonHovered(false)}
 							type="button"
@@ -146,7 +147,7 @@ const ServicesOverview = (props) => {
 								hover
 								isHovered={buttonHovered}
 							/>
-						</button>
+						</Link>
 					</div>
 				</motion.div>
 				<div className="mt-16 flex flex-wrap gap-2 sm:gap-5 md:mt-[72px] lg:gap-8">
