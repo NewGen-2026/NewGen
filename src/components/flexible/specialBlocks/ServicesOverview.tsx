@@ -12,7 +12,7 @@ const activeHoverLayouts = {
 	creator: {
 		color: "bg-boost",
 		hoverTextColor: "text-energy",
-		link: "/influencer-performance",
+		link: "/influencer-creator",
 		button: {
 			bgColor: "bg-energy",
 			textColor: "!text-boost",
@@ -24,7 +24,7 @@ const activeHoverLayouts = {
 	social: {
 		color: "bg-cobalt",
 		hoverTextColor: "text-electric",
-		link: "/social-strategy",
+		link: "/social-community",
 		button: {
 			bgColor: "bg-electric",
 			textColor: "!text-cobalt",
@@ -36,7 +36,7 @@ const activeHoverLayouts = {
 	creative: {
 		color: "bg-forest",
 		hoverTextColor: "text-sand",
-		link: "/creative-and-studio",
+		link: "/creative-production",
 		button: {
 			bgColor: "bg-sand",
 			textColor: "!text-forest",
