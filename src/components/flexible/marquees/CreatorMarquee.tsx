@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { HoverButton } from "~/components/elements/buttons/Button";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import Link from "next/link";
+import { Color } from "~/utils/getColors";
 import CreatorCard from "../creatorBlocks/CreatorCard";
 import CreatorsSlider from "../sliders/CreatorsSlider";
 
@@ -16,6 +17,9 @@ type CreatorMarqueeProps = {
 			title: string;
 			url: string;
 		};
+		text_color?: Color;
+		hover_background_color?: Color;
+		hover_text_color?: Color;
 		background_color?: "black" | "white";
 	};
 	variant?: "slider" | "marquee" | "grid";
@@ -37,6 +41,23 @@ const CreatorMarquee = (props: CreatorMarqueeProps) => {
 				<div className="grid w-full gap-2 xss:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
 					{creators && creators.map((creator, i) => <CreatorCard key={`creator-${i}`} creator={creator} />)}
 				</div>
+				{button?.link && (
+					<div className="mt-10 flex w-full justify-center md:mt-24">
+						<Link href={button?.link?.url}>
+							<HoverButton
+								button={{
+									color: button?.background_color || "black",
+									text_color: button?.text_color || "white",
+									hover_background_color: button?.hover_background_color || "cobalt",
+									text_hover_color: button?.hover_text_color || "electric",
+									size: "wide",
+								}}
+							>
+								{button?.link?.title}
+							</HoverButton>
+						</Link>
+					</div>
+				)}
 			</div>
 		);
 	}
