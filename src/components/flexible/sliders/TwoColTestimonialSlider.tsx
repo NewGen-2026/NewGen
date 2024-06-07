@@ -78,11 +78,11 @@ const TwoColTestimonialSlider = (props) => {
 				getBgColorClasses(items[activeSlide]?.theme_color),
 				boxedVariant
 					? "flex-col-reverse justify-between gap-6"
-					: "tiny-laptop:min-h-664px flex-col items-end justify-between overflow-hidden px-5 md:px-8 lg:min-h-[720px]"
+					: "tiny-laptop:min-h-664px px-5x md:px-8x flex-col items-center justify-between overflow-hidden lg:min-h-[720px]"
 			)}
 		>
-			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[585px] ")}>
-				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 md:mt-[51px]")}>
+			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[585px]")}>
+				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 px-5 md:mt-[51px] md:px-8")}>
 					<div className="">
 						<div style={{ minHeight: maxQuoteHeight }} className="relative w-full">
 							{items?.map((item, i) => (
@@ -186,7 +186,7 @@ const TwoColTestimonialSlider = (props) => {
 				className={clsx(
 					`w-full flex-1 lg:w-[unset] `,
 					boxedVariant && image_aspect !== "landscape" && "tiny-laptop:max-w-[580px]",
-					boxedVariant ? "lg:max-w-[672px]" : "max-w-[650px]  xl:translate-x-[-5%] "
+					boxedVariant ? "lg:max-w-[672px]" : "xl:translate-x-[-5%]x  max-w-[650px] "
 				)}
 			>
 				<div
