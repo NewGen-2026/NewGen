@@ -229,6 +229,11 @@ h6 {
 	@apply leading-[1.05] tracking-[-0.02em];
 }
 
+.t-36 {
+	@include clamp("font-size", rem(36px * $responsive_size_modifier_large), rem(36px), $md, $lg);
+	@apply leading-[1.05] tracking-[-0.02em];
+}
+
 .t-32-menu {
 	@include clamp("font-size", rem(52px * $responsive_size_modifier_large), rem(32px), $md, $lg);
 	@apply leading-[1.1] tracking-[-0.02em];

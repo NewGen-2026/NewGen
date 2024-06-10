@@ -88,7 +88,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 						damping: 20,
 						mass: 0.7,
 					}}
-					className="t-40 text-center font-heading font-black uppercase will-change-transform laptop:text-[2rem]"
+					className="t-36 text-center font-heading font-black uppercase will-change-transform laptop:text-[2rem]"
 				>
 					<FontSwitcher text={creator?.creator?.acf?.hover_name} hover isHovered={isHovered} />
 				</motion.div>
