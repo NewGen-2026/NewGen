@@ -46,7 +46,7 @@ const FadeGrid = ({ items }) => {
 									<div className="mx-auto w-full max-w-[80%] md:max-w-none">
 										<WpImage
 											image={item.logo}
-											className="mx-auto max-h-[30px]
+											className="mx-auto max-h-[110px]
 								 object-contain object-center md:max-h-none"
 										/>
 									</div>
