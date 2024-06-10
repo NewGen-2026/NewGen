@@ -41,8 +41,17 @@ const WorkPost = (props) => {
 							<FontSwitcher text={work_masthead?.heading} />
 						</h1>
 					</div>
-					<div className="relative mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]">
+					<div
+						className={clsx(
+							"relative mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]",
+							work_masthead?.asset?.type === "tiktok" && work_masthead?.asset?.supporting_image?.url !== "" && "md:flex md:gap-6"
+						)}
+					>
 						<Asset priority quality={85} {...work_masthead?.asset} className="h-full w-full object-cover object-center" fill />
+
+						{work_masthead?.asset?.type === "tiktok" && work_masthead?.asset?.supporting_image?.url !== "" && (
+							<WpImage image={work_masthead?.asset?.supporting_image} className="hidden overflow-hidden rounded-lg md:block" />
+						)}
 					</div>
 				</div>
 			</section>
