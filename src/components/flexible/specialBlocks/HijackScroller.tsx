@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
 import WpImage from "~/components/elements/WpImage";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 
@@ -8,13 +8,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode, Mousewheel } from "swiper/modules";
+import SliderNavigation from "../sliders/SliderNavigation";
 
 const HijackScroller = (props) => {
 	const { items } = props;
+	const swiperRef = useRef(null);
 
 	return (
 		<div>
 			<Swiper
+				ref={swiperRef}
 				className="!overflow-visible"
 				slidesPerView={3}
 				spaceBetween={15}
@@ -47,6 +50,10 @@ const HijackScroller = (props) => {
 					</SwiperSlide>
 				))}
 			</Swiper>
+
+			<div className="mt-6 md:hidden">
+				<SliderNavigation swiperRef={swiperRef} />
+			</div>
 		</div>
 	);
 };
