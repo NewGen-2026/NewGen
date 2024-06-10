@@ -66,8 +66,6 @@ const WorkSwiper = (props) => {
 		rightMotionValue.set(translateYPercentage);
 	}, [activeSlide, leftMotionValue, rightMotionValue]);
 
-	console.log(work_slides);
-
 	return (
 		<div className="w-full px-8">
 			<div className="mx-auto flex aspect-[1376/696] max-h-[66vh] w-full max-w-[1376px] overflow-hidden xl:min-h-[600px] ">
