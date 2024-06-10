@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import { VideoLoadedContext } from "~/utils/context";
+import { useWindowSize } from "react-use";
 import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 import ScrollHeader from "../elements/animations/helpers/ScrollHeader";
 import GridSubmenu from "./menus/GridSubmenu";
@@ -35,6 +36,8 @@ export default function Header(props) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [logoHovered, setLogoHovered] = useState(false);
 	const [routeChanged, setRouteChanged] = useState(false);
+
+	const { width } = useWindowSize();
 
 	const { scrollY } = useScroll();
 	const isDark = !pageOptions?.header_color || pageOptions?.header_color === "dark" || (isMenuOpen && scrolledBg) || scrolledBg || mobileMenuOpen;
@@ -67,7 +70,7 @@ export default function Header(props) {
 
 	const { videoLoaded } = useContext(VideoLoadedContext);
 
-	const initialYHome = path === "/" ? -100 : 0;
+	const initialYHome = path === "/" && width > 1024 ? -100 : 0;
 
 	useEffect(() => {
 		const handleRouteChangeStart = () => {
