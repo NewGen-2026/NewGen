@@ -66,6 +66,8 @@ const WorkSwiper = (props) => {
 		rightMotionValue.set(translateYPercentage);
 	}, [activeSlide, leftMotionValue, rightMotionValue]);
 
+	console.log(work_slides);
+
 	return (
 		<div className="w-full px-8">
 			<div className="mx-auto flex aspect-[1376/696] max-h-[66vh] w-full max-w-[1376px] overflow-hidden xl:min-h-[600px] ">
@@ -104,7 +106,7 @@ const WorkSwiper = (props) => {
 									)}`}
 								>
 									<div className="max-w-[120px]">
-										<WpImage image={slide?.work?.acf?.work_logos?.light_logo} className="max-h-20 w-auto" />
+										<WpImage image={slide?.work?.acf?.work_logos?.dark_logo || slide?.work?.acf?.work_logos?.light_logo} className="max-h-20 w-auto" />
 									</div>
 									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
 										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
