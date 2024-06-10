@@ -5,7 +5,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import clsx from "clsx";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import Link from "next/link";
-import { Facebook, Instagram, TikTok, Twitch, Twitter, YouTube } from "./Socials";
+import { Facebook, Instagram, Snapchat, TikTok, Twitch, Twitter, YouTube } from "./Socials";
 
 const socialVariants = {
 	initial: {
@@ -44,6 +44,7 @@ const socialLinks = [
 	{ platform: "Twitter", acfField: "twitter", IconComponent: Twitter },
 	{ platform: "Instagram", acfField: "instagram", IconComponent: Instagram },
 	{ platform: "TikTok", acfField: "tiktok", IconComponent: TikTok },
+	{ platform: "snapchat", acfField: "snapchat", IconComponent: Snapchat },
 ];
 
 const CreatorCard = ({ className = "", creator, size = "default" }) => {
@@ -117,7 +118,7 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 						delayChildren: 0.1,
 						staggerDirection: isHovered ? 1 : -1,
 					}}
-					className="flex justify-center will-change-transform"
+					className="flex items-center justify-center will-change-transform"
 				>
 					{socialLinks.map(({ acfField, IconComponent }) => {
 						const link = creator?.creator?.acf?.[acfField];
@@ -140,7 +141,7 @@ export default CreatorCard;
 
 const SocialIcon = ({ children, variants, link = "/" }) => {
 	return (
-		<motion.div className="h-8 w-8 will-change-transform sm:h-10 sm:w-10 md:h-12 md:w-12" variants={variants}>
+		<motion.div className="flex h-8 w-8 items-center will-change-transform sm:h-10 sm:w-10 md:h-12 md:w-12" variants={variants}>
 			<Link href={link} target="_blank" rel="noopener noreferrer" className="transition-colors duration-200 hover:text-boost">
 				{children}
 			</Link>
