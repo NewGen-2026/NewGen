@@ -45,7 +45,22 @@ const TeamMember = ({ member }) => {
 			<div className="relative w-full overflow-hidden text-white md:flex-[0_1_400px]">
 				<WpImage image={member?.team_member?.featured_image} className="h-full w-full object-cover" />
 
-				<div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/100 to-black/0 opacity-40" />
+				{/* <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/100 to-black/0 opacity-40" /> */}
+				<motion.div
+					initial={{
+						opacity: 0.4,
+						height: "30%",
+					}}
+					animate={{
+						opacity: isHovered ? 1 : 0.4,
+						height: isHovered ? "50%" : "30%",
+					}}
+					transition={{
+						type: "spring",
+						duration: 0.3,
+					}}
+					className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/100 to-black/0"
+				/>
 
 				<div className="absolute inset-0 flex items-end justify-center px-3 text-center md:px-6 md:py-[18px]">
 					<div>
