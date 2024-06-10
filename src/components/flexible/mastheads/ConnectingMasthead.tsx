@@ -146,7 +146,7 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 							}}
 							initial="initial"
 							animate={activeSlide === i ? "animate" : "initial"}
-							className="absolute inset-0 top-[-10px] mx-auto flex w-full max-w-[18%] items-center justify-center md:max-w-[150px]"
+							className="absolute inset-0 top-[-10px] mx-auto flex w-full max-w-[18%] items-center justify-center md:max-w-[180px]"
 						>
 							<WpImage image={item?.feature_image} priority />
 						</motion.div>
