@@ -56,7 +56,7 @@ export default function Footer(props) {
 								<div className={`t-18 mb-6 font-heading font-black uppercase ${isLight ? "text-stone opacity-70" : "opacity-20 "} md:mb-12`}>
 									{navItem?.nav_item?.heading}
 								</div>
-								<ul className="t-16-small mt-4 space-y-3 font-heading font-black uppercase md:space-y-6">
+								<ul className="t-16-small mt-4 space-y-5 font-heading font-black uppercase md:space-y-6">
 									{navItem?.nav_item?.links?.map((link, j) => (
 										<li key={`link${j}`} className={`block transition-colors duration-300 ${themeStyles[footer_theme]?.hoverColor}`}>
 											<Link className="whitespace-nowrap" href={link?.link?.url || "/#"}>
