@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useScrollBlock } from "~/hooks/useScrollBlock";
 import { Button } from "~/components/elements/buttons/Button";
+import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import GridSubmenu from "./GridSubmenu";
 import TwoColSubmenu from "./TwoColSubmenu";
 
 const MobileMenu = ({ mobileMenuOpen, menu, setMobileMenuOpen, breakpointCrossed }) => {
 	const [activeSubmenu, setActiveSubmenu] = useState(null) as any;
 	const [blockScroll, allowScroll] = useScrollBlock();
+	const [isHovered, setIsHovered] = useState(false);
 
 	const router = useRouter();
 
@@ -87,18 +89,21 @@ const MobileMenu = ({ mobileMenuOpen, menu, setMobileMenuOpen, breakpointCrossed
 				</nav>
 			</div>
 
-			<Button
-				className="!w-full text-center !text-electric"
-				button={{
-					background_color: "cobalt",
-					text_color: "electric",
-					hover_background_color: "cobalt",
-					text_hover_color: "electric",
-					size: "wide",
-				}}
-			>
-				G<span className="font-gridular font-normal">e</span>t in t<span className="font-gridular font-normal">o</span>uch
-			</Button>
+			<Link href={menu?.button?.url || "/#"} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+				<Button
+					className="!w-full text-center !text-electric"
+					button={{
+						background_color: "cobalt",
+						text_color: "electric",
+						hover_background_color: "cobalt",
+						text_hover_color: "electric",
+						size: "wide",
+					}}
+				>
+					<FontSwitcher hover isHovered={isHovered} text={menu?.button?.title} />
+					{/* G<span className="font-gridular font-normal">e</span>t in t<span className="font-gridular font-normal">o</span>uch */}
+				</Button>
+			</Link>
 		</div>
 	);
 };
