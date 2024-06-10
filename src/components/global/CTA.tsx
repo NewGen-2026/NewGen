@@ -46,6 +46,7 @@ const CTA = ({ pageOptions }) => {
 	const overrideText = pageOptions?.override_cta_text;
 	const unhoveredText = overrideText && pageOptions?.unhovered_text ? pageOptions?.unhovered_text : themeStyles[cta_theme]?.ctaText;
 	const hoveredText = overrideText && pageOptions?.hovered_text ? pageOptions?.hovered_text : themeStyles[cta_theme]?.ctaHoverText;
+	const link = overrideText && pageOptions?.override_cta_link?.url ? pageOptions?.override_cta_link?.url : "/contact/";
 
 	const displayedText = isHovered ? hoveredText : unhoveredText;
 
@@ -53,7 +54,7 @@ const CTA = ({ pageOptions }) => {
 		<div className={`${themeStyles[cta_theme]?.backgroundColor || "bg-white"}`}>
 			<div className={` mx-auto max-w-[1376px] pb-12 pt-8 md:pt-20 `}>
 				<Link
-					href="/contact"
+					href={link}
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 					className={`w-full  ${
