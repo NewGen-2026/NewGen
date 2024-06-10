@@ -41,7 +41,7 @@ const TestimonialSlider = (props) => {
 			}
 		};
 
-		const intervalDuration = 3500;
+		const intervalDuration = 5000;
 		const interval = setInterval(updateActiveSlide, intervalDuration);
 
 		return () => {
