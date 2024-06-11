@@ -65,7 +65,7 @@ interface ScrollItemProps {
 
 const ScrollItem = forwardRef<HTMLDivElement, ScrollItemProps>(({ item }, ref) => {
 	return (
-		<motion.div ref={ref} className="h-full min-h-[250px] min-w-[90vw] sm:min-h-[350px] md:!min-h-[443px] md:min-w-[55vw] laptop:min-w-[45vw]">
+		<motion.div ref={ref} className="min-w-[90vw]x h-full min-h-[250px] sm:min-h-[350px] md:!min-h-[443px] md:min-w-[55vw] laptop:min-w-[45vw]">
 			<div className="aspect-[790/519] w-full bg-stone/20 tiny-laptop:max-h-[400px] ">
 				<WpImage image={item?.image} className="h-full w-full object-cover" />
 			</div>
