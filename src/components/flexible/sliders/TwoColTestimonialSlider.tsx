@@ -81,7 +81,7 @@ const TwoColTestimonialSlider = (props) => {
 					: "tiny-laptop:min-h-664px px-5x md:px-8x flex-col items-center justify-between overflow-hidden lg:min-h-[720px]"
 			)}
 		>
-			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between lg:max-w-[620px]" : "py-8 lg:max-w-[585px]")}>
+			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between p-8 lg:max-w-[620px]" : "py-8 lg:max-w-[585px]")}>
 				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 px-5 md:mt-[51px] md:px-8")}>
 					<div className="">
 						<div style={{ minHeight: maxQuoteHeight }} className="relative w-full">
@@ -99,7 +99,7 @@ const TwoColTestimonialSlider = (props) => {
 									}}
 									onMouseEnter={() => setIsHovered(true)}
 									onMouseLeave={() => setIsHovered(false)}
-									className={`t-40 absolute left-0 top-0 cursor-default  font-black uppercase  lg:max-w-[680px] ${
+									className={`t-40 absolute left-0 top-0 cursor-default  font-black  uppercase lg:max-w-[680px] ${
 										isHovered ? getTextContrastColorClasses(items[activeSlide]?.theme_color) : ""
 									} ${activeSlide === i ? "" : "delay-[400ms]"}
 								`}
