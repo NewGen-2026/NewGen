@@ -66,7 +66,7 @@ const TwoColTestimonialSlider = (props) => {
 
 	const handlePanEnd = usePanSlider(setActiveSlide, items);
 
-	const imageAspect = image_aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672]";
+	const imageAspect = image_aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672]x";
 	const boxImageNavClasses = image_aspect === "landscape" ? "" : "xl:mt-32 tiny-laptop:mt-12";
 
 	return (
@@ -78,11 +78,11 @@ const TwoColTestimonialSlider = (props) => {
 				getBgColorClasses(items[activeSlide]?.theme_color),
 				boxedVariant
 					? "flex-col-reverse justify-between gap-6"
-					: "tiny-laptop:min-h-664px px-5x md:px-8x flex-col items-center justify-between overflow-hidden lg:min-h-[720px]"
+					: "tiny-laptop:min-h-664px px-5x md:px-8x flex-col justify-between overflow-hidden lg:min-h-[720px]"
 			)}
 		>
 			<div className={clsx(`w-full flex-1 lg:w-[unset]`, boxedVariant ? "flex flex-col justify-between p-8 lg:max-w-[620px]" : "py-8 lg:max-w-[585px]")}>
-				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between " : "mt-6 px-5 md:mt-[51px] md:px-8")}>
+				<div className={clsx(`relative w-full`, boxedVariant ? "flex h-full flex-col justify-between" : "mt-6 px-5 md:mt-[51px] md:px-8")}>
 					<div className="">
 						<div style={{ minHeight: maxQuoteHeight }} className="relative w-full">
 							{items?.map((item, i) => (
@@ -118,7 +118,7 @@ const TwoColTestimonialSlider = (props) => {
 							))}
 						</div>
 
-						<div className="mt-8 xl:mt-[56px]">
+						<div className="mt-8 xl:mt-12">
 							<AnimatePresence mode="wait">
 								{items?.map(
 									(item, i) =>
@@ -186,13 +186,13 @@ const TwoColTestimonialSlider = (props) => {
 				className={clsx(
 					`w-full flex-1 lg:w-[unset] `,
 					boxedVariant && image_aspect !== "landscape" && "tiny-laptop:max-w-[580px]",
-					boxedVariant ? "lg:max-w-[672px]" : "xl:translate-x-[-5%]x  max-w-[650px] "
+					boxedVariant ? "lg:max-w-[672px]" : "xl:translate-x-[-5%]x  slider-aspect relative max-w-[650px] flex-grow items-stretch justify-stretch"
 				)}
 			>
 				<div
 					className={clsx(
-						`pointer-events-none relative w-full `,
-						boxedVariant ? `${imageAspect} overflow-hidden` : "aspect-[650/656]",
+						`pointer-events-none relative w-full`,
+						boxedVariant ? `${imageAspect} h-full overflow-hidden` : "aspect-[650/656]x h-full items-stretch",
 						items[activeSlide]?.add_background && getBgColorClasses(items[activeSlide]?.boxed_image_background?.color)
 					)}
 				>

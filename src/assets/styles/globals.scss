@@ -8,3 +8,9 @@
 @import "containers";
 @import "forms";
 @import "misc";
+
+@media screen and (max-width: 1024px) {
+	.slider-aspect {
+		@apply aspect-[650/656];
+	}
+}
