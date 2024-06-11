@@ -17,6 +17,8 @@ const WorkPost = (props) => {
 		large: "max-h-[85px]",
 	};
 
+	console.log(work_masthead?.asset?.supporting_image?.url);
+
 	return (
 		<>
 			<section className={clsx("pb-8 pt-24 md:pt-[160px]", getBgColorClasses(general?.theme_color))}>
@@ -44,7 +46,9 @@ const WorkPost = (props) => {
 					<div
 						className={clsx(
 							"relative mt-8 aspect-[1376/774] max-h-[780px] w-full md:mt-[72px] xl:min-h-[720px]",
-							work_masthead?.asset?.type === "tiktok" && work_masthead?.asset?.supporting_image?.url !== "" && "md:flex md:gap-6"
+							(work_masthead?.asset?.type === "tiktok" && work_masthead?.asset?.supporting_image?.url) || work_masthead?.asset?.supporting_image?.url
+								? "md:flex md:gap-6"
+								: null
 						)}
 					>
 						<Asset priority quality={85} {...work_masthead?.asset} className="h-full w-full object-cover object-center" fill />
