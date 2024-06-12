@@ -2,6 +2,7 @@
 import Asset from "~/components/elements/Asset";
 import TextCard from "~/components/elements/text/TextCard";
 import { useRef } from "react";
+import clsx from "clsx";
 import TransitionSlider from "../sliders/TransitionSlider";
 
 const TwoColTextAsset = (props) => {
@@ -31,7 +32,10 @@ const TwoColTextAsset = (props) => {
 					</TransitionSlider>
 				</div>
 			) : (
-				<Asset {...media?.asset} className="w-full max-w-[672px] md:flex-1" />
+				<Asset
+					{...media?.asset}
+					className={clsx("w-full max-w-[672px] md:flex-1", media?.aspect === "landscape" ? "aspect-[672/420]" : "aspect-[672/672] object-cover object-center")}
+				/>
 			)}
 		</div>
 	);
