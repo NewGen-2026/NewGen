@@ -119,8 +119,8 @@ const ServicesOverview = (props) => {
 	return (
 		<div ref={ref} className="relative overflow-hidden py-16 md:py-[88px]">
 			<motion.div className={`pointer-events-none absolute inset-0 transition-colors duration-300 ease-in-out  ${activeHoverLayouts[activeHover]?.color}`} />
-			<motion.div layout className="relative z-[5] px-[15px] md:px-8">
-				<motion.div layout className="relative z-[5] mx-auto  w-full max-w-[1139px]  text-center">
+			<motion.div layout className="relative z-[5] ">
+				<motion.div layout className="relative z-[5] mx-auto  w-full max-w-[1139px]  px-[15px] text-center md:px-8">
 					<motion.h2
 						layout
 						className={`t-56 break relative z-[5] flex flex-wrap justify-center gap-[0.1em] hyphens-none font-heading font-black uppercase ${
@@ -150,42 +150,44 @@ const ServicesOverview = (props) => {
 						</Link>
 					</div>
 				</motion.div>
-				<div className="mt-16 flex flex-wrap gap-2 sm:gap-5 md:mt-[72px] lg:gap-8">
-					<div className={`relative aspect-[438/348] w-full flex-[1_1_45%] overflow-hidden sm:flex-1 ${activeHoverLayouts[activeHover]?.blockColor}`}>
-						{layouts.map((layout) => (
-							<motion.div key={layout.id} className="absolute inset-0 h-full w-full" animate={{ opacity: activeHover === layout.id ? 1 : 0 }}>
-								<WpImage image={layout.leftImage} className="h-full w-full object-cover" />
-							</motion.div>
-						))}
-					</div>
-					<div className={`relative aspect-[438/348] flex-[1_1_45%] overflow-hidden sm:flex-1 ${activeHoverLayouts[activeHover]?.blockColor}`}>
-						{layouts.map((layout) => (
-							<motion.div key={layout.id} className="absolute inset-0 h-full w-full" animate={{ opacity: activeHover === layout.id ? 1 : 0 }}>
-								<WpImage image={layout.rightImage} className="h-full w-full object-cover" />
-							</motion.div>
-						))}
-					</div>
-					<div
-						className={`relative flex min-h-[120px] flex-[1_1_438px] flex-col justify-between gap-6 overflow-hidden p-4 sm:aspect-[438/348] sm:flex-1 md:min-h-[200px] md:p-6 ${activeHoverLayouts[activeHover]?.blockColor}`}
-					>
-						{layouts.map((layout, i) => (
-							<motion.div
-								key={layout.id}
-								className="absolute inset-0 flex flex-col justify-between gap-6 overflow-hidden p-4 md:p-6"
-								animate={{ opacity: activeHover === layout.id ? 1 : 0 }}
-								transition={{ duration: 0.3 }}
-							>
-								<h3 className="t-96 font-heading font-black uppercase">
-									{layout.statBlock?.stat && typeof layout.statBlock?.stat === "number" ? (
-										<CountUp stat={layout.statBlock?.stat} startCount={activeHover === layout?.id} />
-									) : (
-										<FontSwitcher text={layout.statBlock?.stat} />
-									)}
-									{/* <span className={clsx(activeHoverLayouts[layout.id]?.font)}>k</span>+ */}
-								</h3>
-								<p className="t-24 font-heading font-black uppercase">{layout.statBlock?.description}</p>
-							</motion.div>
-						))}
+				<div className="container">
+					<div className="mt-16 flex flex-wrap gap-2 sm:gap-5 md:mt-[72px] lg:gap-8">
+						<div className={`relative aspect-[438/348] w-full flex-[1_1_45%] overflow-hidden sm:flex-1 ${activeHoverLayouts[activeHover]?.blockColor}`}>
+							{layouts.map((layout) => (
+								<motion.div key={layout.id} className="absolute inset-0 h-full w-full" animate={{ opacity: activeHover === layout.id ? 1 : 0 }}>
+									<WpImage image={layout.leftImage} className="h-full w-full object-cover" />
+								</motion.div>
+							))}
+						</div>
+						<div className={`relative aspect-[438/348] flex-[1_1_45%] overflow-hidden sm:flex-1 ${activeHoverLayouts[activeHover]?.blockColor}`}>
+							{layouts.map((layout) => (
+								<motion.div key={layout.id} className="absolute inset-0 h-full w-full" animate={{ opacity: activeHover === layout.id ? 1 : 0 }}>
+									<WpImage image={layout.rightImage} className="h-full w-full object-cover" />
+								</motion.div>
+							))}
+						</div>
+						<div
+							className={`relative flex min-h-[120px] flex-[1_1_438px] flex-col justify-between gap-6 overflow-hidden p-4 sm:aspect-[438/348] sm:flex-1 md:min-h-[200px] md:p-6 ${activeHoverLayouts[activeHover]?.blockColor}`}
+						>
+							{layouts.map((layout, i) => (
+								<motion.div
+									key={layout.id}
+									className="absolute inset-0 flex flex-col justify-between gap-6 overflow-hidden p-4 md:p-6"
+									animate={{ opacity: activeHover === layout.id ? 1 : 0 }}
+									transition={{ duration: 0.3 }}
+								>
+									<h3 className="t-96 font-heading font-black uppercase">
+										{layout.statBlock?.stat && typeof layout.statBlock?.stat === "number" ? (
+											<CountUp stat={layout.statBlock?.stat} startCount={activeHover === layout?.id} />
+										) : (
+											<FontSwitcher text={layout.statBlock?.stat} />
+										)}
+										{/* <span className={clsx(activeHoverLayouts[layout.id]?.font)}>k</span>+ */}
+									</h3>
+									<p className="t-24 font-heading font-black uppercase">{layout.statBlock?.description}</p>
+								</motion.div>
+							))}
+						</div>
 					</div>
 				</div>
 			</motion.div>
