@@ -25,9 +25,9 @@ const themeStyles = {
 		ctaHoverText: "F<pst-rec>i</>nd your n<pst-rec>e</>w",
 	},
 	candy: {
-		backgroundColor: "bg-candy",
+		backgroundColor: "bg-white",
 		unhoveredClasses: "bg-ketchup text-candy",
-		hoveredClasses: "bg-white !text-ketchup",
+		hoveredClasses: "bg-candy !text-ketchup",
 		ctaText: "G<pst-bec>e</>t in to<pst-bec>u</>ch",
 		ctaHoverText: "F<pst-bec>i</>nd your n<pst-bec>e</>w",
 	},
