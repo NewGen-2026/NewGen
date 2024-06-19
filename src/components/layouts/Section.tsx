@@ -29,6 +29,8 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 	switch (inner_spacing) {
 		case "none":
 			return "";
+		case "xsmall":
+			return "space-y-6";
 		case "small":
 			return "space-y-8";
 		case "medium":

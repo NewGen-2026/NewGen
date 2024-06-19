@@ -68,7 +68,7 @@ const RotatingHeading = ({ heading_tag, text_prepend, text_append, rotating_line
 	const activeLine = rotating_lines[activeLineIndex]?.line.split("");
 
 	return (
-		<HeadingTag ref={ref} className="container text-center xl:mb-12">
+		<HeadingTag ref={ref} className="container text-center xl:mb-6">
 			<span className="t-72 mx-auto block font-black uppercase">
 				<span className="block">{text_prepend}</span>
 				<span className="relative inline-block">
