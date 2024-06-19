@@ -94,7 +94,7 @@ function Section(props: SectionProps) {
 	return (
 		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
-				<ComponentRenderer pageId={pageId} components={components} static_posts={static_posts} />
+				<ComponentRenderer pageId={pageId} components={components} static_posts={static_posts} background={background} />
 			</div>
 		</section>
 	);

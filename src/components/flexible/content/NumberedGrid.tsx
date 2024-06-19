@@ -1,10 +1,11 @@
+import clsx from "clsx";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
 import { getBgColorClasses } from "~/utils/getColors";
 
 const NumberedGrid = (props) => {
-	const { items, variant, background } = props;
+	const { items, variant, background, parentBgColor } = props;
 
-	return variant === "cards" ? <CardsVariant items={items} background={background?.color} /> : <DefaultVariant items={items} />;
+	return variant === "cards" ? <CardsVariant items={items} background={background?.color} parentBgColor={parentBgColor} /> : <DefaultVariant items={items} />;
 };
 export default NumberedGrid;
 
@@ -30,9 +31,9 @@ const DefaultVariant = ({ items }) => {
 	);
 };
 
-const CardsVariant = ({ items, background }) => {
+const CardsVariant = ({ items, background, parentBgColor }) => {
 	return (
-		<div className="mx-[-15px] flex grid-cols-3 flex-wrap gap-4 md:mx-0 md:grid lg:gap-8">
+		<div className={clsx("mx-[-15px] flex grid-cols-3 flex-wrap gap-4 md:grid lg:gap-8", parentBgColor !== background && "md:mx-0")}>
 			{items?.map((item, i) => (
 				<div key={`stat${i}`} className={`p-6 lg:flex-[0_1_412px] ${getBgColorClasses(background)}`}>
 					<h3 className="t-48 font-heading font-black uppercase">

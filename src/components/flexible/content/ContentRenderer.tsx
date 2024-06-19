@@ -34,13 +34,13 @@ const CONTENT_BLOCKS_COMPONENT_MAP = {
 };
 
 const ContentRenderer = (props) => {
-	const { content, pageId } = props;
+	const { content, pageId, background } = props;
 
 	return content.map((layout, i) => {
 		const Component = CONTENT_BLOCKS_COMPONENT_MAP[layout.acf_fc_layout];
 		return Component ? (
 			<React.Fragment key={pageId + layout.acf_fc_layout + i}>
-				<Component {...layout} />
+				<Component {...layout} parentBgColor={background?.background_color} />
 			</React.Fragment>
 		) : null;
 	});

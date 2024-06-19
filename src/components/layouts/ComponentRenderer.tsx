@@ -25,14 +25,14 @@ const COMPONENT_MAP = {
 	landing_page: LandingPageRenderer,
 };
 
-const ComponentRenderer = ({ components = [], pageId = null, static_posts }) => {
+const ComponentRenderer = ({ components = [], pageId = null, static_posts, background }) => {
 	return (
 		components &&
 		components.map((layout, i) => {
 			const Component = COMPONENT_MAP[layout.acf_fc_layout];
 			return Component ? (
 				<React.Fragment key={pageId + layout.acf_fc_layout + i}>
-					<Component {...layout} pageId={pageId + layout.acf_fc_layout} static_posts={static_posts} />
+					<Component {...layout} pageId={pageId + layout.acf_fc_layout} static_posts={static_posts} background={background} />
 				</React.Fragment>
 			) : null;
 		})
