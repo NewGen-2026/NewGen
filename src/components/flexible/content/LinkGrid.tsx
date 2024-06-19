@@ -55,7 +55,7 @@ const GridItem = ({ item, variant }) => {
 				<div className={`flex ${threeColVariant ? "" : "flex-1"}  flex-col justify-between`}>
 					<h3
 						className={`${threeColVariant ? "t-44" : "t-48 "} ${
-							item?.heading_max_width ? "max-w-[232px]" : ""
+							item?.heading_max_width ? "max-w-[312px]" : ""
 						} group-hover mt-5 font-black uppercase md:mt-10 ${getTextColorGroupHoverClasses(item?.hover_color)}`}
 					>
 						<FontSwitcher text={item?.heading || "Title"} hover isHovered={isHovered} />
