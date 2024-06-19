@@ -17,7 +17,7 @@ const WorkPost = (props) => {
 		large: "max-h-[85px]",
 	};
 
-	console.log(work_masthead?.asset?.supporting_image?.url);
+	// console.log(work_masthead?.asset?.supporting_image?.url);
 
 	return (
 		<>
