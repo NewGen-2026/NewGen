@@ -80,10 +80,10 @@ const FeedPreview = ({
 						!post_tag && "!mb-0"
 					)}
 				>
-					{post_title?.length < 50 && (
+					{post_title?.length && author?.acf?.profile_picture?.url < 50 && (
 						<div
 							className={clsx(
-								`flex-none overflow-hidden rounded-full bg-energy `,
+								`flex-none overflow-hidden rounded-full bg-energy`,
 								slideVariant ? "h-8 w-8 md:h-12 md:w-12" : "h-[43px] w-[43px] md:h-16 md:w-16"
 							)}
 						>
