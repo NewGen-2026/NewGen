@@ -10,6 +10,11 @@ export default function Document() {
 				<link rel="preload" href="/fonts/HALTwins-Semi-Light-01.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 			</Head>
 			<body>
+				<noscript
+					dangerouslySetInnerHTML={{
+						__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-596WKDM5" height="0" width="0" style="display: none; visibility: hidden;" />`,
+					}}
+				/>
 				<Main />
 				<NextScript />
 			</body>
