@@ -14,6 +14,7 @@ const paddingSizes = {
 		xxlarge: "pt-20 md:pt-44 laptop:pt-36",
 		mastheadLarge: "pt-24 md:pt-52 laptop:pt-36",
 		extraMobileSpaceXLarge: "pt-20 md:pt-[184px] laptop:pt-32",
+		mediumSmallOnMobile: "pt-10 md:pt-24",
 	},
 	bottom: {
 		none: "pb-0",
