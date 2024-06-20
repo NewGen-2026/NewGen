@@ -50,7 +50,7 @@ const LoaderMasthead = (props) => {
 	const assetYEndValue = videoLoaded ? 0 : -assetInitialY;
 
 	return (
-		<div className="relative min-h-[280px] overflow-hidden  bg-black text-white lg:min-h-screen ">
+		<div className="relative min-h-[280px] overflow-hidden  bg-black text-white lg:min-h-[90vh]">
 			<div ref={containerRef} className="container absolute inset-0 flex items-center justify-center lg:h-screen">
 				<div ref={logoRef} className="mx-auto w-full max-w-[60vw] md:max-w-[500px]">
 					<LogoLoader videoLoaded={videoLoaded} />
