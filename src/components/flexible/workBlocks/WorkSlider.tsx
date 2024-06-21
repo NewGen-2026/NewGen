@@ -104,7 +104,14 @@ const WorkSwiper = (props) => {
 									)}`}
 								>
 									<div className="max-w-[120px]">
-										<WpImage image={slide?.work?.acf?.work_logos?.dark_logo || slide?.work?.acf?.work_logos?.light_logo} className="max-h-20 w-auto" />
+										<WpImage
+											image={
+												slide?.work?.acf?.general?.theme_color === "boost"
+													? slide?.work?.acf?.work_logos?.light_logo
+													: slide?.work?.acf?.work_logos?.dark_logo || slide?.work?.acf?.work_logos?.light_logo
+											}
+											className="max-h-20 w-auto"
+										/>
 									</div>
 									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
 										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
