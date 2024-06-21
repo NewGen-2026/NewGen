@@ -10,7 +10,7 @@ const variantThemeStyles = {
 		imageClass: "max-w-[70%] md:max-w-[42.8%] tiny-laptop:max-w-[35%] translate-x-[-5%]  translate-y-[5%] md:translate-y-0",
 	},
 	creator: {
-		imageClass: "max-w-[75%] sm:max-w-[50%] md:max-w-[35%] tiny-laptop:max-w-[27%] translate-y-[5%] md:translate-y-0",
+		imageClass: "max-w-[75%] sm:max-w-[50%] md:max-w-[35%] tiny-laptop:max-w-[27%] translate-y-[5%] md:translate-y-0 min-h-xl:max-w-[45%]",
 	},
 };
 
@@ -27,7 +27,11 @@ const AssetAtBottomVariant = (props) => {
 	const textXDistanceRight = breakpointCrossed ? 0 : "-0.45em";
 
 	return (
-		<div className={`relative flex flex-col justify-center gap-y-8 pt-24 md:flex-row md:items-end md:pt-28 ${getBgColorClasses(background_color)}`}>
+		<div
+			className={`relative flex flex-col justify-center gap-y-8 pt-24 md:h-[90vh] md:flex-row md:items-end md:pt-28 min-h-xl:h-[900px] ${getBgColorClasses(
+				background_color
+			)}`}
+		>
 			<div className="mx-auto w-full max-w-[1440px]">
 				<div className="inset-0 flex items-center md:absolute">
 					<div className="container md:pt-20">
