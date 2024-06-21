@@ -1,13 +1,22 @@
+import clsx from "clsx";
 import { useRef } from "react";
 import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher";
+import { getBgColorClasses } from "~/utils/getColors";
 
 const StatRow = (props) => {
-	const { items } = props;
+	const { items, has_contained_background_color = false, background } = props;
 
 	const ref = useRef(null);
 
 	return (
-		<div ref={ref} className="flex flex-wrap justify-center gap-8 text-center sm:justify-start sm:text-start lg:flex-nowrap">
+		<div
+			ref={ref}
+			className={clsx(
+				"flex flex-wrap justify-center gap-8 text-center sm:justify-start sm:text-start lg:flex-nowrap",
+				has_contained_background_color && "px-4 pb-16 pt-8 md:px-10 md:pb-24 md:pt-20",
+				has_contained_background_color && getBgColorClasses(background?.background_color)
+			)}
+		>
 			{items?.map((item, i) => (
 				<div key={`stat${i}`} className="lg:flex-[0_1_437px]">
 					<h3 className="t-80 font-heading font-black uppercase">
