@@ -16,7 +16,7 @@ export default function MyApp({ Component, pageProps }) {
 				})}
 			<Script
 				async
-				strategy="lazyOnload"
+				strategy="afterInteractive"
 				id="google-tag-manager"
 				dangerouslySetInnerHTML={{
 					__html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
