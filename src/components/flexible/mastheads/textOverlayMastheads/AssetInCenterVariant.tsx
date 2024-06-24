@@ -131,7 +131,7 @@ const AssetInCenterVariant = (props) => {
 				</span>
 			</h1>
 
-			<p className="t-20 mx-auto mt-7 max-w-[750px] text-center font-medium text-cobalt/80 opacity-80 md:mt-14">{content}</p>
+			<p className="t-20 mx-auto mt-7 max-w-[750px] text-center font-medium text-cobalt opacity-80 md:mt-14">{content}</p>
 
 			<motion.div
 				initial={{
