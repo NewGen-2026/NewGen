@@ -190,7 +190,7 @@ const NavBar = ({ items, active, setActive }) => {
 				</div>
 				<div className="flex flex-1 items-center gap-5">
 					{items[active]?.work?.permalink && (
-						<Link href={items[active]?.work?.permalink || "/#"} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
+						<Link href={items[active]?.work?.permalink || "/#"} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black text-black">
 							<TextLink underlineColour="black">{items[active]?.override_text_link ? items[active]?.text_link : `VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
 						</Link>
 					)}
