@@ -161,7 +161,7 @@ export default WorkSlider;
 
 const NavBar = ({ items, active, setActive }) => {
 	return (
-		<div className="h-20 w-full max-w-[680px] bg-stone/25 p-3">
+		<div className="h-20 w-full max-w-[680px] bg-white p-3">
 			<div className="flex h-full items-center justify-between pl-2">
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
