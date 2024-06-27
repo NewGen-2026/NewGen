@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Field } from "formik";
 import FormikForm from "./formik/FormikForm";
 import FormikField from "./formik/FormikField";
 import { HoverButton } from "../elements/buttons/Button";
@@ -152,6 +153,14 @@ const ContactBrandsForm = ({ onSubmit }) => {
 			className: "default-input",
 			errorClass,
 		},
+		{
+			name: "_gotcha",
+			type: "hidden",
+			placeHolder: "",
+			initialValue: "",
+			className: "hidden",
+			errorClass,
+		},
 	];
 
 	const brandsLayout = (
@@ -163,6 +172,8 @@ const ContactBrandsForm = ({ onSubmit }) => {
 			}}
 			className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6"
 		>
+			<FormikField {...fields[7]} />
+
 			<FormikField {...fields[0]} />
 			<FormikField {...fields[1]} />
 			<FormikField {...fields[2]} />

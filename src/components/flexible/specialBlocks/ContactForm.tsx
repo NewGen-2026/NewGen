@@ -42,13 +42,28 @@ const formMap = {
 };
 
 const ContactForm = (props) => {
-	const { form, form_layout, heading, links, theme_color, contacts, add_faqs, faqs } = props;
+	const { form, form_layout, heading, links, theme_color, contacts, add_faqs, faqs, form_endpoint } = props;
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
-	const onSubmit = (values) => {
+	console.log(form_layout);
+	console.log(form_endpoint);
+
+	const onSubmit = async (values) => {
 		setIsSubmitted(true);
 		console.log(values);
+		// if (!form_endpoint) return null;
+
+		try {
+			// const response = await fetch(form_endpoint, {
+			const response = await fetch("https://getform.io/f/jbwxxnla", {
+				method: "POST",
+				body: values,
+			});
+			console.log("SENT", response);
+		} catch (error) {
+			console.error("Error sending the form data:", error);
+		}
 	};
 
 	const renderForm = (layout) => {
