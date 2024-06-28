@@ -50,7 +50,7 @@ const ContactForm = (props) => {
 	console.log(form_endpoint);
 
 	const onSubmit = async (values) => {
-		setIsSubmitted(true);
+		// setIsSubmitted(true);
 		console.log(values);
 		// if (!form_endpoint) return null;
 
