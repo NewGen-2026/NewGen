@@ -9,6 +9,7 @@ import { getBgColorClasses, getTextAlwaysDarkClasses, getTextColorClasses, getTe
 import { motion } from "framer-motion";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 const ContactBrandsForm = dynamic(() => import("~/components/forms/ContactBrandsForm"), { ssr: false });
 const ContactProcurementForm = dynamic(() => import("~/components/forms/ContactProcurementForm"), { ssr: false });
@@ -46,24 +47,20 @@ const ContactForm = (props) => {
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
-	console.log(form_layout);
-	console.log(form_endpoint);
-
 	const onSubmit = async (values) => {
-		// setIsSubmitted(true);
-		console.log(values);
-		// if (!form_endpoint) return null;
-
-		try {
-			// const response = await fetch(form_endpoint, {
-			const response = await fetch("https://getform.io/f/jbwxxnla", {
-				method: "POST",
-				body: values,
-			});
-			console.log("SENT", response);
-		} catch (error) {
-			console.error("Error sending the form data:", error);
-		}
+		axios
+			.post(
+				form_endpoint,
+				{
+					...values,
+				},
+				{ headers: { Accept: "application/json" } }
+			)
+			.then((response) => {
+				console.log(response);
+				setIsSubmitted(true);
+			})
+			.catch((error) => console.log(error));
 	};
 
 	const renderForm = (layout) => {
@@ -124,7 +121,14 @@ const ContactForm = (props) => {
 					</div>
 
 					<div className={` ${form_layout === "press" ? "mt-5 md:mt-8" : "mt-8 md:mt-16"}`}>
-						{renderForm(form_layout)}
+						{isSubmitted ? (
+							<div>
+								<h3 className="t-36 font-heading uppercase">Thank You</h3>
+								<p className="t-20 mt-3 font-medium md:mt-6">We will be in touch shortly!</p>
+							</div>
+						) : (
+							renderForm(form_layout)
+						)}
 
 						{form_layout !== "press" && (
 							<motion.div
