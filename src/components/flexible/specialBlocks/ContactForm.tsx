@@ -43,7 +43,10 @@ const formMap = {
 };
 
 const ContactForm = (props) => {
-	const { form, form_layout, heading, links, theme_color, contacts, add_faqs, faqs, form_endpoint } = props;
+	const router = useRouter();
+
+	console.log(props);
+	const { form, form_layout, heading, links, theme_color, contacts, add_faqs, faqs, form_endpoint, form_redirect } = props;
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -58,7 +61,9 @@ const ContactForm = (props) => {
 			)
 			.then((response) => {
 				console.log(response);
-				setIsSubmitted(true);
+
+				if (form_redirect) router.push(form_redirect);
+				if (!form_redirect) setIsSubmitted(true);
 			})
 			.catch((error) => console.log(error));
 	};
