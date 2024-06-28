@@ -35,6 +35,14 @@ const fields = [
 		className: "default-input",
 		errorClass,
 	},
+	{
+		name: "_gotcha",
+		type: "hidden",
+		placeHolder: "",
+		initialValue: "",
+		className: "hidden",
+		errorClass,
+	},
 ];
 
 const layout = (
@@ -50,6 +58,7 @@ const layout = (
 		}}
 		className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6"
 	>
+		<FormikField {...fields[3]} />
 		<FormikField {...fields[0]} />
 		<FormikField {...fields[1]} />
 		<FormikField {...fields[2]} />

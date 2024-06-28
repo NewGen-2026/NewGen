@@ -67,10 +67,19 @@ const fields = [
 			{ value: "Other", label: "Other" },
 		],
 	},
+	{
+		name: "_gotcha",
+		type: "hidden",
+		placeHolder: "",
+		initialValue: "",
+		className: "hidden",
+		errorClass,
+	},
 ];
 
 const contactSuportLayout = (
 	<div className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-5">
+		<FormikField {...fields[4]} />
 		<FormikField {...fields[0]} />
 		<FormikField {...fields[1]} />
 		<FormikField {...fields[2]} />
