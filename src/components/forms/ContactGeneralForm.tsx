@@ -27,6 +27,15 @@ const fields = [
 		errorClass,
 	},
 	{
+		name: "your_company",
+		type: "text",
+		placeHolder: "Your company*",
+		initialValue: "",
+		validation: Yup.string().required("Please enter your company"),
+		className: "default-input",
+		errorClass,
+	},
+	{
 		name: "your_project",
 		type: "textarea",
 		placeHolder: "Tell us about your project",
@@ -58,10 +67,11 @@ const layout = (
 		}}
 		className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6"
 	>
-		<FormikField {...fields[3]} />
 		<FormikField {...fields[0]} />
 		<FormikField {...fields[1]} />
 		<FormikField {...fields[2]} />
+		<FormikField {...fields[3]} />
+
 		<HoverButton
 			button={{
 				size: "wide",

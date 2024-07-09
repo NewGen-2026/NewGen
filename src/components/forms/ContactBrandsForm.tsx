@@ -109,6 +109,17 @@ const ContactBrandsForm = ({ onSubmit }) => {
 			className: "default-input",
 			errorClass,
 		},
+
+		{
+			name: "your_company",
+			type: "text",
+			placeHolder: "Your company*",
+			initialValue: "",
+			validation: Yup.string().required("Please enter your company"),
+			className: "default-input",
+			errorClass,
+		},
+
 		{
 			name: "your_project",
 			type: "textarea",
@@ -172,12 +183,11 @@ const ContactBrandsForm = ({ onSubmit }) => {
 			}}
 			className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6"
 		>
-			<FormikField {...fields[7]} />
-
 			<FormikField {...fields[0]} />
 			<FormikField {...fields[1]} />
 			<FormikField {...fields[2]} />
 			<FormikField {...fields[3]} />
+			<FormikField {...fields[4]} />
 			<div className="mt-6 flex items-center justify-between gap-4">
 				<h3 className="t-44 font-black uppercase">{`What's the budget`}</h3>
 				<div className="t-16 flex items-center gap-8 font-black uppercase">
@@ -186,10 +196,10 @@ const ContactBrandsForm = ({ onSubmit }) => {
 					))}
 				</div>
 			</div>
-			<FormikField {...fields[4]} />
-			<h3 className="t-44 mt-6 font-black uppercase">Optional</h3>
 			<FormikField {...fields[5]} />
+			<h3 className="t-44 mt-6 font-black uppercase">Optional</h3>
 			<FormikField {...fields[6]} />
+			<FormikField {...fields[7]} />
 			<HoverButton
 				button={{
 					size: "wide",
