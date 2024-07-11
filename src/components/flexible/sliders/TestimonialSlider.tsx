@@ -101,7 +101,7 @@ const TestimonialSlider = (props) => {
 											},
 										}}
 										style={{ minHeight: maxQuoteHeight }}
-										onMouseEnter={() => setIsHovered(true)}
+										onMouseEnter={() => setIsHovered(false)}
 										onMouseLeave={() => setIsHovered(false)}
 										className={`t-40 cursor-default font-black uppercase transition-colors duration-200  ${
 											isHovered ? getTextColorClasses(item?.theme_color) : textClass

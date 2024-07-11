@@ -5,7 +5,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 interface Job {
 	url: string;
 	title: string;
-	country: string;
+	city: string;
 	employment_type: string;
 }
 
@@ -27,7 +27,9 @@ const Jobs = (props) => {
 				const jsonData = await response.json();
 				setJobListings(jsonData.jobs);
 
-				const uniqueCountriesSet = new Set<string>(jsonData.jobs.map((job: Job) => job.country));
+				console.log(jsonData.jobs);
+
+				const uniqueCountriesSet = new Set<string>(jsonData.jobs.map((job: Job) => job.city));
 				const uniqueCountriesArray: string[] = Array.from(uniqueCountriesSet);
 				setUniqueCountries(uniqueCountriesArray);
 				setFilteredJobs(jsonData.jobs);
@@ -43,7 +45,7 @@ const Jobs = (props) => {
 		if (selectedCountry === "") {
 			setFilteredJobs(jobListings);
 		} else {
-			const filtered = jobListings.filter((job) => job.country === selectedCountry);
+			const filtered = jobListings.filter((job) => job.city === selectedCountry);
 			setFilteredJobs(filtered);
 		}
 	}, [selectedCountry, jobListings]);
@@ -73,7 +75,7 @@ const Jobs = (props) => {
 };
 export default Jobs;
 
-const JobItem = ({ title, country, employment_type, url }) => {
+const JobItem = ({ title, city, employment_type, url }) => {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
@@ -88,7 +90,7 @@ const JobItem = ({ title, country, employment_type, url }) => {
 					<FontSwitcher hover isHovered={isHovered} text={title} />
 				</div>
 				<div className="flex w-full flex-1 justify-center gap-4 md:max-w-[240px]">
-					<div className="t-20 font-medium">{country}</div>
+					<div className="t-20 font-medium">{city}</div>
 					<div className="t-20 font-medium md:hidden md:max-w-[235px] md:flex-[0.4]">{employment_type}</div>
 				</div>
 				<div className="t-20 hidden font-medium md:block md:max-w-[235px] md:flex-[0.4]">{employment_type}</div>

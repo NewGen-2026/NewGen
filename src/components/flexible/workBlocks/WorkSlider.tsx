@@ -6,7 +6,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import { HoverButton, TextLink } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
-import { Color, getBgColorClasses, getBgContrastColorName } from "~/utils/getColors";
+import { Color, getBgColorClasses, getBgContrastColorName, getTextContrastColorClasses } from "~/utils/getColors";
 import dynamic from "next/dynamic";
 
 const MobileWorkSlider = dynamic(() => import("../sliders/MobileWorkSlider"), { ssr: false });
@@ -116,7 +116,11 @@ const WorkSwiper = (props) => {
 									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
 										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
 									</h2>
-									{slide?.work?.acf?.previews?.excerpt && <div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>}
+									{slide?.work?.acf?.previews?.excerpt && (
+										<div className={`"t-22 max-w-[90%]" ${getTextContrastColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
+											{slide?.work?.acf?.previews?.excerpt}
+										</div>
+									)}
 								</div>
 							))}
 						</motion.div>
