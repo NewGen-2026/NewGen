@@ -104,7 +104,7 @@ const AssetInCenterVariant = (props) => {
 						transition={{
 							delay: imagePopDelay,
 						}}
-						className="inline-block"
+						className="inline-block pr-2 md:pr-0"
 					>
 						<FontSwitcher startDelay={600} text={middle_line_left} />
 					</motion.span>
