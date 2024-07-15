@@ -16,7 +16,7 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			<Form className="w-full">{formLayout}</Form>
+			<Form className="newgen-form w-full">{formLayout}</Form>
 		</Formik>
 	);
 };
