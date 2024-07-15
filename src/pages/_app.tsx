@@ -22,13 +22,7 @@ export default function MyApp({ Component, pageProps }) {
 				}}
 			/>
 
-			<Script
-				strategy="afterInteractive"
-				id="whatConverts"
-				dangerouslySetInnerHTML={{
-					__html: `//s.ksrndkehqnwntyxlhgto.com/126345.js"`,
-				}}
-			/>
+			<Script strategy="afterInteractive" id="whatConverts" src="//s.ksrndkehqnwntyxlhgto.com/126345.js" />
 
 			<Script
 				async
