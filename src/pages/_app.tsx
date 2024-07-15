@@ -16,10 +16,17 @@ export default function MyApp({ Component, pageProps }) {
 				})}
 			<Script
 				strategy="afterInteractive"
+				id="whatConvertsVar"
+				dangerouslySetInnerHTML={{
+					__html: `var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};`,
+				}}
+			/>
+
+			<Script
+				strategy="afterInteractive"
 				id="whatConverts"
 				dangerouslySetInnerHTML={{
-					__html: `var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};</script>
-<script src="//s.ksrndkehqnwntyxlhgto.com/126345.js">`,
+					__html: `//s.ksrndkehqnwntyxlhgto.com/126345.js"`,
 				}}
 			/>
 
