@@ -14,6 +14,7 @@ const paddingSizes = {
 		xxlarge: "pt-20 md:pt-44 laptop:pt-36",
 		mastheadLarge: "pt-24 md:pt-52 laptop:pt-36",
 		extraMobileSpaceXLarge: "pt-20 md:pt-[184px] laptop:pt-32",
+		mediumSmallOnMobile: "pt-10 md:pt-24",
 	},
 	bottom: {
 		none: "pb-0",
@@ -29,6 +30,8 @@ const getComponentSpacingClasses = (inner_spacing = "default") => {
 	switch (inner_spacing) {
 		case "none":
 			return "";
+		case "xsmall":
+			return "space-y-6";
 		case "small":
 			return "space-y-8";
 		case "medium":
@@ -92,7 +95,7 @@ function Section(props: SectionProps) {
 	return (
 		<section id={id} className={outerClasses}>
 			<div className={innerClasses}>
-				<ComponentRenderer pageId={pageId} components={components} static_posts={static_posts} />
+				<ComponentRenderer pageId={pageId} components={components} static_posts={static_posts} background={background} />
 			</div>
 		</section>
 	);

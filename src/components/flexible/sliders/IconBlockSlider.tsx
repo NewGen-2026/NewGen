@@ -15,7 +15,7 @@ const IconBlockSlider = ({ items }) => {
 			<div className="w-full">
 				<Swiper
 					ref={swiperRef}
-					className="!overflow-visible"
+					className="!overflow-visible_"
 					spaceBetween={32}
 					loop
 					slidesPerView="auto"

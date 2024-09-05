@@ -60,8 +60,8 @@ const CreatorCard = ({ className = "", creator, size = "default" }) => {
 		}
 	}, [breakpointCrossed]);
 
-	const yDistance = breakpointCrossed ? -35 : -48;
-	const yDistanceType = breakpointCrossed ? -30 : -40;
+	const yDistance = breakpointCrossed ? -35 : -54;
+	const yDistanceType = breakpointCrossed ? -30 : -50;
 
 	return (
 		<motion.div

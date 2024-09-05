@@ -12,7 +12,7 @@ const TwoColTextAsset = (props) => {
 	return (
 		<div
 			ref={ref}
-			className={`flex justify-between gap-6 gap-y-12 ${options?.reverse_mobile ? "flex-col-reverse" : "flex-col"} ${
+			className={`flex justify-between gap-6 gap-y-12 lg:gap-20 ${options?.reverse_mobile ? "flex-col-reverse" : "flex-col"} ${
 				options?.reverse ? "md-large:flex-row-reverse" : "md-large:flex-row"
 			} ${options?.alignment === "start" ? "items-start" : "items-center"}`}
 		>

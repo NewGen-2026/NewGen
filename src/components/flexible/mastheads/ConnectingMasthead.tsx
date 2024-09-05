@@ -57,7 +57,7 @@ const ConnectingMasthead = (props) => {
 		}
 	}, [isInView, swiper, isInitialLoad]);
 
-	const logoOpacity = isInitialLoad || !autoplayStarted ? "!opacity-100 !brightness-0" : "opacity-50 !brightness-0";
+	const logoOpacity = isInitialLoad || !autoplayStarted ? "!opacity-100 !brightness-0" : "opacity-100 !brightness-0 invert";
 
 	const filterClassMap = {
 		candy: "filter-candy",
@@ -105,53 +105,12 @@ const Title = ({ top_line, middle_line_left, middle_line_right, bottom_line, ite
 				{/* C<span className={`${getFontClass(items[activeSlide]?.hover_font)}`}>o</span>nnecting */}
 			</span>
 			<div className="relative inline-flex">
-				<motion.span
-					className="relative inline-block"
-					initial={{
-						x: 0,
-					}}
-					animate={{
-						x: activeSlide !== null ? "-0.5em" : 0,
-					}}
-				>
-					{middle_line_left}
-				</motion.span>
-				<motion.span
-					initial={{
-						x: 0,
-					}}
-					animate={{
-						x: activeSlide !== null ? "0.5em" : 0,
-					}}
-					className="relative inline-block"
-				>
-					{middle_line_right}
-					{/* <span>wh</span>
+				<span className="relative inline-block">{middle_line_left}</span>
+				<span className="relative inline-block pl-8">{middle_line_right}</span>
+
+				{/* <span>wh</span>
 					<span className={`${getFontClass(items[activeSlide]?.hover_font)}`}>a</span>
 					<span>{`t's`}</span> */}
-				</motion.span>
-				<div className="absolute inset-0 left-[-17%] flex items-center justify-center">
-					{items?.map((item, i) => (
-						<motion.div
-							key={`logoLoader${i}`}
-							variants={{
-								initial: {
-									opacity: 0,
-									scale: 0,
-								},
-								animate: {
-									opacity: 1,
-									scale: 1,
-								},
-							}}
-							initial="initial"
-							animate={activeSlide === i ? "animate" : "initial"}
-							className="absolute inset-0 top-[-10px] mx-auto flex w-full max-w-[18%] items-center justify-center md:max-w-[180px]"
-						>
-							<WpImage image={item?.feature_image} priority />
-						</motion.div>
-					))}
-				</div>
 			</div>
 			<span className="relative z-[20] block ">{bottom_line}</span>
 		</h1>

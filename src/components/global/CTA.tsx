@@ -4,9 +4,9 @@ import FontSwitcher from "../elements/animations/helpers/FontSwitcher";
 
 const themeStyles = {
 	boost: {
-		backgroundColor: "bg-boost",
+		backgroundColor: "bg-white",
 		unhoveredClasses: "bg-energy text-energy",
-		hoveredClasses: "bg-white !text-boost",
+		hoveredClasses: "bg-boost !text-energy",
 		ctaText: "G<pst-pil>e</>t in to<pst-pil>u</>ch",
 		ctaHoverText: "F<pst-grid>i</>nd your n<pst-pil>e</>w",
 	},
@@ -25,9 +25,9 @@ const themeStyles = {
 		ctaHoverText: "F<pst-rec>i</>nd your n<pst-rec>e</>w",
 	},
 	candy: {
-		backgroundColor: "bg-candy",
+		backgroundColor: "bg-white",
 		unhoveredClasses: "bg-ketchup text-candy",
-		hoveredClasses: "bg-white !text-ketchup",
+		hoveredClasses: "bg-candy !text-ketchup",
 		ctaText: "G<pst-bec>e</>t in to<pst-bec>u</>ch",
 		ctaHoverText: "F<pst-bec>i</>nd your n<pst-bec>e</>w",
 	},

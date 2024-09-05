@@ -61,7 +61,7 @@ const TestimonialSlider = (props) => {
 	const handlePanEnd = usePanSlider(setActiveSlide, items);
 
 	return (
-		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} mx-[-15px] px-3 py-12 md:mx-0 md:py-20 tiny-laptop:py-16` : ""}`}>
+		<div className={`${variant === "contained" ? `${getBgColorClasses(background?.color)} mx-[-15px] px-8 py-12 md:mx-0 md:py-20 tiny-laptop:py-16` : ""}`}>
 			<motion.div ref={ref} onPanEnd={handlePanEnd} className="mx-auto flex w-full max-w-[877px] flex-col items-center text-center">
 				<div className="relative aspect-[160/180] w-full max-w-[80px] md:max-w-[160px] tiny-laptop:max-w-[130px]">
 					{items?.map((item, i) => (
@@ -101,7 +101,7 @@ const TestimonialSlider = (props) => {
 											},
 										}}
 										style={{ minHeight: maxQuoteHeight }}
-										onMouseEnter={() => setIsHovered(true)}
+										onMouseEnter={() => setIsHovered(false)}
 										onMouseLeave={() => setIsHovered(false)}
 										className={`t-40 cursor-default font-black uppercase transition-colors duration-200  ${
 											isHovered ? getTextColorClasses(item?.theme_color) : textClass

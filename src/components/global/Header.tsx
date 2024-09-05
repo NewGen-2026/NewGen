@@ -91,6 +91,8 @@ export default function Header(props) {
 		};
 	}, [logoHovered, router.events]);
 
+	const headerColor = pageOptions?.header_bg_overlay ? "bg-black/70" : "bg-transparent";
+
 	return (
 		<>
 			<motion.div
@@ -100,12 +102,12 @@ export default function Header(props) {
 					type: "spring",
 					stiffness: 200,
 					damping: 20,
-					delay: path === "/" ? 3.2 : 0,
+					delay: path === "/" ? 0.5 : 0,
 				}}
 				className="fixed left-0 right-0 top-0 z-[200] block transition-colors duration-200"
 			>
 				<ScrollHeader
-					className={` transition-colors duration-300 ${scrolledBg || (isMenuOpen && scrolledBg) || mobileMenuOpen ? "bg-white" : "bg-transparent"}`}
+					className={` transition-colors duration-300 ${scrolledBg || (isMenuOpen && scrolledBg) || mobileMenuOpen ? "bg-white" : headerColor}`}
 					scrollY={scrollY}
 					setScrolledBg={setScrolledBg}
 					setMenuOpen={setMenuOpen}

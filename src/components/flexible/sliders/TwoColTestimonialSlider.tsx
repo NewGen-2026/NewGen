@@ -74,7 +74,7 @@ const TwoColTestimonialSlider = (props) => {
 			onPanEnd={handlePanEnd}
 			ref={ref}
 			className={clsx(
-				`mx-[-15px] flex w-full gap-y-6 text-center transition-colors duration-200 md:mx-0 lg:flex-row lg:text-left`,
+				`mx-[-15px] flex w-[calc(100%+30px)] gap-y-6 text-center transition-colors duration-200 md:mx-0 md:w-full lg:flex-row lg:text-left`,
 				getBgColorClasses(items[activeSlide]?.theme_color),
 				boxedVariant
 					? "flex-col-reverse justify-between gap-6"

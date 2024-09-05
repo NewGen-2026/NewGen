@@ -6,7 +6,7 @@ import FontSwitcher from "~/components/elements/animations/helpers/FontSwitcher"
 import { HoverButton, TextLink } from "~/components/elements/buttons/Button";
 import { Link } from "~/components/elements/links/Link";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
-import { Color, getBgColorClasses, getBgContrastColorName } from "~/utils/getColors";
+import { Color, getBgColorClasses, getBgContrastColorName, getTextContrastColorClasses } from "~/utils/getColors";
 import dynamic from "next/dynamic";
 
 const MobileWorkSlider = dynamic(() => import("../sliders/MobileWorkSlider"), { ssr: false });
@@ -104,12 +104,23 @@ const WorkSwiper = (props) => {
 									)}`}
 								>
 									<div className="max-w-[120px]">
-										<WpImage image={slide?.work?.acf?.work_logos?.dark_logo || slide?.work?.acf?.work_logos?.light_logo} className="max-h-20 w-auto" />
+										<WpImage
+											image={
+												slide?.work?.acf?.general?.theme_color === "boost"
+													? slide?.work?.acf?.work_logos?.light_logo
+													: slide?.work?.acf?.work_logos?.dark_logo || slide?.work?.acf?.work_logos?.light_logo
+											}
+											className="max-h-20 w-auto"
+										/>
 									</div>
 									<h2 className="t-64-small max-w-[90%] uppercase xl:max-w-[100%]">
 										<FontSwitcher hover isHovered={activeSlide === i} text={slide?.work?.acf?.work_masthead?.heading} />
 									</h2>
-									{slide?.work?.acf?.previews?.excerpt && <div className="t-22 max-w-[90%]">{slide?.work?.acf?.previews?.excerpt}</div>}
+									{slide?.work?.acf?.previews?.excerpt && (
+										<div className={`"t-22 max-w-[90%]" ${getTextContrastColorClasses(slide?.work?.acf?.general?.theme_color)}`}>
+											{slide?.work?.acf?.previews?.excerpt}
+										</div>
+									)}
 								</div>
 							))}
 						</motion.div>
@@ -161,7 +172,7 @@ export default WorkSlider;
 
 const NavBar = ({ items, active, setActive }) => {
 	return (
-		<div className="h-20 w-full max-w-[680px] bg-stone/25 p-3">
+		<div className="h-20 w-full max-w-[680px] bg-white p-3">
 			<div className="flex h-full items-center justify-between pl-2">
 				<div className="flex flex-1 items-center gap-[30px]">
 					<div className="flex  flex-col items-center gap-[9px]">
@@ -183,7 +194,7 @@ const NavBar = ({ items, active, setActive }) => {
 				</div>
 				<div className="flex flex-1 items-center gap-5">
 					{items[active]?.work?.permalink && (
-						<Link href={items[active]?.work?.permalink || "/#"} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black">
+						<Link href={items[active]?.work?.permalink || "/#"} className="t-18 mb-[-5px] whitespace-nowrap font-heading font-black text-black">
 							<TextLink underlineColour="black">{items[active]?.override_text_link ? items[active]?.text_link : `VIEW C<pst-rec>A</>SE STUDY`}</TextLink>
 						</Link>
 					)}

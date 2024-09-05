@@ -85,7 +85,8 @@ const ContactForm = (props) => {
 
 
 							`}
-							first={i === 0}
+							first={false}
+							// first={i === 0}
 							{...link}
 						/>
 					))}
