@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Formik, Form, useFormikContext, useField } from "formik";
 import * as Yup from "yup";
 import Script from "next/script";
+import Head from "next/head";
 
 declare global {
 	interface Window {
@@ -27,16 +28,24 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 	return (
 		<>
-			<Script src="https://www.google.com/recaptcha/api.js?render=6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYynzBB5uYeFvY" />
+			<Script src="https://www.google.com/recaptcha/api.js?render=6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY" />
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					useEffect(() => {
 						console.log("HELLO");
 						if (typeof window !== "undefined" && window.grecaptcha) {
-							window.grecaptcha.ready(() => {
-								window.grecaptcha.execute("6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY", { action: "homepage" }).then((token) => {
+							window?.grecaptcha?.ready(() => {
+								window?.grecaptcha?.execute("6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY", { action: "homepage" }).then((token) => {
 									console.log("TOKEN", token);
-									formik.setFieldValue("g-recaptcha-response", token);
+									if ("g-recaptcha-response" in formik.values) {
+										formik.setFieldValue("g-recaptcha-response", token);
+									} else {
+										// If it doesn't exist, add it
+										formik.setValues({
+											...formik.values,
+											"g-recaptcha-response": token,
+										});
+									}
 								});
 							});
 						}
