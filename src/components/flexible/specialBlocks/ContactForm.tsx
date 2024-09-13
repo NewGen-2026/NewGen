@@ -50,7 +50,7 @@ const ContactForm = (props) => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const onSubmit = async (values) => {
-		console.log({ values });
+		// console.log({ values });
 		axios
 			.post(
 				form_endpoint,
@@ -60,7 +60,7 @@ const ContactForm = (props) => {
 				{ headers: { Accept: "application/json" } }
 			)
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 
 				if (form_redirect) router.push(form_redirect);
 				if (!form_redirect) setIsSubmitted(true);

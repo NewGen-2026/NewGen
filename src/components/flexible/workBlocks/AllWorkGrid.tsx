@@ -138,8 +138,8 @@ const AllWorkGrid = (props) => {
 	const filteredWorkPosts = filteredAndSlicedWorkPosts.slice(0, displayedPostsCount);
 	const allPostsDisplayed = displayedPostsCount >= filteredAndSlicedWorkPosts.length;
 
-	console.log(serviceNames);
-	console.log(selectedWorkType);
+	// console.log(serviceNames);
+	// console.log(selectedWorkType);
 
 	return (
 		<div id="all-work-grid" className="scroll-mt-20">

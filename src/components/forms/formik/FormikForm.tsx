@@ -32,11 +32,10 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					useEffect(() => {
-						console.log("HELLO");
 						if (typeof window !== "undefined" && window.grecaptcha) {
 							window?.grecaptcha?.ready(() => {
 								window?.grecaptcha?.execute("6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY", { action: "homepage" }).then((token) => {
-									console.log("TOKEN", token);
+									// console.log("TOKEN", token);
 									if ("g-recaptcha-response" in formik.values) {
 										formik.setFieldValue("g-recaptcha-response", token);
 									} else {

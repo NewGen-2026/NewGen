@@ -27,7 +27,7 @@ const Jobs = (props) => {
 				const jsonData = await response.json();
 				setJobListings(jsonData.jobs);
 
-				console.log(jsonData.jobs);
+				// console.log(jsonData.jobs);
 
 				const uniqueCountriesSet = new Set<string>(jsonData.jobs.map((job: Job) => job.city));
 				const uniqueCountriesArray: string[] = Array.from(uniqueCountriesSet);
