@@ -45,12 +45,12 @@ const formMap = {
 const ContactForm = (props) => {
 	const router = useRouter();
 
-	console.log(props);
 	const { form, form_layout, heading, links, theme_color, contacts, add_faqs, faqs, form_endpoint, form_redirect } = props;
 
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const onSubmit = async (values) => {
+		console.log({ values });
 		axios
 			.post(
 				form_endpoint,

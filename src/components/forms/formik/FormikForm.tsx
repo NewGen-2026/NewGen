@@ -1,7 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from "react";
-import { Formik, Form } from "formik";
+import React, { useCallback, useEffect, useState } from "react";
+import { Formik, Form, useFormikContext, useField } from "formik";
 import * as Yup from "yup";
+import Script from "next/script";
+
+declare global {
+	interface Window {
+		grecaptcha: {
+			ready: (callback: () => void) => void;
+			execute: (siteKey: string, options: { action: string }) => Promise<string>;
+		};
+	}
+}
 
 const FormikForm = ({ fields, onSubmit, formLayout }) => {
 	const validationSchema = Yup.object().shape(
@@ -15,9 +26,26 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 	}, {});
 
 	return (
-		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			<Form className="newgen-form w-full">{formLayout}</Form>
-		</Formik>
+		<>
+			<Script src="https://www.google.com/recaptcha/api.js?render=6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYynzBB5uYeFvY" />
+			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+				{(formik) => {
+					useEffect(() => {
+						console.log("HELLO");
+						if (typeof window !== "undefined" && window.grecaptcha) {
+							window.grecaptcha.ready(() => {
+								window.grecaptcha.execute("6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY", { action: "homepage" }).then((token) => {
+									console.log("TOKEN", token);
+									formik.setFieldValue("g-recaptcha-response", token);
+								});
+							});
+						}
+					}, [formik.setFieldValue]);
+
+					return <Form className="newgen-form w-full">{formLayout}</Form>;
+				}}
+			</Formik>
+		</>
 	);
 };
 export default FormikForm;

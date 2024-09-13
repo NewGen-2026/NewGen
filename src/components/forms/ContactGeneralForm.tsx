@@ -52,6 +52,15 @@ const fields = [
 		className: "hidden",
 		errorClass,
 	},
+	{
+		name: "g-recaptcha-response",
+		type: "hidden",
+		placeHolder: "",
+		initialValue: "",
+		validation: Yup.string().required(""),
+		className: "default-input",
+		errorClass,
+	},
 ];
 
 const layout = (
@@ -71,6 +80,7 @@ const layout = (
 		<FormikField {...fields[1]} />
 		<FormikField {...fields[2]} />
 		<FormikField {...fields[3]} />
+		<FormikField {...fields[5]} />
 
 		<HoverButton
 			button={{
