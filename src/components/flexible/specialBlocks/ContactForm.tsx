@@ -51,6 +51,11 @@ const ContactForm = (props) => {
 
 	const onSubmit = async (values) => {
 		// console.log({ values });
+
+		// grecaptcha.enterprise.ready(async () => {
+		// 	const token = await grecaptcha.enterprise.execute(‘6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp’, {action: ‘LOGIN’});
+		//   });
+
 		axios
 			.post(
 				form_endpoint,
