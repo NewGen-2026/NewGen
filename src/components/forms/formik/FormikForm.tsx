@@ -9,8 +9,10 @@ import Head from "next/head";
 declare global {
 	interface Window {
 		grecaptcha: {
-			ready: (callback: () => void) => void;
-			execute: (siteKey: string, options: { action: string }) => Promise<string>;
+			enterprise: {
+				ready: (callback: () => void) => void;
+				execute: (siteKey: string, options: { action: string }) => Promise<string>;
+			};
 		};
 	}
 }
@@ -28,13 +30,13 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 	return (
 		<>
-			<Script src="https://www.google.com/recaptcha/api.js?render=6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY" />
+			<Script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp" />
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					useEffect(() => {
 						if (typeof window !== "undefined" && window.grecaptcha) {
-							window?.grecaptcha?.ready(() => {
-								window?.grecaptcha?.execute("6LesbDcqAAAAAM9a7AhrzQxVLfTYynzBB5uYeFvY", { action: "homepage" }).then((token) => {
+							window?.grecaptcha?.enterprise?.ready(() => {
+								window?.grecaptcha?.enterprise?.execute("‘6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp", { action: "LOGIN" }).then((token) => {
 									// console.log("TOKEN", token);
 									if ("g-recaptcha-response" in formik.values) {
 										formik.setFieldValue("g-recaptcha-response", token);
