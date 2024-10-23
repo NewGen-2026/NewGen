@@ -30,27 +30,27 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 	return (
 		<>
-			<Script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp" />
+			{/* <Script src="https://www.google.com/recaptcha/enterprise.js?render=6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp" /> */}
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
-					useEffect(() => {
-						if (typeof window !== "undefined" && window.grecaptcha) {
-							window?.grecaptcha?.enterprise?.ready(() => {
-								window?.grecaptcha?.enterprise?.execute("‘6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp", { action: "LOGIN" }).then((token) => {
-									// console.log("TOKEN", token);
-									if ("g-recaptcha-response" in formik.values) {
-										formik.setFieldValue("g-recaptcha-response", token);
-									} else {
-										// If it doesn't exist, add it
-										formik.setValues({
-											...formik.values,
-											"g-recaptcha-response": token,
-										});
-									}
-								});
-							});
-						}
-					}, [formik.setFieldValue]);
+					// useEffect(() => {
+					// 	if (typeof window !== "undefined" && window.grecaptcha) {
+					// 		window?.grecaptcha?.enterprise?.ready(() => {
+					// 			window?.grecaptcha?.enterprise?.execute("‘6Lf4oVcqAAAAAEP-G6YRpPVT0q0A9NNU0HH32fPp", { action: "LOGIN" }).then((token) => {
+					// 				// console.log("TOKEN", token);
+					// 				if ("g-recaptcha-response" in formik.values) {
+					// 					formik.setFieldValue("g-recaptcha-response", token);
+					// 				} else {
+					// 					// If it doesn't exist, add it
+					// 					formik.setValues({
+					// 						...formik.values,
+					// 						"g-recaptcha-response": token,
+					// 					});
+					// 				}
+					// 			});
+					// 		});
+					// 	}
+					// }, [formik.setFieldValue]);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
