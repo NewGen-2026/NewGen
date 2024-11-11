@@ -40,49 +40,25 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
-					// useEffect(() => {
-					// 	console.log("USEFFECT", isRecaptchaLoaded, window.grecaptcha, window);
-
-					// if (isRecaptchaLoaded && window.grecaptcha) {
-					// 	window.grecaptcha.enterprise.ready(() => {
-					// 		window.grecaptcha.enterprise.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "LOGIN" }).then((token) => {
-					// 			console.log(token);
-					// 			console.log(formik.values);
-					// 			if ("g-recaptcha-response" in formik.values) {
-					// 				console.log("Set FIELD VALUE");
-					// 				formik.setFieldValue("g-recaptcha-response", token);
-					// 			} else {
-					// 				console.log("adding g-recaptcha-response");
-					// 				formik.setValues({
-					// 					...formik.values,
-					// 					"g-recaptcha-response": token,
-					// 				});
-					// 			}
-					// 		});
-					// 	});
-					// }
-					// }, [recaptchaToken]); // Only run when recaptcha loads
-
 					useEffect(() => {
-						let mounted = true;
-
-						if (window.grecaptcha) {
-							window.grecaptcha.ready(() => {
-								if (!mounted) return;
-								console.log(window.grecaptcha);
-								window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
-									if (mounted) {
+						const handleRecaptcha = () => {
+							console.log(window.grecaptcha);
+							if (window.grecaptcha) {
+								window.grecaptcha.ready(() => {
+									window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
 										console.log(token);
 										formik.setFieldValue("g-recaptcha-response", token);
-									}
+									});
 								});
-							});
-						}
-
-						return () => {
-							mounted = false;
+							}
 						};
-					}, [window, formik.setFieldValue]);
+
+						// Call handleRecaptcha after 3 seconds
+						const timer = setTimeout(handleRecaptcha, 3000);
+
+						// Cleanup the timer on component unmount
+						return () => clearTimeout(timer);
+					}, []);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
