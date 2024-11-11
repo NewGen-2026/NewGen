@@ -42,22 +42,35 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 				{(formik) => {
 					useEffect(() => {
 						const handleRecaptcha = () => {
-							console.log(window.grecaptcha);
-							if (window.grecaptcha) {
+							const recaptchaScript = document.getElementById("google-recaptcha-script");
+							if (recaptchaScript && window.grecaptcha) {
 								window.grecaptcha.ready(() => {
 									window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
 										console.log(token);
 										formik.setFieldValue("g-recaptcha-response", token);
 									});
 								});
+								return true; // Indicate success
 							}
+							return false; // Indicate failure
 						};
 
-						// Call handleRecaptcha after 3 seconds
-						const timer = setTimeout(handleRecaptcha, 3000);
+						let attempts = 0;
+						const maxAttempts = 5;
+						const interval = 1000; // 1 second
 
-						// Cleanup the timer on component unmount
-						return () => clearTimeout(timer);
+						const intervalId = setInterval(() => {
+							if (handleRecaptcha() || attempts >= maxAttempts) {
+								clearInterval(intervalId);
+								if (attempts >= maxAttempts) {
+									console.warn("ReCAPTCHA script not loaded after multiple attempts");
+								}
+							}
+							attempts += 1;
+						}, interval);
+
+						// Cleanup the interval on component unmount
+						return () => clearInterval(intervalId);
 					}, []);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
