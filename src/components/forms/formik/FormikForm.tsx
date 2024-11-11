@@ -64,15 +64,25 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 					// }, [recaptchaToken]); // Only run when recaptcha loads
 
 					useEffect(() => {
-						console.log("useEffect");
-						window.grecaptcha.ready(() => {
-							console.log("Ready");
-							window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
-								console.log(token);
-								formik.setFieldValue("g-recaptcha-response", token);
+						let mounted = true;
+
+						if (window.grecaptcha) {
+							window.grecaptcha.ready(() => {
+								if (!mounted) return;
+								console.log(window.grecaptcha);
+								window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
+									if (mounted) {
+										console.log(token);
+										formik.setFieldValue("g-recaptcha-response", token);
+									}
+								});
 							});
-						});
-					}, []);
+						}
+
+						return () => {
+							mounted = false;
+						};
+					}, [window, formik.setFieldValue]);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
