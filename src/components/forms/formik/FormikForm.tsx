@@ -10,10 +10,8 @@ import { GoogleReCaptchaCheckbox } from "@google-recaptcha/react";
 declare global {
 	interface Window {
 		grecaptcha: {
-			enterprise: {
-				ready: (callback: () => void) => void;
-				execute: (siteKey: string, options: { action: string }) => Promise<string>;
-			};
+			ready: (callback: () => void) => void;
+			execute: (siteKey: string, options: { action: string }) => Promise<string>;
 		};
 	}
 }
@@ -66,20 +64,27 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 					// }, [recaptchaToken]); // Only run when recaptcha loads
 
 					useEffect(() => {
-						formik.setFieldValue("g-recaptcha-response", recaptchaToken);
-					}, [recaptchaToken]);
+						console.log("useEffect");
+						window.grecaptcha.ready(() => {
+							console.log("Ready");
+							window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
+								console.log(token);
+								formik.setFieldValue("g-recaptcha-response", token);
+							});
+						});
+					}, []);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
 			</Formik>
 			<div className="mt-10">
-				<GoogleReCaptchaCheckbox
+				{/* <GoogleReCaptchaCheckbox
 					onChange={(token) => {
 						console.log("ONCHANGE", token);
 
 						setRecaptchaToken(token);
 					}}
-				/>
+				/> */}
 				{/* <ReCAPTCHA sitekey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU" ref={recaptchaRef} asyncScriptOnLoad={() => setIsRecaptchaLoaded(true)} /> */}
 			</div>
 		</>
