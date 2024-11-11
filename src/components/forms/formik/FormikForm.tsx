@@ -45,10 +45,21 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
+					// useEffect(() => {
+					// 	console.log("UseEffect", window);
+					// 	if (isRecaptchaLoaded) {
+					// 		console.log("isloaded", window.grecaptcha);
+					// 		window.grecaptcha.ready(() => {
+					// 			window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
+					// 				console.log(token);
+					// 				formik.setFieldValue("g-recaptcha-response", token);
+					// 			});
+					// 		});
+					// 	}
+					// }, [isRecaptchaLoaded]);0
+
 					useEffect(() => {
-						console.log("UseEffect", window);
-						if (isRecaptchaLoaded) {
-							console.log("isloaded", window.grecaptcha);
+						if (window && window.grecaptcha) {
 							window.grecaptcha.ready(() => {
 								window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
 									console.log(token);
