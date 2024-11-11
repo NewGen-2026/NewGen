@@ -31,17 +31,22 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 	return (
 		<>
 			<Script
-				src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU"
+				async
+				src="https://www.google.com/recaptcha/api.js"
+				strategy="afterInteractive"
 				onLoad={() => {
 					console.log("SCRIPT LOADED");
 					setIsRecaptchaLoaded(true);
+				}}
+				onError={(e) => {
+					console.error("Script failed to load", e);
 				}}
 			/>
 
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					useEffect(() => {
-						console.log("UseEffect");
+						console.log("UseEffect", window);
 						if (isRecaptchaLoaded) {
 							console.log("isloaded", window.grecaptcha);
 							window.grecaptcha.ready(() => {
@@ -56,9 +61,9 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
 			</Formik>
-			<div className="mt-10">
+			{/* <div className="mt-10">
 				<div className="g-recaptcha" data-sitekey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU" data-callback="onSubmit" data-size="invisible" />
-			</div>
+			</div> */}
 		</>
 	);
 };
