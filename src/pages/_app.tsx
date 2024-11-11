@@ -1,12 +1,13 @@
 import Script from "next/script";
 import React from "react";
 import "~/assets/styles/globals.scss";
+import { GoogleReCaptchaProvider } from "@google-recaptcha/react";
 
 export default function MyApp({ Component, pageProps }) {
 	const globalScripts = pageProps?.options?.global_scripts || [];
 
 	return (
-		<>
+		<GoogleReCaptchaProvider type="v2-checkbox" siteKey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU">
 			{globalScripts?.length &&
 				globalScripts.map((script, index) => {
 					const { attributes, content } = script;
@@ -21,7 +22,6 @@ export default function MyApp({ Component, pageProps }) {
 					__html: `var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};`,
 				}}
 			/>
-			<Script strategy="afterInteractive" src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU" />
 
 			<Script strategy="afterInteractive" id="whatConverts" src="//s.ksrndkehqnwntyxlhgto.com/126345.js" />
 
@@ -38,6 +38,6 @@ export default function MyApp({ Component, pageProps }) {
 				}}
 			/>
 			<Component {...pageProps} />
-		</>
+		</GoogleReCaptchaProvider>
 	);
 }

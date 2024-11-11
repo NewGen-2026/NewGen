@@ -1173,6 +1173,18 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.51.0.tgz#6d419c240cfb2b66da37df230f7e7eef801c32fa"
   integrity sha512-HxjQ8Qn+4SI3/AFv6sOrDB+g6PpUTDwSJiQqOrnneEk8L71161srI9gjzzZvYVbzHiVg/BvcH95+cK/zfIt4pg==
 
+"@google-recaptcha/core@*":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@google-recaptcha/core/-/core-1.0.5.tgz#90be20a605bff423f9d5a13e71252500cc879301"
+  integrity sha512-PDkw/Q4V4qBKS9cOKRxdK6Ern4l4slondjKYqrJRBMMsMNIPfh87EHRT1YqxtzaMgH9HVRxxI7EUS1NB5z6/Cg==
+
+"@google-recaptcha/react@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@google-recaptcha/react/-/react-1.2.3.tgz#efcdad7151caa4e70be4722e1cd3c89ffd7388f5"
+  integrity sha512-o+iuo2kX3HBcrcelycTz3IOXQ7zC9YkP6EWcQb6fimoFjKDeSx4WDrkP1+9SwnpspO6UJs2VWVKq9HlxNFwG9A==
+  dependencies:
+    "@google-recaptcha/core" "*"
+
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.12"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.12.tgz#549afec9bfce5232ac6325db12765f407e70e3a0"

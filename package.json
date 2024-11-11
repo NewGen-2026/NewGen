@@ -12,6 +12,7 @@
 		"wp": "wp-env start"
 	},
 	"dependencies": {
+		"@google-recaptcha/react": "^1.2.3",
 		"@next/bundle-analyzer": "^13.5.6",
 		"@reach/rect": "^0.18.0",
 		"@svgr/webpack": "^8.1.0",
