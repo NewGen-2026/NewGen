@@ -4549,6 +4549,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+next-recaptcha-v3@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/next-recaptcha-v3/-/next-recaptcha-v3-1.5.0.tgz#70c9da41425048a7da1389879f4e8ed7703644ea"
+  integrity sha512-TvOvPkBb6P7D167Q8pXpTqu1GbJWkYEKPpDyJYIj8WBFGzaYGivZ+QWghFhbY0jq+9pOJxUVL9ZOqa5i97L6ZQ==
+
 next-seo@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-6.1.0.tgz#b60b06958cc77e7ed56f0a61b2d6cd0afed88ebb"

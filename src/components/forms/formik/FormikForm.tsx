@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import Script from "next/script";
 import Head from "next/head";
 
+import { useReCaptcha } from "next-recaptcha-v3";
+
 declare global {
 	interface Window {
 		grecaptcha: {
@@ -28,21 +30,23 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 		return { ...values, [field.name]: field.initialValue !== undefined ? field.initialValue : "" };
 	}, {});
 
+	const {
+		/** reCAPTCHA_site_key */
+		reCaptchaKey,
+		/** Global ReCaptcha object */
+		grecaptcha,
+		/** Is ReCaptcha script loaded */
+		loaded,
+		/** Is ReCaptcha script failed to load */
+		error,
+		/** Other hook props */
+		...otherProps
+	} = useReCaptcha();
+
+	console.log(loaded, grecaptcha, reCaptchaKey);
+
 	return (
 		<>
-			<Script
-				async
-				src="https://www.google.com/recaptcha/api.js"
-				strategy="afterInteractive"
-				onLoad={() => {
-					console.log("SCRIPT LOADED");
-					setIsRecaptchaLoaded(true);
-				}}
-				onError={(e) => {
-					console.error("Script failed to load", e);
-				}}
-			/>
-
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					// useEffect(() => {
@@ -59,7 +63,9 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 					// }, [isRecaptchaLoaded]);0
 
 					useEffect(() => {
+						console.log("UseEffect", loaded, window);
 						if (window && window.grecaptcha) {
+							console.log("UseEffect in window", loaded, window);
 							window.grecaptcha.ready(() => {
 								window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
 									console.log(token);
@@ -67,7 +73,7 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 								});
 							});
 						}
-					}, [isRecaptchaLoaded]);
+					}, [loaded]);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
