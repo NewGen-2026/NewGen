@@ -30,29 +30,55 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 		return { ...values, [field.name]: field.initialValue !== undefined ? field.initialValue : "" };
 	}, {});
 
-	const {
-		/** reCAPTCHA_site_key */
-		reCaptchaKey,
-		/** Global ReCaptcha object */
-		grecaptcha,
-		/** Is ReCaptcha script loaded */
-		loaded,
-		/** Is ReCaptcha script failed to load */
-		error,
-		/** Other hook props */
-		...otherProps
-	} = useReCaptcha();
-
-	console.log(loaded, grecaptcha, reCaptchaKey);
+	console.log(isRecaptchaLoaded);
 
 	return (
 		<>
+			{/* <Script
+				id="g-recaptcha"
+				strategy="afterInteractive"
+				// src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU"
+				src="https://www.google.com/recaptcha/api.js?render=explicit"
+				onLoad={() => setIsRecaptchaLoaded(true)}
+				onError={(e) => {
+					setIsRecaptchaLoaded(false);
+					console.log(e);
+				}}
+			/> */}
+
+			<Script
+				id="g-recaptcha"
+				strategy="afterInteractive"
+				// src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU"
+				src="https://www.google.com/recaptcha/enterprise.js?sitekey=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU&render=explicit"
+				onLoad={() => setIsRecaptchaLoaded(true)}
+				onError={(e) => {
+					setIsRecaptchaLoaded(false);
+					console.log(e);
+				}}
+			/>
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
+					useEffect(() => {
+						const executeRecaptcha = async () => {
+							console.log("UseEffect", window);
+							if (isRecaptchaLoaded) {
+								console.log("isloaded", window.grecaptcha);
+								window.grecaptcha.enterprise.ready(async () => {
+									const token = await window.grecaptcha.enterprise.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" });
+									console.log("token", token);
+									formik.setFieldValue("g-recaptcha-response", token);
+								});
+							}
+						};
+
+						executeRecaptcha();
+					}, [isRecaptchaLoaded]);
+
 					// useEffect(() => {
-					// 	console.log("UseEffect", window);
-					// 	if (isRecaptchaLoaded) {
-					// 		console.log("isloaded", window.grecaptcha);
+					// 	console.log("UseEffect", loaded, window);
+					// 	if (window && window.grecaptcha) {
+					// 		console.log("UseEffect in window", loaded, window);
 					// 		window.grecaptcha.ready(() => {
 					// 			window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
 					// 				console.log(token);
@@ -60,20 +86,7 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 					// 			});
 					// 		});
 					// 	}
-					// }, [isRecaptchaLoaded]);0
-
-					useEffect(() => {
-						console.log("UseEffect", loaded, window);
-						if (window && window.grecaptcha) {
-							console.log("UseEffect in window", loaded, window);
-							window.grecaptcha.ready(() => {
-								window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
-									console.log(token);
-									formik.setFieldValue("g-recaptcha-response", token);
-								});
-							});
-						}
-					}, [loaded]);
+					// }, [loaded]);
 
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}

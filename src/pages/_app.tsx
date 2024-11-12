@@ -7,7 +7,7 @@ export default function MyApp({ Component, pageProps }) {
 	const globalScripts = pageProps?.options?.global_scripts || [];
 
 	return (
-		<ReCaptchaProvider reCaptchaKey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU">
+		<>
 			{globalScripts?.length &&
 				globalScripts.map((script, index) => {
 					const { attributes, content } = script;
@@ -38,6 +38,6 @@ export default function MyApp({ Component, pageProps }) {
 				}}
 			/>
 			<Component {...pageProps} />
-		</ReCaptchaProvider>
+		</>
 	);
 }
