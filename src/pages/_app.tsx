@@ -1,13 +1,13 @@
 import Script from "next/script";
 import React from "react";
 import "~/assets/styles/globals.scss";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
+import { GoogleReCaptchaProvider } from "@google-recaptcha/react";
 
 export default function MyApp({ Component, pageProps }) {
 	const globalScripts = pageProps?.options?.global_scripts || [];
 
 	return (
-		<>
+		<GoogleReCaptchaProvider type="v2-checkbox" siteKey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU">
 			{globalScripts?.length &&
 				globalScripts.map((script, index) => {
 					const { attributes, content } = script;
@@ -38,6 +38,6 @@ export default function MyApp({ Component, pageProps }) {
 				}}
 			/>
 			<Component {...pageProps} />
-		</>
+		</GoogleReCaptchaProvider>
 	);
 }

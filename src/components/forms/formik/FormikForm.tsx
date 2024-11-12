@@ -1,25 +1,13 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useCallback, useEffect, useState } from "react";
-import { Formik, Form, useFormikContext, useField } from "formik";
+import React, { useEffect, useState } from "react";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import Script from "next/script";
-import Head from "next/head";
 
-import { useReCaptcha } from "next-recaptcha-v3";
-
-declare global {
-	interface Window {
-		grecaptcha: {
-			ready: (callback: () => void) => void;
-			execute: (siteKey: string, options: { action: string }) => Promise<string>;
-		};
-	}
-}
+import { GoogleReCaptchaCheckbox } from "@google-recaptcha/react";
 
 const FormikForm = ({ fields, onSubmit, formLayout }) => {
-	const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState(false);
-
 	const validationSchema = Yup.object().shape(
 		fields.reduce((schema, field) => {
 			return { ...schema, [field.name]: field.validation };
@@ -30,70 +18,27 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 		return { ...values, [field.name]: field.initialValue !== undefined ? field.initialValue : "" };
 	}, {});
 
-	console.log(isRecaptchaLoaded);
+	const [token, setToken] = useState("");
 
 	return (
 		<>
-			{/* <Script
-				id="g-recaptcha"
-				strategy="afterInteractive"
-				// src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU"
-				src="https://www.google.com/recaptcha/api.js?render=explicit"
-				onLoad={() => setIsRecaptchaLoaded(true)}
-				onError={(e) => {
-					setIsRecaptchaLoaded(false);
-					console.log(e);
-				}}
-			/> */}
-
-			<Script
-				id="g-recaptcha"
-				strategy="afterInteractive"
-				// src="https://www.google.com/recaptcha/api.js?render=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU"
-				src="https://www.google.com/recaptcha/enterprise.js?sitekey=6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU&render=explicit"
-				onLoad={() => setIsRecaptchaLoaded(true)}
-				onError={(e) => {
-					setIsRecaptchaLoaded(false);
-					console.log(e);
-				}}
-			/>
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{(formik) => {
 					useEffect(() => {
-						const executeRecaptcha = async () => {
-							console.log("UseEffect", window);
-							if (isRecaptchaLoaded) {
-								console.log("isloaded", window.grecaptcha);
-								window.grecaptcha.enterprise.ready(async () => {
-									const token = await window.grecaptcha.enterprise.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" });
-									console.log("token", token);
-									formik.setFieldValue("g-recaptcha-response", token);
-								});
-							}
-						};
-
-						executeRecaptcha();
-					}, [isRecaptchaLoaded]);
-
-					// useEffect(() => {
-					// 	console.log("UseEffect", loaded, window);
-					// 	if (window && window.grecaptcha) {
-					// 		console.log("UseEffect in window", loaded, window);
-					// 		window.grecaptcha.ready(() => {
-					// 			window.grecaptcha.execute("6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU", { action: "homepage" }).then((token) => {
-					// 				console.log(token);
-					// 				formik.setFieldValue("g-recaptcha-response", token);
-					// 			});
-					// 		});
-					// 	}
-					// }, [loaded]);
-
+						console.log("SETTING TOKEN", token);
+						formik.setFieldValue("g-recaptcha-response", token);
+					}, [token]);
 					return <Form className="newgen-form w-full">{formLayout}</Form>;
 				}}
 			</Formik>
-			{/* <div className="mt-10">
-				<div className="g-recaptcha" data-sitekey="6Lf-XnsqAAAAABGFjzGFsbkrcQkPk-LJXtj_E6nU" data-callback="onSubmit" data-size="invisible" />
-			</div> */}
+			<div className="mt-10">
+				<GoogleReCaptchaCheckbox
+					onChange={(token) => {
+						console.log("token", token);
+						setToken(token);
+					}}
+				/>
+			</div>
 		</>
 	);
 };
