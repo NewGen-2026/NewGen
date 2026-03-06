@@ -168,7 +168,7 @@ export default function Header(props) {
 														style={{
 															pointerEvents: activeSubmenu === i ? "auto" : "none",
 														}}
-														className="absolute left-0 top-[90px] z-[5] w-full min-w-[960px] origin-top scale-[0.8] px-5  will-change-transform lg:min-w-[1000px] xl:left-[50%] xl:top-[400%] xl:min-w-[1280px] xl:-translate-x-1/2   xl:px-0 tiny-laptop:scale-[0.8]  "
+														className="absolute left-0 top-[90px] z-[5] w-full min-w-[760px] origin-top scale-[0.8] px-5  will-change-transform lg:min-w-[800px] xl:left-[-100%] xl:top-[400%] xl:min-w-[1080px] xl:-translate-x-1/2   xl:px-0 tiny-laptop:scale-[0.8]  "
 													>
 														<motion.div
 															initial={{

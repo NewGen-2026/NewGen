@@ -20,7 +20,7 @@ const FadeGrid = ({ items }) => {
 				const isLink = !!item?.link;
 				const Tag = isLink ? Link : "div";
 				return (
-					<Tag href={isLink ? item?.link : null} className="block">
+					<Tag href={isLink ? item?.link : null} className="block" key={i}>
 						<motion.div
 							key={i}
 							animate={{ opacity: isInView ? 1 : 0 }}

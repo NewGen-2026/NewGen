@@ -12,7 +12,7 @@ const StatRow = (props) => {
 		<div
 			ref={ref}
 			className={clsx(
-				"flex flex-wrap justify-center gap-8 text-center sm:justify-start sm:text-start lg:flex-nowrap",
+				"flex flex-wrap items-center justify-center gap-8 text-center lg:flex-nowrap",
 				has_contained_background_color && "px-4 pb-16 pt-8 md:px-10 md:pb-24 md:pt-20",
 				has_contained_background_color && getBgColorClasses(background?.background_color)
 			)}

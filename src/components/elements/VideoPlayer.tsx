@@ -73,7 +73,7 @@ function VideoPlayer({ videoFile, className = "", embed, isEmbed = false, playTy
 		<div ref={inViewRef} className="relative h-full w-full will-change-[opacity]">
 			{!isEmbed && (
 				<video
-					className={`fade-in h-full w-full object-cover opacity-100 transition-opacity duration-300  will-change-[opacity]  ${className}`}
+					className={`fade-in h-full w-full object-contain opacity-100 transition-opacity duration-300  will-change-[opacity]  ${className}`}
 					autoPlay={!playOnHover}
 					loop
 					muted

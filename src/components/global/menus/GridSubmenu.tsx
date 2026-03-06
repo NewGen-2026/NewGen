@@ -26,6 +26,8 @@ const fadeUpVariants = {
 	},
 };
 
+const colSpanMap = ["md:col-span-3", "md:col-span-3", "md:col-span-3", "md:col-span-3"];
+
 const GridSubmenu = (props) => {
 	const {
 		data: { grid_items, bottom_link },
@@ -35,23 +37,13 @@ const GridSubmenu = (props) => {
 	const delayMap = grid_items.map((_, index) => delayOrder[index % 6]);
 
 	return (
-		<motion.div
-			initial={{
-				opacity: 0,
-			}}
-			animate={{
-				opacity: 1,
-			}}
-			transition={{
-				delay: 0.2,
-			}}
-			className="py-6 md:px-4 md:py-4 lg:min-h-[690px] "
-		>
-			<div className="grid gap-4 md:grid-cols-3 md:gap-5">
-				{grid_items?.map((item, i) => <GridItem key={`grid${i}`} isMobile={isMobile} i={i} {...item} delayMap={delayMap} />)}
-			</div>
-			<div className="pt-8 md:pt-10">
-				<BottomLink {...bottom_link} isMobile={isMobile} />
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="py-6 md:px-4 md:py-4 lg:min-h-[100%]">
+			<div className="grid grid-cols-2 gap-4 md:gap-3">
+				{grid_items?.map((item, i) => (
+					<div key={`grid${i}`}>
+						<GridItem isMobile={isMobile} i={i} {...item} delayMap={delayMap} />
+					</div>
+				))}
 			</div>
 		</motion.div>
 	);
@@ -68,12 +60,12 @@ const GridItem = (props) => {
 	const staggerDelay = delayMap[i] * 0.1 + 0.2;
 
 	return (
-		<Link href={link} className="block">
+		<Link href={link} className="block h-[100%]">
 			<motion.div
 				initial="initial"
 				animate="animate"
 				className={clsx(
-					"group relative flex h-full max-h-[254px] w-full flex-col overflow-hidden p-5 transition-colors duration-200",
+					"group relative flex h-full max-h-[100%] w-full flex-col overflow-hidden p-3 transition-colors duration-200 md:p-4",
 					getBgContrastHoverColorClasses(theme_color),
 					getTextContrastColorClasses(isMobile ? getBgContrastColorName(theme_color) : theme_color),
 					getTextColorHoverClasses(theme_color)
@@ -119,7 +111,7 @@ const GridItem = (props) => {
 						ease: textEase,
 						duration: 0.4,
 					}}
-					className={clsx(`t-32-menu pointer-events-none mt-4 max-w-[230px] font-heading font-black uppercase  md:mt-6`, getTextColorHoverClasses(theme_color))}
+					className={clsx(`t-32-menu pointer-events-none mt-4 max-w-[100%] font-heading font-black uppercase  md:mt-6`, getTextColorHoverClasses(theme_color))}
 				>
 					<FontSwitcher hover isHovered={isHovered || isMobile} text={heading} />
 				</motion.div>
@@ -130,7 +122,7 @@ const GridItem = (props) => {
 						ease: textEase,
 						duration: 0.4,
 					}}
-					className={clsx(`t-16 pointer-events-none mt-3 max-w-[270px] font-medium !leading-[1.25] md:mt-5`, getTextColorHoverClasses(theme_color))}
+					className={clsx(`t-16 pointer-events-none mt-3 max-w-[100%] font-medium !leading-[1.25] md:mt-5`, getTextColorHoverClasses(theme_color))}
 				>
 					{content}
 				</motion.div>

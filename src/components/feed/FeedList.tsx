@@ -90,11 +90,11 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 		// subscribe needs removed for now
 
 		// if (navState === "search") {
-		// 	handleSearch();
+		//  handleSearch();
 		// } else if (navState === "subscribe") {
-		// 	handleSubscribe();
+		//  handleSubscribe();
 		// } else {
-		// 	setNavState("subscribe");
+		//  setNavState("subscribe");
 		// }
 
 		if (navState === "search") {
@@ -178,9 +178,10 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 				transition={{
 					delay: 0.1,
 				}}
-				className="flex w-full max-w-[971px] flex-col justify-between gap-2 gap-y-12 md:flex-row"
+				className="flex w-full flex-col justify-between gap-5 gap-y-12 md:flex-row"
 			>
-				<div className="relative w-full md:w-auto md:max-w-[203px] md:flex-1">
+				{/* ── Sidebar: fixed width, never shrinks ── */}
+				<div className="relative w-full flex-shrink-0 md:w-[180px]">
 					<div className="sticky top-20">
 						<div className="space-y-4">
 							<CategoryLink active={selectedCategory === "home"} onClick={() => handleCategoryClick("home")} icon="home" title="F<pst-hal>o</>r you" />
@@ -190,7 +191,7 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 									active={selectedCategory === slug}
 									key={slug}
 									icon={slug}
-									title={`${count} ${slug === "article" ? "articl<pst-grid>e</>" : slug === "podcast" ? "podc<pst-nip>a</>st" : slug}s`}
+									title={`${count} ${slug === "article" ? "articl<pst-grid>e</>" : slug === "podcast" ? "podc<pst-nip>a</>st" : slug}`}
 								/>
 							))}
 						</div>
@@ -205,14 +206,18 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 						</ul>
 					</div>
 				</div>
-				<div className="max-w-[502px] flex-1 space-y-16 md:space-y-24">
-					{filteredPosts.slice(0, visiblePostsCount).map((post, i) => (
-						<div key={`post-${post?.ID}`} id={`post-${i}`} ref={i + 1 === visiblePostsCount ? lastPostElementRef : null} className="relative scroll-mt-20">
-							<PreviewWrapper setActiveArticle={setActiveArticle} id={`post-${i}`}>
-								<FeedPreview i={i} {...post} />
-							</PreviewWrapper>
-						</div>
-					))}
+
+				{/* ── Posts grid: takes remaining space, won't overflow sidebar ── */}
+				<div className="min-w-0 flex-1">
+					<div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+						{filteredPosts.slice(0, visiblePostsCount).map((post, i) => (
+							<div key={`post-${post?.ID}`} id={`post-${i}`} ref={i + 1 === visiblePostsCount ? lastPostElementRef : null} className="relative scroll-mt-20">
+								<PreviewWrapper setActiveArticle={setActiveArticle} id={`post-${i}`}>
+									<FeedPreview i={i} {...post} />
+								</PreviewWrapper>
+							</div>
+						))}
+					</div>
 				</div>
 			</motion.div>
 
@@ -328,10 +333,10 @@ const FeedList = ({ posts: initialPosts, featured_tags }) => {
 					</div>
 					<div className="flex items-center gap-8">
 						{/* {navState === "nextPrev" && (
-							<button type="button" onClick={() => setNavState("search")} className="mt-1 block">
-								<TextLink>{`Se<pst-rec>a</>rch`}</TextLink>
-							</button>
-						)} */}
+                            <button type="button" onClick={() => setNavState("search")} className="mt-1 block">
+                                <TextLink>{`Se<pst-rec>a</>rch`}</TextLink>
+                            </button>
+                        )} */}
 						<div className="block w-full sm:min-w-[184px]" onClick={handleSubmit}>
 							<HoverButton
 								className="!w-full"

@@ -1,12 +1,14 @@
 const SelectField = ({ field, options, error, ...props }) => {
+	console.log(options, "options");
 	return (
 		<div className="relative w-full">
 			<select {...field} className={`${props?.className} w-full`}>
-				{options.map((option) => (
-					<option key={option.value || "placeholder"} value={option.value || ""} disabled={option?.disabled} className={option?.className}>
-						{option.label}
-					</option>
-				))}
+				{Array.isArray(options) &&
+					options.map((option) => (
+						<option key={option.value || "placeholder"} value={option.value || ""} disabled={option?.disabled} className={option?.className}>
+							{option.label}
+						</option>
+					))}
 			</select>
 			{error && (
 				<div className={` t-14 pointer-events-none absolute ${props?.errorClass || "bottom-[-30px] left-[-8px]  md:bottom-[-42px] "} z-10  `}>{error}</div>
