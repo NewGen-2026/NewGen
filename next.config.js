@@ -28,6 +28,10 @@ module.exports = withBundleAnalyzer({
 					source: "/wp-content/:path*",
 					destination: `${process.env.NEXT_PUBLIC_WORDPRESS_BASE_URL}/wp-content/:path*`,
 				},
+				{
+          source: "/wp-json/:path*",
+          destination: `${process.env.NEXT_PUBLIC_WORDPRESS_BASE_URL}/wp-json/:path*`,
+        },
 			],
 		};
 	},
