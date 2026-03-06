@@ -17,10 +17,10 @@ const DynamicCF7Form = dynamic(() => import("~/components/forms/DynamicCF7Form")
 // Maps the form_layout ACF value → CF7 form ID.
 // Update these IDs if they change in WordPress.
 const FORM_ID_MAP: Record<string, number> = {
-	general: 3551,
-	brands: 3552,
-	procurement: 3569,
-	collab: 3570,
+	general: 3516,
+	brands: 3519,
+	procurement: 3517,
+	collab: 3518,
 };
 
 type Color = "electric" | "cobalt" | "white" | "black" | "boost" | "energy" | "forest";

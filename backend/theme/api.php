@@ -713,3 +713,89 @@ function get_integrations_with_categories()
 
 	return new WP_REST_Response($termsMapped);
 }
+
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/cf7-form/(?P<id>\d+)', [
+        'methods'             => WP_REST_Server::READABLE,
+        'callback'            => 'get_cf7_form_structure_callback',
+        'permission_callback' => '__return_true',
+    ]);
+});
+
+function get_cf7_form_structure_callback(WP_REST_Request $request) {
+    $form_id      = (int) $request->get_param('id');
+    $contact_form = wpcf7_contact_form($form_id);
+
+    if (!$contact_form || !is_a($contact_form, 'WPCF7_ContactForm')) {
+        return new WP_Error(
+            'form_not_found',
+            'Invalid or non-existent Contact Form 7 ID',
+            ['status' => 404]
+        );
+    }
+
+    $form_code = $contact_form->prop('form');
+    $manager   = WPCF7_FormTagsManager::get_instance();
+    $tags      = $manager->scan($form_code);
+
+    $fields = [];
+
+    foreach ($tags as $tag) {
+        if (!$tag instanceof WPCF7_FormTag || empty($tag->name)) {
+            continue;
+        }
+
+        $is_select         = $tag->basetype === 'select';
+        $is_hidden         = $tag->basetype === 'hidden';
+        $has_first_as_label = $tag->has_option('first_as_label');
+
+        $placeholder = '';
+        $options     = [];
+        $initial_val = '';
+
+        if ($is_select) {
+            if ($has_first_as_label && !empty($tag->values)) {
+                // First value is the placeholder label, exclude it from options
+                $placeholder = $tag->values[0];
+                $options     = array_slice($tag->values, 1);
+            } elseif (!empty($tag->values)) {
+                $options = $tag->values;
+            }
+        } elseif ($is_hidden) {
+            $initial_val = !empty($tag->values) ? $tag->values[0] : '';
+        } else {
+            // text / email / textarea / tel etc.
+            // CF7 syntax: [text field-name placeholder "Your placeholder"]
+            // get_option() retrieves the string value of the named option
+            $placeholder = $tag->get_option('placeholder', '', true) ?: '';
+
+            // Fallback: [text field-name "Your placeholder"] — no explicit placeholder keyword
+            if (empty($placeholder) && !empty($tag->values)) {
+                $placeholder = $tag->values[0];
+            }
+        }
+
+        $field = [
+            'type'        => $tag->basetype,
+            'name'        => $tag->name,
+            'required'    => $tag->is_required(),
+            'placeholder' => $placeholder,
+            'initial_val' => $initial_val,
+            'class'       => $tag->get_class_option() ?: false,
+            'id'          => $tag->get_id_option() ?: false,
+        ];
+
+        if ($is_select && !empty($options)) {
+            $field['options'] = array_values($options); // reset keys after slice
+        }
+
+        $fields[] = $field;
+    }
+
+    return rest_ensure_response([
+        'id'      => $form_id,
+        'title'   => $contact_form->title(),
+        'fields'  => $fields,
+        'success' => true,
+    ]);
+}
