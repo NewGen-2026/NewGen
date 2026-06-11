@@ -124,15 +124,23 @@ const DynamicCF7Form = ({
 		// The REST API read endpoint requires auth — construct it directly instead
 		fd.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
 
+		// Budget is rendered as a single base field (e.g. "budget") but CF7 defines and
+		// requires every currency variant (budget_gbp/usd/eur). Collect the base names so
+		// we can fan the selected value out across all variants below.
+		const currencyBaseNames = new Set<string>();
+		(formData?.fields ?? []).forEach((f) => {
+			const m = f.name.match(CURRENCY_FIELD_RE);
+			if (m) currencyBaseNames.add(m[1]);
+		});
+
 		Object.entries(values).forEach(([key, value]) => {
 			if (key === "_gotcha") return;
 			if (key === "g-recaptcha-response") return;
 
-			const match = key.match(CURRENCY_FIELD_RE);
-			if (match) {
-				if (match[2].toUpperCase() === activeCurrency) {
-					fd.append(match[1], value ?? "");
-				}
+			// Fan the chosen budget value into all currency variants so CF7's
+			// required validation passes for each one.
+			if (currencyBaseNames.has(key)) {
+				CURRENCIES.forEach((c) => fd.append(`${key}_${c.toLowerCase()}`, value ?? ""));
 				return;
 			}
 
