@@ -1,11 +1,9 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
-import { GoogleReCaptchaCheckbox } from "@google-recaptcha/react";
 
 const FormikForm = ({ fields, onSubmit, formLayout }) => {
 	const validationSchema = Yup.object().shape(
@@ -18,28 +16,12 @@ const FormikForm = ({ fields, onSubmit, formLayout }) => {
 		return { ...values, [field.name]: field.initialValue !== undefined ? field.initialValue : "" };
 	}, {});
 
-	const [token, setToken] = useState("");
-
 	return (
-		<>
-			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-				{(formik) => {
-					useEffect(() => {
-						console.log("SETTING TOKEN", token);
-						formik.setFieldValue("g-recaptcha-response", token);
-					}, [token]);
-					return <Form className="newgen-form w-full">{formLayout}</Form>;
-				}}
-			</Formik>
-			<div className="mt-10">
-				<GoogleReCaptchaCheckbox
-					onChange={(token) => {
-						console.log("token", token);
-						setToken(token);
-					}}
-				/>
-			</div>
-		</>
+		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			{() => {
+				return <Form className="newgen-form w-full">{formLayout}</Form>;
+			}}
+		</Formik>
 	);
 };
 export default FormikForm;

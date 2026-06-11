@@ -4,7 +4,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useCF7Form } from "~/hooks/useCF7Form";
 import { useRouter } from "next/router";
-import { GoogleReCaptchaCheckbox } from "@google-recaptcha/react";
 import FormikForm from "./formik/FormikForm";
 import FormikField from "./formik/FormikField";
 import { HoverButton } from "../elements/buttons/Button";
@@ -127,6 +126,7 @@ const DynamicCF7Form = ({
 
 		Object.entries(values).forEach(([key, value]) => {
 			if (key === "_gotcha") return;
+			if (key === "g-recaptcha-response") return;
 
 			const match = key.match(CURRENCY_FIELD_RE);
 			if (match) {
