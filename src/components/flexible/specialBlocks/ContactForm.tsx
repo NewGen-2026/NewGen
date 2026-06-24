@@ -13,7 +13,7 @@ const DynamicCF7Form = dynamic(() => import("~/components/forms/DynamicCF7Form")
 const GENERAL_FORM_ID = 3516;
 
 const SUBMIT_BUTTON_COLORS = {
-	background_color: "cobalt",
+	background_color: "boost",
 	text_color: "white",
 	hover_background_color: "white",
 	text_hover_color: "black",
