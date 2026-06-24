@@ -11,20 +11,11 @@ import { HoverButton } from "../elements/buttons/Button";
 const errorClass = "!left-[2px] text-green-2 !bottom-[-20px] !text-[11px]";
 
 type Color = "electric" | "cobalt" | "white" | "black" | "boost" | "energy" | "forest";
-type Currency = "GBP" | "USD" | "EUR";
-
-const CURRENCIES: Currency[] = ["GBP", "USD", "EUR"];
-
-// Detects if a field name is a currency budget variant e.g. budget_gbp, budget_usd, budget_eur
-const CURRENCY_FIELD_RE = /^(.+)_(gbp|usd|eur)$/i;
 
 interface DynamicCF7FormProps {
 	formId: number;
 	formRedirect?: string;
 	submitLabel?: string;
-	showBudgetTitle?: boolean; // renders "What's the budget" heading + currency tabs
-	showOptionalTitle?: boolean; // renders "Optional" heading before optional fields
-	optionalFields?: string[]; // field names to appear under the Optional heading
 	buttonColors?: {
 		background_color?: Color;
 		text_color?: Color;
@@ -55,7 +46,7 @@ const buildValidation = (field: any) => {
 	return schema;
 };
 
-const buildFormikField = (field: any, overrideOptions?: { value: string; label: string }[]) => {
+const buildFormikField = (field: any) => {
 	const base: any = {
 		name: field.name,
 		type: field.type,
@@ -70,39 +61,17 @@ const buildFormikField = (field: any, overrideOptions?: { value: string; label: 
 	}
 
 	if (field.type === "select") {
-		const opts = overrideOptions ?? field.options ?? [];
+		const opts = field.options ?? [];
 		base.options = [{ value: "", label: field.placeholder || "Please select", disabled: true }, ...opts];
 	}
 
 	return base;
 };
 
-const CurrencySwitch = ({
-	currency,
-	selectedCurrency,
-	setSelectedCurrency,
-}: {
-	currency: Currency;
-	selectedCurrency: Currency;
-	setSelectedCurrency: (c: Currency) => void;
-}) => (
-	<button type="button" aria-label={currency} className="relative" onClick={() => setSelectedCurrency(currency)}>
-		{currency}
-		{currency === selectedCurrency && (
-			<motion.div layoutId="currency-switcher" className="absolute left-0 right-0 top-[120%] flex justify-center">
-				<div className="h-[6px] w-[6px] bg-electric" />
-			</motion.div>
-		)}
-	</button>
-);
-
 const DynamicCF7Form = ({
 	formId,
 	formRedirect,
 	submitLabel = "Submit",
-	showBudgetTitle = true,
-	showOptionalTitle = true,
-	optionalFields = ["target_audience"],
 	buttonColors = {
 		background_color: "cobalt",
 		text_color: "white",
@@ -113,7 +82,6 @@ const DynamicCF7Form = ({
 	const { formData, loading, error } = useCF7Form(formId);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
-	const [activeCurrency, setActiveCurrency] = useState<Currency>("GBP");
 	const router = useRouter();
 
 	const onSubmit = async (values: Record<string, any>) => {
@@ -121,29 +89,10 @@ const DynamicCF7Form = ({
 		const fd = new FormData();
 
 		// CF7 unit tag format is always wpcf7-f{ID}-o1 for single instances
-		// The REST API read endpoint requires auth — construct it directly instead
 		fd.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
-
-		// Budget is rendered as a single base field (e.g. "budget") but CF7 defines and
-		// requires every currency variant (budget_gbp/usd/eur). Collect the base names so
-		// we can fan the selected value out across all variants below.
-		const currencyBaseNames = new Set<string>();
-		(formData?.fields ?? []).forEach((f) => {
-			const m = f.name.match(CURRENCY_FIELD_RE);
-			if (m) currencyBaseNames.add(m[1]);
-		});
 
 		Object.entries(values).forEach(([key, value]) => {
 			if (key === "_gotcha") return;
-			if (key === "g-recaptcha-response") return;
-
-			// Fan the chosen budget value into all currency variants so CF7's
-			// required validation passes for each one.
-			if (currencyBaseNames.has(key)) {
-				CURRENCIES.forEach((c) => fd.append(`${key}_${c.toLowerCase()}`, value ?? ""));
-				return;
-			}
-
 			fd.append(key, value ?? "");
 		});
 
@@ -187,71 +136,13 @@ const DynamicCF7Form = ({
 		);
 	}
 
-	// Detect if this form has currency fields
-	const hasCurrencyFields = formData.fields.some((f) => CURRENCY_FIELD_RE.test(f.name));
-
-	// Build a lookup of currency options: { budget: { GBP: [...], USD: [...], EUR: [...] } }
-	const currencyOptionsMap: Record<string, Record<Currency, any[]>> = {};
-	if (hasCurrencyFields) {
-		formData.fields.forEach((field) => {
-			const match = field.name.match(CURRENCY_FIELD_RE);
-			if (match) {
-				const baseName = match[1];
-				const currency = match[2].toUpperCase() as Currency;
-				if (!currencyOptionsMap[baseName]) currencyOptionsMap[baseName] = { GBP: [], USD: [], EUR: [] };
-				currencyOptionsMap[baseName][currency] = field.options ?? [];
-			}
-		});
-	}
-
-	// Filter out non-primary currency fields (keep only _gbp as the rendered one, skip _usd/_eur)
-	const visibleFields = formData.fields.filter((field) => {
-		const match = field.name.match(CURRENCY_FIELD_RE);
-		if (!match) return true;
-		// Only render the GBP variant — options will swap based on activeCurrency
-		return match[2].toLowerCase() === "gbp";
-	});
-
-	let optionalTitleInserted = false;
-
 	const formLayout = (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="flex w-full flex-col gap-4 md:flex-nowrap md:gap-6">
-			{visibleFields.map((field, i) => {
-				const match = field.name.match(CURRENCY_FIELD_RE);
-				const baseName = match ? match[1] : field.name;
-				const isCurrencyField = !!match;
-
-				// Get active currency options for this field
-				const overrideOptions = isCurrencyField ? currencyOptionsMap[baseName]?.[activeCurrency] : undefined;
-
-				const builtField = buildFormikField({ ...field, name: isCurrencyField ? baseName : field.name }, overrideOptions);
-
-				const isOptional = optionalFields.includes(field.name);
-				const showOptionalHeader = showOptionalTitle && isOptional && !optionalTitleInserted;
-				if (showOptionalHeader) optionalTitleInserted = true;
-
-				return (
-					<div key={`${field.name}-${i}`}>
-						{/* Budget title + currency tabs */}
-						{isCurrencyField && showBudgetTitle && (
-							<div className="mb-4 mt-6 flex items-center justify-between gap-4">
-								{/* <h3 className="t-44 font-black uppercase">What's the budget</h3> */}
-								<h3 className="t-44 font-black uppercase">What&apos;s the budget</h3>
-								<div className="t-16 flex items-center gap-8 font-black uppercase">
-									{CURRENCIES.map((c) => (
-										<CurrencySwitch key={c} currency={c} selectedCurrency={activeCurrency} setSelectedCurrency={setActiveCurrency} />
-									))}
-								</div>
-							</div>
-						)}
-
-						{/* Optional section title */}
-						{showOptionalHeader && <h3 className="t-44 mb-4 mt-6 font-black uppercase">Optional</h3>}
-
-						<FormikField {...builtField} />
-					</div>
-				);
-			})}
+			{formData.fields.map((field, i) => (
+				<div key={`${field.name}-${i}`}>
+					<FormikField {...buildFormikField(field)} />
+				</div>
+			))}
 
 			{submitError && <p className="t-14 text-red-500">{submitError}</p>}
 
@@ -267,18 +158,7 @@ const DynamicCF7Form = ({
 		</motion.div>
 	);
 
-	return (
-		<FormikForm
-			fields={visibleFields.map((field) => {
-				const match = field.name.match(CURRENCY_FIELD_RE);
-				const baseName = match ? match[1] : field.name;
-				const overrideOptions = match ? currencyOptionsMap[baseName]?.[activeCurrency] : undefined;
-				return buildFormikField({ ...field, name: baseName }, overrideOptions);
-			})}
-			onSubmit={onSubmit}
-			formLayout={formLayout}
-		/>
-	);
+	return <FormikForm fields={formData.fields.map((field) => buildFormikField(field))} onSubmit={onSubmit} formLayout={formLayout} />;
 };
 
 export default DynamicCF7Form;
