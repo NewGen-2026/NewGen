@@ -7,9 +7,9 @@ import FloatingImagesCta from "./FloatingImagesCta";
 import Offices from "./Offices";
 import Jobs from "./Jobs";
 import ContactForm from "./ContactForm";
+import FeedListFlexible from "./FeedListFlexible";
+import AllTeam from "./AllTeam";
 
-const AllTeam = dynamic(() => import("./AllTeam"), { ssr: false });
-const FeedListFlexible = dynamic(() => import("./FeedListFlexible"), { ssr: false });
 const HijackScroller = dynamic(() => import("./HijackScroller"), { ssr: false });
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
