@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "~/components/templates/Layout";
 import Page from "~/components/templates/Page";
 import Post from "~/components/templates/Post";
+import WorkPost from "~/components/templates/WorkPost";
 import { WpOptions, WpPage } from "~/types/wp";
 import cms from "~/utils/cms";
-import dynamic from "next/dynamic";
 import BackToTopButton from "~/components/elements/buttons/BackToTopButton";
-
-const WorkPost = dynamic(() => import("~/components/templates/WorkPost"), { ssr: false });
 
 type TemplateProps = {
 	page: WpPage;
