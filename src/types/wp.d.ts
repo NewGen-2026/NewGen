@@ -43,6 +43,10 @@ export type WpPage = {
 	menu_order: number;
 	post_type: string;
 	page_options?: any;
+	author?: {
+		name?: string;
+		acf?: any;
+	};
 	url: string;
 	flexible_content: FlexibleContent[];
 	sections: FlexibleContent[];
@@ -59,6 +63,9 @@ export type WpSeo = {
 
 export type WpOptions = {
 	menu: any;
+	footer_menu?: {
+		socials?: { link?: { title?: string; url?: string } }[];
+	};
 };
 
 export type FlexibleContent = {
