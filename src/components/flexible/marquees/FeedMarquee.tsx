@@ -1,12 +1,10 @@
 import { useInView } from "framer-motion";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRef } from "react";
+import Marquee from "react-fast-marquee";
 import { HoverButton } from "~/components/elements/buttons/Button";
 import FeedPreview from "~/components/feed/FeedPreview";
 import FeedSlider from "../sliders/FeedSlider";
-
-const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
 const FeedMarquee = (props) => {
 	const { posts, hide_button = false, variant } = props;

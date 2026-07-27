@@ -9,8 +9,7 @@ import Jobs from "./Jobs";
 import ContactForm from "./ContactForm";
 import FeedListFlexible from "./FeedListFlexible";
 import AllTeam from "./AllTeam";
-
-const HijackScroller = dynamic(() => import("./HijackScroller"), { ssr: false });
+import HijackScroller from "./HijackScroller";
 
 const SPECIAL_BLOCKS_COMPONENT_MAP = {
 	services_overview: ServicesOverview,

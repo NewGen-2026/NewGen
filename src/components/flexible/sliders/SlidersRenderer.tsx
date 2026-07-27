@@ -6,7 +6,7 @@ import DualAssetSlider from "./DualAssetSlider";
 import AssetSlider from "./AssetSlider";
 import LinkSlider from "./LinkSlider";
 
-const TwoColTestimonialSlider = dynamic(() => import("./TwoColTestimonialSlider"), { ssr: false });
+import TwoColTestimonialSlider from "./TwoColTestimonialSlider";
 
 const SLIDERS_COMPONENT_MAP = {
 	testimonial_slider: TestimonialSlider,

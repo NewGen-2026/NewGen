@@ -13,8 +13,8 @@ import StatRow from "./StatRow";
 import NumberedGrid from "./NumberedGrid";
 import ThreeColText from "./ThreeColText";
 
-const RosterGrid = dynamic(() => import("./RosterGrid"), { ssr: false });
-const AllCreatorsList = dynamic(() => import("./AllCreatorsList"), { ssr: false });
+import RosterGrid from "./RosterGrid";
+import AllCreatorsList from "./AllCreatorsList";
 
 const CONTENT_BLOCKS_COMPONENT_MAP = {
 	two_col_text_asset: TwoColTextAsset,

@@ -10,6 +10,8 @@ import WpImage from "../elements/WpImage";
 import FeedMarquee from "../flexible/marquees/FeedMarquee";
 import { CopyLink, LinkedIn, Twitter } from "../flexible/creatorBlocks/Socials";
 
+import FlexiblePostContent from "../feed/FlexiblePostContent";
+
 const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod.TwitterShareButton), {
 	ssr: false,
 });
@@ -17,8 +19,6 @@ const TwitterShareButton = dynamic(() => import("react-share").then((mod) => mod
 const LinkedinShareButton = dynamic(() => import("react-share").then((mod) => mod.LinkedinShareButton), {
 	ssr: false,
 });
-
-const FlexiblePostContent = dynamic(() => import("../feed/FlexiblePostContent"), { ssr: false });
 
 export default function Post(data) {
 	const {

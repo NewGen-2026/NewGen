@@ -1,14 +1,12 @@
 import { useInView } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useRef } from "react";
+import Marquee from "react-fast-marquee";
 import { HoverButton } from "~/components/elements/buttons/Button";
 import useBreakpointCrossed from "~/hooks/useBreakpointCrossed";
 import Link from "next/link";
 import { Color } from "~/utils/getColors";
 import CreatorCard from "../creatorBlocks/CreatorCard";
 import CreatorsSlider from "../sliders/CreatorsSlider";
-
-const Marquee = dynamic(() => import("react-fast-marquee"), { ssr: false });
 
 type CreatorMarqueeProps = {
 	creators: any;

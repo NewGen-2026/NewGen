@@ -1,9 +1,7 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import WorkSlider from "./WorkSlider";
 import WorkGrid from "./WorkGrid";
-
-const AllWorkGrid = dynamic(() => import("./AllWorkGrid"), { ssr: false });
+import AllWorkGrid from "./AllWorkGrid";
 
 const WORK_BLOCKS_COMPONENT_MAP = {
 	work_slider: WorkSlider,
