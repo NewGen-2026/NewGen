@@ -1,1 +1,8 @@
-[{ "source": "/example-redirect-test", "destination": "/", "permanent": false }]
+[
+	{ "source": "/example-redirect-test", "destination": "/", "permanent": false },
+	{
+		"source": "/blog-and-podcasts/3716/",
+		"destination": "/blog-and-podcasts/the-death-of-clicks-marketing-kpis-2026/",
+		"permanent": true
+	}
+]
