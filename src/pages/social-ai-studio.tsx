@@ -126,6 +126,16 @@ export default function SocialAiStudio() {
 					</div>
 				</section>
 
+				{/* CTA */}
+				<section className="px-6 pb-24">
+					<Link
+						href="/"
+						className={`${CONTAINER} flex min-h-[72px] items-center justify-center rounded-full bg-black px-7 py-6 text-center text-[16px] font-extrabold uppercase tracking-[0.06em] text-white transition-colors duration-150 hover:bg-boost active:scale-[0.99]`}
+					>
+						Discover more about NewGen
+					</Link>
+				</section>
+
 				<footer className="mt-auto bg-black px-6 py-12 text-white">
 					<div className={`${CONTAINER} flex flex-wrap items-end justify-between gap-6`}>
 						<div className="flex flex-col gap-5">
@@ -135,12 +145,6 @@ export default function SocialAiStudio() {
 								<br />
 								and the next
 							</div>
-							<Link
-								href="/"
-								className="inline-flex min-h-[52px] items-center justify-center self-start rounded-full bg-white px-7 py-[18px] text-[13px] font-extrabold uppercase tracking-[0.06em] text-black transition-colors duration-150 hover:bg-boost hover:text-white active:scale-[0.97]"
-							>
-								Discover more about NewGen
-							</Link>
 						</div>
 						<div className="flex flex-col gap-1.5 text-[13px] uppercase tracking-[0.04em]">
 							<a href="mailto:hello@thenewgen.com" className="hover:text-boost">
