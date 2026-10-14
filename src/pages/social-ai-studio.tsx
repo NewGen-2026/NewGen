@@ -96,10 +96,11 @@ export default function SocialAiStudio() {
 						</div>
 						<div className="flex flex-col gap-6 text-[18px] [text-wrap:pretty]">
 							<p>
-								At NewGen, our approach to AI starts with a simple belief: iconic brands are relentlessly present in culture, and the people who put them there
-								are our greatest advantage. Social AI Studio gives our strategists, creatives and social teams the speed and scale to create content as culture
-								moves. Multiple™, NewGen&apos;s proprietary intelligence platform, has launched a revolutionary new AI Content Studio which turns early insight
-								into on-brand content and learns from every post, so you can scale the ideas that work.
+								At NewGen, we believe AI works best in the hands of the people who make brands iconic, and those people are our greatest advantage. Social AI
+								Studio gives our strategists, creatives and social teams the speed and scale to keep pace with social. It spots trends early and turns our
+								creatives&apos; ideas into on-brand content, tailored to each client&apos;s guidelines and guardrails. Every post teaches the next one. A new
+								service within Multiple™, NewGen&apos;s proprietary intelligence platform, it sits alongside production, creators and UGC as one part of the
+								mix.
 							</p>
 						</div>
 					</div>
