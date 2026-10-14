@@ -23,13 +23,13 @@ const CONTAINER = "mx-auto w-full max-w-[1280px]";
 const STATS = [
 	{
 		label: "Speed",
-		value: "3 days ⟶ <4 hrs",
+		value: "18x Faster",
 		body: "Social AI Studio cuts social video production from around three days to around four hours.",
 		className: "bg-black text-white",
 	},
 	{
 		label: "Scale",
-		value: "One to many",
+		value: "1 Concept, All Platforms",
 		body: "Our creatives direct, the studio produces. One idea adapted for every platform and market, tailored to each client's guidelines and guardrails.",
 		className: "bg-boost text-white",
 	},
