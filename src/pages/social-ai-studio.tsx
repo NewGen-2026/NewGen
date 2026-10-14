@@ -139,6 +139,12 @@ export default function SocialAiStudio() {
 								<br />
 								and the next
 							</div>
+							<Link
+								href="/"
+								className="inline-flex min-h-[52px] items-center justify-center self-start rounded-full bg-white px-7 py-[18px] text-[13px] font-extrabold uppercase tracking-[0.06em] text-black transition-colors duration-150 hover:bg-boost hover:text-white active:scale-[0.97]"
+							>
+								Discover more about NewGen
+							</Link>
 						</div>
 						<div className="flex flex-col gap-1.5 text-[13px] uppercase tracking-[0.04em]">
 							<a href="mailto:hello@thenewgen.com" className="hover:text-boost">
