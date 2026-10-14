@@ -7,7 +7,7 @@ export default function MyApp({ Component, pageProps }) {
 
 	return (
 		<>
-			{globalScripts?.length &&
+			{globalScripts.length > 0 &&
 				globalScripts.map((script, index) => {
 					const { attributes, content } = script;
 					return (
