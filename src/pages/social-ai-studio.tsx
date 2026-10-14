@@ -29,7 +29,7 @@ const STATS = [
 	},
 	{
 		label: "Scale",
-		value: "1 Concept, All Platforms",
+		value: "1 Concept, Everywhere",
 		body: "Our creatives direct, the studio produces. One idea adapted for every platform and market, tailored to each client's guidelines and guardrails.",
 		className: "bg-boost text-white",
 	},
