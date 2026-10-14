@@ -8,16 +8,17 @@ import { useRouter } from "next/router";
 // Bespoke "Book a demo" form for the hidden Social AI Studio landing page.
 // Posts straight to the Contact Form 7 REST endpoint (same mechanism as DynamicCF7Form),
 // but with a fixed field set so the markup can match the design exactly.
-// Field names must match the tags in the CF7 form: your_name, your_email, your_company, source.
+// Field names must match the tags in the CF7 form: your_name, your_email, your_company, your_notes, source.
 
 type Values = {
 	your_name: string;
 	your_email: string;
 	your_company: string;
+	your_notes: string; // optional
 	website: string; // honeypot – never shown to humans, bots tend to fill it
 };
 
-const initialValues: Values = { your_name: "", your_email: "", your_company: "", website: "" };
+const initialValues: Values = { your_name: "", your_email: "", your_company: "", your_notes: "", website: "" };
 
 const validationSchema = Yup.object({
 	your_name: Yup.string().trim().required("Please enter your name"),
@@ -39,9 +40,11 @@ type TextFieldProps = {
 	type?: "text" | "email";
 	autoComplete?: string;
 	error?: string | false;
+	required?: boolean;
+	multiline?: boolean;
 };
 
-const TextField = ({ name, label, placeholder, type = "text", autoComplete, error }: TextFieldProps) => {
+const TextField = ({ name, label, placeholder, type = "text", autoComplete, error, required = true, multiline = false }: TextFieldProps) => {
 	const id = `sas-${name}`;
 	return (
 		<div className="flex flex-col gap-1.5">
@@ -51,13 +54,13 @@ const TextField = ({ name, label, placeholder, type = "text", autoComplete, erro
 			<Field
 				id={id}
 				name={name}
-				type={type}
+				{...(multiline ? { as: "textarea", rows: 4 } : { type })}
 				placeholder={placeholder}
 				autoComplete={autoComplete}
-				required
+				required={required}
 				aria-invalid={!!error}
 				aria-describedby={error ? `${id}-error` : undefined}
-				className={clsx(INPUT, error && "!border-ketchup")}
+				className={clsx(INPUT, multiline && "!min-h-[120px] resize-y", error && "!border-ketchup")}
 			/>
 			{error && (
 				<p id={`${id}-error`} className="text-[12px] text-ketchup">
@@ -119,6 +122,7 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 		fd.append("your_name", name);
 		fd.append("your_email", email);
 		fd.append("your_company", values.your_company.trim());
+		fd.append("your_notes", values.your_notes.trim());
 		fd.append("source", source);
 
 		try {
@@ -196,6 +200,7 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 						autoComplete="organization"
 						error={touched.your_company && errors.your_company}
 					/>
+					<TextField name="your_notes" label="Extra notes (optional)" placeholder="Anything else we should know?" required={false} multiline />
 
 					{/* Honeypot – visually removed, excluded from tab order and screen readers */}
 					<Honeypot />
