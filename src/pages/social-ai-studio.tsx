@@ -101,10 +101,6 @@ export default function SocialAiStudio() {
 								moves. Multiple™, NewGen&apos;s proprietary intelligence platform, has launched a revolutionary new AI Content Studio which turns early insight
 								into on-brand content and learns from every post, so you can scale the ideas that work.
 							</p>
-							<p>
-								But is more, faster and cheaper necessarily better? And will everyone agree this is a good thing? Social AI Studio is part of the mix, alongside
-								production, creators and UGC. Book a demo and judge for yourself.
-							</p>
 						</div>
 					</div>
 				</section>
