@@ -159,7 +159,7 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 						<path d="M5 12l5 5L20 7" />
 					</svg>
 				</div>
-				<h2 className="text-[28px] font-extrabold uppercase leading-none">You&apos;re in</h2>
+				<h2 className="text-[28px] font-extrabold uppercase leading-none !text-black">You&apos;re in</h2>
 				<p className="text-[16px] text-[#1A1A1A]">
 					Thanks {sent.firstName}. We&apos;ve got your request and will be in touch at {sent.email} to lock in a time.
 				</p>
@@ -179,7 +179,7 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 			{({ errors, touched, isSubmitting }) => (
 				<Form noValidate className="flex flex-col gap-5">
 					<div>
-						<h2 className="text-[28px] font-extrabold uppercase leading-none">Book a demo</h2>
+						<h2 className="text-[28px] font-extrabold uppercase leading-none !text-black">Book a demo</h2>
 						<p className="mt-2 text-[14px] text-[#4A4A4A]">Fifteen minutes. Your brand, live.</p>
 					</div>
 
