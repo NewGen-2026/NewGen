@@ -96,8 +96,10 @@ export default function SocialAiStudio() {
 						</div>
 						<div className="flex flex-col gap-6 text-[18px] [text-wrap:pretty]">
 							<p>
-								We&apos;ll showcase the most advanced AI technology being used in social today, demonstrating what&apos;s now possible for brands - from
-								creating and adapting content at scale to entirely new creative possibilities.
+								At NewGen, our approach to AI starts with a simple belief: iconic brands are relentlessly present in culture, and the people who put them there
+								are our greatest advantage. Social AI Studio gives our strategists, creatives and social teams the speed and scale to create content as culture
+								moves. Multiple™, NewGen&apos;s proprietary intelligence platform, has launched a revolutionary new AI Content Studio which turns early insight
+								into on-brand content and learns from every post, so you can scale the ideas that work.
 							</p>
 							<p>
 								But is more, faster and cheaper necessarily better? And will everyone agree this is a good thing? Social AI Studio is part of the mix, alongside
@@ -126,9 +128,6 @@ export default function SocialAiStudio() {
 							</div>
 						))}
 					</div>
-					<p className={`${CONTAINER} mt-4 text-[12px] text-[#4A4A4A]`}>
-						Speed: Social AI Studio logs, Sep to Oct 2026. Median working time, full-concept films, against three days for practical production.
-					</p>
 				</section>
 
 				<footer className="mt-auto bg-black px-6 py-12 text-white">

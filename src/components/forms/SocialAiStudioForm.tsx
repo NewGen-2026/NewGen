@@ -178,10 +178,7 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 			{({ errors, touched, isSubmitting }) => (
 				<Form noValidate className="flex flex-col gap-5">
-					<div>
-						<h2 className="text-[28px] font-extrabold uppercase leading-none !text-black">Book a demo</h2>
-						<p className="mt-2 text-[14px] text-[#4A4A4A]">Fifteen minutes. Your brand, live.</p>
-					</div>
+					<h2 className="text-[28px] font-extrabold uppercase leading-none !text-black">Book a Social AI Studio Demo</h2>
 
 					<TextField name="your_name" label="Name" placeholder="Your name" autoComplete="name" error={touched.your_name && errors.your_name} />
 					<TextField
@@ -216,8 +213,6 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 					>
 						{isSubmitting ? "Sending…" : "Book my demo"}
 					</button>
-
-					<p className="text-[12px] text-[#4A4A4A]">We&apos;ll reply within one working day. No newsletter, no spam.</p>
 				</Form>
 			)}
 		</Formik>
