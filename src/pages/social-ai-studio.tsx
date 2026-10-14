@@ -65,7 +65,7 @@ export default function SocialAiStudio() {
 
 				{/* Hero + form */}
 				<section className="relative overflow-hidden bg-boost px-6 pb-16 pt-12 text-white">
-					<div className={`${CONTAINER} grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-start gap-12`}>
+					<div className={`${CONTAINER} grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-center gap-12`}>
 						<div className="relative">
 							<div className={`${EYEBROW} mb-6`}>Social AI Studio</div>
 							<h1 className="text-[clamp(44px,6.5vw,88px)] font-extrabold uppercase leading-[0.85] tracking-[-0.02em] [text-wrap:balance]">
