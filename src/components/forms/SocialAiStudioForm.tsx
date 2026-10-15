@@ -8,22 +8,23 @@ import { useRouter } from "next/router";
 // Bespoke "Book a demo" form for the hidden Social AI Studio landing page.
 // Posts straight to the Contact Form 7 REST endpoint (same mechanism as DynamicCF7Form),
 // but with a fixed field set so the markup can match the design exactly.
-// Field names must match the tags in the CF7 form: your_name, your_email, your_company, your_notes, source.
+// Field names must match the tags in the CF7 form: FNAME, EMAIL, COMPANY, your_notes, SOURCE.
+// The uppercase names are Mailchimp merge tags so Mailchimp for WordPress (MC4WP) can map them.
 
 type Values = {
-	your_name: string;
-	your_email: string;
-	your_company: string;
+	FNAME: string;
+	EMAIL: string;
+	COMPANY: string;
 	your_notes: string; // optional
 	website: string; // honeypot – never shown to humans, bots tend to fill it
 };
 
-const initialValues: Values = { your_name: "", your_email: "", your_company: "", your_notes: "", website: "" };
+const initialValues: Values = { FNAME: "", EMAIL: "", COMPANY: "", your_notes: "", website: "" };
 
 const validationSchema = Yup.object({
-	your_name: Yup.string().trim().required("Please enter your name"),
-	your_email: Yup.string().trim().email("Please enter a valid email address").required("Please enter your work email"),
-	your_company: Yup.string().trim().required("Please enter your company"),
+	FNAME: Yup.string().trim().required("Please enter your name"),
+	EMAIL: Yup.string().trim().email("Please enter a valid email address").required("Please enter your work email"),
+	COMPANY: Yup.string().trim().required("Please enter your company"),
 });
 
 // Where the enquiry came from. Override per QR code / campaign with ?src=... on the page URL.
@@ -99,8 +100,8 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 	const onSubmit = async (values: Values) => {
 		setSubmitError(null);
 
-		const name = values.your_name.trim();
-		const email = values.your_email.trim();
+		const name = values.FNAME.trim();
+		const email = values.EMAIL.trim();
 		const markSent = () => setSent({ firstName: name.split(" ")[0], email });
 
 		// Honeypot tripped: pretend it worked, send nothing.
@@ -119,11 +120,13 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 		const fd = new FormData();
 		// CF7 unit tag format is always wpcf7-f{ID}-o1 for single instances
 		fd.append("_wpcf7_unit_tag", `wpcf7-f${formId}-o1`);
-		fd.append("your_name", name);
-		fd.append("your_email", email);
-		fd.append("your_company", values.your_company.trim());
+		fd.append("FNAME", name);
+		fd.append("EMAIL", email);
+		fd.append("COMPANY", values.COMPANY.trim());
 		fd.append("your_notes", values.your_notes.trim());
-		fd.append("source", source);
+		fd.append("SOURCE", source);
+		// Tells Mailchimp for WordPress (MC4WP) to subscribe this submission – the same flag a ticked [mc4wp_checkbox] sends.
+		fd.append("_mc4wp_subscribe_contact-form-7", "1");
 
 		try {
 			const res = await axios.post(`/wp-json/contact-form-7/v1/contact-forms/${formId}/feedback`, fd, { headers: { "Content-Type": "multipart/form-data" } });
@@ -184,22 +187,9 @@ const SocialAiStudioForm = ({ formId, instagramUrl }: SocialAiStudioFormProps) =
 				<Form noValidate className="flex flex-col gap-5">
 					<h2 className="text-[28px] font-extrabold uppercase leading-none !text-black">Book a Social AI Studio Demo</h2>
 
-					<TextField name="your_name" label="Name" placeholder="Your name" autoComplete="name" error={touched.your_name && errors.your_name} />
-					<TextField
-						name="your_email"
-						label="Work email"
-						type="email"
-						placeholder="you@company.com"
-						autoComplete="email"
-						error={touched.your_email && errors.your_email}
-					/>
-					<TextField
-						name="your_company"
-						label="Company"
-						placeholder="Brand or agency"
-						autoComplete="organization"
-						error={touched.your_company && errors.your_company}
-					/>
+					<TextField name="FNAME" label="Name" placeholder="Your name" autoComplete="name" error={touched.FNAME && errors.FNAME} />
+					<TextField name="EMAIL" label="Work email" type="email" placeholder="you@company.com" autoComplete="email" error={touched.EMAIL && errors.EMAIL} />
+					<TextField name="COMPANY" label="Company" placeholder="Brand or agency" autoComplete="organization" error={touched.COMPANY && errors.COMPANY} />
 					<TextField name="your_notes" label="Extra notes (optional)" placeholder="Anything else we should know?" required={false} multiline />
 
 					{/* Honeypot – visually removed, excluded from tab order and screen readers */}
